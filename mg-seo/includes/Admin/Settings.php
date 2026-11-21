@@ -102,6 +102,9 @@ final class Settings {
 		}
 
 		$show_if = ! empty( $field['show_if'] ) ? ' data-show-if="' . esc_attr( 'mgseo-' . str_replace( '_', '-', $field['show_if'] ) ) . '"' : '';
+		if ( '' !== $show_if && isset( $field['show_if_value'] ) ) {
+			$show_if .= ' data-show-value="' . esc_attr( implode( '|', (array) $field['show_if_value'] ) ) . '"';
+		}
 		echo '<tr class="mgseo-field mgseo-field-' . esc_attr( $type ) . '"' . $show_if . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
 		echo '<th scope="row"><label for="' . esc_attr( $dom ) . '">' . esc_html( $field['label'] ?? '' ) . '</label></th><td>';
 

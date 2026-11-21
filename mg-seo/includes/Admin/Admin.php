@@ -72,7 +72,7 @@ final class Admin {
 				$pages[] = array(
 					'slug'       => 'mg-seo-' . $id,
 					'title'      => Plugin::title( $id ),
-					'menu_title' => Plugin::title( $id ),
+					'menu_title' => $module->settings_menu_title(),
 					'capability' => $module->capability(),
 					'callback'   => static function () use ( $module ): void {
 						Settings::render_page( $module );
@@ -214,7 +214,10 @@ final class Admin {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
 		$message = isset( $_GET['mgseo-message'] ) ? sanitize_text_field( wp_unslash( $_GET['mgseo-message'] ) ) : '';
 		if ( '' !== $message ) {
-			echo '<div class="notice notice-info is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
+			$type = isset( $_GET['mgseo-notice-type'] ) ? sanitize_key( wp_unslash( $_GET['mgseo-notice-type'] ) ) : 'info';
+			$type = in_array( $type, array( 'error', 'warning', 'success', 'info' ), true ) ? $type : 'info';
+			echo '<div class="notice notice-' . esc_attr( $type ) . ' is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
 		}
 	}
 

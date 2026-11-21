@@ -43,7 +43,8 @@ abstract class Module {
 	 *        array( 'id' => 'key', 'type' => 'text|textarea|code|toggle|select|multicheck|number|url|image|color|hidden|heading|callback',
 	 *               'label' => '', 'desc' => '', 'default' => mixed, 'options' => array( value => label ),
 	 *               'placeholder' => '', 'variables' => bool (show variable hint), 'callback' => callable (for type=callback),
-	 *               'sanitize' => callable (optional custom sanitizer) ),
+	 *               'sanitize' => callable (optional custom sanitizer),
+	 *               'show_if' => 'other_field_id' (row shown when that toggle is checked), 'show_if_value' => 'a'|array (…or when that select has one of these values) ),
 	 *     ),
 	 *   )
 	 *
@@ -64,6 +65,13 @@ abstract class Module {
 	 */
 	public function admin_pages(): array {
 		return array();
+	}
+
+	/**
+	 * Menu label of the module's settings page (defaults to the module title).
+	 */
+	public function settings_menu_title(): string {
+		return Plugin::title( $this->id() );
 	}
 
 	/**

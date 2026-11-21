@@ -68,6 +68,15 @@ final class Module extends Base {
 	/**
 	 * Settings schema.
 	 */
+	public function settings_menu_title(): string {
+		return __( 'Redirection settings', 'mg-seo' );
+	}
+
+	/**
+	 * Settings schema.
+	 *
+	 * @return array
+	 */
 	public function settings(): array {
 		return array(
 			array(

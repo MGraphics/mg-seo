@@ -64,6 +64,15 @@ final class Module extends Base {
 	/**
 	 * Settings schema.
 	 */
+	public function settings_menu_title(): string {
+		return __( 'Tools settings', 'mg-seo' );
+	}
+
+	/**
+	 * Settings schema.
+	 *
+	 * @return array
+	 */
 	public function settings(): array {
 		$post_types = self::post_type_options();
 		return array(

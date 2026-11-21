@@ -36,10 +36,17 @@
 		$( '[data-show-if]' ).each( function () {
 			var $row = $( this );
 			var $ref = $( '#' + $row.data( 'show-if' ) );
-			$row.toggle( ! $ref.length || $ref.is( ':checked' ) );
+			var values = $row.data( 'show-value' );
+			if ( ! $ref.length ) {
+				$row.show();
+			} else if ( values !== undefined && values !== null && values !== '' ) {
+				$row.toggle( String( values ).split( '|' ).indexOf( String( $ref.val() ) ) !== -1 );
+			} else {
+				$row.toggle( $ref.is( ':checked' ) );
+			}
 		} );
 	}
-	$( document ).on( 'change', '.mgseo-settings-form input[type=checkbox]', applyShowIf );
+	$( document ).on( 'change', '.mgseo-settings-form input[type=checkbox], .mgseo-settings-form select', applyShowIf );
 	$( applyShowIf );
 
 	/* ---------- SEO box: counters, preview, live analysis ---------- */
