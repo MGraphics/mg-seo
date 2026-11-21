@@ -139,8 +139,8 @@ final class Helpers {
 			if ( '' === $src ) {
 				continue;
 			}
-			$alt = preg_match( '/\salt=(["\'])(.*?)\1/i', $tag, $m ) ? html_entity_decode( $m[2] ) : '';
-			$id  = preg_match( '/wp-image-(\d+)/', $tag, $m ) ? (int) $m[1] : 0;
+			$alt      = preg_match( '/\salt=(["\'])(.*?)\1/i', $tag, $m ) ? html_entity_decode( $m[2] ) : '';
+			$id       = preg_match( '/wp-image-(\d+)/', $tag, $m ) ? (int) $m[1] : 0;
 			$images[] = array(
 				'src' => $src,
 				'alt' => $alt,

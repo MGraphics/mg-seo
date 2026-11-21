@@ -129,9 +129,9 @@ final class Module extends Base {
 		if ( '' !== $post->post_name && ! str_contains( $url, $post->post_name ) ) {
 			$url = trailingslashit( home_url( $slug ) );
 		}
-		$content  = (string) apply_filters( 'mgseo/analysis_content', do_blocks( $post->post_content ), $post );
+		$content = (string) apply_filters( 'mgseo/analysis_content', do_blocks( $post->post_content ), $post );
 
-		$analyzer = new Analyzer(
+		$analyzer        = new Analyzer(
 			array(
 				'title'          => Variables::replace( $title_tpl, $post ),
 				'description'    => $desc,
@@ -159,7 +159,7 @@ final class Module extends Base {
 		global $wpdb;
 		$like = $wpdb->esc_like( $keyword );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- lightweight lookup.
-		$ids = $wpdb->get_col(
+		$ids    = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT pm.post_id, pm.meta_value FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
 				WHERE pm.meta_key = %s AND p.post_status = 'publish' AND pm.post_id <> %d AND pm.meta_value LIKE %s LIMIT 20",

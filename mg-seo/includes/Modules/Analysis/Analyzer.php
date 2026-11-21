@@ -104,7 +104,8 @@ final class Analyzer {
 		if ( '' === trim( $text ) ) {
 			return 0;
 		}
-		return count( preg_split( '/[\s]+/u', trim( $text ) ) ?: array() );
+		$parts = preg_split( '/[\s]+/u', trim( $text ) );
+		return is_array( $parts ) ? count( $parts ) : 0;
 	}
 
 	/**
@@ -168,7 +169,8 @@ final class Analyzer {
 			$add( 'keyword_in_url', 'basic', $in_slug, self::msg( $in_slug, __( 'Focus keyword is used in the URL.', 'mg-seo' ), __( 'Use the focus keyword in the URL slug.', 'mg-seo' ) ), 7 );
 
 			$intro_words = max( 50, (int) ceil( $words * 0.1 ) );
-			$intro       = implode( ' ', array_slice( preg_split( '/\s+/u', $text ) ?: array(), 0, $intro_words ) );
+			$all_words   = preg_split( '/\s+/u', $text );
+			$intro       = implode( ' ', array_slice( is_array( $all_words ) ? $all_words : array(), 0, $intro_words ) );
 			$in_intro    = self::contains( $primary, $intro );
 			$add( 'keyword_in_intro', 'basic', $in_intro, self::msg( $in_intro, __( 'Focus keyword appears at the beginning of the content.', 'mg-seo' ), __( 'Use the focus keyword in the first paragraph.', 'mg-seo' ) ), 6 );
 
@@ -265,7 +267,8 @@ final class Analyzer {
 		$has_number = (bool) preg_match( '/\d/', $title );
 		$add( 'title_number', 'title', $has_number ? 'ok' : 'warn', self::msg( $has_number, __( 'Title contains a number.', 'mg-seo' ), __( 'Titles with numbers often get more clicks.', 'mg-seo' ) ), 2 );
 
-		$paragraphs = preg_split( '#</p>|\n\s*\n#i', $html ) ?: array();
+		$paragraphs = preg_split( '#</p>|\n\s*\n#i', $html );
+		$paragraphs = is_array( $paragraphs ) ? $paragraphs : array();
 		$long       = 0;
 		foreach ( $paragraphs as $paragraph ) {
 			if ( self::words( self::text( $paragraph ) ) > 150 ) {

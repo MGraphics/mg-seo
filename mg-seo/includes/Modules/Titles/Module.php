@@ -56,16 +56,16 @@ final class Module extends Base {
 			array_diff_key( Helpers::robots_directives(), array( 'noindex' => true ) )
 		);
 		$separators     = array(
-			'-'  => '-',
-			'–'  => '–',
-			'—'  => '—',
-			'|'  => '|',
-			'·'  => '·',
-			'•'  => '•',
-			'»'  => '»',
-			'/'  => '/',
-			'~'  => '~',
-			':'  => ':',
+			'-' => '-',
+			'–' => '–',
+			'—' => '—',
+			'|' => '|',
+			'·' => '·',
+			'•' => '•',
+			'»' => '»',
+			'/' => '/',
+			'~' => '~',
+			':' => ':',
 		);
 
 		$tabs = array(
@@ -79,7 +79,8 @@ final class Module extends Base {
 						'label'   => __( 'Title separator', 'mg-seo' ),
 						'options' => $separators,
 						'default' => '-',
-						'desc'    => __( 'Used by the %sep% variable.', 'mg-seo' ),
+						/* translators: %s: the separator variable */
+						'desc'    => sprintf( __( 'Used by the %s variable.', 'mg-seo' ), '%sep%' ),
 					),
 					array(
 						'id'           => 'capitalize',
@@ -175,7 +176,8 @@ final class Module extends Base {
 						'id'    => 'rss_heading',
 						'type'  => 'heading',
 						'label' => __( 'RSS feed', 'mg-seo' ),
-						'desc'  => __( 'Text added to every feed item. Variables: %postlink%, %sitelink%, %title%, %sitename%.', 'mg-seo' ),
+						/* translators: %s: list of variables */
+						'desc'  => sprintf( __( 'Text added to every feed item. Variables: %s.', 'mg-seo' ), '%postlink%, %sitelink%, %title%, %sitename%' ),
 					),
 					array(
 						'id'      => 'rss_before',
@@ -378,15 +380,15 @@ final class Module extends Base {
 					'id'        => 'search_title',
 					'type'      => 'text',
 					'label'     => __( 'Search results title', 'mg-seo' ),
-					/* translators: search title template */
-					'default'   => __( 'Search: %search_query% %page% %sep% %sitename%', 'mg-seo' ),
+					/* translators: %s: search query variable */
+					'default'   => sprintf( __( 'Search: %s', 'mg-seo' ), '%search_query%' ) . ' %page% %sep% %sitename%',
 					'variables' => true,
 				),
 				array(
 					'id'        => '404_title',
 					'type'      => 'text',
 					'label'     => __( '404 title', 'mg-seo' ),
-					'default'   => __( 'Page not found %sep% %sitename%', 'mg-seo' ),
+					'default'   => __( 'Page not found', 'mg-seo' ) . ' %sep% %sitename%',
 					'variables' => true,
 				),
 			),
@@ -679,13 +681,13 @@ final class Module extends Base {
 		}
 		$robots = array_unique( array_merge( $robots, array_diff( $own, array( 'index' ) ) ) );
 
-		$out              = array();
-		$noindex          = in_array( 'noindex', $robots, true );
-		$out['index']     = ! $noindex;
-		$out['noindex']   = $noindex;
-		$nofollow         = in_array( 'nofollow', $robots, true );
-		$out['follow']    = ! $nofollow;
-		$out['nofollow']  = $nofollow;
+		$out             = array();
+		$noindex         = in_array( 'noindex', $robots, true );
+		$out['index']    = ! $noindex;
+		$out['noindex']  = $noindex;
+		$nofollow        = in_array( 'nofollow', $robots, true );
+		$out['follow']   = ! $nofollow;
+		$out['nofollow'] = $nofollow;
 		foreach ( array( 'noarchive', 'nosnippet', 'noimageindex', 'notranslate' ) as $directive ) {
 			if ( in_array( $directive, $robots, true ) ) {
 				$out[ $directive ] = true;

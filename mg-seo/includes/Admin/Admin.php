@@ -183,7 +183,8 @@ final class Admin {
 			wp_die( esc_html__( 'You do not have permission to do this.', 'mg-seo' ) );
 		}
 		check_admin_referer( 'mgseo_modules' );
-		$posted = isset( $_POST['modules'] ) && is_array( $_POST['modules'] ) ? array_map( 'sanitize_key', array_keys( wp_unslash( $_POST['modules'] ) ) ) : array();
+		$raw    = isset( $_POST['modules'] ) && is_array( $_POST['modules'] ) ? map_deep( wp_unslash( $_POST['modules'] ), 'sanitize_key' ) : array();
+		$posted = array_map( 'sanitize_key', array_keys( $raw ) );
 		foreach ( Plugin::registry() as $id => $def ) {
 			if ( ! empty( $def['required'] ) ) {
 				continue;

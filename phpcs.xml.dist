@@ -27,6 +27,18 @@
 			</property>
 		</properties>
 	</rule>
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="mgseo_manage_settings"/>
+				<element value="mgseo_edit_meta"/>
+				<element value="mgseo_edit_advanced"/>
+				<element value="mgseo_redirections"/>
+				<element value="mgseo_view_reports"/>
+				<element value="mgseo_bulk_edit"/>
+			</property>
+		</properties>
+	</rule>
 	<rule ref="WordPress.NamingConventions.ValidHookName">
 		<properties>
 			<property name="additionalWordDelimiters" value="/"/>

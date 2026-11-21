@@ -45,10 +45,10 @@ final class Module extends Base {
 	public function settings(): array {
 		return array(
 			array(
-				'id'     => 'general',
-				'title'  => __( 'Breadcrumbs', 'mg-seo' ),
+				'id'          => 'general',
+				'title'       => __( 'Breadcrumbs', 'mg-seo' ),
 				'description' => __( 'Show breadcrumbs with the [mgseo_breadcrumbs] shortcode, the Breadcrumbs block or mgseo_breadcrumbs() in a theme.', 'mg-seo' ),
-				'fields' => array(
+				'fields'      => array(
 					array(
 						'id'      => 'separator',
 						'type'    => 'text',
@@ -151,7 +151,7 @@ final class Module extends Base {
 		$ctx   = Context::current();
 		$obj   = $ctx['object'];
 		$items = array();
-		$opt   = static fn( string $key, mixed $default = null ) => Options::get( 'breadcrumbs', $key, $default );
+		$opt   = static fn( string $key, mixed $fallback = null ) => Options::get( 'breadcrumbs', $key, $fallback );
 
 		if ( $opt( 'show_home', true ) ) {
 			$items[] = array(
@@ -170,13 +170,13 @@ final class Module extends Base {
 				break;
 			case Context::SINGULAR:
 				if ( $obj instanceof \WP_Post ) {
-					$items = array_merge( $items, self::post_parents( $obj ) );
+					$items   = array_merge( $items, self::post_parents( $obj ) );
 					$items[] = self::post_item( $obj );
 				}
 				break;
 			case Context::TERM:
 				if ( $obj instanceof \WP_Term ) {
-					$items = array_merge( $items, self::term_ancestors( $obj ) );
+					$items   = array_merge( $items, self::term_ancestors( $obj ) );
 					$items[] = self::term_item( $obj );
 				}
 				break;
@@ -197,7 +197,7 @@ final class Module extends Base {
 				}
 				break;
 			case Context::DATE:
-				$year = (int) get_query_var( 'year' );
+				$year  = (int) get_query_var( 'year' );
 				$month = (int) get_query_var( 'monthnum' );
 				if ( $year ) {
 					$items[] = array(
@@ -207,7 +207,7 @@ final class Module extends Base {
 				}
 				if ( $month ) {
 					$items[] = array(
-						'text' => (string) wp_date( 'F', (int) mktime( 0, 0, 0, $month, 1, $year ?: (int) gmdate( 'Y' ) ) ),
+						'text' => (string) wp_date( 'F', (int) mktime( 0, 0, 0, $month, 1, $year ? $year : (int) gmdate( 'Y' ) ) ),
 						'url'  => get_month_link( $year, $month ),
 					);
 				}
@@ -303,7 +303,7 @@ final class Module extends Base {
 	 */
 	private static function post_parents( \WP_Post $post ): array {
 		$items = array();
-		$opt   = static fn( string $key, mixed $default = null ) => Options::get( 'breadcrumbs', $key, $default );
+		$opt   = static fn( string $key, mixed $fallback = null ) => Options::get( 'breadcrumbs', $key, $fallback );
 		$type  = get_post_type_object( $post->post_type );
 
 		if ( 'post' === $post->post_type && $opt( 'show_blog', true ) && 'page' === get_option( 'show_on_front' ) ) {
@@ -347,7 +347,7 @@ final class Module extends Base {
 	 * @param string $post_type Post type.
 	 */
 	private static function main_taxonomy( string $post_type ): string {
-		$map = array(
+		$map      = array(
 			'post'    => 'category',
 			'product' => 'product_cat',
 		);

@@ -97,7 +97,8 @@ final class Variables {
 			'term'             => __( 'Current term name', 'mg-seo' ),
 			'term_description' => __( 'Current term description', 'mg-seo' ),
 			'author'           => __( 'Author display name', 'mg-seo' ),
-			'date'             => __( 'Publish date, optional format: %date(Y-m-d)%', 'mg-seo' ),
+			/* translators: %s: example variable */
+			'date'             => sprintf( __( 'Publish date, optional format: %s', 'mg-seo' ), '%date(Y-m-d)%' ),
 			'modified'         => __( 'Last modified date', 'mg-seo' ),
 			'currentyear'      => __( 'Current year', 'mg-seo' ),
 			'currentmonth'     => __( 'Current month', 'mg-seo' ),
@@ -113,8 +114,10 @@ final class Variables {
 			'url'              => __( 'Permalink', 'mg-seo' ),
 			'filename'         => __( 'Attachment file name without extension', 'mg-seo' ),
 			'org_name'         => __( 'Organization name from schema settings', 'mg-seo' ),
-			'customfield'      => __( 'Custom field value: %customfield(field_name)%', 'mg-seo' ),
-			'customterm'       => __( 'Terms of a taxonomy: %customterm(taxonomy)%', 'mg-seo' ),
+			/* translators: %s: example variable */
+			'customfield'      => sprintf( __( 'Custom field value: %s', 'mg-seo' ), '%customfield(field_name)%' ),
+			/* translators: %s: example variable */
+			'customterm'       => sprintf( __( 'Terms of a taxonomy: %s', 'mg-seo' ), '%customterm(taxonomy)%' ),
 		);
 		/**
 		 * Filter variable descriptions shown in the UI.
@@ -140,7 +143,7 @@ final class Variables {
 		if ( null !== self::$vars ) {
 			return self::$vars;
 		}
-		$post = static function ( ?object $obj ): ?\WP_Post {
+		$post  = static function ( ?object $obj ): ?\WP_Post {
 			if ( $obj instanceof \WP_Post ) {
 				return $obj;
 			}
@@ -152,7 +155,7 @@ final class Variables {
 			}
 			return null;
 		};
-		$term = static function ( ?object $obj ): ?\WP_Term {
+		$term  = static function ( ?object $obj ): ?\WP_Term {
 			if ( $obj instanceof \WP_Term ) {
 				return $obj;
 			}
@@ -209,9 +212,9 @@ final class Variables {
 				}
 				return '';
 			},
-			'term_title'       => static fn( ?object $obj ) => ( $t = $term( $obj ) ) ? $t->name : '',
-			'term'             => static fn( ?object $obj ) => ( $t = $term( $obj ) ) ? $t->name : '',
-			'term_description' => static fn( ?object $obj ) => ( $t = $term( $obj ) ) ? wp_strip_all_tags( term_description( $t ) ) : '',
+			'term_title'       => static fn( ?object $obj ) => self::with( $term( $obj ), static fn( $t ) => $t->name ),
+			'term'             => static fn( ?object $obj ) => self::with( $term( $obj ), static fn( $t ) => $t->name ),
+			'term_description' => static fn( ?object $obj ) => self::with( $term( $obj ), static fn( $t ) => wp_strip_all_tags( term_description( $t ) ) ),
 			'excerpt'          => static function ( ?object $obj ) use ( $post ): string {
 				$p = $post( $obj );
 				if ( ! $p ) {
@@ -222,7 +225,7 @@ final class Variables {
 				}
 				return Helpers::excerpt_from_content( $p->post_content, 160 );
 			},
-			'excerpt_only'     => static fn( ?object $obj ) => ( $p = $post( $obj ) ) && has_excerpt( $p ) ? wp_strip_all_tags( $p->post_excerpt ) : '',
+			'excerpt_only'     => static fn( ?object $obj ) => self::with( $post( $obj ), static fn( $p ) => has_excerpt( $p ) ? wp_strip_all_tags( $p->post_excerpt ) : '' ),
 			'category'         => static fn( ?object $obj ) => $terms( $post( $obj ), 'category', false ),
 			'categories'       => static fn( ?object $obj ) => $terms( $post( $obj ), 'category', true ),
 			'primary_category' => static function ( ?object $obj ) use ( $post, $terms ): string {
@@ -248,8 +251,8 @@ final class Variables {
 				return $ctx['object'] instanceof \WP_User ? $ctx['object']->display_name : '';
 			},
 			'name'             => static fn( ?object $obj ) => call_user_func( self::$vars['author'], $obj, '' ),
-			'date'             => static fn( ?object $obj, string $arg ) => ( $p = $post( $obj ) ) ? get_the_date( '' !== $arg ? $arg : '', $p ) : '',
-			'modified'         => static fn( ?object $obj, string $arg ) => ( $p = $post( $obj ) ) ? get_the_modified_date( '' !== $arg ? $arg : '', $p ) : '',
+			'date'             => static fn( ?object $obj, string $arg ) => self::with( $post( $obj ), static fn( $p ) => get_the_date( $arg, $p ) ),
+			'modified'         => static fn( ?object $obj, string $arg ) => self::with( $post( $obj ), static fn( $p ) => get_the_modified_date( $arg, $p ) ),
 			'currentyear'      => static fn() => wp_date( 'Y' ),
 			'currentmonth'     => static fn() => wp_date( 'F' ),
 			'currentday'       => static fn() => wp_date( 'j' ),
@@ -285,8 +288,8 @@ final class Variables {
 				return (string) ( $parts[0] ?? '' );
 			},
 			'keywords'         => static fn( ?object $obj ) => (string) Meta::for_object( $post( $obj ) ?? $term( $obj ), 'focus_keyword', '' ),
-			'id'               => static fn( ?object $obj ) => ( $p = $post( $obj ) ) ? (string) $p->ID : '',
-			'url'              => static fn( ?object $obj ) => ( $p = $post( $obj ) ) ? (string) get_permalink( $p ) : '',
+			'id'               => static fn( ?object $obj ) => self::with( $post( $obj ), static fn( $p ) => (string) $p->ID ),
+			'url'              => static fn( ?object $obj ) => self::with( $post( $obj ), static fn( $p ) => (string) get_permalink( $p ) ),
 			'filename'         => static function ( ?object $obj ) use ( $post ): string {
 				$p = $post( $obj );
 				if ( ! $p || 'attachment' !== $p->post_type ) {
@@ -316,6 +319,16 @@ final class Variables {
 		 */
 		self::$vars = apply_filters( 'mgseo/variables', $vars );
 		return self::$vars;
+	}
+
+	/**
+	 * Apply a callback to a resolved object, or return '' when there is none.
+	 *
+	 * @param object|null $obj      Resolved object.
+	 * @param callable    $callback Callback receiving the object.
+	 */
+	private static function with( ?object $obj, callable $callback ): string {
+		return null === $obj ? '' : (string) $callback( $obj );
 	}
 
 	/**
