@@ -267,6 +267,7 @@ final class Metabox {
 		<p class="mgseo-row">
 			<label class="mgseo-inline"><input type="checkbox" name="mgseo[pillar]" value="1" <?php checked( (bool) Meta::post( $post->ID, 'pillar', false ) ); ?> /> <?php esc_html_e( 'Pillar content (cornerstone, preferred in link suggestions)', 'mg-seo' ); ?></label>
 			<label class="mgseo-inline"><input type="checkbox" name="mgseo[sitemap_exclude]" value="1" <?php checked( (bool) Meta::post( $post->ID, 'sitemap_exclude', false ) ); ?> /> <?php esc_html_e( 'Exclude from XML sitemap', 'mg-seo' ); ?></label>
+			<label class="mgseo-inline"><input type="checkbox" name="mgseo[news_exclude]" value="1" <?php checked( (bool) Meta::post( $post->ID, 'news_exclude', false ) ); ?> /> <?php esc_html_e( 'Exclude from Google News sitemap', 'mg-seo' ); ?></label>
 		</p>
 		<?php
 	}
@@ -369,6 +370,7 @@ final class Metabox {
 		Meta::set_post( $post_id, 'breadcrumb_title', sanitize_text_field( (string) ( $data['breadcrumb_title'] ?? '' ) ) );
 		Meta::set_post( $post_id, 'pillar', ! empty( $data['pillar'] ) );
 		Meta::set_post( $post_id, 'sitemap_exclude', ! empty( $data['sitemap_exclude'] ) );
+		Meta::set_post( $post_id, 'news_exclude', ! empty( $data['news_exclude'] ) );
 		foreach ( (array) ( $data['primary'] ?? array() ) as $taxonomy => $term_id ) {
 			$taxonomy = sanitize_key( (string) $taxonomy );
 			if ( taxonomy_exists( $taxonomy ) ) {
