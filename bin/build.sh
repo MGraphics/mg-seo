@@ -9,7 +9,7 @@ WPORG=0
 [[ "${1:-}" == "--wporg" ]] && WPORG=1
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
-rsync -a --exclude-from="$ROOT/mg-seo/.distignore" "$ROOT/mg-seo/" "$STAGE/mg-seo/"
+rsync -a --exclude-from="$ROOT/.distignore" "$ROOT/mg-seo/" "$STAGE/mg-seo/"
 # Compile translations if msgfmt is available.
 if command -v msgfmt >/dev/null 2>&1; then
 	for po in "$STAGE"/mg-seo/languages/*.po; do [[ -e "$po" ]] && msgfmt -o "${po%.po}.mo" "$po"; done
