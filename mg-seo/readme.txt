@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.1.2 =
+* Fix: self-updates now install only the GitHub release asset `mg-seo-<version>.zip`. The updater could previously pick `mg-seo-<version>-wporg.zip` from the same release, which ships without the updater, so the site stopped receiving updates after that.
 
 = 0.1.1 =
 * Fix: "Check for updates" no longer fails with a fatal error (Class "Parsedown" not found) when the GitHub release has release notes. The bundled plugin-update-checker now ships complete, including its vendor/ libraries.

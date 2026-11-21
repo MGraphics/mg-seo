@@ -3,7 +3,7 @@
  * Plugin Name:       MG SEO
  * Plugin URI:        https://github.com/MGraphics/mg-seo
  * Description:       SEO toolkit for MGraphics sites: titles and meta, schema, sitemaps, redirections, local SEO, WooCommerce and more.
- * Version:           0.1.1
+ * Version:           0.1.2
  * Requires at least: 6.5
  * Requires PHP:      8.2
  * Author:            MGraphics
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MGSEO_VERSION', '0.1.1' );
+define( 'MGSEO_VERSION', '0.1.2' );
 define( 'MGSEO_FILE', __FILE__ );
 define( 'MGSEO_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGSEO_URL', plugin_dir_url( __FILE__ ) );

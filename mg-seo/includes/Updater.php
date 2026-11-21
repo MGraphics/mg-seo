@@ -22,6 +22,12 @@ defined( 'ABSPATH' ) || exit;
 final class Updater {
 
 	/**
+	 * Release asset the updater installs: exactly mg-seo-<version>.zip. Any suffixed variant
+	 * (mg-seo-<version>-wporg.zip ships without the updater) must never be picked up.
+	 */
+	public const ASSET_REGEX = '/^mg-seo-[0-9][0-9.]*\\.zip$/i';
+
+	/**
 	 * Boot the update checker.
 	 */
 	public static function boot(): void {
@@ -43,8 +49,9 @@ final class Updater {
 		$checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker( trailingslashit( $repo ), MGSEO_FILE, 'mg-seo' );
 		$api     = $checker->getVcsApi();
 		if ( $api && method_exists( $api, 'enableReleaseAssets' ) ) {
-			// Use the packaged mg-seo-x.y.z.zip asset attached to each GitHub release (not the source archive).
-			$api->enableReleaseAssets( '/mg-seo[^\/]*\.zip($|[?&#])/i' );
+			// Only the packaged mg-seo-x.y.z.zip asset of each GitHub release: never the -wporg variant
+			// and never GitHub's source archive (it unpacks to the wrong folder).
+			$api->enableReleaseAssets( self::ASSET_REGEX, $api::REQUIRE_RELEASE_ASSETS );
 		}
 	}
 
