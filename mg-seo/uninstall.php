@@ -13,10 +13,10 @@ if ( ! $mgseo_delete ) {
 	return;
 }
 
-define( 'MGSEO_DIR', plugin_dir_path( __FILE__ ) );
-define( 'MGSEO_FILE', MGSEO_DIR . 'mg-seo.php' );
-define( 'MGSEO_URL', plugin_dir_url( __FILE__ ) );
-define( 'MGSEO_VERSION', 'uninstall' );
+defined( 'MGSEO_DIR' ) || define( 'MGSEO_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'MGSEO_FILE' ) || define( 'MGSEO_FILE', MGSEO_DIR . 'mg-seo.php' );
+defined( 'MGSEO_URL' ) || define( 'MGSEO_URL', plugin_dir_url( __FILE__ ) );
+defined( 'MGSEO_VERSION' ) || define( 'MGSEO_VERSION', 'uninstall' );
 
 spl_autoload_register(
 	static function ( string $class_name ): void {
@@ -29,24 +29,26 @@ spl_autoload_register(
 	}
 );
 
-/**
- * Remove data for the current site.
- */
-function mgseo_uninstall_site(): void {
-	global $wpdb;
-	foreach ( MGSEO\Plugin::registry() as $mgseo_def ) {
-		if ( class_exists( $mgseo_def['class'] ) ) {
-			( new $mgseo_def['class']() )->uninstall();
+if ( ! function_exists( 'mgseo_uninstall_site' ) ) {
+	/**
+	 * Remove data for the current site.
+	 */
+	function mgseo_uninstall_site(): void {
+		global $wpdb;
+		foreach ( MGSEO\Plugin::registry() as $mgseo_def ) {
+			if ( class_exists( $mgseo_def['class'] ) ) {
+				( new $mgseo_def['class']() )->uninstall();
+			}
 		}
+		MGSEO\Installer::remove_capabilities();
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->termmeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s", $wpdb->esc_like( 'mgseo_' ) . '%', $wpdb->esc_like( '_transient_mgseo_' ) . '%', $wpdb->esc_like( '_transient_timeout_mgseo_' ) . '%' ) );
+		// phpcs:enable
+		wp_clear_scheduled_hook( 'mgseo_daily' );
 	}
-	MGSEO\Installer::remove_capabilities();
-	// phpcs:disable WordPress.DB.DirectDatabaseQuery
-	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
-	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->termmeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
-	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s", $wpdb->esc_like( '_mgseo_' ) . '%' ) );
-	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s", $wpdb->esc_like( 'mgseo_' ) . '%', $wpdb->esc_like( '_transient_mgseo_' ) . '%', $wpdb->esc_like( '_transient_timeout_mgseo_' ) . '%' ) );
-	// phpcs:enable
-	wp_clear_scheduled_hook( 'mgseo_daily' );
 }
 
 if ( is_multisite() ) {
