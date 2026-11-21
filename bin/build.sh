@@ -24,4 +24,16 @@ fi
 mkdir -p "$ROOT/dist"
 rm -f "$ROOT/dist/$NAME.zip"
 (cd "$STAGE" && zip -qr "$ROOT/dist/$NAME.zip" mg-seo)
+# The self-updating build must ship the complete update checker: GitHubApi needs vendor/Parsedown.php for
+# release notes ("Class Parsedown not found" otherwise). Full runtime check: bin/check-release-zip.sh.
+if [[ $WPORG -eq 0 ]]; then
+	LISTING="$(unzip -Z1 "$ROOT/dist/$NAME.zip")"
+	for f in Parsedown.php PucReadmeParser.php; do
+		if ! grep -qx "mg-seo/lib/plugin-update-checker/vendor/$f" <<<"$LISTING"; then
+			echo "build: $NAME.zip is missing lib/plugin-update-checker/vendor/$f" >&2
+			rm -f "$ROOT/dist/$NAME.zip"
+			exit 1
+		fi
+	done
+fi
 echo "$ROOT/dist/$NAME.zip"

@@ -2,7 +2,7 @@ node_modules/
 .DS_Store
 *.sql
 *.sql.gz
-vendor/
+/vendor/
 .local/
 !docker/db-init/*.sql
 .phpunit.result.cache

@@ -51,6 +51,7 @@ docker compose run --rm tests          # WordPress integration tests
 vendor/bin/phpcs                       # coding standards
 bin/build.sh                           # dist/mg-seo-<version>.zip (release asset)
 bin/build.sh --wporg                   # WordPress.org package (no self-updater)
+bin/check-release-zip.sh dist/mg-seo-<version>.zip  # update check from the built zip (mocked GitHub release)
 ```
 
 Plugin code lives in [`mg-seo/`](mg-seo); tests in [`tests/`](tests).
@@ -58,7 +59,7 @@ Plugin code lives in [`mg-seo/`](mg-seo); tests in [`tests/`](tests).
 ## Releasing
 
 1. Bump `Version:` in `mg-seo/mg-seo.php`, `Stable tag:` and the changelog in `mg-seo/readme.txt`.
-2. `bin/build.sh`
+2. `bin/build.sh`, then `bin/check-release-zip.sh dist/mg-seo-<version>.zip` (must print `OK`).
 3. Create a GitHub release with tag `v<version>` and attach `dist/mg-seo-<version>.zip` as a release asset, e.g.
    `gh release create v<version> dist/mg-seo-<version>.zip --repo MGraphics/mg-seo --title "MG SEO <version>"`.
    Sites pick it up on their next update check.
