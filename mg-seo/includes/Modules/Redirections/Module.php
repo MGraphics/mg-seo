@@ -59,6 +59,7 @@ final class Module extends Base {
 		add_action( 'shutdown', array( $this, 'shutdown' ) );
 		add_action( 'mgseo_daily', array( Log404::class, 'cleanup' ) );
 		add_action( 'mgseo/settings_saved', array( $this, 'settings_saved' ) );
+		add_filter( 'mgseo/links/is_redirected', array( $this, 'is_redirected' ), 10, 2 );
 		AutoRedirect::boot();
 		if ( is_admin() ) {
 			Admin::boot();
@@ -580,5 +581,20 @@ final class Module extends Base {
 			$this->log = null;
 			Log404::log( $log['uri'], $log['referer'], $log['user_agent'], $log['ip'], (string) Options::get( 'redirections', 'log_mode', 'simple' ) );
 		}
+	}
+
+	/**
+	 * Whether a URL is covered by an active redirection (used by the broken link report).
+	 *
+	 * @param bool   $redirected Current value.
+	 * @param string $url        URL or path.
+	 */
+	public function is_redirected( $redirected, $url ): bool {
+		if ( $redirected ) {
+			return true;
+		}
+		$path  = \MGSEO\Helpers::request_path( (string) $url );
+		$query = (string) wp_parse_url( (string) $url, PHP_URL_QUERY );
+		return null !== Matcher::match( $path, $query, Repository::compiled(), (string) Options::get( 'redirections', 'query_mode', 'ignore' ) );
 	}
 }
