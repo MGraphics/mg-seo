@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build release archives of MG SEO.
-#   bin/build.sh            -> dist/mg-seo-<version>.zip        (GitLab release asset, self-updating)
+#   bin/build.sh            -> dist/mg-seo-<version>.zip        (GitHub release asset, self-updating)
 #   bin/build.sh --wporg    -> dist/mg-seo-<version>-wporg.zip  (WordPress.org: no update checker, no Update URI)
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

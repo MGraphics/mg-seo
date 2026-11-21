@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       MG SEO
- * Plugin URI:        https://mgraphics.com.pl/mg-seo/
+ * Plugin URI:        https://github.com/MGraphics/mg-seo
  * Description:       SEO toolkit for MGraphics sites: titles and meta, schema, sitemaps, redirections, local SEO, WooCommerce and more.
  * Version:           0.1.0
  * Requires at least: 6.5
@@ -10,7 +10,7 @@
  * Author URI:        https://mgraphics.com.pl
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        https://gitlab.com/mgraphics/mg-seo
+ * Update URI:        https://github.com/MGraphics/mg-seo
  * Text Domain:       mg-seo
  * Domain Path:       /languages
  *
@@ -25,11 +25,11 @@ define( 'MGSEO_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MGSEO_URL', plugin_dir_url( __FILE__ ) );
 
 /*
- * Self-hosted updates from GitLab Releases (placeholder project URL until the repository exists).
+ * Self-hosted updates from GitHub Releases of the public MGraphics/mg-seo repository (no token needed).
  * Define MGSEO_UPDATE_REPO as an empty string in wp-config.php to turn update checks off.
  */
 if ( ! defined( 'MGSEO_UPDATE_REPO' ) ) {
-	define( 'MGSEO_UPDATE_REPO', 'https://gitlab.com/mgraphics/mg-seo' );
+	define( 'MGSEO_UPDATE_REPO', 'https://github.com/MGraphics/mg-seo' );
 }
 
 spl_autoload_register(

@@ -60,7 +60,7 @@ Complete SEO toolkit: titles and meta, schema generator, XML sitemaps, redirecti
 
 = Does MG SEO send any data to external servers? =
 
-No. MG SEO has no telemetry. External requests happen only for features you explicitly configure: Google Search Console (your own Google Cloud project), IndexNow (when enabled) and update checks against the MGraphics GitLab releases for copies not installed from WordPress.org (define `MGSEO_UPDATE_REPO` as an empty string to disable them).
+No. MG SEO has no telemetry. External requests happen only for features you explicitly configure: Google Search Console (your own Google Cloud project), IndexNow (when enabled) and update checks against the public MGraphics GitHub releases (github.com/MGraphics/mg-seo) for copies not installed from WordPress.org (define `MGSEO_UPDATE_REPO` as an empty string to disable them).
 
 = Can I switch from Rank Math without losing my data? =
 
@@ -78,3 +78,4 @@ Tak, interfejs jest dostępny po polsku i po angielsku.
 
 = 0.1.0 =
 * First release.
+* Self-hosted updates come from GitHub Releases of github.com/MGraphics/mg-seo (release asset `mg-seo-<version>.zip`).

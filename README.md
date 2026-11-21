@@ -31,14 +31,16 @@ Titles and meta, a schema generator, XML sitemaps (with image, news and video), 
 
 ## Installation
 
-1. Download `mg-seo-<version>.zip` from the latest release.
+1. Download `mg-seo-<version>.zip` from the [latest GitHub release](https://github.com/MGraphics/mg-seo/releases/latest)
+   (the attached asset, not the "Source code" archive).
 2. In WordPress go to **Plugins → Add New → Upload Plugin**, upload the ZIP and activate it.
 3. Open **MG SEO → Dashboard** to pick modules, then **MG SEO → Titles & Meta**.
 
-Updates are delivered from this project's releases through the bundled
-[plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker) (MIT). To turn update checks
-off, add `define( 'MGSEO_UPDATE_REPO', '' );` to `wp-config.php`. Copies installed from WordPress.org never
-use the self-updater.
+Updates appear in **Dashboard → Updates** like any other plugin. They come from the
+[GitHub Releases](https://github.com/MGraphics/mg-seo/releases) of this public repository through the bundled
+[plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker) (MIT); no GitHub account or token
+is needed. To turn update checks off, add `define( 'MGSEO_UPDATE_REPO', '' );` to `wp-config.php`. Copies
+installed from WordPress.org never use the self-updater.
 
 ## Development
 
@@ -57,7 +59,9 @@ Plugin code lives in [`mg-seo/`](mg-seo); tests in [`tests/`](tests).
 
 1. Bump `Version:` in `mg-seo/mg-seo.php`, `Stable tag:` and the changelog in `mg-seo/readme.txt`.
 2. `bin/build.sh`
-3. Create a GitLab release with tag `v<version>` and attach `dist/mg-seo-<version>.zip` as a release asset.
+3. Create a GitHub release with tag `v<version>` and attach `dist/mg-seo-<version>.zip` as a release asset, e.g.
+   `gh release create v<version> dist/mg-seo-<version>.zip --repo MGraphics/mg-seo --title "MG SEO <version>"`.
+   Sites pick it up on their next update check.
 
 ## Author
 

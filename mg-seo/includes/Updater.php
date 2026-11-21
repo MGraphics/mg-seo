@@ -1,6 +1,6 @@
 <?php
 /**
- * Self-hosted updates from GitLab Releases.
+ * Self-hosted updates from GitHub Releases.
  *
  * @package MGSEO
  */
@@ -10,13 +10,14 @@ namespace MGSEO;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Wires YahnisElsts/plugin-update-checker (MIT) to the public GitLab project.
+ * Wires YahnisElsts/plugin-update-checker (MIT) to the public GitHub repository MGraphics/mg-seo.
+ * The repository is public, so no access token is used.
  *
  * The checker is only loaded when:
  * - MGSEO_UPDATE_REPO is a non-empty URL (define it as '' in wp-config.php to opt out),
  * - the bundled library exists (the WordPress.org build ships without lib/plugin-update-checker),
  * - the plugin was not installed from WordPress.org (filter `mgseo/self_updates`).
- * It talks to GitLab only when WordPress itself checks for plugin updates.
+ * It talks to the GitHub API only when WordPress itself checks for plugin updates.
  */
 final class Updater {
 
@@ -27,7 +28,7 @@ final class Updater {
 		$repo = defined( 'MGSEO_UPDATE_REPO' ) ? (string) MGSEO_UPDATE_REPO : '';
 		$lib  = MGSEO_DIR . 'lib/plugin-update-checker/plugin-update-checker.php';
 		/**
-		 * Whether MG SEO checks GitLab Releases for updates.
+		 * Whether MG SEO checks GitHub Releases for updates.
 		 *
 		 * @param bool $enabled Enabled.
 		 */
@@ -42,7 +43,7 @@ final class Updater {
 		$checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker( trailingslashit( $repo ), MGSEO_FILE, 'mg-seo' );
 		$api     = $checker->getVcsApi();
 		if ( $api && method_exists( $api, 'enableReleaseAssets' ) ) {
-			// Use the packaged mg-seo-x.y.z.zip asset attached to each GitLab release.
+			// Use the packaged mg-seo-x.y.z.zip asset attached to each GitHub release (not the source archive).
 			$api->enableReleaseAssets( '/mg-seo[^\/]*\.zip($|[?&#])/i' );
 		}
 	}

@@ -26,8 +26,8 @@ msgstr "MG SEO"
 
 #. Plugin URI of the plugin
 #: mg-seo.php
-msgid "https://mgraphics.com.pl/mg-seo/"
-msgstr "https://mgraphics.com.pl/mg-seo/"
+msgid "https://github.com/MGraphics/mg-seo"
+msgstr "https://github.com/MGraphics/mg-seo"
 
 #. Description of the plugin
 #: mg-seo.php
