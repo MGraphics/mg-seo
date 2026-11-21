@@ -215,6 +215,14 @@ final class Module extends Base {
 			}
 			$data['image'] = self::post_image( $post );
 		} elseif ( $obj instanceof \WP_Term ) {
+			$og_title = (string) Meta::term( $obj->term_id, 'og_title' );
+			$og_desc  = (string) Meta::term( $obj->term_id, 'og_description' );
+			if ( '' !== $og_title ) {
+				$data['title'] = Variables::replace( $og_title, $obj );
+			}
+			if ( '' !== $og_desc ) {
+				$data['description'] = Variables::replace( $og_desc, $obj );
+			}
 			$url = (string) Meta::term( $obj->term_id, 'og_image' );
 			if ( '' !== $url ) {
 				$data['image'] = self::image_from_url( $url );

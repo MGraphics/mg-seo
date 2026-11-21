@@ -88,6 +88,14 @@ final class TermFields {
 			</tr>
 			<?php endif; ?>
 			<tr>
+				<th><label for="mgseo-og-title"><?php esc_html_e( 'Open Graph title', 'mg-seo' ); ?></label></th>
+				<td><input type="text" id="mgseo-og-title" name="mgseo[og_title]" class="large-text mgseo-has-variables" value="<?php echo esc_attr( (string) Meta::term( $term->term_id, 'og_title' ) ); ?>" /></td>
+			</tr>
+			<tr>
+				<th><label for="mgseo-og-description"><?php esc_html_e( 'Open Graph description', 'mg-seo' ); ?></label></th>
+				<td><textarea id="mgseo-og-description" name="mgseo[og_description]" rows="2" class="large-text mgseo-has-variables"><?php echo esc_textarea( (string) Meta::term( $term->term_id, 'og_description' ) ); ?></textarea></td>
+			</tr>
+			<tr>
 				<th><label for="mgseo-og-image"><?php esc_html_e( 'Social image', 'mg-seo' ); ?></label></th>
 				<td><input type="url" id="mgseo-og-image" name="mgseo[og_image]" class="regular-text" value="<?php echo esc_attr( (string) Meta::term( $term->term_id, 'og_image' ) ); ?>" /> <button type="button" class="button mgseo-media" data-target="mgseo-og-image"><?php esc_html_e( 'Choose image', 'mg-seo' ); ?></button></td>
 			</tr>
@@ -121,6 +129,8 @@ final class TermFields {
 		Meta::set_term( $term_id, 'description', sanitize_textarea_field( (string) ( $data['description'] ?? '' ) ) );
 		Meta::set_term( $term_id, 'focus_keyword', sanitize_text_field( (string) ( $data['focus_keyword'] ?? '' ) ) );
 		Meta::set_term( $term_id, 'og_image', esc_url_raw( (string) ( $data['og_image'] ?? '' ) ) );
+		Meta::set_term( $term_id, 'og_title', sanitize_text_field( (string) ( $data['og_title'] ?? '' ) ) );
+		Meta::set_term( $term_id, 'og_description', sanitize_textarea_field( (string) ( $data['og_description'] ?? '' ) ) );
 		if ( current_user_can( 'mgseo_edit_advanced' ) && array_key_exists( 'index', $data ) ) {
 			$robots = array_diff( Helpers::sanitize_robots( $data['robots'] ?? array() ), array( 'index', 'noindex' ) );
 			$index  = sanitize_key( (string) $data['index'] );

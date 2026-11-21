@@ -377,6 +377,13 @@ final class Module extends Base {
 					'desc'      => __( 'When a static page shows the latest posts and has no SEO title of its own.', 'mg-seo' ),
 				),
 				array(
+					'id'        => 'blog_description',
+					'type'      => 'textarea',
+					'label'     => __( 'Posts page description', 'mg-seo' ),
+					'default'   => '',
+					'variables' => true,
+				),
+				array(
 					'id'        => 'search_title',
 					'type'      => 'text',
 					'label'     => __( 'Search results title', 'mg-seo' ),
@@ -586,7 +593,7 @@ final class Module extends Base {
 				break;
 			case Context::BLOG:
 				$custom = $obj instanceof \WP_Post ? (string) Meta::post( $obj->ID, 'description' ) : '';
-				$tpl    = '' !== $custom ? $custom : ( $obj ? '' : (string) Options::get( 'titles', 'home_description', '%sitedesc%' ) );
+				$tpl    = '' !== $custom ? $custom : (string) Options::get( 'titles', $obj ? 'blog_description' : 'home_description', $obj ? '' : '%sitedesc%' );
 				break;
 			case Context::TERM:
 				if ( $obj instanceof \WP_Term ) {
@@ -629,8 +636,10 @@ final class Module extends Base {
 	public static function current_robots(): array {
 		$ctx    = Context::current();
 		$obj    = $ctx['object'];
-		$robots = (array) Options::get( 'titles', 'robots_global', array() );
+		$global = (array) Options::get( 'titles', 'robots_global', array() );
+		$robots = $global;
 		$own    = array();
+		$forced = false;
 
 		switch ( $ctx['type'] ) {
 			case Context::SINGULAR:
@@ -638,7 +647,7 @@ final class Module extends Base {
 					$robots = array_merge( $robots, (array) Options::get( 'titles', 'pt_' . $obj->post_type . '_robots', array() ) );
 					$own    = (array) Meta::post( $obj->ID, 'robots', array() );
 					if ( post_password_required( $obj ) && Options::get( 'titles', 'noindex_password', true ) ) {
-						$robots[] = 'noindex';
+						$forced = true;
 					}
 				}
 				break;
@@ -671,15 +680,18 @@ final class Module extends Base {
 				break;
 		}
 
+		// Per-object override: an explicit index/noindex choice replaces the inherited (post type, taxonomy,
+		// archive) directives with the object's own list; without it, the object's directives add up.
+		if ( array_intersect( $own, array( 'index', 'noindex' ) ) ) {
+			$robots = $global;
+		}
+		$robots = array_unique( array_merge( $robots, array_diff( $own, array( 'index' ) ) ) );
+		if ( $forced ) {
+			$robots[] = 'noindex';
+		}
 		if ( Context::page_number() > 1 && Options::get( 'titles', 'noindex_paged', false ) && ! is_singular() ) {
 			$robots[] = 'noindex';
 		}
-
-		// Per-object override: explicit index/noindex replaces the inherited value; other directives add up.
-		if ( in_array( 'index', $own, true ) ) {
-			$robots = array_diff( $robots, array( 'noindex' ) );
-		}
-		$robots = array_unique( array_merge( $robots, array_diff( $own, array( 'index' ) ) ) );
 
 		$out             = array();
 		$noindex         = in_array( 'noindex', $robots, true );

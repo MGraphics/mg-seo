@@ -134,4 +134,35 @@ class TitlesTest extends TestCase {
 		$this->assertStringNotContainsString( '<!--', $head );
 		$this->assertDoesNotMatchRegularExpression( '/mg-?seo|mgseo|rank-?math|yoast/i', $head );
 	}
+
+	public function test_explicit_index_choice_replaces_post_type_directives(): void {
+		$this->set_option( 'titles', 'pt_page_robots', array( 'nofollow', 'noarchive' ) );
+		$page = self::factory()->post->create_and_get( array( 'post_type' => 'page' ) );
+		$this->go_to( get_permalink( $page ) );
+		$robots = Titles::current_robots();
+		$this->assertTrue( $robots['nofollow'] );
+		$this->assertTrue( $robots['noarchive'] );
+
+		Meta::set_post( $page->ID, 'robots', array( 'index', 'nosnippet' ) );
+		$this->go_to( get_permalink( $page ) );
+		$robots = Titles::current_robots();
+		$this->assertTrue( $robots['follow'] );
+		$this->assertArrayNotHasKey( 'noarchive', $robots );
+		$this->assertTrue( $robots['nosnippet'] );
+	}
+
+	public function test_password_protected_stays_noindex_even_with_explicit_index(): void {
+		$post = self::factory()->post->create_and_get( array( 'post_password' => 'secret' ) );
+		Meta::set_post( $post->ID, 'robots', array( 'index' ) );
+		$this->go_to( get_permalink( $post ) );
+		$this->assertTrue( Titles::current_robots()['noindex'] );
+	}
+
+	public function test_term_open_graph_overrides(): void {
+		$term = self::factory()->category->create_and_get( array( 'name' => 'Ogrody' ) );
+		self::factory()->post->create( array( 'post_category' => array( $term->term_id ) ) );
+		Meta::set_term( $term->term_id, 'og_title', 'OG %term%' );
+		$head = $this->head_for( get_term_link( $term ) );
+		$this->assertStringContainsString( '<meta property="og:title" content="OG Ogrody" />', $head );
+	}
 }
