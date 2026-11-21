@@ -1,0 +1,68 @@
+# MG SEO
+
+Complete, privacy-friendly SEO plugin for WordPress by **[MGraphics](https://mgraphics.com.pl)**.
+
+Titles and meta, a schema generator, XML sitemaps (with image, news and video), redirections with a 404 monitor, local SEO, WooCommerce SEO, image SEO, bulk editing, Google Search Console reports, internal link suggestions, and imports from Rank Math and Yoast SEO. Everything runs on your own server: no telemetry, no account, and no external calls unless you configure an integration yourself.
+
+> Polski: kompletna wtyczka SEO dla WordPressa od MGraphics. Zobacz [`mg-seo/readme.txt`](mg-seo/readme.txt), sekcja „Opis (Polski)”.
+
+## Features
+
+| Area | What you get |
+|---|---|
+| Titles & meta | Templates with variables per post type, taxonomy and archive; per-post title/description; robots (noindex, nofollow, max-snippet, max-image-preview …); canonical URLs; verification codes; RSS before/after text |
+| Editor | SEO box in the block and classic editors with a Google snippet preview, live focus keyword analysis (multiple keywords) and an SEO score column |
+| Social | Open Graph and Twitter Cards with per-post overrides and default images |
+| Schema | Site graph (WebSite, Organization/Person, WebPage, BreadcrumbList), generator for Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service and more, custom JSON-LD, templates with conditions, local validation |
+| Sitemaps | XML sitemap index, post type/taxonomy/author sitemaps with images, Google News and video sitemaps, neutral XSL |
+| Redirections | 301/302/307/410/451, regex, automatic slug-change redirects, CSV import/export, 404 monitor |
+| Local SEO | Business data, opening hours, multiple locations, address shortcode/block, KML |
+| WooCommerce | Product schema (GTIN/MPN/brand, offers, ratings), product Open Graph, URL base options |
+| Images | Automatic alt/title attributes, case options, find & replace |
+| Tools | Bulk editor + CSV, role manager, robots.txt editor, llms.txt, IndexNow (opt-in), settings export/import |
+| Search Console | OAuth with your own Google Cloud project: performance, keyword positions, URL inspection |
+| Migration | Import from Rank Math and Yoast, including data left behind after the plugin was deleted; Rank Math/Yoast breadcrumb functions keep working in themes |
+| No fingerprint | No HTML comments, plugin names or plugin class names in front-end markup |
+
+## Requirements
+
+- WordPress 6.4+ (tested with 7.1)
+- PHP 8.2+
+
+## Installation
+
+1. Download `mg-seo-<version>.zip` from the latest release.
+2. In WordPress go to **Plugins → Add New → Upload Plugin**, upload the ZIP and activate it.
+3. Open **MG SEO → Dashboard** to pick modules, then **MG SEO → Titles & Meta**.
+
+Updates are delivered from this project's releases through the bundled
+[plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker) (MIT). To turn update checks
+off, add `define( 'MGSEO_UPDATE_REPO', '' );` to `wp-config.php`. Copies installed from WordPress.org never
+use the self-updater.
+
+## Development
+
+```bash
+composer install                       # PHPUnit, WPCS (dev only)
+docker compose up -d                   # dev site http://127.0.0.1:8471 (admin/admin)
+docker compose run --rm tests          # WordPress integration tests
+vendor/bin/phpcs                       # coding standards
+bin/build.sh                           # dist/mg-seo-<version>.zip (release asset)
+bin/build.sh --wporg                   # WordPress.org package (no self-updater)
+```
+
+Plugin code lives in [`mg-seo/`](mg-seo); tests in [`tests/`](tests).
+
+## Releasing
+
+1. Bump `Version:` in `mg-seo/mg-seo.php`, `Stable tag:` and the changelog in `mg-seo/readme.txt`.
+2. `bin/build.sh`
+3. Create a GitLab release with tag `v<version>` and attach `dist/mg-seo-<version>.zip` as a release asset.
+
+## Author
+
+**MGraphics** — [https://mgraphics.com.pl](https://mgraphics.com.pl)
+
+## License
+
+GPL-2.0-or-later. See [`mg-seo/LICENSE`](mg-seo/LICENSE). Bundled: plugin-update-checker (MIT).

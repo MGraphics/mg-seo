@@ -7,3 +7,4 @@ vendor/
 !docker/db-init/*.sql
 .phpunit.result.cache
 .phpcs-cache
+dist/

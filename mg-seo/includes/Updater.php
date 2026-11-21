@@ -48,13 +48,10 @@ final class Updater {
 	}
 
 	/**
-	 * WordPress.org copies carry no Update URI header pointing elsewhere; also honour a marker file
-	 * that the wp.org build adds.
+	 * The WordPress.org build (bin/build.sh --wporg) ships without the Update URI header and without the
+	 * update checker library, so either signal disables self-updates.
 	 */
 	public static function installed_from_wporg(): bool {
-		if ( file_exists( MGSEO_DIR . '.wporg' ) ) {
-			return true;
-		}
 		if ( ! function_exists( 'get_file_data' ) ) {
 			return false;
 		}
