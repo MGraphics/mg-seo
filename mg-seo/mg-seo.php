@@ -4,7 +4,7 @@
  * Plugin URI:        https://mgraphics.com.pl/mg-seo/
  * Description:       SEO toolkit for MGraphics sites: titles and meta, schema, sitemaps, redirections, local SEO, WooCommerce and more.
  * Version:           0.1.0
- * Requires at least: 6.4
+ * Requires at least: 6.5
  * Requires PHP:      8.2
  * Author:            MGraphics
  * Author URI:        https://mgraphics.com.pl

@@ -192,7 +192,9 @@ final class Plugin {
 		);
 
 		Installer::maybe_upgrade();
-		Updater::boot();
+		if ( class_exists( Updater::class ) ) {
+			Updater::boot();
+		}
 
 		foreach ( self::registry() as $id => $def ) {
 			if ( ! $this->is_module_active( $id ) ) {

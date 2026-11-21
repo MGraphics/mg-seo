@@ -263,7 +263,6 @@ final class Module extends Base {
 				'offset'                 => max( 0, $offset ),
 				'no_found_rows'          => false,
 				'ignore_sticky_posts'    => true,
-				'suppress_filters'       => true,
 				'update_post_term_cache' => false,
 			)
 		);

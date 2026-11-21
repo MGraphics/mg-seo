@@ -85,7 +85,7 @@ final class Module extends Base {
 						'type'        => 'text',
 						'label'       => __( 'OAuth client ID', 'mg-seo' ),
 						'default'     => '',
-						'placeholder' => '1234567890-abc.apps.googleusercontent.com',
+						'placeholder' => '1234567890-abc…',
 					),
 					array(
 						'id'       => 'client_secret',

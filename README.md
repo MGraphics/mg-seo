@@ -26,7 +26,7 @@ Titles and meta, a schema generator, XML sitemaps (with image, news and video), 
 
 ## Requirements
 
-- WordPress 6.4+ (tested with 7.1)
+- WordPress 6.5+ (tested with 7.1)
 - PHP 8.2+
 
 ## Installation

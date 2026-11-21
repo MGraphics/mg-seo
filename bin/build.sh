@@ -16,7 +16,8 @@ if command -v msgfmt >/dev/null 2>&1; then
 fi
 NAME="mg-seo-$VERSION"
 if [[ $WPORG -eq 1 ]]; then
-	rm -rf "$STAGE/mg-seo/lib/plugin-update-checker"
+	rm -rf "$STAGE/mg-seo/lib/plugin-update-checker" "$STAGE/mg-seo/includes/Updater.php"
+	rmdir "$STAGE/mg-seo/lib" 2>/dev/null || true
 	sed -i.bak '/^ \* Update URI:/d' "$STAGE/mg-seo/mg-seo.php" && rm "$STAGE/mg-seo/mg-seo.php.bak"
 	NAME="$NAME-wporg"
 fi

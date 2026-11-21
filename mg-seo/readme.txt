@@ -1,7 +1,7 @@
 === MG SEO ===
 Contributors: mgraphics
 Tags: seo, schema, sitemap, redirections, local seo
-Requires at least: 6.4
+Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
 Stable tag: 0.1.0

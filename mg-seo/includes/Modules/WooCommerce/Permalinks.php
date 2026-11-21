@@ -141,7 +141,6 @@ final class Permalinks {
 				'post_status'      => 'publish',
 				'numberposts'      => 1,
 				'no_found_rows'    => true,
-				'suppress_filters' => true,
 			)
 		);
 		return $posts ? $posts[0] : null;
