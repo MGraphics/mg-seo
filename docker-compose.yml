@@ -1,0 +1,94 @@
+# MG SEO development environment (project name: mg-seo).
+# Usage: docker compose -p mg-seo up -d ; site at http://127.0.0.1:8471
+name: mg-seo
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wp
+    volumes:
+      - db:/var/lib/mysql
+      - ./docker/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 20
+  wordpress:
+    image: wordpress:php8.4-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8471:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+    volumes:
+      - wp:/var/www/html
+      - ./mg-seo:/var/www/html/wp-content/plugins/mg-seo
+  # Second site with real Rank Math (free, wordpress.org) data for import tests.
+  wordpress-rm:
+    image: wordpress:php8.4-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8472:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress_rm
+      WORDPRESS_DEBUG: "1"
+    volumes:
+      - wprm:/var/www/html
+      - ./mg-seo:/var/www/html/wp-content/plugins/mg-seo
+  cli:
+    image: wordpress:cli-php8.4
+    user: "33:33"
+    depends_on:
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp:/var/www/html
+      - wprm:/var/www/rm
+      - ./mg-seo:/var/www/html/wp-content/plugins/mg-seo
+      - ./mg-seo:/var/www/rm/wp-content/plugins/mg-seo
+      - .:/repo
+    entrypoint: ["wp"]
+    profiles: ["tools"]
+  tests:
+    image: wordpress:cli-php8.4
+    depends_on:
+      db:
+        condition: service_healthy
+    working_dir: /repo
+    environment:
+      WP_TESTS_DB_HOST: db
+      WP_CORE_DIR: /var/www/html
+      WP_PHPUNIT__TESTS_CONFIG: /repo/tests/wp-tests-config.php
+      # Override per parallel run: docker compose run --rm -e WP_PHPUNIT__TABLE_PREFIX=t2_ tests
+      WP_PHPUNIT__TABLE_PREFIX: wptests_
+    volumes:
+      - wp:/var/www/html
+      - .:/repo
+    entrypoint: ["php", "vendor/bin/phpunit"]
+    profiles: ["tools"]
+volumes:
+  db:
+  wp:
+  wprm:

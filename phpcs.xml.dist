@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ruleset name="MG SEO">
+	<description>WordPress Coding Standards for MG SEO.</description>
+	<file>./mg-seo</file>
+	<exclude-pattern>./mg-seo/lib/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<arg name="extensions" value="php"/>
+	<arg name="cache" value=".phpcs-cache"/>
+	<arg value="sp"/>
+	<config name="testVersion" value="8.2-"/>
+	<config name="minimum_wp_version" value="6.4"/>
+	<rule ref="WordPress">
+		<!-- PSR-4 class files (includes/Modules/Foo/Module.php) instead of class-foo.php. -->
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
+	<rule ref="PHPCompatibilityWP"/>
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array"><element value="mg-seo"/></property>
+		</properties>
+	</rule>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="mgseo"/>
+				<element value="MGSEO"/>
+			</property>
+		</properties>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidHookName">
+		<properties>
+			<property name="additionalWordDelimiters" value="/"/>
+		</properties>
+	</rule>
+</ruleset>

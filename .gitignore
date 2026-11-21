@@ -4,3 +4,6 @@ node_modules/
 *.sql.gz
 vendor/
 .local/
+!docker/db-init/*.sql
+.phpunit.result.cache
+.phpcs-cache
