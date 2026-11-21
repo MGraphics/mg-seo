@@ -1,0 +1,23 @@
+.mgseo-bulk .mgseo-bulk-filters { margin: 12px 0; }
+.mgseo-bulk .mgseo-bulk-filters .search-box { float: right; }
+.mgseo-bulk .wp-list-table { table-layout: fixed; }
+.mgseo-bulk .column-post { width: 17%; }
+.mgseo-bulk .column-seo_title { width: 22%; }
+.mgseo-bulk .column-description { width: 22%; }
+.mgseo-bulk .column-focus_keyword { width: 14%; }
+.mgseo-bulk .column-index { width: 11%; }
+.mgseo-bulk .column-score { width: 6%; }
+.mgseo-bulk .column-actions { width: 8%; }
+.mgseo-bulk .wp-list-table input[type="text"], .mgseo-bulk .wp-list-table textarea, .mgseo-bulk .wp-list-table select { width: 100%; max-width: 100%; box-sizing: border-box; }
+.mgseo-bulk-row.is-dirty { box-shadow: inset 3px 0 0 #dba617; }
+.mgseo-bulk-status { display: block; font-size: 12px; color: #00a32a; }
+.mgseo-bulk-status.is-error, .mgseo-csv-error { color: #d63638; }
+.mgseo-bulk .mgseo-score.is-good { color: #00a32a; }
+.mgseo-bulk .mgseo-score.is-ok { color: #996800; }
+.mgseo-bulk .mgseo-score.is-bad { color: #d63638; }
+.mgseo-quick-edit textarea { width: 100%; }
+.mgseo-csv-preview { max-width: 1100px; margin-top: 8px; }
+@media screen and (max-width: 782px) {
+	.mgseo-bulk .wp-list-table { table-layout: auto; }
+	.mgseo-bulk .mgseo-bulk-filters .search-box { float: none; }
+}
