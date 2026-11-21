@@ -1,0 +1,44 @@
+.mgseo-rd .mgseo-rd-form,
+.mgseo-rd .mgseo-rd-io {
+	max-width: none;
+	margin: 1em 0 1.5em;
+}
+.mgseo-rd-source {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 6px;
+}
+.mgseo-rd-source .regular-text {
+	flex: 1 1 280px;
+}
+.mgseo-rd-remove-source {
+	font-size: 20px;
+	line-height: 1;
+	color: #b32d2e;
+	text-decoration: none;
+}
+.mgseo-rd-cmp {
+	display: inline-block;
+	padding: 0 6px;
+	border-radius: 3px;
+	background: #f0f0f1;
+	font-size: 12px;
+	color: #50575e;
+}
+.mgseo-rd-break {
+	word-break: break-all;
+}
+.mgseo-rd .column-type,
+.mgseo-rd .column-hits {
+	width: 70px;
+}
+.mgseo-rd .column-last_accessed,
+.mgseo-rd .column-last_seen,
+.mgseo-rd .column-ip {
+	width: 150px;
+}
+.mgseo-rd-clear {
+	margin-top: 1em;
+}

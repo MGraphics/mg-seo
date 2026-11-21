@@ -1,0 +1,17 @@
+.mgseo-tools .mgseo-tools-card {
+	max-width: 960px;
+	margin-bottom: 1.5em;
+}
+.mgseo-tools-suggestion {
+	max-width: 640px;
+	padding: 8px 12px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	white-space: pre-wrap;
+}
+.mgseo-tools-error {
+	color: #b32d2e;
+}
+.mgseo-tools details code {
+	word-break: break-all;
+}
