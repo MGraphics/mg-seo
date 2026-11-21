@@ -377,7 +377,7 @@ final class RankMath extends Source {
 			$this->put_setting( 'social', 'twitter_card', $card );
 		}
 		if ( '' !== (string) $t( 'facebook_author_urls' ) ) {
-			$this->log->warning( __( 'The site-wide Facebook author URL (article:author fallback) has no MG SEO equivalent; add Facebook profiles to the user profiles instead.', 'mg-seo' ) );
+			$this->put_setting( 'social', 'facebook_author', esc_url_raw( (string) $t( 'facebook_author_urls' ) ) );
 		}
 		if ( '' !== (string) $t( 'facebook_admin_id' ) ) {
 			$this->log->warning( __( 'The Facebook admin id (fb:admins) is not supported by MG SEO and was skipped.', 'mg-seo' ) );

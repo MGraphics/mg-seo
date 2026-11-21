@@ -69,6 +69,13 @@ final class Module extends Base {
 						'default' => '',
 					),
 					array(
+						'id'      => 'facebook_author',
+						'type'    => 'url',
+						'label'   => __( 'Default Facebook author URL', 'mg-seo' ),
+						'default' => '',
+						'desc'    => __( 'Used as article:author when the post author has no Facebook profile in their user profile.', 'mg-seo' ),
+					),
+					array(
 						'id'      => 'facebook_app_id',
 						'type'    => 'text',
 						'label'   => __( 'Facebook app ID', 'mg-seo' ),
@@ -346,7 +353,8 @@ final class Module extends Base {
 			Head::property( 'article:publisher', $publisher );
 			$ctx = Context::current();
 			if ( $ctx['object'] instanceof \WP_Post ) {
-				Head::property( 'article:author', (string) Meta::user( (int) $ctx['object']->post_author, 'social_facebook' ) );
+				$author_fb = (string) Meta::user( (int) $ctx['object']->post_author, 'social_facebook' );
+				Head::property( 'article:author', '' !== $author_fb ? $author_fb : (string) Options::get( 'social', 'facebook_author', '' ) );
 			}
 			foreach ( (array) ( $data['tags'] ?? array() ) as $tag ) {
 				Head::property( 'article:tag', (string) $tag );
@@ -394,6 +402,7 @@ final class Module extends Base {
 		}
 		if ( $post ) {
 			$creator = ltrim( (string) Meta::user( (int) $post->post_author, 'social_twitter' ), '@' );
+			$creator = '' !== $creator ? $creator : $site;
 			if ( '' !== $creator ) {
 				Head::meta( 'twitter:creator', '@' . $creator );
 			}
