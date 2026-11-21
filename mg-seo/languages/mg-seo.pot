@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MG SEO 0.1.2\n"
+"Project-Id-Version: MG SEO 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-21T20:07:46+00:00\n"
+"POT-Creation-Date: 2026-11-21T22:18:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mg-seo\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: mg-seo.php
 #: includes/Admin/Admin.php:59
 #: includes/Admin/Admin.php:60
-#: includes/Admin/Admin.php:136
+#: includes/Admin/Admin.php:137
 msgid "MG SEO"
 msgstr ""
 
@@ -70,12 +70,22 @@ msgstr ""
 #: assets/image.js:106
 #: assets/image.js:136
 #: assets/image.js:161
-#: assets/import.js:120
+#: assets/import.js:134
+#: assets/scores.js:67
+#: assets/scores.js:87
 msgid "Error"
 msgstr ""
 
-#: includes/Admin/Admin.php:132
+#: includes/Admin/Admin.php:122
+#: includes/Modules/Analysis/Module.php:685
+#: includes/Modules/Analysis/Overview.php:172
+#: assets/editor.js:68
+msgid "No keyword"
+msgstr ""
+
+#: includes/Admin/Admin.php:133
 #: includes/Admin/Settings.php:29
+#: includes/Modules/Analysis/Overview.php:192
 #: includes/Modules/Bulk/Page.php:24
 #: includes/Modules/Image/Module.php:217
 #: includes/Modules/Import/Page.php:39
@@ -85,18 +95,18 @@ msgstr ""
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: includes/Admin/Admin.php:137
+#: includes/Admin/Admin.php:138
 msgid "Turn modules on or off. Disabled modules load no code on the front end."
 msgstr ""
 
 #. translators: %s: dependency name
-#: includes/Admin/Admin.php:152
+#: includes/Admin/Admin.php:153
 #, php-format
 msgid "Requires %s."
 msgstr ""
 
-#: includes/Admin/Admin.php:155
-#: includes/Admin/Admin.php:231
+#: includes/Admin/Admin.php:156
+#: includes/Admin/Admin.php:232
 #: includes/Modules/Import/Page.php:24
 #: includes/Modules/Redirections/Admin.php:319
 #: includes/Modules/Redirections/Admin.php:516
@@ -106,13 +116,13 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:160
+#: includes/Admin/Admin.php:161
 msgid "Save modules"
 msgstr ""
 
-#: includes/Admin/Admin.php:183
+#: includes/Admin/Admin.php:184
 #: includes/Admin/Settings.php:239
-#: includes/Modules/Bulk/Csv.php:313
+#: includes/Modules/Bulk/Csv.php:323
 #: includes/Modules/Redirections/Admin.php:106
 #: includes/Modules/Roles/Module.php:127
 #: includes/Modules/SearchConsole/Module.php:506
@@ -122,17 +132,19 @@ msgstr ""
 msgid "You do not have permission to do this."
 msgstr ""
 
-#: includes/Admin/Admin.php:212
+#: includes/Admin/Admin.php:213
 msgid "Settings saved."
 msgstr ""
 
 #: includes/Admin/Metabox.php:83
 #: includes/Admin/TermFields.php:52
 #: includes/Admin/UserFields.php:56
-#: includes/Modules/Analysis/Module.php:209
+#: includes/Modules/Analysis/Module.php:493
+#: includes/Modules/Analysis/Module.php:739
 #: includes/Modules/Bulk/Module.php:117
 #: includes/Modules/Bulk/Module.php:168
-#: assets/editor.js:33
+#: assets/editor.js:125
+#: assets/editor.js:130
 msgid "SEO"
 msgstr ""
 
@@ -162,7 +174,11 @@ msgstr ""
 msgid "Separate keywords with commas. The first one is the primary keyword."
 msgstr ""
 
-#: includes/Admin/Metabox.php:175
+#: includes/Admin/Metabox.php:178
+msgid "Suggestion from the title:"
+msgstr ""
+
+#: includes/Admin/Metabox.php:184
 #: includes/Admin/TermFields.php:55
 #: includes/Modules/Bulk/ListTable.php:158
 #: includes/Modules/Bulk/ListTable.php:226
@@ -170,27 +186,27 @@ msgstr ""
 msgid "SEO title"
 msgstr ""
 
-#: includes/Admin/Metabox.php:179
+#: includes/Admin/Metabox.php:188
 #: includes/Admin/TermFields.php:59
 #: includes/Modules/Bulk/ListTable.php:159
 #: includes/Modules/Bulk/ListTable.php:234
 msgid "Meta description"
 msgstr ""
 
-#: includes/Admin/Metabox.php:184
+#: includes/Admin/Metabox.php:193
 msgid "SEO analysis"
 msgstr ""
 
-#: includes/Admin/Metabox.php:185
+#: includes/Admin/Metabox.php:194
 msgid "Enter a focus keyword to analyse the content."
 msgstr ""
 
-#: includes/Admin/Metabox.php:206
-#: includes/Admin/Metabox.php:214
+#: includes/Admin/Metabox.php:215
+#: includes/Admin/Metabox.php:223
 #: includes/Admin/TermFields.php:73
 #: includes/Admin/UserFields.php:80
 #: includes/Helpers.php:167
-#: includes/Modules/Analysis/Module.php:236
+#: includes/Modules/Analysis/Module.php:546
 #: includes/Modules/Bulk/ListTable.php:58
 #: includes/Modules/Bulk/ListTable.php:249
 #: includes/Modules/Bulk/Module.php:133
@@ -199,15 +215,15 @@ msgstr ""
 msgid "No Index"
 msgstr ""
 
-#: includes/Admin/Metabox.php:206
-#: includes/Admin/Metabox.php:213
+#: includes/Admin/Metabox.php:215
+#: includes/Admin/Metabox.php:222
 #: includes/Admin/TermFields.php:72
 #: includes/Modules/Bulk/ListTable.php:248
 #: includes/Modules/Bulk/Module.php:204
 msgid "Index"
 msgstr ""
 
-#: includes/Admin/Metabox.php:209
+#: includes/Admin/Metabox.php:218
 #: includes/Admin/TermFields.php:68
 #: includes/Modules/Bulk/ListTable.php:161
 #: includes/Modules/Bulk/ListTable.php:251
@@ -217,31 +233,31 @@ msgid "Indexing"
 msgstr ""
 
 #. translators: %s: default indexing value
-#: includes/Admin/Metabox.php:212
+#: includes/Admin/Metabox.php:221
 #, php-format
 msgid "Default (%s)"
 msgstr ""
 
-#: includes/Admin/Metabox.php:217
+#: includes/Admin/Metabox.php:226
 #: includes/Modules/Titles/Module.php:256
 #: includes/Modules/Titles/Module.php:307
 msgid "Robots meta"
 msgstr ""
 
-#: includes/Admin/Metabox.php:228
+#: includes/Admin/Metabox.php:237
 msgid "Max snippet"
 msgstr ""
 
-#: includes/Admin/Metabox.php:229
+#: includes/Admin/Metabox.php:238
 msgid "Max video preview"
 msgstr ""
 
-#: includes/Admin/Metabox.php:230
+#: includes/Admin/Metabox.php:239
 #: includes/Modules/Titles/Module.php:118
 msgid "Max image preview"
 msgstr ""
 
-#: includes/Admin/Metabox.php:232
+#: includes/Admin/Metabox.php:241
 #: includes/Admin/TermFields.php:71
 #: includes/Modules/Bulk/ListTable.php:247
 #: includes/Modules/Bulk/Module.php:203
@@ -252,36 +268,36 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: includes/Admin/Metabox.php:240
+#: includes/Admin/Metabox.php:249
 #: includes/Admin/TermFields.php:86
 msgid "Canonical URL"
 msgstr ""
 
-#: includes/Admin/Metabox.php:244
+#: includes/Admin/Metabox.php:253
 msgid "Breadcrumb title"
 msgstr ""
 
 #. translators: %s: taxonomy singular name
-#: includes/Admin/Metabox.php:259
+#: includes/Admin/Metabox.php:268
 #, php-format
 msgid "Primary %s"
 msgstr ""
 
-#: includes/Admin/Metabox.php:260
+#: includes/Admin/Metabox.php:269
 #: includes/Modules/Schema/Graph.php:386
 #: includes/Modules/Tools/Utilities.php:181
 msgid "Automatic"
 msgstr ""
 
-#: includes/Admin/Metabox.php:268
+#: includes/Admin/Metabox.php:277
 msgid "Pillar content (cornerstone, preferred in link suggestions)"
 msgstr ""
 
-#: includes/Admin/Metabox.php:269
+#: includes/Admin/Metabox.php:278
 msgid "Exclude from XML sitemap"
 msgstr ""
 
-#: includes/Admin/Metabox.php:270
+#: includes/Admin/Metabox.php:279
 msgid "Exclude from Google News sitemap"
 msgstr ""
 
@@ -443,6 +459,7 @@ msgid "Focus keyword found in an image alt attribute."
 msgstr ""
 
 #: includes/Modules/Analysis/Analyzer.php:216
+#: includes/Modules/Analysis/Scores.php:271
 msgid "Add an image with the focus keyword in its alt text."
 msgstr ""
 
@@ -520,16 +537,263 @@ msgstr ""
 msgid "Add images or video to the content."
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:227
-#: includes/Modules/Bulk/ListTable.php:259
-msgid "N/A"
+#: includes/Modules/Analysis/Module.php:77
+#: includes/Modules/Analysis/Overview.php:214
+msgid "SEO Overview"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:78
+#: includes/Modules/Links/ReportPage.php:27
+#: includes/Modules/SearchConsole/ReportsPage.php:24
+msgid "Overview"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:475
+msgid "This post cannot be scored."
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:530
+msgid "Calculate score"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:601
+msgid "Recalculate SEO score"
+msgstr ""
+
+#. translators: %d: number of posts
+#: includes/Modules/Analysis/Module.php:647
+#, php-format
+msgid "SEO score recalculated for %d post."
+msgid_plural "SEO score recalculated for %d posts."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Module.php:706
+msgid "SEO score:"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:708
+msgid "Details"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:741
+msgid "SEO score of this page"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:749
+#: includes/Modules/Analysis/Overview.php:360
+#: includes/Modules/Analysis/Overview.php:362
+#: assets/editor.js:110
+msgid "Set a focus keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:771
+#: assets/editor.js:112
+msgid "SEO overview of all pages"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:169
+msgid "Not calculated yet"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:215
+msgid "Every indexable page with its SEO score, worst first. Start at the top: each row lists the changes that raise the score the most. Scores are calculated on this server from the focus keyword and the content."
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:224
+msgid "All pages"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:244
+#: includes/Modules/Bulk/Page.php:78
+#: includes/Modules/Bulk/Page.php:114
+#: includes/Modules/Schema/Module.php:706
+msgid "Post type"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:245
+msgid "All post types"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:250
+#: includes/Modules/Bulk/Page.php:82
+#: includes/Modules/Bulk/Page.php:87
+#: includes/Modules/Redirections/ListTable.php:164
+msgid "Filter"
+msgstr ""
+
+#. translators: %d: number of pages
+#: includes/Modules/Analysis/Overview.php:258
+#, php-format
+msgid "%d page has not been scored yet. It will be scored in the background, or click \"Recalculate all\"."
+msgid_plural "%d pages have not been scored yet. They will be scored in the background, or click \"Recalculate all\"."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Overview.php:263
+#: includes/Modules/Bulk/ListTable.php:162
+msgid "Score"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:264
+#: includes/Modules/SearchConsole/ReportsPage.php:277
+msgid "Page"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:265
+msgid "What to improve first"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:266
+msgid "Focus keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:269
+msgid "No pages found."
+msgstr ""
+
+#. translators: %s: date and time
+#: includes/Modules/Analysis/Overview.php:295
+#, php-format
+msgid "All scores last recalculated: %s."
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:297
+msgid "Scores update when a page is saved and once a day in the background (they also depend on other pages, e.g. duplicate focus keywords)."
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:312
+#: includes/Modules/Bulk/ListTable.php:215
+#: includes/Modules/Links/ReportPage.php:114
+msgid "(no title)"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:324
+msgid "Edit SEO"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:326
+#: includes/Modules/Links/ReportPage.php:117
+#: includes/Modules/Redirections/LogTable.php:128
+msgid "View"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:329
+msgid "Not calculated yet."
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:333
+#: assets/editor.js:96
+msgid "Nothing important left to fix."
+msgstr ""
+
+#. translators: %s: suggested focus keyword
+#: includes/Modules/Analysis/Overview.php:368
+#, php-format
+msgid "Suggestion: “%s”"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:382
+msgid "Recalculate all"
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:198
+msgid "Poor (0–49)"
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:199
+msgid "Needs work (50–79)"
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:200
+msgid "Good (80–100)"
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:201
+msgid "No focus keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:260
+msgid "Set a focus keyword so the page can be scored."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:261
+msgid "Make the SEO title 30–60 characters long."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:262
+msgid "Write a meta description of 120–160 characters."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:263
+msgid "Add more content (at least 600 words is recommended)."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:264
+msgid "Put the focus keyword in the SEO title."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:265
+msgid "Use the focus keyword in the meta description."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:266
+msgid "Use the focus keyword in the URL."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:267
+msgid "Mention the focus keyword in the first paragraph."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:268
+msgid "Use the focus keyword in the content."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:269
+msgid "Use the focus keyword more naturally (0.5–2.5% of the words)."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:270
+msgid "Use the focus keyword in a subheading (H2–H4)."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:272
+msgid "Move the focus keyword closer to the start of the title."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:273
+msgid "Another page targets the same focus keyword: pick a different one."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:274
+msgid "Shorten the URL to under 75 characters."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:275
+msgid "Link to other pages of this site."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:276
+msgid "Link to a trustworthy external source."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:277
+msgid "Consider a number in the title."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:278
+msgid "Split paragraphs longer than 150 words."
+msgstr ""
+
+#: includes/Modules/Analysis/Scores.php:279
+msgid "Add an image or a video."
 msgstr ""
 
 #: includes/Modules/Breadcrumbs/Module.php:49
 #: includes/Modules/Breadcrumbs/Module.php:401
 #: includes/Modules/Breadcrumbs/Module.php:478
 #: includes/Plugin.php:146
-#: assets/editor.js:60
+#: assets/editor.js:183
 msgid "Breadcrumbs"
 msgstr ""
 
@@ -671,20 +935,20 @@ msgstr ""
 msgid "Line %1$d: you cannot edit post #%2$d."
 msgstr ""
 
-#: includes/Modules/Bulk/Csv.php:348
+#: includes/Modules/Bulk/Csv.php:358
 msgid "Choose a CSV file."
 msgstr ""
 
 #. translators: %d: number of changes
-#: includes/Modules/Bulk/Csv.php:358
-#: includes/Modules/Bulk/Csv.php:376
+#: includes/Modules/Bulk/Csv.php:368
+#: includes/Modules/Bulk/Csv.php:386
 #, php-format
 msgid "%d change applied."
 msgid_plural "%d changes applied."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Modules/Bulk/Csv.php:372
+#: includes/Modules/Bulk/Csv.php:382
 msgid "Nothing to apply. Upload the file again."
 msgstr ""
 
@@ -727,17 +991,12 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-#: includes/Modules/Bulk/ListTable.php:162
-msgid "Score"
-msgstr ""
-
 #: includes/Modules/Bulk/ListTable.php:163
 msgid "Actions"
 msgstr ""
 
-#: includes/Modules/Bulk/ListTable.php:215
-#: includes/Modules/Links/ReportPage.php:114
-msgid "(no title)"
+#: includes/Modules/Bulk/ListTable.php:259
+msgid "N/A"
 msgstr ""
 
 #: includes/Modules/Bulk/ListTable.php:264
@@ -788,7 +1047,7 @@ msgid "— No change —"
 msgstr ""
 
 #: includes/Modules/Bulk/Module.php:256
-#: includes/Modules/Links/Module.php:463
+#: includes/Modules/Links/Module.php:451
 #: includes/Modules/Schema/Module.php:612
 msgid "Post not found."
 msgstr ""
@@ -807,18 +1066,6 @@ msgstr ""
 
 #: includes/Modules/Bulk/Page.php:38
 msgid "CSV export / import"
-msgstr ""
-
-#: includes/Modules/Bulk/Page.php:78
-#: includes/Modules/Bulk/Page.php:114
-#: includes/Modules/Schema/Module.php:706
-msgid "Post type"
-msgstr ""
-
-#: includes/Modules/Bulk/Page.php:82
-#: includes/Modules/Bulk/Page.php:87
-#: includes/Modules/Redirections/ListTable.php:164
-msgid "Filter"
 msgstr ""
 
 #: includes/Modules/Bulk/Page.php:88
@@ -1343,7 +1590,7 @@ msgstr ""
 
 #: includes/Modules/Import/Runner.php:93
 #: includes/Modules/Import/Runner.php:122
-#: includes/Modules/Import/Runner.php:168
+#: includes/Modules/Import/Runner.php:176
 msgid "Unknown import source."
 msgstr ""
 
@@ -1352,7 +1599,7 @@ msgid "Unknown import scope."
 msgstr ""
 
 #. translators: %s: plugin name
-#: includes/Modules/Import/Runner.php:172
+#: includes/Modules/Import/Runner.php:180
 #, php-format
 msgid "Deactivate %s before deleting its data."
 msgstr ""
@@ -1391,80 +1638,75 @@ msgstr ""
 msgid "Link Report"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:318
+#: includes/Modules/Links/Module.php:306
 msgid "Internal links out / external links out / inbound internal links"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:318
-#: includes/Modules/Links/Module.php:401
+#: includes/Modules/Links/Module.php:306
+#: includes/Modules/Links/Module.php:389
 msgid "Links"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:345
+#: includes/Modules/Links/Module.php:333
 #: includes/Modules/Links/ReportPage.php:69
 msgid "Internal links"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:347
+#: includes/Modules/Links/Module.php:335
 #: includes/Modules/Links/ReportPage.php:70
 msgid "External links"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:349
+#: includes/Modules/Links/Module.php:337
 msgid "Inbound internal links"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:376
+#: includes/Modules/Links/Module.php:364
 #: includes/Modules/Links/ReportPage.php:225
 msgid "Copy link"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:377
+#: includes/Modules/Links/Module.php:365
 msgid "Copied"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:378
+#: includes/Modules/Links/Module.php:366
 #: includes/Modules/Links/ReportPage.php:232
 msgid "Copy as HTML link"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:379
+#: includes/Modules/Links/Module.php:367
 #: includes/Modules/Links/ReportPage.php:223
 msgid "Pillar"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:380
+#: includes/Modules/Links/Module.php:368
 #: includes/Modules/Links/ReportPage.php:227
 msgid "Phrase found in your text:"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:381
+#: includes/Modules/Links/Module.php:369
 #: includes/Modules/Links/ReportPage.php:215
 msgid "No suggestions. Add focus keywords or more content."
 msgstr ""
 
-#: includes/Modules/Links/Module.php:382
+#: includes/Modules/Links/Module.php:370
 msgid "Loading…"
 msgstr ""
 
-#: includes/Modules/Links/Module.php:383
+#: includes/Modules/Links/Module.php:371
 #: includes/Modules/SearchConsole/Module.php:640
 msgid "Request failed."
 msgstr ""
 
-#: includes/Modules/Links/Module.php:384
+#: includes/Modules/Links/Module.php:372
 msgid "Index rebuilt."
 msgstr ""
 
 #. translators: 1: processed posts, 2: total posts
-#: includes/Modules/Links/Module.php:386
+#: includes/Modules/Links/Module.php:374
 #, php-format
 msgid "Indexed %1$d of %2$d…"
-msgstr ""
-
-#: includes/Modules/Links/ReportPage.php:27
-#: includes/Modules/SearchConsole/ReportsPage.php:24
-msgid "Overview"
 msgstr ""
 
 #: includes/Modules/Links/ReportPage.php:28
@@ -1525,11 +1767,6 @@ msgstr ""
 
 #: includes/Modules/Links/ReportPage.php:106
 msgid "Inbound"
-msgstr ""
-
-#: includes/Modules/Links/ReportPage.php:117
-#: includes/Modules/Redirections/LogTable.php:128
-msgid "View"
 msgstr ""
 
 #: includes/Modules/Links/ReportPage.php:151
@@ -4372,10 +4609,6 @@ msgid "Position"
 msgstr ""
 
 #: includes/Modules/SearchConsole/ReportsPage.php:277
-msgid "Page"
-msgstr ""
-
-#: includes/Modules/SearchConsole/ReportsPage.php:277
 #: includes/Modules/SearchConsole/ReportsPage.php:332
 #: includes/Modules/SearchConsole/ReportsPage.php:368
 #: includes/Modules/SearchConsole/ReportsPage.php:501
@@ -6091,12 +6324,20 @@ msgstr ""
 msgid "Saved %1$d of %2$d"
 msgstr ""
 
-#: assets/editor.js:35
-msgid "SEO score"
+#: assets/editor.js:107
+msgid "Set a focus keyword in the SEO box to get a score."
 msgstr ""
 
-#: assets/editor.js:47
+#: assets/editor.js:110
+#: assets/editor.js:132
 msgid "Edit SEO settings"
+msgstr ""
+
+#: assets/editor.js:120
+#: assets/editor.js:127
+#: assets/editor.js:128
+#: assets/editor.js:131
+msgid "SEO score"
 msgstr ""
 
 #: assets/image.js:74
@@ -6139,15 +6380,21 @@ msgstr ""
 msgid "%1$s: %2$d of %3$s"
 msgstr ""
 
-#: assets/import.js:84
+#. translators: 1: posts done, 2: total posts
+#: assets/import.js:90
+#, js-format
+msgid "Calculating SEO scores: %1$d of %2$d"
+msgstr ""
+
+#: assets/import.js:98
 msgid "Finished. Reloading…"
 msgstr ""
 
-#: assets/import.js:87
+#: assets/import.js:101
 msgid "The import failed."
 msgstr ""
 
-#: assets/import.js:117
+#: assets/import.js:131
 msgid "Deleted."
 msgstr ""
 
@@ -6177,4 +6424,18 @@ msgstr ""
 
 #: assets/local.js:58
 msgid "Embedded map"
+msgstr ""
+
+#. translators: 1: posts done, 2: total posts
+#: assets/scores.js:57
+#, js-format
+msgid "Scored %1$d of %2$d…"
+msgstr ""
+
+#: assets/scores.js:62
+msgid "Done. Reloading…"
+msgstr ""
+
+#: assets/scores.js:79
+msgid "Calculating…"
 msgstr ""

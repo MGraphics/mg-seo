@@ -69,6 +69,8 @@ final class Installer {
 	 */
 	public static function deactivate(): void {
 		wp_clear_scheduled_hook( 'mgseo_daily' );
+		wp_clear_scheduled_hook( 'mgseo_scores_daily' );
+		wp_clear_scheduled_hook( 'mgseo_scores_batch' );
 		flush_rewrite_rules( false );
 	}
 

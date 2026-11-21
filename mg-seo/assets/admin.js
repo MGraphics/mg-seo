@@ -111,11 +111,15 @@
 			).appendTo( $list );
 		} );
 		var score = parseInt( result.score, 10 ) || 0;
-		var cls = score >= 80 ? 'is-good' : ( score >= 50 ? 'is-ok' : 'is-bad' );
-		$box.find( '.mgseo-score-badge' ).removeClass( 'is-good is-ok is-bad' ).addClass( cls ).text( score + '/100' );
+		var hasKeyword = result.has_keyword !== false;
+		var cls = ! hasKeyword ? 'is-none' : ( score >= 80 ? 'is-good' : ( score >= 50 ? 'is-ok' : 'is-bad' ) );
+		var text = hasKeyword ? score + '/100' : ( ( cfg.i18n && cfg.i18n.noKeyword ) || 'No keyword' );
+		$box.find( '.mgseo-score-badge' ).removeClass( 'is-good is-ok is-bad is-none' ).addClass( cls ).text( text );
+		/* Same badge in the Publish box (classic editor) and in the admin bar. */
+		$( '.mgseo-live-score, #wp-admin-bar-seo-score .seo-score-value' ).removeClass( 'is-good is-ok is-bad is-none' ).addClass( cls ).text( text );
 		$( document ).trigger( 'mgseo:analysis', [ result ] );
 		if ( window.mgseoScoreStore ) {
-			window.mgseoScoreStore( score );
+			window.mgseoScoreStore( score, result );
 		}
 	}
 
@@ -185,6 +189,62 @@
 				lastContent = c;
 			}
 		} );
+	}
+
+	/* Keyword suggestion (shown while the focus keyword is empty). */
+	$box.on( 'click', '.mgseo-use-suggestion', function ( e ) {
+		e.preventDefault();
+		$( '#mgseo-focus-keyword' ).val( $( this ).data( 'keyword' ) ).trigger( 'change' ).trigger( 'focus' );
+		$( this ).closest( '.mgseo-keyword-suggestion' ).remove();
+	} );
+
+	/*
+	 * Show the SEO box (the block editor collapses the meta box pane) and optionally focus the keyword field.
+	 * Used by "Set a focus keyword" links (lists, overview, admin bar) and the block editor sidebar.
+	 */
+	window.mgseoRevealBox = function ( focusKeyword ) {
+		var tries = 0;
+		var opened = false;
+		var reveal = function () {
+			var pane = document.querySelector( '.edit-post-meta-boxes-main' );
+			if ( pane && ! opened ) {
+				var toggle = Array.prototype.find.call( pane.querySelectorAll( 'button[aria-expanded="false"]' ), function ( b ) {
+					return ! b.closest( '.postbox' );
+				} );
+				if ( toggle ) {
+					toggle.click();
+				}
+				opened = true;
+			}
+			var postbox = document.getElementById( 'mgseo-box' );
+			if ( postbox && postbox.classList.contains( 'closed' ) ) {
+				var handle = postbox.querySelector( '.handlediv' );
+				if ( handle ) {
+					handle.click();
+				}
+			}
+			var field = document.getElementById( 'mgseo-focus-keyword' );
+			if ( ! field || ! field.offsetParent ) {
+				if ( tries++ < 40 ) {
+					setTimeout( reveal, 250 );
+				}
+				return;
+			}
+			$box.find( '.mgseo-box-tab[data-tab="general"]' ).trigger( 'click' );
+			if ( focusKeyword ) {
+				field.scrollIntoView( { block: 'center' } );
+				field.focus( { preventScroll: true } );
+				$( field ).closest( '.mgseo-row' ).addClass( 'is-highlighted' );
+			} else if ( postbox ) {
+				postbox.scrollIntoView( { behavior: 'smooth' } );
+			}
+		};
+		reveal();
+	};
+	if ( /[?&]mgseo_focus=keyword\b/.test( window.location.search ) ) {
+		setTimeout( function () {
+			window.mgseoRevealBox( true );
+		}, 300 );
 	}
 
 	updateCounters();

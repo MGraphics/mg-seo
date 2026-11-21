@@ -80,6 +80,20 @@
 				await runScope( base, scopes[ i ], i, scopes.length, 0 === i );
 			}
 			await wp.apiFetch( { path: cfg.path + '/finish', method: 'POST' } );
+			// Imported focus keywords: calculate SEO scores right away (a background pass is the fallback).
+			if ( ! base.dry_run && window.mgseoRecalc ) {
+				try {
+					await window.mgseoRecalc( {
+						onProgress( done, total ) {
+							bar.style.width = '100%';
+							/* translators: 1: posts done, 2: total posts */
+							status.textContent = sprintf( __( 'Calculating SEO scores: %1$d of %2$d', 'mg-seo' ), done, total );
+						},
+					} );
+				} catch ( err ) {
+					// Scores are also calculated in the background.
+				}
+			}
 			bar.style.width = '100%';
 			status.textContent = __( 'Finished. Reloading…', 'mg-seo' );
 			window.location.reload();

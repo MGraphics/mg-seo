@@ -178,18 +178,7 @@ final class Module extends Base {
 	 * @param \WP_Post $post Post.
 	 */
 	public static function is_indexable( \WP_Post $post ): bool {
-		$own = (array) Meta::post( $post->ID, 'robots', array() );
-		if ( in_array( 'noindex', $own, true ) ) {
-			return false;
-		}
-		if ( in_array( 'index', $own, true ) ) {
-			return true;
-		}
-		if ( '' !== $post->post_password && Options::get( 'titles', 'noindex_password', true ) ) {
-			return false;
-		}
-		$inherited = array_merge( (array) Options::get( 'titles', 'robots_global', array() ), (array) Options::get( 'titles', 'pt_' . $post->post_type . '_robots', array() ) );
-		return ! in_array( 'noindex', $inherited, true );
+		return Helpers::robots_allow_index( (array) Meta::post( $post->ID, 'robots', array() ), (string) $post->post_password, $post->post_type );
 	}
 
 	/**

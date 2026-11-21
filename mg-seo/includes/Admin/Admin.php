@@ -119,6 +119,7 @@ final class Admin {
 					'useImage'    => __( 'Use this image', 'mg-seo' ),
 					'saved'       => __( 'Saved', 'mg-seo' ),
 					'error'       => __( 'Error', 'mg-seo' ),
+					'noKeyword'   => __( 'No keyword', 'mg-seo' ),
 				),
 			)
 		);

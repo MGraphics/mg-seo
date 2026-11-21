@@ -164,6 +164,8 @@ class ImportYoastTest extends TestCase {
 		update_user_meta( $user, 'wpseo_noindex_author', 'on' );
 		update_user_meta( $user, 'linkedin', 'https://www.linkedin.com/in/u' );
 
+		// Check the raw mapping of the Yoast score; ScoresTest covers the recalculation after imports.
+		remove_all_actions( 'mgseo/import/finished' );
 		Runner::run( 'yoast', array( 'posts', 'terms', 'users' ) );
 
 		$this->assertSame( '%title% %sep% %primary_category% %sep% %sitename%', Meta::post( $post, 'title' ) );

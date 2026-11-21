@@ -48,6 +48,8 @@ if ( ! function_exists( 'mgseo_uninstall_site' ) ) {
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s", $wpdb->esc_like( 'mgseo_' ) . '%', $wpdb->esc_like( '_transient_mgseo_' ) . '%', $wpdb->esc_like( '_transient_timeout_mgseo_' ) . '%' ) );
 		// phpcs:enable
 		wp_clear_scheduled_hook( 'mgseo_daily' );
+		wp_clear_scheduled_hook( 'mgseo_scores_daily' );
+		wp_clear_scheduled_hook( 'mgseo_scores_batch' );
 	}
 }
 

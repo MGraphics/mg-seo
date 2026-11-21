@@ -170,6 +170,15 @@ final class Metabox {
 			<label for="mgseo-focus-keyword"><strong><?php esc_html_e( 'Focus keywords', 'mg-seo' ); ?></strong></label>
 			<input type="text" id="mgseo-focus-keyword" name="mgseo[focus_keyword]" value="<?php echo esc_attr( $keyword ); ?>" class="widefat" placeholder="<?php esc_attr_e( 'Main keyword, secondary keyword, …', 'mg-seo' ); ?>" />
 			<span class="description"><?php esc_html_e( 'Separate keywords with commas. The first one is the primary keyword.', 'mg-seo' ); ?></span>
+			<?php
+			$suggestion = '' === trim( $keyword ) && class_exists( \MGSEO\Modules\Analysis\Scores::class ) ? \MGSEO\Modules\Analysis\Scores::suggest_keyword( $post ) : '';
+			if ( '' !== $suggestion ) :
+				?>
+				<span class="mgseo-keyword-suggestion">
+					<?php esc_html_e( 'Suggestion from the title:', 'mg-seo' ); ?>
+					<button type="button" class="button-link mgseo-use-suggestion" data-keyword="<?php echo esc_attr( $suggestion ); ?>"><?php echo esc_html( $suggestion ); ?></button>
+				</span>
+			<?php endif; ?>
 		</p>
 		<p class="mgseo-row">
 			<label for="mgseo-title"><strong><?php esc_html_e( 'SEO title', 'mg-seo' ); ?></strong> <span class="mgseo-counter" data-for="mgseo-title" data-max="60"></span></label>

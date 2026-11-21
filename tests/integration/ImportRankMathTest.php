@@ -300,6 +300,8 @@ class ImportRankMathTest extends TestCase {
 		update_option( 'blogname', 'Studio' );
 		$this->set_option( 'titles', 'separator', '|' );
 		$post = $this->rm_post();
+		// Check the raw mapping of rank_math_seo_score; ScoresTest covers the recalculation after imports.
+		remove_all_actions( 'mgseo/import/finished' );
 		Runner::run( 'rankmath', array( 'posts' ) );
 
 		$this->assertSame( '%title% %sep% %primary_category% %sep% %sitename%', Meta::post( $post, 'title' ) );

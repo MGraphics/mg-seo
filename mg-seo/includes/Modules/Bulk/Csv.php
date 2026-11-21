@@ -285,6 +285,7 @@ final class Csv {
 	 */
 	public static function apply( array $changes ): int {
 		$applied = 0;
+		$ids     = array();
 		foreach ( $changes as $change ) {
 			$id    = (int) $change['id'];
 			$field = self::FIELDS[ $change['field'] ] ?? '';
@@ -299,6 +300,15 @@ final class Csv {
 				Meta::set_post( $id, 'og_image_id', '' !== $change['value'] ? attachment_url_to_postid( (string) $change['value'] ) : 0 );
 			}
 			++$applied;
+			$ids[] = $id;
+		}
+		if ( $ids ) {
+			/**
+			 * Fires after CSV changes were applied (SEO scores are recalculated on this hook).
+			 *
+			 * @param int[] $ids Changed post ids.
+			 */
+			do_action( 'mgseo/bulk/csv_applied', array_values( array_unique( $ids ) ) );
 		}
 		return $applied;
 	}

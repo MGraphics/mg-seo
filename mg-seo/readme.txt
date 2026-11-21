@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.1.2
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,7 @@ Complete SEO toolkit: titles and meta, schema generator, XML sitemaps, redirecti
 
 * **Titles & meta** – templates with variables for every post type, taxonomy and archive, per-post title/description, robots meta (incl. max-snippet / max-image-preview), canonical URLs, webmaster verification codes.
 * **SEO box** in the block editor and the classic editor with a Google snippet preview and live focus keyword analysis (20+ checks, multiple keywords, SEO score in post lists).
+* **SEO overview** – every indexable page sorted by score (worst first) with the 2–3 changes that matter most, counts per band, a live score badge in the editor header, the Publish box and the admin bar.
 * **Open Graph & Twitter Cards** with per-post overrides.
 * **Schema generator** – Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service, Recipe, Course, JobPosting, Video and custom JSON-LD; schema templates with display conditions; local validation against Google rich result rules.
 * **XML sitemaps** with images, plus Google News and video sitemaps.
@@ -39,6 +40,7 @@ Complete SEO toolkit: titles and meta, schema generator, XML sitemaps, redirecti
 
 * Szablony tytułów i opisów ze zmiennymi, robots meta, kanoniczne adresy URL, kody weryfikacyjne.
 * Panel SEO w edytorze blokowym i klasycznym z podglądem wyniku Google i analizą fraz kluczowych na żywo.
+* Przegląd SEO – wszystkie indeksowane strony posortowane od najsłabszego wyniku, z 2–3 najważniejszymi poprawkami; wynik x/100 widoczny na żywo w nagłówku edytora, w polu „Opublikuj” i na pasku administratora.
 * Open Graph i Twitter Cards.
 * Generator schema (Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service i własny JSON-LD), szablony schema z warunkami, walidacja zgodna z regułami Google.
 * Mapy witryny XML z obrazami, Google News i wideo.
@@ -75,6 +77,14 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.2.0 =
+* New: SEO scores are always available. They are calculated after every import (Rank Math, Yoast, CSV), on the fly in post lists, with "Recalculate all" on the list screens and the overview, a bulk action, `wp mgseo scores recalc`, and a daily background pass in small batches (scores depend on other pages, e.g. duplicate focus keywords). Imported Rank Math/Yoast scores are replaced by MG SEO's own analysis.
+* New: in post lists a missing score has a "Calculate score" button that fills the cell in place; posts without a focus keyword show "Set a focus keyword" (opens the field) with a suggestion from the title or H1.
+* New: MG SEO → Overview lists all indexable pages worst first with their most important fixes in plain language, counts per band (good / needs work / poor / no keyword) and a post type filter.
+* New: live score badge while editing: in the block editor header (pinned sidebar button), the pre-publish panel, the classic Publish box and the admin bar (front end and editor screens, so it is visible with any page builder).
+* New: REST endpoint `mg-seo/v1/analyze/html` and `MGSEO\Modules\Analysis\Module::analyze_html()` analyse any rendered HTML with a focus keyword (for page builder integrations).
+* Fix: sorting the post list by SEO score no longer hides posts without a score.
 
 = 0.1.2 =
 * Fix: self-updates now install only the GitHub release asset `mg-seo-<version>.zip`. The updater could previously pick `mg-seo-<version>-wporg.zip` from the same release, which ships without the updater, so the site stopped receiving updates after that.

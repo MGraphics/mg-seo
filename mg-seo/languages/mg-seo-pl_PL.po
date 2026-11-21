@@ -2,25 +2,24 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MG SEO 0.1.2\n"
+"Project-Id-Version: MG SEO 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
+"POT-Creation-Date: 2026-11-21T22:18:39+00:00\n"
+"PO-Revision-Date: 2026-11-21 23:20+0100\n"
 "Last-Translator: MGraphics\n"
 "Language-Team: Polski\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language: pl_PL\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-21T20:07:46+00:00\n"
-"PO-Revision-Date: 2026-11-21 21:00+0100\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mg-seo\n"
 
 #. Plugin Name of the plugin
-#: mg-seo.php
-#: includes/Admin/Admin.php:59
-#: includes/Admin/Admin.php:60
-#: includes/Admin/Admin.php:136
+#: mg-seo.php includes/Admin/Admin.php:59 includes/Admin/Admin.php:60
+#: includes/Admin/Admin.php:137
 msgid "MG SEO"
 msgstr "MG SEO"
 
@@ -31,8 +30,12 @@ msgstr "https://github.com/MGraphics/mg-seo"
 
 #. Description of the plugin
 #: mg-seo.php
-msgid "SEO toolkit for MGraphics sites: titles and meta, schema, sitemaps, redirections, local SEO, WooCommerce and more."
-msgstr "Zestaw narzędzi SEO dla stron MGraphics: tytuły i meta, dane strukturalne, mapy witryny, przekierowania, lokalne SEO, WooCommerce i więcej."
+msgid ""
+"SEO toolkit for MGraphics sites: titles and meta, schema, sitemaps, "
+"redirections, local SEO, WooCommerce and more."
+msgstr ""
+"Zestaw narzędzi SEO dla stron MGraphics: tytuły i meta, dane strukturalne, "
+"mapy witryny, przekierowania, lokalne SEO, WooCommerce i więcej."
 
 #. Author of the plugin
 #: mg-seo.php
@@ -48,10 +51,8 @@ msgstr "https://mgraphics.com.pl"
 msgid "Dashboard"
 msgstr "Kokpit"
 
-#: includes/Admin/Admin.php:118
-#: includes/Admin/Settings.php:172
-#: includes/Admin/TermFields.php:100
-#: includes/Modules/Schema/Module.php:719
+#: includes/Admin/Admin.php:118 includes/Admin/Settings.php:172
+#: includes/Admin/TermFields.php:100 includes/Modules/Schema/Module.php:719
 #: includes/Modules/Social/Module.php:142
 msgid "Choose image"
 msgstr "Wybierz obraz"
@@ -60,61 +61,57 @@ msgstr "Wybierz obraz"
 msgid "Use this image"
 msgstr "Użyj tego obrazu"
 
-#: includes/Admin/Admin.php:120
-#: assets/bulk.js:42
-#: assets/image.js:133
+#: includes/Admin/Admin.php:120 assets/bulk.js:42 assets/image.js:133
 msgid "Saved"
 msgstr "Zapisano"
 
-#: includes/Admin/Admin.php:121
-#: assets/bulk.js:68
-#: assets/bulk.js:89
-#: assets/image.js:106
-#: assets/image.js:136
-#: assets/image.js:161
-#: assets/import.js:120
+#: includes/Admin/Admin.php:121 assets/bulk.js:68 assets/bulk.js:89
+#: assets/image.js:106 assets/image.js:136 assets/image.js:161
+#: assets/import.js:134 assets/scores.js:67 assets/scores.js:87
 msgid "Error"
 msgstr "Błąd"
 
-#: includes/Admin/Admin.php:132
-#: includes/Admin/Settings.php:29
-#: includes/Modules/Bulk/Page.php:24
-#: includes/Modules/Image/Module.php:217
-#: includes/Modules/Import/Page.php:39
+#: includes/Admin/Admin.php:122 includes/Modules/Analysis/Module.php:685
+#: includes/Modules/Analysis/Overview.php:172 assets/editor.js:68
+msgid "No keyword"
+msgstr "Brak frazy"
+
+#: includes/Admin/Admin.php:133 includes/Admin/Settings.php:29
+#: includes/Modules/Analysis/Overview.php:192 includes/Modules/Bulk/Page.php:24
+#: includes/Modules/Image/Module.php:217 includes/Modules/Import/Page.php:39
 #: includes/Modules/Links/ReportPage.php:24
 #: includes/Modules/Roles/Module.php:152
 #: includes/Modules/SearchConsole/ReportsPage.php:99
 msgid "You do not have permission to access this page."
 msgstr "Nie masz uprawnień do wyświetlenia tej strony."
 
-#: includes/Admin/Admin.php:137
+#: includes/Admin/Admin.php:138
 msgid "Turn modules on or off. Disabled modules load no code on the front end."
-msgstr "Włączaj i wyłączaj moduły. Wyłączone moduły nie ładują żadnego kodu na stronie publicznej."
+msgstr ""
+"Włączaj i wyłączaj moduły. Wyłączone moduły nie ładują żadnego kodu na "
+"stronie publicznej."
 
 #. translators: %s: dependency name
-#: includes/Admin/Admin.php:152
+#: includes/Admin/Admin.php:153
 #, php-format
 msgid "Requires %s."
 msgstr "Wymaga: %s."
 
-#: includes/Admin/Admin.php:155
-#: includes/Admin/Admin.php:231
+#: includes/Admin/Admin.php:156 includes/Admin/Admin.php:232
 #: includes/Modules/Import/Page.php:24
 #: includes/Modules/Redirections/Admin.php:319
 #: includes/Modules/Redirections/Admin.php:516
 #: includes/Modules/Schema/Module.php:752
-#: includes/Modules/Tools/Utilities.php:166
-#: assets/local.js:38
+#: includes/Modules/Tools/Utilities.php:166 assets/local.js:38
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: includes/Admin/Admin.php:160
+#: includes/Admin/Admin.php:161
 msgid "Save modules"
 msgstr "Zapisz moduły"
 
-#: includes/Admin/Admin.php:183
-#: includes/Admin/Settings.php:239
-#: includes/Modules/Bulk/Csv.php:313
+#: includes/Admin/Admin.php:184 includes/Admin/Settings.php:239
+#: includes/Modules/Bulk/Csv.php:323
 #: includes/Modules/Redirections/Admin.php:106
 #: includes/Modules/Roles/Module.php:127
 #: includes/Modules/SearchConsole/Module.php:506
@@ -124,22 +121,19 @@ msgstr "Zapisz moduły"
 msgid "You do not have permission to do this."
 msgstr "Nie masz uprawnień do wykonania tej czynności."
 
-#: includes/Admin/Admin.php:212
+#: includes/Admin/Admin.php:213
 msgid "Settings saved."
 msgstr "Ustawienia zostały zapisane."
 
-#: includes/Admin/Metabox.php:83
-#: includes/Admin/TermFields.php:52
-#: includes/Admin/UserFields.php:56
-#: includes/Modules/Analysis/Module.php:209
-#: includes/Modules/Bulk/Module.php:117
-#: includes/Modules/Bulk/Module.php:168
-#: assets/editor.js:33
+#: includes/Admin/Metabox.php:83 includes/Admin/TermFields.php:52
+#: includes/Admin/UserFields.php:56 includes/Modules/Analysis/Module.php:493
+#: includes/Modules/Analysis/Module.php:739
+#: includes/Modules/Bulk/Module.php:117 includes/Modules/Bulk/Module.php:168
+#: assets/editor.js:125 assets/editor.js:130
 msgid "SEO"
 msgstr "SEO"
 
-#: includes/Admin/Metabox.php:96
-#: includes/Modules/Links/Module.php:75
+#: includes/Admin/Metabox.php:96 includes/Modules/Links/Module.php:75
 #: includes/Modules/Sitemap/Module.php:427
 #: includes/Modules/Titles/Module.php:74
 msgid "General"
@@ -149,8 +143,7 @@ msgstr "Ogólne"
 msgid "Advanced"
 msgstr "Zaawansowane"
 
-#: includes/Admin/Metabox.php:170
-#: includes/Admin/TermFields.php:63
+#: includes/Admin/Metabox.php:170 includes/Admin/TermFields.php:63
 #: includes/Modules/Bulk/ListTable.php:160
 #: includes/Modules/Bulk/ListTable.php:241
 msgid "Focus keywords"
@@ -164,126 +157,111 @@ msgstr "Główna fraza kluczowa, dodatkowa fraza kluczowa, …"
 msgid "Separate keywords with commas. The first one is the primary keyword."
 msgstr "Oddziel frazy kluczowe przecinkami. Pierwsza z nich jest frazą główną."
 
-#: includes/Admin/Metabox.php:175
-#: includes/Admin/TermFields.php:55
+#: includes/Admin/Metabox.php:178
+msgid "Suggestion from the title:"
+msgstr "Propozycja z tytułu:"
+
+#: includes/Admin/Metabox.php:184 includes/Admin/TermFields.php:55
 #: includes/Modules/Bulk/ListTable.php:158
-#: includes/Modules/Bulk/ListTable.php:226
-#: includes/Modules/Bulk/Module.php:169
+#: includes/Modules/Bulk/ListTable.php:226 includes/Modules/Bulk/Module.php:169
 msgid "SEO title"
 msgstr "Tytuł SEO"
 
-#: includes/Admin/Metabox.php:179
-#: includes/Admin/TermFields.php:59
+#: includes/Admin/Metabox.php:188 includes/Admin/TermFields.php:59
 #: includes/Modules/Bulk/ListTable.php:159
 #: includes/Modules/Bulk/ListTable.php:234
 msgid "Meta description"
 msgstr "Opis meta"
 
-#: includes/Admin/Metabox.php:184
+#: includes/Admin/Metabox.php:193
 msgid "SEO analysis"
 msgstr "Analiza SEO"
 
-#: includes/Admin/Metabox.php:185
+#: includes/Admin/Metabox.php:194
 msgid "Enter a focus keyword to analyse the content."
 msgstr "Wpisz frazę kluczową, aby przeanalizować treść."
 
-#: includes/Admin/Metabox.php:206
-#: includes/Admin/Metabox.php:214
-#: includes/Admin/TermFields.php:73
-#: includes/Admin/UserFields.php:80
-#: includes/Helpers.php:167
-#: includes/Modules/Analysis/Module.php:236
+#: includes/Admin/Metabox.php:215 includes/Admin/Metabox.php:223
+#: includes/Admin/TermFields.php:73 includes/Admin/UserFields.php:80
+#: includes/Helpers.php:167 includes/Modules/Analysis/Module.php:546
 #: includes/Modules/Bulk/ListTable.php:58
-#: includes/Modules/Bulk/ListTable.php:249
-#: includes/Modules/Bulk/Module.php:133
-#: includes/Modules/Bulk/Module.php:205
-#: includes/Modules/Titles/Module.php:55
+#: includes/Modules/Bulk/ListTable.php:249 includes/Modules/Bulk/Module.php:133
+#: includes/Modules/Bulk/Module.php:205 includes/Modules/Titles/Module.php:55
 msgid "No Index"
 msgstr "Noindex"
 
-#: includes/Admin/Metabox.php:206
-#: includes/Admin/Metabox.php:213
-#: includes/Admin/TermFields.php:72
-#: includes/Modules/Bulk/ListTable.php:248
+#: includes/Admin/Metabox.php:215 includes/Admin/Metabox.php:222
+#: includes/Admin/TermFields.php:72 includes/Modules/Bulk/ListTable.php:248
 #: includes/Modules/Bulk/Module.php:204
 msgid "Index"
 msgstr "Index"
 
-#: includes/Admin/Metabox.php:209
-#: includes/Admin/TermFields.php:68
+#: includes/Admin/Metabox.php:218 includes/Admin/TermFields.php:68
 #: includes/Modules/Bulk/ListTable.php:161
-#: includes/Modules/Bulk/ListTable.php:251
-#: includes/Modules/Bulk/Module.php:173
+#: includes/Modules/Bulk/ListTable.php:251 includes/Modules/Bulk/Module.php:173
 #: includes/Modules/SearchConsole/ReportsPage.php:563
 msgid "Indexing"
 msgstr "Indeksowanie"
 
 #. translators: %s: default indexing value
-#: includes/Admin/Metabox.php:212
+#: includes/Admin/Metabox.php:221
 #, php-format
 msgid "Default (%s)"
 msgstr "Domyślne (%s)"
 
-#: includes/Admin/Metabox.php:217
-#: includes/Modules/Titles/Module.php:256
+#: includes/Admin/Metabox.php:226 includes/Modules/Titles/Module.php:256
 #: includes/Modules/Titles/Module.php:307
 msgid "Robots meta"
 msgstr "Meta robots"
 
-#: includes/Admin/Metabox.php:228
+#: includes/Admin/Metabox.php:237
 msgid "Max snippet"
 msgstr "Maks. długość fragmentu"
 
-#: includes/Admin/Metabox.php:229
+#: includes/Admin/Metabox.php:238
 msgid "Max video preview"
 msgstr "Maks. podgląd wideo"
 
-#: includes/Admin/Metabox.php:230
-#: includes/Modules/Titles/Module.php:118
+#: includes/Admin/Metabox.php:239 includes/Modules/Titles/Module.php:118
 msgid "Max image preview"
 msgstr "Maks. podgląd obrazu"
 
-#: includes/Admin/Metabox.php:232
-#: includes/Admin/TermFields.php:71
-#: includes/Modules/Bulk/ListTable.php:247
-#: includes/Modules/Bulk/Module.php:203
+#: includes/Admin/Metabox.php:241 includes/Admin/TermFields.php:71
+#: includes/Modules/Bulk/ListTable.php:247 includes/Modules/Bulk/Module.php:203
 #: includes/Modules/Schema/Module.php:698
 #: includes/Modules/Social/Module.php:152
-#: includes/Modules/WooCommerce/Fields.php:34
-#: assets/local.js:55
+#: includes/Modules/WooCommerce/Fields.php:34 assets/local.js:55
 msgid "Default"
 msgstr "Domyślne"
 
-#: includes/Admin/Metabox.php:240
-#: includes/Admin/TermFields.php:86
+#: includes/Admin/Metabox.php:249 includes/Admin/TermFields.php:86
 msgid "Canonical URL"
 msgstr "Kanoniczny adres URL"
 
-#: includes/Admin/Metabox.php:244
+#: includes/Admin/Metabox.php:253
 msgid "Breadcrumb title"
 msgstr "Tytuł w okruszkach"
 
 #. translators: %s: taxonomy singular name
-#: includes/Admin/Metabox.php:259
+#: includes/Admin/Metabox.php:268
 #, php-format
 msgid "Primary %s"
 msgstr "Główna: %s"
 
-#: includes/Admin/Metabox.php:260
-#: includes/Modules/Schema/Graph.php:386
+#: includes/Admin/Metabox.php:269 includes/Modules/Schema/Graph.php:386
 #: includes/Modules/Tools/Utilities.php:181
 msgid "Automatic"
 msgstr "Automatycznie"
 
-#: includes/Admin/Metabox.php:268
+#: includes/Admin/Metabox.php:277
 msgid "Pillar content (cornerstone, preferred in link suggestions)"
 msgstr "Treść filarowa (kluczowa, preferowana w podpowiedziach linków)"
 
-#: includes/Admin/Metabox.php:269
+#: includes/Admin/Metabox.php:278
 msgid "Exclude from XML sitemap"
 msgstr "Wyklucz z mapy witryny XML"
 
-#: includes/Admin/Metabox.php:270
+#: includes/Admin/Metabox.php:279
 msgid "Exclude from Google News sitemap"
 msgstr "Wyklucz z mapy witryny Google News"
 
@@ -446,6 +424,7 @@ msgid "Focus keyword found in an image alt attribute."
 msgstr "Fraza kluczowa występuje w atrybucie alt obrazu."
 
 #: includes/Modules/Analysis/Analyzer.php:216
+#: includes/Modules/Analysis/Scores.php:271
 msgid "Add an image with the focus keyword in its alt text."
 msgstr "Dodaj obraz z frazą kluczową w tekście alternatywnym."
 
@@ -523,25 +502,290 @@ msgstr "Treść zawiera obrazy lub wideo."
 msgid "Add images or video to the content."
 msgstr "Dodaj do treści obrazy lub wideo."
 
-#: includes/Modules/Analysis/Module.php:227
-#: includes/Modules/Bulk/ListTable.php:259
-msgid "N/A"
-msgstr "Brak danych"
+#: includes/Modules/Analysis/Module.php:77
+#: includes/Modules/Analysis/Overview.php:214
+msgid "SEO Overview"
+msgstr "Przegląd SEO"
+
+#: includes/Modules/Analysis/Module.php:78
+#: includes/Modules/Links/ReportPage.php:27
+#: includes/Modules/SearchConsole/ReportsPage.php:24
+msgid "Overview"
+msgstr "Przegląd"
+
+#: includes/Modules/Analysis/Module.php:475
+msgid "This post cannot be scored."
+msgstr "Dla tej treści nie można policzyć wyniku."
+
+#: includes/Modules/Analysis/Module.php:530
+msgid "Calculate score"
+msgstr "Ustal wynik"
+
+#: includes/Modules/Analysis/Module.php:601
+msgid "Recalculate SEO score"
+msgstr "Przelicz wynik SEO"
+
+#. translators: %d: number of posts
+#: includes/Modules/Analysis/Module.php:647
+#, php-format
+msgid "SEO score recalculated for %d post."
+msgid_plural "SEO score recalculated for %d posts."
+msgstr[0] "Przeliczono wynik SEO dla %d wpisu."
+msgstr[1] "Przeliczono wynik SEO dla %d wpisów."
+msgstr[2] "Przeliczono wynik SEO dla %d wpisów."
+
+#: includes/Modules/Analysis/Module.php:706
+msgid "SEO score:"
+msgstr "Wynik SEO:"
+
+#: includes/Modules/Analysis/Module.php:708
+msgid "Details"
+msgstr "Szczegóły"
+
+#: includes/Modules/Analysis/Module.php:741
+msgid "SEO score of this page"
+msgstr "Wynik SEO tej strony"
+
+#: includes/Modules/Analysis/Module.php:749
+#: includes/Modules/Analysis/Overview.php:360
+#: includes/Modules/Analysis/Overview.php:362 assets/editor.js:110
+msgid "Set a focus keyword"
+msgstr "Ustaw frazę kluczową"
+
+#: includes/Modules/Analysis/Module.php:771 assets/editor.js:112
+msgid "SEO overview of all pages"
+msgstr "Przegląd SEO wszystkich stron"
+
+#: includes/Modules/Analysis/Overview.php:169
+msgid "Not calculated yet"
+msgstr "Jeszcze nie policzono"
+
+#: includes/Modules/Analysis/Overview.php:215
+msgid ""
+"Every indexable page with its SEO score, worst first. Start at the top: each "
+"row lists the changes that raise the score the most. Scores are calculated "
+"on this server from the focus keyword and the content."
+msgstr ""
+"Wszystkie indeksowane strony z wynikiem SEO, od najsłabszych. Zacznij od "
+"góry: przy każdej stronie są zmiany, które najbardziej podniosą wynik. "
+"Wyniki są liczone na tym serwerze na podstawie frazy kluczowej i treści."
+
+#: includes/Modules/Analysis/Overview.php:224
+msgid "All pages"
+msgstr "Wszystkie strony"
+
+#: includes/Modules/Analysis/Overview.php:244 includes/Modules/Bulk/Page.php:78
+#: includes/Modules/Bulk/Page.php:114 includes/Modules/Schema/Module.php:706
+msgid "Post type"
+msgstr "Typ treści"
+
+#: includes/Modules/Analysis/Overview.php:245
+msgid "All post types"
+msgstr "Wszystkie typy treści"
+
+#: includes/Modules/Analysis/Overview.php:250 includes/Modules/Bulk/Page.php:82
+#: includes/Modules/Bulk/Page.php:87
+#: includes/Modules/Redirections/ListTable.php:164
+msgid "Filter"
+msgstr "Filtruj"
+
+#. translators: %d: number of pages
+#: includes/Modules/Analysis/Overview.php:258
+#, php-format
+msgid ""
+"%d page has not been scored yet. It will be scored in the background, or "
+"click \"Recalculate all\"."
+msgid_plural ""
+"%d pages have not been scored yet. They will be scored in the background, or "
+"click \"Recalculate all\"."
+msgstr[0] ""
+"%d strona nie ma jeszcze wyniku. Zostanie policzona w tle albo kliknij "
+"„Przelicz wszystkie”."
+msgstr[1] ""
+"%d strony nie mają jeszcze wyniku. Zostaną policzone w tle albo kliknij "
+"„Przelicz wszystkie”."
+msgstr[2] ""
+"%d stron nie ma jeszcze wyniku. Zostaną policzone w tle albo kliknij "
+"„Przelicz wszystkie”."
+
+#: includes/Modules/Analysis/Overview.php:263
+#: includes/Modules/Bulk/ListTable.php:162
+msgid "Score"
+msgstr "Wynik"
+
+#: includes/Modules/Analysis/Overview.php:264
+#: includes/Modules/SearchConsole/ReportsPage.php:277
+msgid "Page"
+msgstr "Strona"
+
+#: includes/Modules/Analysis/Overview.php:265
+msgid "What to improve first"
+msgstr "Co poprawić najpierw"
+
+#: includes/Modules/Analysis/Overview.php:266
+msgid "Focus keyword"
+msgstr "Fraza kluczowa"
+
+#: includes/Modules/Analysis/Overview.php:269
+msgid "No pages found."
+msgstr "Nie znaleziono stron."
+
+#. translators: %s: date and time
+#: includes/Modules/Analysis/Overview.php:295
+#, php-format
+msgid "All scores last recalculated: %s."
+msgstr "Ostatnie przeliczenie wszystkich wyników: %s."
+
+#: includes/Modules/Analysis/Overview.php:297
+msgid ""
+"Scores update when a page is saved and once a day in the background (they "
+"also depend on other pages, e.g. duplicate focus keywords)."
+msgstr ""
+"Wyniki odświeżają się po zapisaniu strony i raz dziennie w tle (zależą też "
+"od innych stron, np. powtórzonych fraz kluczowych)."
+
+#: includes/Modules/Analysis/Overview.php:312
+#: includes/Modules/Bulk/ListTable.php:215
+#: includes/Modules/Links/ReportPage.php:114
+msgid "(no title)"
+msgstr "(brak tytułu)"
+
+#: includes/Modules/Analysis/Overview.php:324
+msgid "Edit SEO"
+msgstr "Edytuj SEO"
+
+#: includes/Modules/Analysis/Overview.php:326
+#: includes/Modules/Links/ReportPage.php:117
+#: includes/Modules/Redirections/LogTable.php:128
+msgid "View"
+msgstr "Zobacz"
+
+#: includes/Modules/Analysis/Overview.php:329
+msgid "Not calculated yet."
+msgstr "Jeszcze nie policzono."
+
+#: includes/Modules/Analysis/Overview.php:333 assets/editor.js:96
+msgid "Nothing important left to fix."
+msgstr "Nie ma już nic ważnego do poprawy."
+
+#. translators: %s: suggested focus keyword
+#: includes/Modules/Analysis/Overview.php:368
+#, php-format
+msgid "Suggestion: “%s”"
+msgstr "Propozycja: „%s”"
+
+#: includes/Modules/Analysis/Overview.php:382
+msgid "Recalculate all"
+msgstr "Przelicz wszystkie"
+
+#: includes/Modules/Analysis/Scores.php:198
+msgid "Poor (0–49)"
+msgstr "Słabe (0–49)"
+
+#: includes/Modules/Analysis/Scores.php:199
+msgid "Needs work (50–79)"
+msgstr "Do poprawy (50–79)"
+
+#: includes/Modules/Analysis/Scores.php:200
+msgid "Good (80–100)"
+msgstr "Dobre (80–100)"
+
+#: includes/Modules/Analysis/Scores.php:201
+msgid "No focus keyword"
+msgstr "Bez frazy kluczowej"
+
+#: includes/Modules/Analysis/Scores.php:260
+msgid "Set a focus keyword so the page can be scored."
+msgstr "Ustaw frazę kluczową, żeby policzyć wynik strony."
+
+#: includes/Modules/Analysis/Scores.php:261
+msgid "Make the SEO title 30–60 characters long."
+msgstr "Tytuł SEO powinien mieć 30–60 znaków."
+
+#: includes/Modules/Analysis/Scores.php:262
+msgid "Write a meta description of 120–160 characters."
+msgstr "Napisz opis meta o długości 120–160 znaków."
+
+#: includes/Modules/Analysis/Scores.php:263
+msgid "Add more content (at least 600 words is recommended)."
+msgstr "Dodaj więcej treści (zalecane co najmniej 600 słów)."
+
+#: includes/Modules/Analysis/Scores.php:264
+msgid "Put the focus keyword in the SEO title."
+msgstr "Wstaw frazę kluczową do tytułu SEO."
+
+#: includes/Modules/Analysis/Scores.php:265
+msgid "Use the focus keyword in the meta description."
+msgstr "Użyj frazy kluczowej w opisie meta."
+
+#: includes/Modules/Analysis/Scores.php:266
+msgid "Use the focus keyword in the URL."
+msgstr "Użyj frazy kluczowej w adresie URL."
+
+#: includes/Modules/Analysis/Scores.php:267
+msgid "Mention the focus keyword in the first paragraph."
+msgstr "Wspomnij frazę kluczową w pierwszym akapicie."
+
+#: includes/Modules/Analysis/Scores.php:268
+msgid "Use the focus keyword in the content."
+msgstr "Użyj frazy kluczowej w treści."
+
+#: includes/Modules/Analysis/Scores.php:269
+msgid "Use the focus keyword more naturally (0.5–2.5% of the words)."
+msgstr "Używaj frazy kluczowej naturalnie (0,5–2,5% słów)."
+
+#: includes/Modules/Analysis/Scores.php:270
+msgid "Use the focus keyword in a subheading (H2–H4)."
+msgstr "Użyj frazy kluczowej w śródtytule (H2–H4)."
+
+#: includes/Modules/Analysis/Scores.php:272
+msgid "Move the focus keyword closer to the start of the title."
+msgstr "Przesuń frazę kluczową bliżej początku tytułu."
+
+#: includes/Modules/Analysis/Scores.php:273
+msgid "Another page targets the same focus keyword: pick a different one."
+msgstr "Inna strona ma tę samą frazę kluczową: wybierz inną."
+
+#: includes/Modules/Analysis/Scores.php:274
+msgid "Shorten the URL to under 75 characters."
+msgstr "Skróć adres URL do mniej niż 75 znaków."
+
+#: includes/Modules/Analysis/Scores.php:275
+msgid "Link to other pages of this site."
+msgstr "Dodaj linki do innych stron tej witryny."
+
+#: includes/Modules/Analysis/Scores.php:276
+msgid "Link to a trustworthy external source."
+msgstr "Dodaj link do wiarygodnego źródła zewnętrznego."
+
+#: includes/Modules/Analysis/Scores.php:277
+msgid "Consider a number in the title."
+msgstr "Rozważ liczbę w tytule."
+
+#: includes/Modules/Analysis/Scores.php:278
+msgid "Split paragraphs longer than 150 words."
+msgstr "Podziel akapity dłuższe niż 150 słów."
+
+#: includes/Modules/Analysis/Scores.php:279
+msgid "Add an image or a video."
+msgstr "Dodaj obraz lub film."
 
 #: includes/Modules/Breadcrumbs/Module.php:49
 #: includes/Modules/Breadcrumbs/Module.php:401
-#: includes/Modules/Breadcrumbs/Module.php:478
-#: includes/Plugin.php:146
-#: assets/editor.js:60
+#: includes/Modules/Breadcrumbs/Module.php:478 includes/Plugin.php:146
+#: assets/editor.js:183
 msgid "Breadcrumbs"
 msgstr "Okruszki"
 
 #: includes/Modules/Breadcrumbs/Module.php:50
-msgid "Show breadcrumbs with the [mgseo_breadcrumbs] shortcode, the Breadcrumbs block or mgseo_breadcrumbs() in a theme."
-msgstr "Wyświetlaj okruszki za pomocą shortcode [mgseo_breadcrumbs], bloku Okruszki lub funkcji mgseo_breadcrumbs() w motywie."
+msgid ""
+"Show breadcrumbs with the [mgseo_breadcrumbs] shortcode, the Breadcrumbs "
+"block or mgseo_breadcrumbs() in a theme."
+msgstr ""
+"Wyświetlaj okruszki za pomocą shortcode [mgseo_breadcrumbs], bloku Okruszki "
+"lub funkcji mgseo_breadcrumbs() w motywie."
 
-#: includes/Modules/Breadcrumbs/Module.php:55
-#: includes/Variables.php:89
+#: includes/Modules/Breadcrumbs/Module.php:55 includes/Variables.php:89
 msgid "Separator"
 msgstr "Separator"
 
@@ -614,7 +858,9 @@ msgstr "Strona wpisów"
 
 #: includes/Modules/Breadcrumbs/Module.php:109
 msgid "Show the posts page in post trails (when a static front page is set)"
-msgstr "Pokaż stronę wpisów w ścieżkach wpisów (gdy ustawiona jest statyczna strona główna)"
+msgstr ""
+"Pokaż stronę wpisów w ścieżkach wpisów (gdy ustawiona jest statyczna strona "
+"główna)"
 
 #: includes/Modules/Breadcrumbs/Module.php:115
 msgid "Post type archive"
@@ -630,7 +876,8 @@ msgstr "Bieżąca strona"
 
 #: includes/Modules/Breadcrumbs/Module.php:123
 msgid "Hide the current page title from the visible trail (still in schema)"
-msgstr "Ukryj tytuł bieżącej strony w widocznej ścieżce (nadal występuje w schema)"
+msgstr ""
+"Ukryj tytuł bieżącej strony w widocznej ścieżce (nadal występuje w schema)"
 
 #: includes/Modules/Breadcrumbs/Module.php:129
 msgid "CSS class"
@@ -645,8 +892,12 @@ msgid "Theme compatibility"
 msgstr "Zgodność z motywem"
 
 #: includes/Modules/Breadcrumbs/Module.php:137
-msgid "Answer Rank Math and Yoast breadcrumb functions and shortcodes when those plugins are not active"
-msgstr "Obsługuj funkcje i shortcode okruszków Rank Math i Yoast, gdy te wtyczki nie są aktywne"
+msgid ""
+"Answer Rank Math and Yoast breadcrumb functions and shortcodes when those "
+"plugins are not active"
+msgstr ""
+"Obsługuj funkcje i shortcode okruszków Rank Math i Yoast, gdy te wtyczki nie "
+"są aktywne"
 
 #. translators: %d: page number
 #: includes/Modules/Breadcrumbs/Module.php:239
@@ -674,13 +925,12 @@ msgstr "Wiersz %d: nie znaleziono wpisu."
 msgid "Line %1$d: you cannot edit post #%2$d."
 msgstr "Wiersz %1$d: nie możesz edytować wpisu #%2$d."
 
-#: includes/Modules/Bulk/Csv.php:348
+#: includes/Modules/Bulk/Csv.php:358
 msgid "Choose a CSV file."
 msgstr "Wybierz plik CSV."
 
 #. translators: %d: number of changes
-#: includes/Modules/Bulk/Csv.php:358
-#: includes/Modules/Bulk/Csv.php:376
+#: includes/Modules/Bulk/Csv.php:368 includes/Modules/Bulk/Csv.php:386
 #, php-format
 msgid "%d change applied."
 msgid_plural "%d changes applied."
@@ -688,12 +938,11 @@ msgstr[0] "Zastosowano %d zmianę."
 msgstr[1] "Zastosowano %d zmiany."
 msgstr[2] "Zastosowano %d zmian."
 
-#: includes/Modules/Bulk/Csv.php:372
+#: includes/Modules/Bulk/Csv.php:382
 msgid "Nothing to apply. Upload the file again."
 msgstr "Brak zmian do zastosowania. Prześlij plik ponownie."
 
-#: includes/Modules/Bulk/ListTable.php:54
-#: includes/Modules/Bulk/Page.php:114
+#: includes/Modules/Bulk/ListTable.php:54 includes/Modules/Bulk/Page.php:114
 #: includes/Modules/Redirections/ListTable.php:120
 msgid "All"
 msgstr "Wszystkie"
@@ -726,23 +975,17 @@ msgstr "Wynik 80+"
 msgid "No score"
 msgstr "Brak wyniku"
 
-#: includes/Modules/Bulk/ListTable.php:157
-#: includes/Modules/Bulk/Page.php:141
+#: includes/Modules/Bulk/ListTable.php:157 includes/Modules/Bulk/Page.php:141
 msgid "Post"
 msgstr "Wpis"
-
-#: includes/Modules/Bulk/ListTable.php:162
-msgid "Score"
-msgstr "Wynik"
 
 #: includes/Modules/Bulk/ListTable.php:163
 msgid "Actions"
 msgstr "Akcje"
 
-#: includes/Modules/Bulk/ListTable.php:215
-#: includes/Modules/Links/ReportPage.php:114
-msgid "(no title)"
-msgstr "(brak tytułu)"
+#: includes/Modules/Bulk/ListTable.php:259
+msgid "N/A"
+msgstr "Brak danych"
 
 #: includes/Modules/Bulk/ListTable.php:264
 #: includes/Modules/Image/Module.php:288
@@ -753,8 +996,7 @@ msgstr "Zapisz"
 msgid "No posts found."
 msgstr "Nie znaleziono wpisów."
 
-#: includes/Modules/Bulk/Module.php:60
-#: includes/Modules/Bulk/Page.php:34
+#: includes/Modules/Bulk/Module.php:60 includes/Modules/Bulk/Page.php:34
 msgid "Bulk SEO Editor"
 msgstr "Masowy edytor SEO"
 
@@ -762,22 +1004,17 @@ msgstr "Masowy edytor SEO"
 msgid "Bulk Editor"
 msgstr "Masowy edytor"
 
-#: includes/Modules/Bulk/Module.php:170
-#: includes/Modules/Image/Module.php:229
+#: includes/Modules/Bulk/Module.php:170 includes/Modules/Image/Module.php:229
 #: includes/Modules/Local/Business.php:236
 #: includes/Modules/Schema/Module.php:155
-#: includes/Modules/Schema/Module.php:738
-#: includes/Modules/Schema/Types.php:401
-#: includes/Modules/Schema/Types.php:413
-#: includes/Modules/Schema/Types.php:575
-#: includes/Modules/Schema/Types.php:594
-#: includes/Modules/Schema/Types.php:623
+#: includes/Modules/Schema/Module.php:738 includes/Modules/Schema/Types.php:401
+#: includes/Modules/Schema/Types.php:413 includes/Modules/Schema/Types.php:575
+#: includes/Modules/Schema/Types.php:594 includes/Modules/Schema/Types.php:623
 #: includes/Modules/Schema/Types.php:738
 msgid "Description"
 msgstr "Opis"
 
-#: includes/Modules/Bulk/Module.php:171
-#: includes/Modules/Schema/Types.php:416
+#: includes/Modules/Bulk/Module.php:171 includes/Modules/Schema/Types.php:416
 #: includes/Modules/Schema/Types.php:688
 #: includes/Modules/SearchConsole/ReportsPage.php:26
 msgid "Keywords"
@@ -791,8 +1028,7 @@ msgstr "Indeksowanie SEO"
 msgid "— No change —"
 msgstr "— Bez zmian —"
 
-#: includes/Modules/Bulk/Module.php:256
-#: includes/Modules/Links/Module.php:463
+#: includes/Modules/Bulk/Module.php:256 includes/Modules/Links/Module.php:451
 #: includes/Modules/Schema/Module.php:612
 msgid "Post not found."
 msgstr "Nie znaleziono wpisu."
@@ -813,18 +1049,6 @@ msgstr "Edytor"
 msgid "CSV export / import"
 msgstr "Eksport / import CSV"
 
-#: includes/Modules/Bulk/Page.php:78
-#: includes/Modules/Bulk/Page.php:114
-#: includes/Modules/Schema/Module.php:706
-msgid "Post type"
-msgstr "Typ treści"
-
-#: includes/Modules/Bulk/Page.php:82
-#: includes/Modules/Bulk/Page.php:87
-#: includes/Modules/Redirections/ListTable.php:164
-msgid "Filter"
-msgstr "Filtruj"
-
 #: includes/Modules/Bulk/Page.php:88
 msgid "Search"
 msgstr "Szukaj"
@@ -833,8 +1057,7 @@ msgstr "Szukaj"
 msgid "Save all changes"
 msgstr "Zapisz wszystkie zmiany"
 
-#: includes/Modules/Bulk/Page.php:110
-#: includes/Modules/Import/Page.php:136
+#: includes/Modules/Bulk/Page.php:110 includes/Modules/Import/Page.php:136
 msgid "Export"
 msgstr "Eksport"
 
@@ -848,15 +1071,21 @@ msgstr "Pobierz CSV"
 msgid "Columns: %s."
 msgstr "Kolumny: %s."
 
-#: includes/Modules/Bulk/Page.php:123
-#: includes/Modules/Import/Page.php:81
+#: includes/Modules/Bulk/Page.php:123 includes/Modules/Import/Page.php:81
 #: includes/Modules/Tools/Utilities.php:215
 msgid "Import"
 msgstr "Import"
 
 #: includes/Modules/Bulk/Page.php:124
-msgid "Rows are matched by id (or post type + slug, or URL). Empty cells keep the current value, a single dash (-) clears it. Robots: comma separated directives (noindex,nofollow …) or \"default\"."
-msgstr "Wiersze są dopasowywane według id (lub typu treści + slugu, albo adresu URL). Puste komórki zachowują bieżącą wartość, pojedynczy myślnik (-) ją czyści. Robots: dyrektywy oddzielone przecinkami (noindex,nofollow …) lub „default”."
+msgid ""
+"Rows are matched by id (or post type + slug, or URL). Empty cells keep the "
+"current value, a single dash (-) clears it. Robots: comma separated "
+"directives (noindex,nofollow …) or \"default\"."
+msgstr ""
+"Wiersze są dopasowywane według id (lub typu treści + slugu, albo adresu "
+"URL). Puste komórki zachowują bieżącą wartość, pojedynczy myślnik (-) ją "
+"czyści. Robots: dyrektywy oddzielone przecinkami (noindex,nofollow …) lub "
+"„default”."
 
 #: includes/Modules/Bulk/Page.php:128
 #: includes/Modules/Redirections/Admin.php:498
@@ -877,8 +1106,7 @@ msgstr "Prześlij"
 msgid "Preview: %1$d rows, %2$d changes"
 msgstr "Podgląd: wiersze: %1$d, zmiany: %2$d"
 
-#: includes/Modules/Bulk/Page.php:141
-#: includes/Modules/Image/Module.php:254
+#: includes/Modules/Bulk/Page.php:141 includes/Modules/Image/Module.php:254
 msgid "Field"
 msgstr "Pole"
 
@@ -886,8 +1114,7 @@ msgstr "Pole"
 msgid "Current"
 msgstr "Obecna"
 
-#: includes/Modules/Bulk/Page.php:141
-#: includes/Modules/Schema/Types.php:238
+#: includes/Modules/Bulk/Page.php:141 includes/Modules/Schema/Types.php:238
 #: includes/Modules/WooCommerce/Fields.php:35
 msgid "New"
 msgstr "Nowa"
@@ -919,17 +1146,23 @@ msgstr "WIELKIE LITERY"
 #. translators: %s: list of image variables
 #: includes/Modules/Image/Module.php:53
 #, php-format
-msgid "Image variables: %s. Other variables describe the post that shows the image."
-msgstr "Zmienne obrazu: %s. Pozostałe zmienne opisują wpis, w którym wyświetlany jest obraz."
+msgid ""
+"Image variables: %s. Other variables describe the post that shows the image."
+msgstr ""
+"Zmienne obrazu: %s. Pozostałe zmienne opisują wpis, w którym wyświetlany "
+"jest obraz."
 
-#: includes/Modules/Image/Module.php:57
-#: includes/Plugin.php:152
+#: includes/Modules/Image/Module.php:57 includes/Plugin.php:152
 msgid "Image SEO"
 msgstr "SEO obrazów"
 
 #: includes/Modules/Image/Module.php:58
-msgid "Attributes are added when the page is rendered; the media library is not changed (except by the upload options and the tools)."
-msgstr "Atrybuty są dodawane podczas renderowania strony; biblioteka mediów nie jest zmieniana (z wyjątkiem opcji przesyłania i narzędzi)."
+msgid ""
+"Attributes are added when the page is rendered; the media library is not "
+"changed (except by the upload options and the tools)."
+msgstr ""
+"Atrybuty są dodawane podczas renderowania strony; biblioteka mediów nie jest "
+"zmieniana (z wyjątkiem opcji przesyłania i narzędzi)."
 
 #: includes/Modules/Image/Module.php:63
 msgid "Missing alt"
@@ -985,7 +1218,8 @@ msgstr "Wielkość liter istniejących wartości"
 
 #: includes/Modules/Image/Module.php:121
 msgid "Apply the case change to existing alt/title attributes as well"
-msgstr "Zastosuj zmianę wielkości liter także do istniejących atrybutów alt/title"
+msgstr ""
+"Zastosuj zmianę wielkości liter także do istniejących atrybutów alt/title"
 
 #: includes/Modules/Image/Module.php:127
 msgid "Apply to"
@@ -1027,14 +1261,12 @@ msgstr "Czytelny tytuł przy przesyłaniu"
 msgid "Turn \"my-photo_02.jpg\" into the title \"My photo 02\""
 msgstr "Zamień „my-photo_02.jpg” na tytuł „My photo 02”"
 
-#: includes/Modules/Image/Module.php:173
-#: includes/Modules/Image/Module.php:174
+#: includes/Modules/Image/Module.php:173 includes/Modules/Image/Module.php:174
 #: includes/Modules/Image/Module.php:233
 msgid "Image SEO tools"
 msgstr "Narzędzia SEO obrazów"
 
-#: includes/Modules/Image/Module.php:226
-#: includes/Modules/Image/Module.php:271
+#: includes/Modules/Image/Module.php:226 includes/Modules/Image/Module.php:271
 #: includes/Modules/Image/Module.php:287
 msgid "Alt text"
 msgstr "Tekst alternatywny"
@@ -1053,8 +1285,12 @@ msgid "Find & replace in the media library"
 msgstr "Znajdź i zamień w bibliotece mediów"
 
 #: includes/Modules/Image/Module.php:236
-msgid "Changes are written to the media library. Preview first; replacing runs in batches of 50 images."
-msgstr "Zmiany są zapisywane w bibliotece mediów. Najpierw wyświetl podgląd; zamiana jest wykonywana partiami po 50 obrazów."
+msgid ""
+"Changes are written to the media library. Preview first; replacing runs in "
+"batches of 50 images."
+msgstr ""
+"Zmiany są zapisywane w bibliotece mediów. Najpierw wyświetl podgląd; zamiana "
+"jest wykonywana partiami po 50 obrazów."
 
 #: includes/Modules/Image/Module.php:239
 msgid "Find"
@@ -1076,12 +1312,9 @@ msgstr "Podgląd"
 msgid "Replace"
 msgstr "Zamień"
 
-#: includes/Modules/Image/Module.php:254
-#: includes/Modules/Image/Module.php:271
-#: includes/Modules/Schema/Module.php:749
-#: includes/Modules/Schema/Types.php:384
-#: includes/Modules/Schema/Types.php:402
-#: includes/Modules/Schema/Types.php:624
+#: includes/Modules/Image/Module.php:254 includes/Modules/Image/Module.php:271
+#: includes/Modules/Schema/Module.php:749 includes/Modules/Schema/Types.php:384
+#: includes/Modules/Schema/Types.php:402 includes/Modules/Schema/Types.php:624
 #: includes/Modules/Schema/Types.php:884
 msgid "Image"
 msgstr "Obraz"
@@ -1105,14 +1338,15 @@ msgstr[2] "Obrazy bez tekstu alternatywnego (%d)"
 
 #: includes/Modules/Image/Module.php:267
 msgid "Save alt text from the upload template for all images without alt text?"
-msgstr "Zapisać tekst alt z szablonu przesyłania dla wszystkich obrazów bez tekstu alternatywnego?"
+msgstr ""
+"Zapisać tekst alt z szablonu przesyłania dla wszystkich obrazów bez tekstu "
+"alternatywnego?"
 
 #: includes/Modules/Image/Module.php:267
 msgid "Fill all from the upload template"
 msgstr "Uzupełnij wszystkie z szablonu przesyłania"
 
-#: includes/Modules/Image/Module.php:271
-#: includes/Modules/Tools/Module.php:141
+#: includes/Modules/Image/Module.php:271 includes/Modules/Tools/Module.php:141
 msgid "File"
 msgstr "Plik"
 
@@ -1152,12 +1386,10 @@ msgstr "ID użytkownika autora"
 msgid "Description of the first term of a taxonomy: %s"
 msgstr "Opis pierwszego terminu taksonomii: %s"
 
-#: includes/Modules/Import/Module.php:50
-#: includes/Modules/Import/Module.php:51
+#: includes/Modules/Import/Module.php:50 includes/Modules/Import/Module.php:51
 #: includes/Modules/Import/Page.php:53
 #: includes/Modules/Redirections/Admin.php:317
-#: includes/Modules/Redirections/Admin.php:491
-#: includes/Plugin.php:156
+#: includes/Modules/Redirections/Admin.php:491 includes/Plugin.php:156
 msgid "Import & Export"
 msgstr "Import i eksport"
 
@@ -1195,8 +1427,7 @@ msgstr "Meta użytkowników"
 msgid "Redirections"
 msgstr "Przekierowania"
 
-#: includes/Modules/Import/Page.php:29
-#: includes/Modules/Schema/Module.php:424
+#: includes/Modules/Import/Page.php:29 includes/Modules/Schema/Module.php:424
 msgid "Schema"
 msgstr "Schema"
 
@@ -1207,15 +1438,20 @@ msgid "404 log"
 msgstr "Dziennik 404"
 
 #: includes/Modules/Import/Page.php:54
-msgid "MG SEO reads the data other SEO plugins leave in the database, so the import also works after Rank Math or Yoast SEO has been deactivated and deleted. Nothing is sent outside your site."
-msgstr "MG SEO odczytuje dane pozostawione w bazie przez inne wtyczki SEO, dzięki czemu import działa również po dezaktywacji i usunięciu Rank Math lub Yoast SEO. Nic nie jest wysyłane poza Twoją witrynę."
+msgid ""
+"MG SEO reads the data other SEO plugins leave in the database, so the import "
+"also works after Rank Math or Yoast SEO has been deactivated and deleted. "
+"Nothing is sent outside your site."
+msgstr ""
+"MG SEO odczytuje dane pozostawione w bazie przez inne wtyczki SEO, dzięki "
+"czemu import działa również po dezaktywacji i usunięciu Rank Math lub Yoast "
+"SEO. Nic nie jest wysyłane poza Twoją witrynę."
 
 #: includes/Modules/Import/Page.php:57
 msgid "Data found"
 msgstr "Znalezione dane"
 
-#: includes/Modules/Import/Page.php:58
-#: includes/Modules/Import/Page.php:83
+#: includes/Modules/Import/Page.php:58 includes/Modules/Import/Page.php:83
 #: includes/Modules/Tools/Utilities.php:179
 msgid "Source"
 msgstr "Źródło"
@@ -1263,8 +1499,14 @@ msgid "Delete leftover data"
 msgstr "Usuń pozostałe dane"
 
 #: includes/Modules/Import/Page.php:116
-msgid "After a successful import you can remove the old plugin's data (post, term and user meta, options and tables). This cannot be undone – make a database backup first."
-msgstr "Po udanym imporcie możesz usunąć dane starej wtyczki (meta wpisów, terminów i użytkowników, opcje oraz tabele). Tej operacji nie można cofnąć – najpierw wykonaj kopię zapasową bazy danych."
+msgid ""
+"After a successful import you can remove the old plugin's data (post, term "
+"and user meta, options and tables). This cannot be undone – make a database "
+"backup first."
+msgstr ""
+"Po udanym imporcie możesz usunąć dane starej wtyczki (meta wpisów, terminów "
+"i użytkowników, opcje oraz tabele). Tej operacji nie można cofnąć – najpierw "
+"wykonaj kopię zapasową bazy danych."
 
 #. translators: %s: plugin name
 #: includes/Modules/Import/Page.php:124
@@ -1321,34 +1563,53 @@ msgid "Planned changes (first 200)"
 msgstr "Planowane zmiany (pierwsze 200)"
 
 #: includes/Modules/Import/RankMath.php:210
-msgid "Homepage Open Graph title/description from Rank Math were not imported (MG SEO uses the homepage SEO title and description, or the static front page's own social fields)."
-msgstr "Tytuł i opis Open Graph strony głównej z Rank Math nie zostały zaimportowane (MG SEO używa tytułu i opisu SEO strony głównej lub własnych pól społecznościowych statycznej strony głównej)."
+msgid ""
+"Homepage Open Graph title/description from Rank Math were not imported (MG "
+"SEO uses the homepage SEO title and description, or the static front page's "
+"own social fields)."
+msgstr ""
+"Tytuł i opis Open Graph strony głównej z Rank Math nie zostały zaimportowane "
+"(MG SEO używa tytułu i opisu SEO strony głównej lub własnych pól "
+"społecznościowych statycznej strony głównej)."
 
 #. translators: %s: post type name
 #: includes/Modules/Import/RankMath.php:227
 #, php-format
-msgid "Post type \"%s\" had its own max-snippet/max-image-preview values in Rank Math; MG SEO only has global values (set them per post if needed)."
-msgstr "Typ treści „%s” miał w Rank Math własne wartości max-snippet/max-image-preview; MG SEO ma tylko wartości globalne (w razie potrzeby ustaw je dla poszczególnych wpisów)."
+msgid ""
+"Post type \"%s\" had its own max-snippet/max-image-preview values in Rank "
+"Math; MG SEO only has global values (set them per post if needed)."
+msgstr ""
+"Typ treści „%s” miał w Rank Math własne wartości max-snippet/max-image-"
+"preview; MG SEO ma tylko wartości globalne (w razie potrzeby ustaw je dla "
+"poszczególnych wpisów)."
 
 #: includes/Modules/Import/RankMath.php:284
 msgid "Custom webmaster tags from Rank Math were not imported."
-msgstr "Niestandardowe znaczniki webmastera z Rank Math nie zostały zaimportowane."
+msgstr ""
+"Niestandardowe znaczniki webmastera z Rank Math nie zostały zaimportowane."
 
 #: includes/Modules/Import/RankMath.php:305
-msgid "Rank Math Image SEO (automatic alt/title) was enabled: configure the MG SEO Image SEO module manually."
-msgstr "Moduł Image SEO w Rank Math (automatyczny alt/title) był włączony: skonfiguruj moduł SEO obrazów w MG SEO ręcznie."
+msgid ""
+"Rank Math Image SEO (automatic alt/title) was enabled: configure the MG SEO "
+"Image SEO module manually."
+msgstr ""
+"Moduł Image SEO w Rank Math (automatyczny alt/title) był włączony: "
+"skonfiguruj moduł SEO obrazów w MG SEO ręcznie."
 
 #: includes/Modules/Import/RankMath.php:383
-msgid "The Facebook admin id (fb:admins) is not supported by MG SEO and was skipped."
-msgstr "Identyfikator administratora Facebooka (fb:admins) nie jest obsługiwany przez MG SEO i został pominięty."
+msgid ""
+"The Facebook admin id (fb:admins) is not supported by MG SEO and was skipped."
+msgstr ""
+"Identyfikator administratora Facebooka (fb:admins) nie jest obsługiwany "
+"przez MG SEO i został pominięty."
 
 #: includes/Modules/Import/RankMath.php:939
 msgid "The Redirections module is not available; redirections were skipped."
-msgstr "Moduł Przekierowania jest niedostępny; przekierowania zostały pominięte."
+msgstr ""
+"Moduł Przekierowania jest niedostępny; przekierowania zostały pominięte."
 
-#: includes/Modules/Import/Runner.php:93
-#: includes/Modules/Import/Runner.php:122
-#: includes/Modules/Import/Runner.php:168
+#: includes/Modules/Import/Runner.php:93 includes/Modules/Import/Runner.php:122
+#: includes/Modules/Import/Runner.php:176
 msgid "Unknown import source."
 msgstr "Nieznane źródło importu."
 
@@ -1357,7 +1618,7 @@ msgid "Unknown import scope."
 msgstr "Nieznany zakres importu."
 
 #. translators: %s: plugin name
-#: includes/Modules/Import/Runner.php:172
+#: includes/Modules/Import/Runner.php:180
 #, php-format
 msgid "Deactivate %s before deleting its data."
 msgstr "Dezaktywuj %s przed usunięciem jej danych."
@@ -1368,7 +1629,9 @@ msgstr "Kolumna linków"
 
 #: includes/Modules/Links/Module.php:81
 msgid "Show internal, external and inbound link counts in post lists"
-msgstr "Pokaż liczbę linków wewnętrznych, zewnętrznych i przychodzących na listach wpisów"
+msgstr ""
+"Pokaż liczbę linków wewnętrznych, zewnętrznych i przychodzących na listach "
+"wpisów"
 
 #: includes/Modules/Links/Module.php:87
 msgid "Link suggestions"
@@ -1388,89 +1651,86 @@ msgstr "Podpowiadaj wpisy tych typów"
 
 #: includes/Modules/Links/Module.php:103
 msgid "Leave all unchecked to suggest every public post type."
-msgstr "Pozostaw wszystkie niezaznaczone, aby podpowiadać wszystkie publiczne typy treści."
+msgstr ""
+"Pozostaw wszystkie niezaznaczone, aby podpowiadać wszystkie publiczne typy "
+"treści."
 
-#: includes/Modules/Links/Module.php:119
-#: includes/Modules/Links/Module.php:120
+#: includes/Modules/Links/Module.php:119 includes/Modules/Links/Module.php:120
 #: includes/Modules/Links/ReportPage.php:36
 msgid "Link Report"
 msgstr "Raport linków"
 
-#: includes/Modules/Links/Module.php:318
+#: includes/Modules/Links/Module.php:306
 msgid "Internal links out / external links out / inbound internal links"
-msgstr "Linki wewnętrzne wychodzące / linki zewnętrzne wychodzące / linki wewnętrzne przychodzące"
+msgstr ""
+"Linki wewnętrzne wychodzące / linki zewnętrzne wychodzące / linki wewnętrzne "
+"przychodzące"
 
-#: includes/Modules/Links/Module.php:318
-#: includes/Modules/Links/Module.php:401
+#: includes/Modules/Links/Module.php:306 includes/Modules/Links/Module.php:389
 msgid "Links"
 msgstr "Linki"
 
-#: includes/Modules/Links/Module.php:345
+#: includes/Modules/Links/Module.php:333
 #: includes/Modules/Links/ReportPage.php:69
 msgid "Internal links"
 msgstr "Linki wewnętrzne"
 
-#: includes/Modules/Links/Module.php:347
+#: includes/Modules/Links/Module.php:335
 #: includes/Modules/Links/ReportPage.php:70
 msgid "External links"
 msgstr "Linki zewnętrzne"
 
-#: includes/Modules/Links/Module.php:349
+#: includes/Modules/Links/Module.php:337
 msgid "Inbound internal links"
 msgstr "Przychodzące linki wewnętrzne"
 
-#: includes/Modules/Links/Module.php:376
+#: includes/Modules/Links/Module.php:364
 #: includes/Modules/Links/ReportPage.php:225
 msgid "Copy link"
 msgstr "Kopiuj link"
 
-#: includes/Modules/Links/Module.php:377
+#: includes/Modules/Links/Module.php:365
 msgid "Copied"
 msgstr "Skopiowano"
 
-#: includes/Modules/Links/Module.php:378
+#: includes/Modules/Links/Module.php:366
 #: includes/Modules/Links/ReportPage.php:232
 msgid "Copy as HTML link"
 msgstr "Kopiuj jako link HTML"
 
-#: includes/Modules/Links/Module.php:379
+#: includes/Modules/Links/Module.php:367
 #: includes/Modules/Links/ReportPage.php:223
 msgid "Pillar"
 msgstr "Filar"
 
-#: includes/Modules/Links/Module.php:380
+#: includes/Modules/Links/Module.php:368
 #: includes/Modules/Links/ReportPage.php:227
 msgid "Phrase found in your text:"
 msgstr "Fraza znaleziona w Twoim tekście:"
 
-#: includes/Modules/Links/Module.php:381
+#: includes/Modules/Links/Module.php:369
 #: includes/Modules/Links/ReportPage.php:215
 msgid "No suggestions. Add focus keywords or more content."
 msgstr "Brak podpowiedzi. Dodaj frazy kluczowe lub więcej treści."
 
-#: includes/Modules/Links/Module.php:382
+#: includes/Modules/Links/Module.php:370
 msgid "Loading…"
 msgstr "Wczytywanie…"
 
-#: includes/Modules/Links/Module.php:383
+#: includes/Modules/Links/Module.php:371
 #: includes/Modules/SearchConsole/Module.php:640
 msgid "Request failed."
 msgstr "Żądanie nie powiodło się."
 
-#: includes/Modules/Links/Module.php:384
+#: includes/Modules/Links/Module.php:372
 msgid "Index rebuilt."
 msgstr "Indeks został przebudowany."
 
 #. translators: 1: processed posts, 2: total posts
-#: includes/Modules/Links/Module.php:386
+#: includes/Modules/Links/Module.php:374
 #, php-format
 msgid "Indexed %1$d of %2$d…"
 msgstr "Zaindeksowano %1$d z %2$d…"
-
-#: includes/Modules/Links/ReportPage.php:27
-#: includes/Modules/SearchConsole/ReportsPage.php:24
-msgid "Overview"
-msgstr "Przegląd"
 
 #: includes/Modules/Links/ReportPage.php:28
 msgid "Orphan content"
@@ -1489,8 +1749,12 @@ msgid "Link index"
 msgstr "Indeks linków"
 
 #: includes/Modules/Links/ReportPage.php:77
-msgid "Links are counted automatically whenever a post is saved. Rebuild the index after importing content or changing permalinks."
-msgstr "Linki są liczone automatycznie przy każdym zapisie wpisu. Przebuduj indeks po zaimportowaniu treści lub zmianie bezpośrednich odnośników."
+msgid ""
+"Links are counted automatically whenever a post is saved. Rebuild the index "
+"after importing content or changing permalinks."
+msgstr ""
+"Linki są liczone automatycznie przy każdym zapisie wpisu. Przebuduj indeks "
+"po zaimportowaniu treści lub zmianie bezpośrednich odnośników."
 
 #. translators: %s: date and time
 #: includes/Modules/Links/ReportPage.php:80
@@ -1532,14 +1796,15 @@ msgstr "Zewnętrzne wychodzące"
 msgid "Inbound"
 msgstr "Przychodzące"
 
-#: includes/Modules/Links/ReportPage.php:117
-#: includes/Modules/Redirections/LogTable.php:128
-msgid "View"
-msgstr "Zobacz"
-
 #: includes/Modules/Links/ReportPage.php:151
-msgid "Published, indexable content that no other published post links to. Search engines and visitors find these pages only through menus, archives or the sitemap — add internal links to them."
-msgstr "Opublikowane, indeksowalne treści, do których nie prowadzi link z żadnego innego opublikowanego wpisu. Wyszukiwarki i odwiedzający znajdują te strony tylko przez menu, archiwa lub mapę witryny — dodaj do nich linki wewnętrzne."
+msgid ""
+"Published, indexable content that no other published post links to. Search "
+"engines and visitors find these pages only through menus, archives or the "
+"sitemap — add internal links to them."
+msgstr ""
+"Opublikowane, indeksowalne treści, do których nie prowadzi link z żadnego "
+"innego opublikowanego wpisu. Wyszukiwarki i odwiedzający znajdują te strony "
+"tylko przez menu, archiwa lub mapę witryny — dodaj do nich linki wewnętrzne."
 
 #: includes/Modules/Links/ReportPage.php:154
 msgid "No orphan content found."
@@ -1555,8 +1820,13 @@ msgstr[1] "%d osierocone wpisy"
 msgstr[2] "%d osieroconych wpisów"
 
 #: includes/Modules/Links/ReportPage.php:166
-msgid "Internal links in published content whose URL matches no post, archive, uploaded file or redirect. Checked locally without crawling."
-msgstr "Linki wewnętrzne w opublikowanych treściach, których adres URL nie pasuje do żadnego wpisu, archiwum, przesłanego pliku ani przekierowania. Sprawdzane lokalnie, bez skanowania witryny."
+msgid ""
+"Internal links in published content whose URL matches no post, archive, "
+"uploaded file or redirect. Checked locally without crawling."
+msgstr ""
+"Linki wewnętrzne w opublikowanych treściach, których adres URL nie pasuje do "
+"żadnego wpisu, archiwum, przesłanego pliku ani przekierowania. Sprawdzane "
+"lokalnie, bez skanowania witryny."
 
 #: includes/Modules/Links/ReportPage.php:169
 msgid "No broken internal links found."
@@ -1595,15 +1865,20 @@ msgid "Refresh"
 msgstr "Odśwież"
 
 #: includes/Modules/Links/ReportPage.php:202
-msgid "Related published content ranked locally by focus keywords, titles, shared categories and tags. Pillar content is preferred; posts you already link to are skipped."
-msgstr "Powiązane opublikowane treści uszeregowane lokalnie według fraz kluczowych, tytułów oraz wspólnych kategorii i tagów. Preferowane są treści filarowe; wpisy, do których już linkujesz, są pomijane."
+msgid ""
+"Related published content ranked locally by focus keywords, titles, shared "
+"categories and tags. Pillar content is preferred; posts you already link to "
+"are skipped."
+msgstr ""
+"Powiązane opublikowane treści uszeregowane lokalnie według fraz kluczowych, "
+"tytułów oraz wspólnych kategorii i tagów. Preferowane są treści filarowe; "
+"wpisy, do których już linkujesz, są pomijane."
 
 #: includes/Modules/Local/Admin.php:52
 msgid "Number"
 msgstr "Liczba"
 
-#: includes/Modules/Local/Admin.php:52
-#: includes/Modules/Schema/Types.php:608
+#: includes/Modules/Local/Admin.php:52 includes/Modules/Schema/Types.php:608
 msgid "Contact type"
 msgstr "Typ kontaktu"
 
@@ -1619,13 +1894,11 @@ msgstr "Nie określono"
 msgid "Open"
 msgstr "Otwarte"
 
-#: includes/Modules/Local/Admin.php:76
-#: includes/Modules/Local/Renderer.php:219
+#: includes/Modules/Local/Admin.php:76 includes/Modules/Local/Renderer.php:219
 msgid "Open 24 hours"
 msgstr "Otwarte całą dobę"
 
-#: includes/Modules/Local/Admin.php:77
-#: includes/Modules/Local/Renderer.php:217
+#: includes/Modules/Local/Admin.php:77 includes/Modules/Local/Renderer.php:217
 #: includes/Modules/Local/Renderer.php:225
 #: includes/Modules/Local/Renderer.php:236
 msgid "Closed"
@@ -1639,20 +1912,16 @@ msgstr "— Brak —"
 msgid "Location details"
 msgstr "Szczegóły lokalizacji"
 
-#: includes/Modules/Local/Admin.php:127
-#: includes/Modules/Local/Module.php:82
+#: includes/Modules/Local/Admin.php:127 includes/Modules/Local/Module.php:82
 msgid "Business"
 msgstr "Firma"
 
-#: includes/Modules/Local/Admin.php:128
-#: includes/Modules/Local/Module.php:88
+#: includes/Modules/Local/Admin.php:128 includes/Modules/Local/Module.php:88
 msgid "Contact"
 msgstr "Kontakt"
 
-#: includes/Modules/Local/Admin.php:129
-#: includes/Modules/Local/Business.php:395
-#: includes/Modules/Local/Module.php:93
-#: includes/Modules/Local/Renderer.php:242
+#: includes/Modules/Local/Admin.php:129 includes/Modules/Local/Business.php:395
+#: includes/Modules/Local/Module.php:93 includes/Modules/Local/Renderer.php:242
 #: includes/Modules/Schema/Types.php:645
 msgid "Opening hours"
 msgstr "Godziny otwarcia"
@@ -1721,12 +1990,15 @@ msgid "Leave empty to use the location title."
 msgstr "Pozostaw puste, aby użyć tytułu lokalizacji."
 
 #: includes/Modules/Local/Business.php:231
-msgid "Leave empty to use the Organization name from the schema settings or the site title."
-msgstr "Pozostaw puste, aby użyć nazwy Organization z ustawień schema lub tytułu witryny."
+msgid ""
+"Leave empty to use the Organization name from the schema settings or the "
+"site title."
+msgstr ""
+"Pozostaw puste, aby użyć nazwy Organization z ustawień schema lub tytułu "
+"witryny."
 
 #: includes/Modules/Local/Business.php:242
-#: includes/Modules/Schema/Module.php:141
-#: includes/Modules/Schema/Types.php:596
+#: includes/Modules/Schema/Module.php:141 includes/Modules/Schema/Types.php:596
 #: includes/Modules/Schema/Types.php:625
 msgid "Logo"
 msgstr "Logo"
@@ -1737,7 +2009,9 @@ msgstr "Zdjęcie firmy"
 
 #: includes/Modules/Local/Business.php:250
 msgid "Recommended by Google for local results. The logo is used when empty."
-msgstr "Zalecane przez Google dla wyników lokalnych. Gdy pole jest puste, używane jest logo."
+msgstr ""
+"Zalecane przez Google dla wyników lokalnych. Gdy pole jest puste, używane "
+"jest logo."
 
 #: includes/Modules/Local/Business.php:255
 #: includes/Modules/Schema/Types.php:202
@@ -1795,15 +2069,17 @@ msgid "Phone numbers"
 msgstr "Numery telefonów"
 
 #: includes/Modules/Local/Business.php:314
-msgid "The first number is the main telephone. Use the international format, e.g. +48 123 456 789."
-msgstr "Pierwszy numer jest głównym numerem telefonu. Użyj formatu międzynarodowego, np. +48 123 456 789."
+msgid ""
+"The first number is the main telephone. Use the international format, e.g. "
+"+48 123 456 789."
+msgstr ""
+"Pierwszy numer jest głównym numerem telefonu. Użyj formatu międzynarodowego, "
+"np. +48 123 456 789."
 
 #: includes/Modules/Local/Business.php:319
 #: includes/Modules/Schema/Module.php:161
-#: includes/Modules/Schema/Module.php:294
-#: includes/Modules/Schema/Types.php:578
-#: includes/Modules/Schema/Types.php:597
-#: includes/Modules/Schema/Types.php:610
+#: includes/Modules/Schema/Module.php:294 includes/Modules/Schema/Types.php:578
+#: includes/Modules/Schema/Types.php:597 includes/Modules/Schema/Types.php:610
 #: includes/Modules/Schema/Types.php:628
 msgid "Email"
 msgstr "E-mail"
@@ -1838,8 +2114,7 @@ msgid "Comma separated, e.g. Cash, Credit card, BLIK."
 msgstr "Oddzielone przecinkami, np. gotówka, karta kredytowa, BLIK."
 
 #: includes/Modules/Local/Business.php:347
-#: includes/Modules/Schema/Module.php:295
-#: includes/Modules/Schema/Types.php:658
+#: includes/Modules/Schema/Module.php:295 includes/Modules/Schema/Types.php:658
 #: includes/Modules/Schema/Types.php:672
 msgid "Area served"
 msgstr "Obszar działania"
@@ -1854,8 +2129,11 @@ msgid "Social profiles"
 msgstr "Profile społecznościowe"
 
 #: includes/Modules/Local/Business.php:356
-msgid "One URL per line (Facebook, Instagram, LinkedIn, Google Business Profile …)."
-msgstr "Jeden adres URL w wierszu (Facebook, Instagram, LinkedIn, Profil Firmy w Google …)."
+msgid ""
+"One URL per line (Facebook, Instagram, LinkedIn, Google Business Profile …)."
+msgstr ""
+"Jeden adres URL w wierszu (Facebook, Instagram, LinkedIn, Profil Firmy w "
+"Google …)."
 
 #: includes/Modules/Local/Business.php:362
 msgid "Company identifiers"
@@ -1889,16 +2167,25 @@ msgid "KRS"
 msgstr "KRS"
 
 #: includes/Modules/Local/Business.php:399
-msgid "Several ranges per day are separated with commas, e.g. 08:00-12:00, 13:00-17:00. A closing time earlier than the opening time means the next day."
-msgstr "Kilka przedziałów w ciągu dnia oddziel przecinkami, np. 08:00-12:00, 13:00-17:00. Godzina zamknięcia wcześniejsza niż godzina otwarcia oznacza następny dzień."
+msgid ""
+"Several ranges per day are separated with commas, e.g. 08:00-12:00, "
+"13:00-17:00. A closing time earlier than the opening time means the next day."
+msgstr ""
+"Kilka przedziałów w ciągu dnia oddziel przecinkami, np. 08:00-12:00, "
+"13:00-17:00. Godzina zamknięcia wcześniejsza niż godzina otwarcia oznacza "
+"następny dzień."
 
 #: includes/Modules/Local/Business.php:404
 msgid "Holidays and special hours"
 msgstr "Święta i godziny specjalne"
 
 #: includes/Modules/Local/Business.php:407
-msgid "One date per line: \"2026-12-24 | 08:00-12:00\", \"2026-12-25 | closed\" or a range \"2026-08-01 - 2026-08-14 | closed\"."
-msgstr "Jedna data w wierszu: „2026-12-24 | 08:00-12:00”, „2026-12-25 | closed” lub zakres „2026-08-01 - 2026-08-14 | closed”."
+msgid ""
+"One date per line: \"2026-12-24 | 08:00-12:00\", \"2026-12-25 | closed\" or "
+"a range \"2026-08-01 - 2026-08-14 | closed\"."
+msgstr ""
+"Jedna data w wierszu: „2026-12-24 | 08:00-12:00”, „2026-12-25 | closed” lub "
+"zakres „2026-08-01 - 2026-08-14 | closed”."
 
 #: includes/Modules/Local/Locations.php:42
 #: includes/Modules/Local/Locations.php:52
@@ -1908,8 +2195,7 @@ msgid "Locations"
 msgstr "Lokalizacje"
 
 #: includes/Modules/Local/Locations.php:43
-#: includes/Modules/Schema/Types.php:553
-#: assets/local.js:46
+#: includes/Modules/Schema/Types.php:553 assets/local.js:46
 msgid "Location"
 msgstr "Lokalizacja"
 
@@ -1946,8 +2232,15 @@ msgid "No locations found in Trash."
 msgstr "Nie znaleziono lokalizacji w koszu."
 
 #: includes/Modules/Local/Module.php:83
-msgid "With a single location the site Organization in the schema graph becomes this LocalBusiness (when the site represents an organization). Show the data with the [mgseo_local] shortcode or the Business info block."
-msgstr "Przy jednej lokalizacji organizacja witryny (Organization) w grafie schema staje się tym LocalBusiness (gdy witryna reprezentuje organizację). Wyświetlaj dane za pomocą shortcode [mgseo_local] lub bloku Informacje o firmie."
+msgid ""
+"With a single location the site Organization in the schema graph becomes "
+"this LocalBusiness (when the site represents an organization). Show the data "
+"with the [mgseo_local] shortcode or the Business info block."
+msgstr ""
+"Przy jednej lokalizacji organizacja witryny (Organization) w grafie schema "
+"staje się tym LocalBusiness (gdy witryna reprezentuje organizację). "
+"Wyświetlaj dane za pomocą shortcode [mgseo_local] lub bloku Informacje o "
+"firmie."
 
 #: includes/Modules/Local/Module.php:100
 msgid "Time format"
@@ -1961,8 +2254,7 @@ msgstr "Wyświetlanie i strony"
 msgid "Map in the shortcode"
 msgstr "Mapa w shortcode"
 
-#: includes/Modules/Local/Module.php:120
-#: assets/local.js:56
+#: includes/Modules/Local/Module.php:120 assets/local.js:56
 msgid "No map"
 msgstr "Bez mapy"
 
@@ -1987,8 +2279,15 @@ msgid "Print map iframes"
 msgstr "Wyświetlaj ramki iframe z mapami"
 
 #: includes/Modules/Local/Module.php:142
-msgid "An embedded map loads third-party content from Google Maps or OpenStreetMap in the visitor's browser (their cookies and IP logging apply; you may need cookie consent). Without this only a plain link is printed."
-msgstr "Osadzona mapa ładuje treści stron trzecich z Map Google lub OpenStreetMap w przeglądarce odwiedzającego (obowiązują ich pliki cookie i rejestrowanie adresu IP; może być wymagana zgoda na cookies). Bez tej opcji wyświetlany jest tylko zwykły link."
+msgid ""
+"An embedded map loads third-party content from Google Maps or OpenStreetMap "
+"in the visitor's browser (their cookies and IP logging apply; you may need "
+"cookie consent). Without this only a plain link is printed."
+msgstr ""
+"Osadzona mapa ładuje treści stron trzecich z Map Google lub OpenStreetMap w "
+"przeglądarce odwiedzającego (obowiązują ich pliki cookie i rejestrowanie "
+"adresu IP; może być wymagana zgoda na cookies). Bez tej opcji wyświetlany "
+"jest tylko zwykły link."
 
 #: includes/Modules/Local/Module.php:147
 msgid "Map zoom"
@@ -2020,11 +2319,19 @@ msgstr "Wiele lokalizacji"
 
 #: includes/Modules/Local/Module.php:188
 msgid "Manage several locations (branches, shops, offices) as separate posts"
-msgstr "Zarządzaj wieloma lokalizacjami (oddziałami, sklepami, biurami) jako osobnymi wpisami"
+msgstr ""
+"Zarządzaj wieloma lokalizacjami (oddziałami, sklepami, biurami) jako "
+"osobnymi wpisami"
 
 #: includes/Modules/Local/Module.php:190
-msgid "Each location gets its own LocalBusiness schema on its page. The site Organization keeps its type and gets the address and contact data from these settings."
-msgstr "Każda lokalizacja otrzymuje na swojej stronie własne dane schema LocalBusiness. Organizacja witryny (Organization) zachowuje swój typ i pobiera adres oraz dane kontaktowe z tych ustawień."
+msgid ""
+"Each location gets its own LocalBusiness schema on its page. The site "
+"Organization keeps its type and gets the address and contact data from these "
+"settings."
+msgstr ""
+"Każda lokalizacja otrzymuje na swojej stronie własne dane schema "
+"LocalBusiness. Organizacja witryny (Organization) zachowuje swój typ i "
+"pobiera adres oraz dane kontaktowe z tych ustawień."
 
 #: includes/Modules/Local/Module.php:195
 msgid "Location pages"
@@ -2060,11 +2367,14 @@ msgid "KML file"
 msgstr "Plik KML"
 
 #: includes/Modules/Local/Module.php:221
-msgid "Serve /locations.kml (listed in /sitemap-locations.xml together with the location pages)"
-msgstr "Udostępnij /locations.kml (wymieniony w /sitemap-locations.xml razem ze stronami lokalizacji)"
+msgid ""
+"Serve /locations.kml (listed in /sitemap-locations.xml together with the "
+"location pages)"
+msgstr ""
+"Udostępnij /locations.kml (wymieniony w /sitemap-locations.xml razem ze "
+"stronami lokalizacji)"
 
-#: includes/Modules/Local/Module.php:486
-#: assets/local.js:18
+#: includes/Modules/Local/Module.php:486 assets/local.js:18
 msgid "Business info"
 msgstr "Informacje o firmie"
 
@@ -2196,8 +2506,14 @@ msgid "Add another source"
 msgstr "Dodaj kolejne źródło"
 
 #: includes/Modules/Redirections/Admin.php:429
-msgid "Paths are relative to the site address, e.g. /old-page/. Regex patterns are matched against the path without leading and trailing slashes; use $1, $2 … in the destination for captured groups."
-msgstr "Ścieżki są względne wobec adresu witryny, np. /old-page/. Wzorce wyrażeń regularnych są dopasowywane do ścieżki bez początkowych i końcowych ukośników; w adresie docelowym użyj $1, $2 …, aby wstawić przechwycone grupy."
+msgid ""
+"Paths are relative to the site address, e.g. /old-page/. Regex patterns are "
+"matched against the path without leading and trailing slashes; use $1, $2 … "
+"in the destination for captured groups."
+msgstr ""
+"Ścieżki są względne wobec adresu witryny, np. /old-page/. Wzorce wyrażeń "
+"regularnych są dopasowywane do ścieżki bez początkowych i końcowych "
+"ukośników; w adresie docelowym użyj $1, $2 …, aby wstawić przechwycone grupy."
 
 #: includes/Modules/Redirections/Admin.php:431
 msgid "Destination URL"
@@ -2208,21 +2524,22 @@ msgid "Redirection type"
 msgstr "Typ przekierowania"
 
 #: includes/Modules/Redirections/Admin.php:438
-msgid "410 and 451 show the theme 404 template with that status code and need no destination."
-msgstr "410 i 451 wyświetlają szablon 404 motywu z tym kodem statusu i nie wymagają adresu docelowego."
+msgid ""
+"410 and 451 show the theme 404 template with that status code and need no "
+"destination."
+msgstr ""
+"410 i 451 wyświetlają szablon 404 motywu z tym kodem statusu i nie wymagają "
+"adresu docelowego."
 
 #: includes/Modules/Redirections/Admin.php:441
 #: includes/Modules/Redirections/ListTable.php:83
-#: includes/Modules/Schema/Types.php:245
-#: includes/Modules/Schema/Types.php:673
-#: includes/Modules/Schema/Types.php:686
-#: includes/Modules/Schema/Types.php:821
+#: includes/Modules/Schema/Types.php:245 includes/Modules/Schema/Types.php:673
+#: includes/Modules/Schema/Types.php:686 includes/Modules/Schema/Types.php:821
 msgid "Category"
 msgstr "Kategoria"
 
 #: includes/Modules/Redirections/Admin.php:449
-#: includes/Modules/Schema/Types.php:525
-#: includes/Modules/Tools/Module.php:96
+#: includes/Modules/Schema/Types.php:525 includes/Modules/Tools/Module.php:96
 msgid "Status"
 msgstr "Status"
 
@@ -2261,8 +2578,18 @@ msgid "Remove source"
 msgstr "Usuń źródło"
 
 #: includes/Modules/Redirections/Admin.php:492
-msgid "CSV columns: id, source, comparison (exact, contains, start, end, regex), ignore_case (0/1), destination, type (301, 302, 307, 410, 451), status (active/inactive), category, hits, created. Rows with the same id become one redirection with several sources; only \"source\" is required. Sources that already have a redirection are skipped."
-msgstr "Kolumny CSV: id, source, comparison (exact, contains, start, end, regex), ignore_case (0/1), destination, type (301, 302, 307, 410, 451), status (active/inactive), category, hits, created. Wiersze z tym samym id stają się jednym przekierowaniem z wieloma źródłami; wymagana jest tylko kolumna „source”. Źródła, dla których istnieje już przekierowanie, są pomijane."
+msgid ""
+"CSV columns: id, source, comparison (exact, contains, start, end, regex), "
+"ignore_case (0/1), destination, type (301, 302, 307, 410, 451), status "
+"(active/inactive), category, hits, created. Rows with the same id become one "
+"redirection with several sources; only \"source\" is required. Sources that "
+"already have a redirection are skipped."
+msgstr ""
+"Kolumny CSV: id, source, comparison (exact, contains, start, end, regex), "
+"ignore_case (0/1), destination, type (301, 302, 307, 410, 451), status "
+"(active/inactive), category, hits, created. Wiersze z tym samym id stają się "
+"jednym przekierowaniem z wieloma źródłami; wymagana jest tylko kolumna "
+"„source”. Źródła, dla których istnieje już przekierowanie, są pomijane."
 
 #: includes/Modules/Redirections/Admin.php:494
 #: includes/Modules/Redirections/Admin.php:514
@@ -2282,7 +2609,9 @@ msgstr "Monitor 404"
 
 #: includes/Modules/Redirections/Admin.php:520
 msgid "404 logging is turned off in the settings. Existing entries are kept."
-msgstr "Rejestrowanie błędów 404 jest wyłączone w ustawieniach. Istniejące wpisy zostały zachowane."
+msgstr ""
+"Rejestrowanie błędów 404 jest wyłączone w ustawieniach. Istniejące wpisy "
+"zostały zachowane."
 
 #: includes/Modules/Redirections/Admin.php:526
 msgid "Search log"
@@ -2364,8 +2693,7 @@ msgstr "Wszystkie typy"
 msgid "Filter by category"
 msgstr "Filtruj według kategorii"
 
-#: includes/Modules/Redirections/ListTable.php:158
-#: includes/Variables.php:94
+#: includes/Modules/Redirections/ListTable.php:158 includes/Variables.php:94
 msgid "All categories"
 msgstr "Wszystkie kategorie"
 
@@ -2424,16 +2752,23 @@ msgid "Query strings"
 msgstr "Ciągi zapytania"
 
 #: includes/Modules/Redirections/Module.php:92
-msgid "Ignore: match on the path (sources that contain \"?\" still need that query)"
-msgstr "Ignoruj: dopasuj według ścieżki (źródła zawierające „?” nadal wymagają tego zapytania)"
+msgid ""
+"Ignore: match on the path (sources that contain \"?\" still need that query)"
+msgstr ""
+"Ignoruj: dopasuj według ścieżki (źródła zawierające „?” nadal wymagają tego "
+"zapytania)"
 
 #: includes/Modules/Redirections/Module.php:93
 msgid "Exact: the query string must match the source"
 msgstr "Dokładnie: ciąg zapytania musi odpowiadać źródłu"
 
 #: includes/Modules/Redirections/Module.php:94
-msgid "Pass through: match on the path and append the query string to the destination"
-msgstr "Przekaż dalej: dopasuj według ścieżki i dołącz ciąg zapytania do adresu docelowego"
+msgid ""
+"Pass through: match on the path and append the query string to the "
+"destination"
+msgstr ""
+"Przekaż dalej: dopasuj według ścieżki i dołącz ciąg zapytania do adresu "
+"docelowego"
 
 #: includes/Modules/Redirections/Module.php:101
 msgid "When to match"
@@ -2444,8 +2779,11 @@ msgid "After WordPress parsed the request (recommended)"
 msgstr "Po przetworzeniu żądania przez WordPress (zalecane)"
 
 #: includes/Modules/Redirections/Module.php:104
-msgid "Early, before the main query (faster; also for URLs WordPress does not know)"
-msgstr "Wcześnie, przed głównym zapytaniem (szybsze; także dla adresów URL nieznanych WordPressowi)"
+msgid ""
+"Early, before the main query (faster; also for URLs WordPress does not know)"
+msgstr ""
+"Wcześnie, przed głównym zapytaniem (szybsze; także dla adresów URL "
+"nieznanych WordPressowi)"
 
 #: includes/Modules/Redirections/Module.php:111
 msgid "Fallback behaviour"
@@ -2466,7 +2804,8 @@ msgstr "Przekieruj na własny adres URL"
 
 #: includes/Modules/Redirections/Module.php:118
 msgid "What happens with 404 requests that match no redirection."
-msgstr "Co dzieje się z żądaniami 404, które nie pasują do żadnego przekierowania."
+msgstr ""
+"Co dzieje się z żądaniami 404, które nie pasują do żadnego przekierowania."
 
 #: includes/Modules/Redirections/Module.php:123
 msgid "Fallback URL"
@@ -2504,8 +2843,11 @@ msgid "Auto redirect"
 msgstr "Automatyczne przekierowanie"
 
 #: includes/Modules/Redirections/Module.php:149
-msgid "Create a 301 redirect when the URL of a published post, page or term changes"
-msgstr "Utwórz przekierowanie 301, gdy zmieni się adres URL opublikowanego wpisu, strony lub pojęcia taksonomii"
+msgid ""
+"Create a 301 redirect when the URL of a published post, page or term changes"
+msgstr ""
+"Utwórz przekierowanie 301, gdy zmieni się adres URL opublikowanego wpisu, "
+"strony lub pojęcia taksonomii"
 
 #: includes/Modules/Redirections/Module.php:155
 msgid "Trashed posts"
@@ -2524,8 +2866,12 @@ msgid "Redirect to the parent page or category"
 msgstr "Przekieruj do strony nadrzędnej lub kategorii"
 
 #: includes/Modules/Redirections/Module.php:163
-msgid "Applied when a published post is moved to the trash; restoring it removes the entry."
-msgstr "Stosowane, gdy opublikowany wpis zostaje przeniesiony do kosza; jego przywrócenie usuwa ten wpis."
+msgid ""
+"Applied when a published post is moved to the trash; restoring it removes "
+"the entry."
+msgstr ""
+"Stosowane, gdy opublikowany wpis zostaje przeniesiony do kosza; jego "
+"przywrócenie usuwa ten wpis."
 
 #: includes/Modules/Redirections/Module.php:168
 msgid "Hit counter"
@@ -2540,8 +2886,12 @@ msgid "Debug redirections"
 msgstr "Debugowanie przekierowań"
 
 #: includes/Modules/Redirections/Module.php:176
-msgid "Show an interstitial page to users who manage redirections instead of redirecting them"
-msgstr "Zamiast przekierowywać, pokazuj stronę pośrednią użytkownikom zarządzającym przekierowaniami"
+msgid ""
+"Show an interstitial page to users who manage redirections instead of "
+"redirecting them"
+msgstr ""
+"Zamiast przekierowywać, pokazuj stronę pośrednią użytkownikom zarządzającym "
+"przekierowaniami"
 
 #: includes/Modules/Redirections/Module.php:189
 msgid "Record requests that end in a 404 error"
@@ -2554,11 +2904,14 @@ msgstr "Tryb"
 
 #: includes/Modules/Redirections/Module.php:198
 msgid "Simple: one row per URL with a hit counter (no IP addresses)"
-msgstr "Prosty: jeden wiersz na adres URL z licznikiem odwiedzin (bez adresów IP)"
+msgstr ""
+"Prosty: jeden wiersz na adres URL z licznikiem odwiedzin (bez adresów IP)"
 
 #: includes/Modules/Redirections/Module.php:199
 msgid "Advanced: one row per hit with referer, user agent and anonymised IP"
-msgstr "Zaawansowany: jeden wiersz na każde odwiedziny z refererem, user agentem i zanonimizowanym IP"
+msgstr ""
+"Zaawansowany: jeden wiersz na każde odwiedziny z refererem, user agentem i "
+"zanonimizowanym IP"
 
 #: includes/Modules/Redirections/Module.php:208
 #: includes/Modules/Schema/Module.php:704
@@ -2566,8 +2919,12 @@ msgid "Exclude"
 msgstr "Wyklucz"
 
 #: includes/Modules/Redirections/Module.php:210
-msgid "One pattern per line. Patterns with * are matched against the whole path (e.g. *.map), others match any part of the URL."
-msgstr "Jeden wzorzec w wierszu. Wzorce z * są dopasowywane do całej ścieżki (np. *.map), pozostałe do dowolnej części adresu URL."
+msgid ""
+"One pattern per line. Patterns with * are matched against the whole path "
+"(e.g. *.map), others match any part of the URL."
+msgstr ""
+"Jeden wzorzec w wierszu. Wzorce z * są dopasowywane do całej ścieżki (np. "
+"*.map), pozostałe do dowolnej części adresu URL."
 
 #: includes/Modules/Redirections/Module.php:216
 msgid "Bots"
@@ -2575,7 +2932,8 @@ msgstr "Boty"
 
 #: includes/Modules/Redirections/Module.php:217
 msgid "Do not log requests from crawlers, scripts and empty user agents"
-msgstr "Nie rejestruj żądań od robotów indeksujących, skryptów i pustych user agentów"
+msgstr ""
+"Nie rejestruj żądań od robotów indeksujących, skryptów i pustych user agentów"
 
 #: includes/Modules/Redirections/Module.php:225
 msgid "Log URLs without their query string"
@@ -2610,8 +2968,12 @@ msgid "Redirection debugger"
 msgstr "Debugger przekierowań"
 
 #: includes/Modules/Redirections/Module.php:497
-msgid "Debug mode is on, so you see this page instead of being redirected. Visitors are redirected normally."
-msgstr "Tryb debugowania jest włączony, dlatego widzisz tę stronę zamiast zostać przekierowanym. Odwiedzający są przekierowywani normalnie."
+msgid ""
+"Debug mode is on, so you see this page instead of being redirected. Visitors "
+"are redirected normally."
+msgstr ""
+"Tryb debugowania jest włączony, dlatego widzisz tę stronę zamiast zostać "
+"przekierowanym. Odwiedzający są przekierowywani normalnie."
 
 #: includes/Modules/Redirections/Module.php:498
 msgid "Requested URL:"
@@ -2646,8 +3008,12 @@ msgid "Enter a destination URL."
 msgstr "Wpisz docelowy adres URL."
 
 #: includes/Modules/Redirections/Repository.php:136
-msgid "The destination is the same as a source URL, which would create a redirect loop."
-msgstr "Adres docelowy jest taki sam jak źródłowy adres URL, co spowodowałoby pętlę przekierowań."
+msgid ""
+"The destination is the same as a source URL, which would create a redirect "
+"loop."
+msgstr ""
+"Adres docelowy jest taki sam jak źródłowy adres URL, co spowodowałoby pętlę "
+"przekierowań."
 
 #. translators: %s: regular expression
 #: includes/Modules/Redirections/Repository.php:225
@@ -2659,10 +3025,8 @@ msgstr "Nieprawidłowe wyrażenie regularne: %s"
 msgid "Enter at least one source URL."
 msgstr "Wpisz co najmniej jeden źródłowy adres URL."
 
-#: includes/Modules/Roles/Module.php:46
-#: includes/Modules/Roles/Module.php:47
-#: includes/Modules/Roles/Module.php:158
-#: includes/Plugin.php:157
+#: includes/Modules/Roles/Module.php:46 includes/Modules/Roles/Module.php:47
+#: includes/Modules/Roles/Module.php:158 includes/Plugin.php:157
 msgid "Role Manager"
 msgstr "Menedżer ról"
 
@@ -2671,8 +3035,12 @@ msgid "Default capabilities restored."
 msgstr "Przywrócono domyślne uprawnienia."
 
 #: includes/Modules/Roles/Module.php:163
-msgid "Choose what each role may do in MG SEO. Administrators always keep access to the settings so the site cannot be locked out."
-msgstr "Wybierz, co może robić każda rola w MG SEO. Administratorzy zawsze zachowują dostęp do ustawień, aby nie można było zablokować dostępu do witryny."
+msgid ""
+"Choose what each role may do in MG SEO. Administrators always keep access to "
+"the settings so the site cannot be locked out."
+msgstr ""
+"Wybierz, co może robić każda rola w MG SEO. Administratorzy zawsze zachowują "
+"dostęp do ustawień, aby nie można było zablokować dostępu do witryny."
 
 #: includes/Modules/Roles/Module.php:167
 msgid "Role"
@@ -2692,8 +3060,7 @@ msgstr "Zapisz role"
 msgid "Reset to defaults"
 msgstr "Przywróć domyślne"
 
-#: includes/Modules/Schema/Blocks.php:38
-#: includes/Modules/Schema/Module.php:730
+#: includes/Modules/Schema/Blocks.php:38 includes/Modules/Schema/Module.php:730
 #: includes/Modules/Schema/Types.php:421
 msgid "FAQ"
 msgstr "FAQ"
@@ -2702,8 +3069,7 @@ msgstr "FAQ"
 msgid "Questions and answers marked up as FAQPage structured data."
 msgstr "Pytania i odpowiedzi oznaczone jako dane strukturalne FAQPage."
 
-#: includes/Modules/Schema/Blocks.php:64
-#: includes/Modules/Schema/Module.php:736
+#: includes/Modules/Schema/Blocks.php:64 includes/Modules/Schema/Module.php:736
 #: includes/Modules/Schema/Types.php:448
 msgid "How-to"
 msgstr "How-to"
@@ -2737,14 +3103,12 @@ msgid "Total time:"
 msgstr "Całkowity czas:"
 
 #: includes/Modules/Schema/Blocks.php:280
-#: includes/Modules/Schema/Module.php:741
-#: includes/Modules/Schema/Types.php:469
+#: includes/Modules/Schema/Module.php:741 includes/Modules/Schema/Types.php:469
 msgid "Supplies"
 msgstr "Materiały"
 
 #: includes/Modules/Schema/Blocks.php:281
-#: includes/Modules/Schema/Module.php:742
-#: includes/Modules/Schema/Types.php:478
+#: includes/Modules/Schema/Module.php:742 includes/Modules/Schema/Types.php:478
 #: includes/Plugin.php:158
 msgid "Tools"
 msgstr "Narzędzia"
@@ -2753,7 +3117,9 @@ msgstr "Narzędzia"
 #: includes/Modules/Schema/Entities.php:173
 #, php-format
 msgid "Custom JSON-LD was not saved because it is not valid JSON (%s)."
-msgstr "Własny JSON-LD nie został zapisany, ponieważ nie jest prawidłowym JSON-em (%s)."
+msgstr ""
+"Własny JSON-LD nie został zapisany, ponieważ nie jest prawidłowym JSON-em "
+"(%s)."
 
 #: includes/Modules/Schema/Entities.php:174
 msgid "empty"
@@ -2771,8 +3137,7 @@ msgstr "Brak (tylko WebPage)"
 msgid "Article (type from the setting below)"
 msgstr "Article (typ z ustawienia poniżej)"
 
-#: includes/Modules/Schema/Module.php:66
-#: includes/Modules/Schema/Types.php:411
+#: includes/Modules/Schema/Module.php:66 includes/Modules/Schema/Types.php:411
 msgid "Article type"
 msgstr "Typ artykułu"
 
@@ -2793,8 +3158,12 @@ msgstr "Knowledge Graph"
 #. translators: %s: variable name
 #: includes/Modules/Schema/Module.php:93
 #, php-format
-msgid "Who the site represents. Used for the Organization or Person node, the article publisher and the %s variable."
-msgstr "Kogo reprezentuje witryna. Używane dla węzła Organization lub Person, wydawcy artykułu i zmiennej %s."
+msgid ""
+"Who the site represents. Used for the Organization or Person node, the "
+"article publisher and the %s variable."
+msgstr ""
+"Kogo reprezentuje witryna. Używane dla węzła Organization lub Person, "
+"wydawcy artykułu i zmiennej %s."
 
 #: includes/Modules/Schema/Module.php:100
 msgid "The site represents"
@@ -2808,20 +3177,15 @@ msgstr "Organizację"
 msgid "A person"
 msgstr "Osobę"
 
-#: includes/Modules/Schema/Module.php:110
-#: includes/Modules/Schema/Types.php:587
+#: includes/Modules/Schema/Module.php:110 includes/Modules/Schema/Types.php:587
 msgid "Organization"
 msgstr "Organizacja"
 
 #: includes/Modules/Schema/Module.php:115
-#: includes/Modules/Schema/Module.php:203
-#: includes/Modules/Schema/Types.php:339
-#: includes/Modules/Schema/Types.php:400
-#: includes/Modules/Schema/Types.php:573
-#: includes/Modules/Schema/Types.php:591
-#: includes/Modules/Schema/Types.php:622
-#: includes/Modules/Schema/Types.php:805
-#: includes/Modules/Schema/Types.php:883
+#: includes/Modules/Schema/Module.php:203 includes/Modules/Schema/Types.php:339
+#: includes/Modules/Schema/Types.php:400 includes/Modules/Schema/Types.php:573
+#: includes/Modules/Schema/Types.php:591 includes/Modules/Schema/Types.php:622
+#: includes/Modules/Schema/Types.php:805 includes/Modules/Schema/Types.php:883
 msgid "Name"
 msgstr "Nazwa"
 
@@ -2829,18 +3193,15 @@ msgstr "Nazwa"
 msgid "Empty: the site title."
 msgstr "Puste: tytuł witryny."
 
-#: includes/Modules/Schema/Module.php:122
-#: includes/Modules/Schema/Types.php:593
+#: includes/Modules/Schema/Module.php:122 includes/Modules/Schema/Types.php:593
 msgid "Alternate name"
 msgstr "Nazwa alternatywna"
 
-#: includes/Modules/Schema/Module.php:128
-#: includes/Modules/Schema/Types.php:592
+#: includes/Modules/Schema/Module.php:128 includes/Modules/Schema/Types.php:592
 msgid "Legal name"
 msgstr "Nazwa prawna"
 
-#: includes/Modules/Schema/Module.php:134
-#: includes/Modules/Schema/Types.php:590
+#: includes/Modules/Schema/Module.php:134 includes/Modules/Schema/Types.php:590
 msgid "Organization type"
 msgstr "Typ organizacji"
 
@@ -2848,12 +3209,9 @@ msgstr "Typ organizacji"
 msgid "Square or rectangular image, at least 112 × 112 px."
 msgstr "Obraz kwadratowy lub prostokątny, co najmniej 112 × 112 px."
 
-#: includes/Modules/Schema/Module.php:148
-#: includes/Modules/Schema/Types.php:228
-#: includes/Modules/Schema/Types.php:340
-#: includes/Modules/Schema/Types.php:403
-#: includes/Modules/Schema/Types.php:560
-#: includes/Modules/Schema/Types.php:885
+#: includes/Modules/Schema/Module.php:148 includes/Modules/Schema/Types.php:228
+#: includes/Modules/Schema/Types.php:340 includes/Modules/Schema/Types.php:403
+#: includes/Modules/Schema/Types.php:560 includes/Modules/Schema/Types.php:885
 #: includes/Modules/Sitemap/Stylesheet.php:29
 msgid "URL"
 msgstr "URL"
@@ -2863,30 +3221,30 @@ msgid "Empty: the home URL."
 msgstr "Puste: adres strony głównej."
 
 #: includes/Modules/Schema/Module.php:167
-#: includes/Modules/Schema/Module.php:293
-#: includes/Modules/Schema/Types.php:579
-#: includes/Modules/Schema/Types.php:598
-#: includes/Modules/Schema/Types.php:609
+#: includes/Modules/Schema/Module.php:293 includes/Modules/Schema/Types.php:579
+#: includes/Modules/Schema/Types.php:598 includes/Modules/Schema/Types.php:609
 #: includes/Modules/Schema/Types.php:627
 msgid "Phone"
 msgstr "Telefon"
 
-#: includes/Modules/Schema/Module.php:173
-#: includes/Modules/Schema/Types.php:600
+#: includes/Modules/Schema/Module.php:173 includes/Modules/Schema/Types.php:600
 msgid "Founding date"
 msgstr "Data założenia"
 
 #: includes/Modules/Schema/Module.php:183
-msgid "One URL per line (Facebook, LinkedIn, Instagram, YouTube, Wikipedia …). The Facebook page and X account from the Social settings are added automatically."
-msgstr "Jeden adres URL w wierszu (Facebook, LinkedIn, Instagram, YouTube, Wikipedia …). Strona na Facebooku i konto X z ustawień społecznościowych są dodawane automatycznie."
+msgid ""
+"One URL per line (Facebook, LinkedIn, Instagram, YouTube, Wikipedia …). The "
+"Facebook page and X account from the Social settings are added automatically."
+msgstr ""
+"Jeden adres URL w wierszu (Facebook, LinkedIn, Instagram, YouTube, Wikipedia "
+"…). Strona na Facebooku i konto X z ustawień społecznościowych są dodawane "
+"automatycznie."
 
-#: includes/Modules/Schema/Module.php:189
-#: includes/Modules/Schema/Types.php:603
+#: includes/Modules/Schema/Module.php:189 includes/Modules/Schema/Types.php:603
 msgid "Contact points"
 msgstr "Punkty kontaktowe"
 
-#: includes/Modules/Schema/Module.php:197
-#: includes/Modules/Schema/Types.php:570
+#: includes/Modules/Schema/Module.php:197 includes/Modules/Schema/Types.php:570
 msgid "Person"
 msgstr "Osoba"
 
@@ -2894,14 +3252,12 @@ msgstr "Osoba"
 msgid "Used when the site represents a person."
 msgstr "Używane, gdy witryna reprezentuje osobę."
 
-#: includes/Modules/Schema/Module.php:209
-#: includes/Modules/Schema/Types.php:574
+#: includes/Modules/Schema/Module.php:209 includes/Modules/Schema/Types.php:574
 #: includes/Modules/Schema/Types.php:737
 msgid "Job title"
 msgstr "Stanowisko"
 
-#: includes/Modules/Schema/Module.php:215
-#: includes/Modules/Schema/Types.php:576
+#: includes/Modules/Schema/Module.php:215 includes/Modules/Schema/Types.php:576
 msgid "Photo"
 msgstr "Zdjęcie"
 
@@ -2938,16 +3294,27 @@ msgid "Post types"
 msgstr "Rodzaje treści"
 
 #: includes/Modules/Schema/Module.php:248
-msgid "Schema added automatically to posts that have no schema of their own in the SEO box."
-msgstr "Dane Schema dodawane automatycznie do wpisów, które nie mają własnych danych Schema w polu SEO."
+msgid ""
+"Schema added automatically to posts that have no schema of their own in the "
+"SEO box."
+msgstr ""
+"Dane Schema dodawane automatycznie do wpisów, które nie mają własnych danych "
+"Schema w polu SEO."
 
 #: includes/Modules/Schema/Module.php:253
 msgid "Templates"
 msgstr "Szablony"
 
 #: includes/Modules/Schema/Module.php:254
-msgid "Reusable schema added to every post that matches the display conditions (unless a post turns templates off in its SEO box). A template is skipped on posts that already have schema of the same type."
-msgstr "Wielokrotnego użytku dane Schema dodawane do każdego wpisu spełniającego warunki wyświetlania (chyba że wpis wyłączy szablony w swoim polu SEO). Szablon jest pomijany we wpisach, które mają już dane Schema tego samego typu."
+msgid ""
+"Reusable schema added to every post that matches the display conditions "
+"(unless a post turns templates off in its SEO box). A template is skipped on "
+"posts that already have schema of the same type."
+msgstr ""
+"Wielokrotnego użytku dane Schema dodawane do każdego wpisu spełniającego "
+"warunki wyświetlania (chyba że wpis wyłączy szablony w swoim polu SEO). "
+"Szablon jest pomijany we wpisach, które mają już dane Schema tego samego "
+"typu."
 
 #: includes/Modules/Schema/Module.php:259
 msgid "Schema templates"
@@ -2988,12 +3355,18 @@ msgid "Organization logo URL from schema settings"
 msgstr "URL logo organizacji z ustawień Schema"
 
 #: includes/Modules/Schema/Module.php:467
-msgid "This post uses the default schema of its post type. Edit it below to customise it for this post."
-msgstr "Ten wpis używa domyślnych danych Schema swojego rodzaju. Edytuj je poniżej, aby dostosować je do tego wpisu."
+msgid ""
+"This post uses the default schema of its post type. Edit it below to "
+"customise it for this post."
+msgstr ""
+"Ten wpis używa domyślnych danych Schema swojego rodzaju. Edytuj je poniżej, "
+"aby dostosować je do tego wpisu."
 
 #: includes/Modules/Schema/Module.php:467
 msgid "No default schema for this post type. Add schema below."
-msgstr "Brak domyślnych danych Schema dla tego rodzaju wpisu. Dodaj dane Schema poniżej."
+msgstr ""
+"Brak domyślnych danych Schema dla tego rodzaju wpisu. Dodaj dane Schema "
+"poniżej."
 
 #: includes/Modules/Schema/Module.php:469
 msgid "This post has its own schema."
@@ -3073,8 +3446,13 @@ msgid "Move down"
 msgstr "Przesuń w dół"
 
 #: includes/Modules/Schema/Module.php:695
-msgid "Paste JSON-LD. Without \"@context\" it is added to the page graph; with \"@context\" it is printed as a separate script. Values may contain variables."
-msgstr "Wklej JSON-LD. Bez „@context” zostanie dodany do grafu strony; z „@context” zostanie wydrukowany jako osobny skrypt. Wartości mogą zawierać zmienne."
+msgid ""
+"Paste JSON-LD. Without \"@context\" it is added to the page graph; with "
+"\"@context\" it is printed as a separate script. Values may contain "
+"variables."
+msgstr ""
+"Wklej JSON-LD. Bez „@context” zostanie dodany do grafu strony; z „@context” "
+"zostanie wydrukowany jako osobny skrypt. Wartości mogą zawierać zmienne."
 
 #: includes/Modules/Schema/Module.php:696
 msgid "Invalid JSON:"
@@ -3117,8 +3495,11 @@ msgid "Taxonomy term"
 msgstr "Pojęcie taksonomii"
 
 #: includes/Modules/Schema/Module.php:709
-msgid "taxonomy:term (slug or ID), e.g. category:news or category:* for any term"
-msgstr "taksonomia:pojęcie (slug lub ID), np. category:news lub category:* dla dowolnego pojęcia"
+msgid ""
+"taxonomy:term (slug or ID), e.g. category:news or category:* for any term"
+msgstr ""
+"taksonomia:pojęcie (slug lub ID), np. category:news lub category:* dla "
+"dowolnego pojęcia"
 
 #: includes/Modules/Schema/Module.php:710
 msgid "Comma separated IDs"
@@ -3174,13 +3555,11 @@ msgstr "Przełącz szczegóły"
 msgid "One per line."
 msgstr "Jeden w wierszu."
 
-#: includes/Modules/Schema/Module.php:731
-#: includes/Modules/Schema/Types.php:431
+#: includes/Modules/Schema/Module.php:731 includes/Modules/Schema/Types.php:431
 msgid "Question"
 msgstr "Pytanie"
 
-#: includes/Modules/Schema/Module.php:732
-#: includes/Modules/Schema/Types.php:434
+#: includes/Modules/Schema/Module.php:732 includes/Modules/Schema/Types.php:434
 #: includes/Modules/Schema/Types.php:439
 msgid "Answer"
 msgstr "Odpowiedź"
@@ -3225,8 +3604,7 @@ msgstr "Krok"
 msgid "Step title"
 msgstr "Tytuł kroku"
 
-#: includes/Modules/Schema/Module.php:747
-#: includes/Modules/Schema/Types.php:383
+#: includes/Modules/Schema/Module.php:747 includes/Modules/Schema/Types.php:383
 msgid "Instructions"
 msgstr "Instrukcje"
 
@@ -3238,8 +3616,7 @@ msgstr "Dodaj krok"
 msgid "Remove image"
 msgstr "Usuń obraz"
 
-#: includes/Modules/Schema/Module.php:751
-#: includes/Modules/Schema/Types.php:454
+#: includes/Modules/Schema/Module.php:751 includes/Modules/Schema/Types.php:454
 #: includes/Modules/Schema/Types.php:692
 msgid "Total time"
 msgstr "Całkowity czas"
@@ -3349,8 +3726,7 @@ msgstr "Wycofany z oferty"
 msgid "Aggregate rating"
 msgstr "Ocena zbiorcza"
 
-#: includes/Modules/Schema/Types.php:291
-#: includes/Modules/Schema/Types.php:315
+#: includes/Modules/Schema/Types.php:291 includes/Modules/Schema/Types.php:315
 msgid "Rating value"
 msgstr "Wartość oceny"
 
@@ -3362,13 +3738,11 @@ msgstr "Liczba recenzji"
 msgid "Rating count"
 msgstr "Liczba ocen"
 
-#: includes/Modules/Schema/Types.php:294
-#: includes/Modules/Schema/Types.php:316
+#: includes/Modules/Schema/Types.php:294 includes/Modules/Schema/Types.php:316
 msgid "Best rating"
 msgstr "Najwyższa ocena"
 
-#: includes/Modules/Schema/Types.php:295
-#: includes/Modules/Schema/Types.php:317
+#: includes/Modules/Schema/Types.php:295 includes/Modules/Schema/Types.php:317
 msgid "Worst rating"
 msgstr "Najniższa ocena"
 
@@ -3380,13 +3754,11 @@ msgstr "Ocena"
 msgid "Reviews"
 msgstr "Recenzje"
 
-#: includes/Modules/Schema/Types.php:359
-#: includes/Modules/Schema/Types.php:848
+#: includes/Modules/Schema/Types.php:359 includes/Modules/Schema/Types.php:848
 msgid "Author"
 msgstr "Autor"
 
-#: includes/Modules/Schema/Types.php:361
-#: includes/Modules/Schema/Types.php:891
+#: includes/Modules/Schema/Types.php:361 includes/Modules/Schema/Types.php:891
 msgid "Review text"
 msgstr "Treść recenzji"
 
@@ -3427,8 +3799,7 @@ msgstr "Nagłówek"
 msgid "Empty: the meta description."
 msgstr "Puste: opis meta."
 
-#: includes/Modules/Schema/Types.php:415
-#: includes/Modules/Schema/Types.php:685
+#: includes/Modules/Schema/Types.php:415 includes/Modules/Schema/Types.php:685
 #: includes/Modules/Schema/Types.php:890
 msgid "Author (empty: post author)"
 msgstr "Autor (puste: autor wpisu)"
@@ -3453,14 +3824,12 @@ msgstr "Pytania"
 msgid "Estimated cost"
 msgstr "Szacowany koszt"
 
-#: includes/Modules/Schema/Types.php:462
-#: includes/Modules/Schema/Types.php:788
+#: includes/Modules/Schema/Types.php:462 includes/Modules/Schema/Types.php:788
 #: includes/Modules/Schema/Types.php:806
 msgid "Value"
 msgstr "Wartość"
 
-#: includes/Modules/Schema/Types.php:463
-#: includes/Modules/Schema/Types.php:780
+#: includes/Modules/Schema/Types.php:463 includes/Modules/Schema/Types.php:780
 msgid "Currency"
 msgstr "Waluta"
 
@@ -3490,8 +3859,7 @@ msgstr "GTIN (EAN/UPC/ISBN)"
 msgid "MPN"
 msgstr "MPN"
 
-#: includes/Modules/Schema/Types.php:500
-#: includes/Modules/Schema/Types.php:505
+#: includes/Modules/Schema/Types.php:500 includes/Modules/Schema/Types.php:505
 #: includes/Modules/WooCommerce/Module.php:97
 msgid "Brand"
 msgstr "Marka"
@@ -3504,13 +3872,11 @@ msgstr "Event"
 msgid "Event type"
 msgstr "Typ wydarzenia"
 
-#: includes/Modules/Schema/Types.php:521
-#: includes/Modules/Schema/Types.php:725
+#: includes/Modules/Schema/Types.php:521 includes/Modules/Schema/Types.php:725
 msgid "Start date"
 msgstr "Data rozpoczęcia"
 
-#: includes/Modules/Schema/Types.php:522
-#: includes/Modules/Schema/Types.php:726
+#: includes/Modules/Schema/Types.php:522 includes/Modules/Schema/Types.php:726
 msgid "End date"
 msgstr "Data zakończenia"
 
@@ -3606,8 +3972,7 @@ msgstr "Usługa"
 msgid "Service type"
 msgstr "Typ usługi"
 
-#: includes/Modules/Schema/Types.php:671
-#: includes/Modules/Schema/Types.php:713
+#: includes/Modules/Schema/Types.php:671 includes/Modules/Schema/Types.php:713
 msgid "Provider (empty: the site organization)"
 msgstr "Dostawca (puste: organizacja witryny)"
 
@@ -3917,7 +4282,9 @@ msgstr "Waluta musi być 3-literowym kodem ISO 4217: %s"
 
 #: includes/Modules/Schema/Validator.php:339
 msgid "The event ends before it starts (endDate is earlier than startDate)."
-msgstr "Wydarzenie kończy się przed rozpoczęciem (endDate jest wcześniejsze niż startDate)."
+msgstr ""
+"Wydarzenie kończy się przed rozpoczęciem (endDate jest wcześniejsze niż "
+"startDate)."
 
 #: includes/Modules/Schema/Validator.php:345
 msgid "A breadcrumb trail should have at least two items."
@@ -3968,8 +4335,12 @@ msgid "Only published posts can be inspected."
 msgstr "Można sprawdzać tylko opublikowane wpisy."
 
 #: includes/Modules/SearchConsole/Inspection.php:136
-msgid "The Indexing API feature is off or was not granted. Enable it and reconnect your Google account."
-msgstr "Funkcja Indexing API jest wyłączona lub nie udzielono do niej zgody. Włącz ją i połącz ponownie konto Google."
+msgid ""
+"The Indexing API feature is off or was not granted. Enable it and reconnect "
+"your Google account."
+msgstr ""
+"Funkcja Indexing API jest wyłączona lub nie udzielono do niej zgody. Włącz "
+"ją i połącz ponownie konto Google."
 
 #: includes/Modules/SearchConsole/Module.php:69
 msgid "Connection"
@@ -4009,16 +4380,25 @@ msgid "Days to import"
 msgstr "Dni do zaimportowania"
 
 #: includes/Modules/SearchConsole/Module.php:122
-msgid "How many days of performance data to keep in sync (Google keeps up to 16 months, about 486 days). Older days are imported gradually by the daily task."
-msgstr "Dane o skuteczności z ilu dni mają być synchronizowane (Google przechowuje je do 16 miesięcy, czyli około 486 dni). Starsze dni są importowane stopniowo przez zadanie dzienne."
+msgid ""
+"How many days of performance data to keep in sync (Google keeps up to 16 "
+"months, about 486 days). Older days are imported gradually by the daily task."
+msgstr ""
+"Dane o skuteczności z ilu dni mają być synchronizowane (Google przechowuje "
+"je do 16 miesięcy, czyli około 486 dni). Starsze dni są importowane "
+"stopniowo przez zadanie dzienne."
 
 #: includes/Modules/SearchConsole/Module.php:130
 msgid "Keep stored data for (days)"
 msgstr "Przechowuj zapisane dane przez (dni)"
 
 #: includes/Modules/SearchConsole/Module.php:131
-msgid "Rows older than this are deleted from the local table. You can keep data longer than Google does."
-msgstr "Wiersze starsze niż ta wartość są usuwane z lokalnej tabeli. Możesz przechowywać dane dłużej niż Google."
+msgid ""
+"Rows older than this are deleted from the local table. You can keep data "
+"longer than Google does."
+msgstr ""
+"Wiersze starsze niż ta wartość są usuwane z lokalnej tabeli. Możesz "
+"przechowywać dane dłużej niż Google."
 
 #: includes/Modules/SearchConsole/Module.php:139
 msgid "Synchronisation"
@@ -4034,7 +4414,8 @@ msgstr "Skuteczność w edytorze"
 
 #: includes/Modules/SearchConsole/Module.php:152
 msgid "Show clicks, impressions, queries and index status in the SEO box"
-msgstr "Pokaż kliknięcia, wyświetlenia, zapytania i stan indeksowania w polu SEO"
+msgstr ""
+"Pokaż kliknięcia, wyświetlenia, zapytania i stan indeksowania w polu SEO"
 
 #: includes/Modules/SearchConsole/Module.php:158
 msgid "Google Indexing API"
@@ -4042,39 +4423,81 @@ msgstr "Google Indexing API"
 
 #: includes/Modules/SearchConsole/Module.php:159
 msgid "Allow submitting URLs to the Indexing API (off by default)"
-msgstr "Zezwalaj na przesyłanie adresów URL do Indexing API (domyślnie wyłączone)"
+msgstr ""
+"Zezwalaj na przesyłanie adresów URL do Indexing API (domyślnie wyłączone)"
 
 #: includes/Modules/SearchConsole/Module.php:160
-msgid "Google officially supports the Indexing API only for pages with JobPosting or BroadcastEvent (livestream) structured data. Enable the \"Web Search Indexing API\" in your Google Cloud project, then reconnect your account so the extra permission is granted. URLs are only submitted when you click the button in the editor."
-msgstr "Google oficjalnie obsługuje Indexing API tylko dla stron z danymi strukturalnymi JobPosting lub BroadcastEvent (transmisje na żywo). Włącz „Web Search Indexing API” w swoim projekcie Google Cloud, a następnie połącz ponownie konto, aby udzielić dodatkowego uprawnienia. Adresy URL są przesyłane tylko po kliknięciu przycisku w edytorze."
+msgid ""
+"Google officially supports the Indexing API only for pages with JobPosting "
+"or BroadcastEvent (livestream) structured data. Enable the \"Web Search "
+"Indexing API\" in your Google Cloud project, then reconnect your account so "
+"the extra permission is granted. URLs are only submitted when you click the "
+"button in the editor."
+msgstr ""
+"Google oficjalnie obsługuje Indexing API tylko dla stron z danymi "
+"strukturalnymi JobPosting lub BroadcastEvent (transmisje na żywo). Włącz "
+"„Web Search Indexing API” w swoim projekcie Google Cloud, a następnie połącz "
+"ponownie konto, aby udzielić dodatkowego uprawnienia. Adresy URL są "
+"przesyłane tylko po kliknięciu przycisku w edytorze."
 
 #: includes/Modules/SearchConsole/Module.php:173
-msgid "In the Google Cloud console create a project (or pick an existing one) and enable the \"Google Search Console API\"."
-msgstr "W konsoli Google Cloud utwórz projekt (lub wybierz istniejący) i włącz „Google Search Console API”."
+msgid ""
+"In the Google Cloud console create a project (or pick an existing one) and "
+"enable the \"Google Search Console API\"."
+msgstr ""
+"W konsoli Google Cloud utwórz projekt (lub wybierz istniejący) i włącz "
+"„Google Search Console API”."
 
 #: includes/Modules/SearchConsole/Module.php:174
-msgid "Configure the OAuth consent screen (External or Internal, add yourself as a test user while the app is in testing)."
-msgstr "Skonfiguruj ekran zgody OAuth (zewnętrzny lub wewnętrzny; dodaj siebie jako użytkownika testowego, gdy aplikacja jest w trybie testowym)."
+msgid ""
+"Configure the OAuth consent screen (External or Internal, add yourself as a "
+"test user while the app is in testing)."
+msgstr ""
+"Skonfiguruj ekran zgody OAuth (zewnętrzny lub wewnętrzny; dodaj siebie jako "
+"użytkownika testowego, gdy aplikacja jest w trybie testowym)."
 
 #: includes/Modules/SearchConsole/Module.php:175
-msgid "Create credentials → OAuth client ID → Web application, and add the redirect URI shown below as an authorized redirect URI."
-msgstr "Utwórz dane uwierzytelniające → Identyfikator klienta OAuth → Aplikacja internetowa i dodaj poniższy identyfikator URI przekierowania jako autoryzowany identyfikator URI przekierowania."
+msgid ""
+"Create credentials → OAuth client ID → Web application, and add the redirect "
+"URI shown below as an authorized redirect URI."
+msgstr ""
+"Utwórz dane uwierzytelniające → Identyfikator klienta OAuth → Aplikacja "
+"internetowa i dodaj poniższy identyfikator URI przekierowania jako "
+"autoryzowany identyfikator URI przekierowania."
 
 #: includes/Modules/SearchConsole/Module.php:176
-msgid "Paste the client ID and client secret here, save, then click \"Connect with Google\"."
-msgstr "Wklej tutaj identyfikator klienta i tajny klucz klienta, zapisz, a następnie kliknij „Połącz z Google”."
+msgid ""
+"Paste the client ID and client secret here, save, then click \"Connect with "
+"Google\"."
+msgstr ""
+"Wklej tutaj identyfikator klienta i tajny klucz klienta, zapisz, a następnie "
+"kliknij „Połącz z Google”."
 
 #: includes/Modules/SearchConsole/Module.php:182
-msgid "MG SEO talks to Google directly from this site with your own credentials. No data is sent to MGraphics or any third party, and no request is made until you connect an account."
-msgstr "MG SEO komunikuje się z Google bezpośrednio z tej witryny, używając Twoich własnych danych uwierzytelniających. Żadne dane nie są wysyłane do MGraphics ani do osób trzecich, a do czasu połączenia konta nie jest wykonywane żadne żądanie."
+msgid ""
+"MG SEO talks to Google directly from this site with your own credentials. No "
+"data is sent to MGraphics or any third party, and no request is made until "
+"you connect an account."
+msgstr ""
+"MG SEO komunikuje się z Google bezpośrednio z tej witryny, używając Twoich "
+"własnych danych uwierzytelniających. Żadne dane nie są wysyłane do MGraphics "
+"ani do osób trzecich, a do czasu połączenia konta nie jest wykonywane żadne "
+"żądanie."
 
 #: includes/Modules/SearchConsole/Module.php:194
-msgid "Copy this exact URL into \"Authorized redirect URIs\" of your OAuth client."
-msgstr "Skopiuj dokładnie ten adres URL do pola „Autoryzowane identyfikatory URI przekierowania” w swoim kliencie OAuth."
+msgid ""
+"Copy this exact URL into \"Authorized redirect URIs\" of your OAuth client."
+msgstr ""
+"Skopiuj dokładnie ten adres URL do pola „Autoryzowane identyfikatory URI "
+"przekierowania” w swoim kliencie OAuth."
 
 #: includes/Modules/SearchConsole/Module.php:209
-msgid "A secret is stored (encrypted). Leave empty to keep it, or type a new one to replace it."
-msgstr "Tajny klucz jest zapisany (zaszyfrowany). Pozostaw puste, aby go zachować, lub wpisz nowy, aby go zastąpić."
+msgid ""
+"A secret is stored (encrypted). Leave empty to keep it, or type a new one to "
+"replace it."
+msgstr ""
+"Tajny klucz jest zapisany (zaszyfrowany). Pozostaw puste, aby go zachować, "
+"lub wpisz nowy, aby go zastąpić."
 
 #: includes/Modules/SearchConsole/Module.php:210
 msgid "Delete stored secret"
@@ -4082,7 +4505,8 @@ msgstr "Usuń zapisany tajny klucz"
 
 #: includes/Modules/SearchConsole/Module.php:212
 msgid "Stored encrypted with a key derived from your WordPress salts."
-msgstr "Zapisany w postaci zaszyfrowanej kluczem wyprowadzonym z soli WordPressa."
+msgstr ""
+"Zapisany w postaci zaszyfrowanej kluczem wyprowadzonym z soli WordPressa."
 
 #: includes/Modules/SearchConsole/Module.php:241
 msgid "Connected"
@@ -4095,8 +4519,12 @@ msgid "since %1$s by %2$s"
 msgstr "od %1$s przez %2$s"
 
 #: includes/Modules/SearchConsole/Module.php:248
-msgid "The Indexing API is enabled but was not granted. Disconnect and connect again to grant it."
-msgstr "Indexing API jest włączone, ale nie udzielono do niego zgody. Rozłącz i połącz ponownie, aby ją udzielić."
+msgid ""
+"The Indexing API is enabled but was not granted. Disconnect and connect "
+"again to grant it."
+msgstr ""
+"Indexing API jest włączone, ale nie udzielono do niego zgody. Rozłącz i "
+"połącz ponownie, aby ją udzielić."
 
 #: includes/Modules/SearchConsole/Module.php:253
 msgid "Disconnect and revoke access"
@@ -4115,8 +4543,11 @@ msgid "Connect with Google"
 msgstr "Połącz z Google"
 
 #: includes/Modules/SearchConsole/Module.php:266
-msgid "You will be sent to Google to grant read-only access to Search Console data."
-msgstr "Zostaniesz przekierowany do Google, aby udzielić dostępu tylko do odczytu danych Search Console."
+msgid ""
+"You will be sent to Google to grant read-only access to Search Console data."
+msgstr ""
+"Zostaniesz przekierowany do Google, aby udzielić dostępu tylko do odczytu "
+"danych Search Console."
 
 #: includes/Modules/SearchConsole/Module.php:279
 msgid "Connect your Google account on the Connection tab first."
@@ -4144,8 +4575,12 @@ msgid "Refresh list"
 msgstr "Odśwież listę"
 
 #: includes/Modules/SearchConsole/Module.php:298
-msgid "Domain properties cover all protocols and subdomains; URL-prefix properties only URLs starting with that prefix."
-msgstr "Usługi domenowe obejmują wszystkie protokoły i subdomeny; usługi z prefiksem URL tylko adresy zaczynające się od tego prefiksu."
+msgid ""
+"Domain properties cover all protocols and subdomains; URL-prefix properties "
+"only URLs starting with that prefix."
+msgstr ""
+"Usługi domenowe obejmują wszystkie protokoły i subdomeny; usługi z prefiksem "
+"URL tylko adresy zaczynające się od tego prefiksu."
 
 #: includes/Modules/SearchConsole/Module.php:300
 msgid "Warning: this property does not contain the address of this site."
@@ -4155,11 +4590,14 @@ msgstr "Ostrzeżenie: ta usługa nie zawiera adresu tej witryny."
 #: includes/Modules/SearchConsole/Module.php:327
 #, php-format
 msgid "Last run: %1$s (%2$s rows). Stored range: %3$s – %4$s."
-msgstr "Ostatnie uruchomienie: %1$s (liczba wierszy: %2$s). Zakres zapisanych danych: %3$s – %4$s."
+msgstr ""
+"Ostatnie uruchomienie: %1$s (liczba wierszy: %2$s). Zakres zapisanych "
+"danych: %3$s – %4$s."
 
 #: includes/Modules/SearchConsole/Module.php:329
 msgid "Not synchronised yet. Data is imported once a day by WP-Cron."
-msgstr "Jeszcze nie zsynchronizowano. Dane są importowane raz dziennie przez WP-Cron."
+msgstr ""
+"Jeszcze nie zsynchronizowano. Dane są importowane raz dziennie przez WP-Cron."
 
 #: includes/Modules/SearchConsole/Module.php:335
 #: includes/Modules/SearchConsole/ReportsPage.php:134
@@ -4205,11 +4643,14 @@ msgstr "Połączono, ale nie udało się wczytać listy usług:"
 
 #: includes/Modules/SearchConsole/Module.php:557
 msgid "Connected to Google Search Console. Choose the property to use."
-msgstr "Połączono z Google Search Console. Wybierz usługę, której chcesz używać."
+msgstr ""
+"Połączono z Google Search Console. Wybierz usługę, której chcesz używać."
 
 #: includes/Modules/SearchConsole/Module.php:568
 msgid "Disconnected. Access was revoked at Google; stored reports were kept."
-msgstr "Rozłączono. Dostęp został cofnięty w Google; zapisane raporty zostały zachowane."
+msgstr ""
+"Rozłączono. Dostęp został cofnięty w Google; zapisane raporty zostały "
+"zachowane."
 
 #. translators: %d: number of properties
 #: includes/Modules/SearchConsole/Module.php:582
@@ -4238,8 +4679,7 @@ msgstr "Sprawdzanie…"
 msgid "Submitting…"
 msgstr "Przesyłanie…"
 
-#: includes/Modules/SearchConsole/Module.php:658
-#: includes/Plugin.php:154
+#: includes/Modules/SearchConsole/Module.php:658 includes/Plugin.php:154
 msgid "Search Console"
 msgstr "Search Console"
 
@@ -4252,8 +4692,12 @@ msgid "Submitted to the Google Indexing API."
 msgstr "Przesłano do Google Indexing API."
 
 #: includes/Modules/SearchConsole/OAuth.php:168
-msgid "Google did not return a refresh token. Remove the app from your Google account permissions and connect again."
-msgstr "Google nie zwrócił tokenu odświeżania. Usuń aplikację z uprawnień swojego konta Google i połącz się ponownie."
+msgid ""
+"Google did not return a refresh token. Remove the app from your Google "
+"account permissions and connect again."
+msgstr ""
+"Google nie zwrócił tokenu odświeżania. Usuń aplikację z uprawnień swojego "
+"konta Google i połącz się ponownie."
 
 #: includes/Modules/SearchConsole/OAuth.php:205
 msgid "Google revoked access for MG SEO. Connect your account again."
@@ -4298,8 +4742,12 @@ msgid "Last 12 months"
 msgstr "Ostatnie 12 miesięcy"
 
 #: includes/Modules/SearchConsole/ReportsPage.php:114
-msgid "Connect your own Google Cloud OAuth client to import Search Console data. Until then nothing is sent to Google."
-msgstr "Połącz własnego klienta OAuth Google Cloud, aby importować dane z Search Console. Do tego czasu nic nie jest wysyłane do Google."
+msgid ""
+"Connect your own Google Cloud OAuth client to import Search Console data. "
+"Until then nothing is sent to Google."
+msgstr ""
+"Połącz własnego klienta OAuth Google Cloud, aby importować dane z Search "
+"Console. Do tego czasu nic nie jest wysyłane do Google."
 
 #: includes/Modules/SearchConsole/ReportsPage.php:116
 msgid "Set up Search Console"
@@ -4384,10 +4832,6 @@ msgid "Position"
 msgstr "Pozycja"
 
 #: includes/Modules/SearchConsole/ReportsPage.php:277
-msgid "Page"
-msgstr "Strona"
-
-#: includes/Modules/SearchConsole/ReportsPage.php:277
 #: includes/Modules/SearchConsole/ReportsPage.php:332
 #: includes/Modules/SearchConsole/ReportsPage.php:368
 #: includes/Modules/SearchConsole/ReportsPage.php:501
@@ -4404,8 +4848,13 @@ msgid "Tracked"
 msgstr "Śledzone"
 
 #: includes/Modules/SearchConsole/ReportsPage.php:321
-msgid "Average position of each keyword compared with the previous period of the same length (keywords with at least 5 impressions in both periods)."
-msgstr "Średnia pozycja każdego słowa kluczowego w porównaniu z poprzednim okresem o tej samej długości (słowa kluczowe z co najmniej 5 wyświetleniami w obu okresach)."
+msgid ""
+"Average position of each keyword compared with the previous period of the "
+"same length (keywords with at least 5 impressions in both periods)."
+msgstr ""
+"Średnia pozycja każdego słowa kluczowego w porównaniu z poprzednim okresem o "
+"tej samej długości (słowa kluczowe z co najmniej 5 wyświetleniami w obu "
+"okresach)."
 
 #: includes/Modules/SearchConsole/ReportsPage.php:324
 msgid "Winning keywords"
@@ -4425,8 +4874,15 @@ msgid "Change"
 msgstr "Zmiana"
 
 #: includes/Modules/SearchConsole/ReportsPage.php:354
-msgid "Positions come from your own Search Console data (impression-weighted daily average). Nothing is scraped and no third-party service is used; keywords without impressions show no position."
-msgstr "Pozycje pochodzą z Twoich własnych danych Search Console (dzienna średnia ważona wyświetleniami). Nic nie jest pobierane z wyników wyszukiwania i nie jest używana żadna usługa zewnętrzna; słowa kluczowe bez wyświetleń nie mają pozycji."
+msgid ""
+"Positions come from your own Search Console data (impression-weighted daily "
+"average). Nothing is scraped and no third-party service is used; keywords "
+"without impressions show no position."
+msgstr ""
+"Pozycje pochodzą z Twoich własnych danych Search Console (dzienna średnia "
+"ważona wyświetleniami). Nic nie jest pobierane z wyników wyszukiwania i nie "
+"jest używana żadna usługa zewnętrzna; słowa kluczowe bez wyświetleń nie mają "
+"pozycji."
 
 #: includes/Modules/SearchConsole/ReportsPage.php:358
 msgid "Add keywords (one per line)"
@@ -4620,7 +5076,8 @@ msgstr "Liczba odnośników na mapę witryny"
 
 #: includes/Modules/Sitemap/Module.php:307
 msgid "Larger lists are split into numbered sitemaps (maximum 50,000)."
-msgstr "Dłuższe listy są dzielone na ponumerowane mapy witryny (maksymalnie 50 000)."
+msgstr ""
+"Dłuższe listy są dzielone na ponumerowane mapy witryny (maksymalnie 50 000)."
 
 #: includes/Modules/Sitemap/Module.php:312
 #: includes/Modules/Sitemap/Stylesheet.php:30
@@ -4645,7 +5102,9 @@ msgstr "Wyklucz wpisy"
 
 #: includes/Modules/Sitemap/Module.php:329
 msgid "Posts, pages or other entries that never appear in sitemaps."
-msgstr "Wpisy, strony lub inne treści, które nigdy nie pojawiają się w mapach witryny."
+msgstr ""
+"Wpisy, strony lub inne treści, które nigdy nie pojawiają się w mapach "
+"witryny."
 
 #: includes/Modules/Sitemap/Module.php:335
 msgid "Exclude terms"
@@ -4653,15 +5112,20 @@ msgstr "Wyklucz terminy"
 
 #: includes/Modules/Sitemap/Module.php:337
 msgid "Categories, tags or other terms that never appear in sitemaps."
-msgstr "Kategorie, tagi lub inne terminy, które nigdy nie pojawiają się w mapach witryny."
+msgstr ""
+"Kategorie, tagi lub inne terminy, które nigdy nie pojawiają się w mapach "
+"witryny."
 
 #: includes/Modules/Sitemap/Module.php:343
 msgid "Stylesheet"
 msgstr "Arkusz stylów"
 
 #: includes/Modules/Sitemap/Module.php:344
-msgid "Show sitemaps as a readable table in browsers (served from /sitemap.xsl)"
-msgstr "Pokaż mapy witryny w przeglądarkach jako czytelną tabelę (serwowaną z /sitemap.xsl)"
+msgid ""
+"Show sitemaps as a readable table in browsers (served from /sitemap.xsl)"
+msgstr ""
+"Pokaż mapy witryny w przeglądarkach jako czytelną tabelę (serwowaną z /"
+"sitemap.xsl)"
 
 #: includes/Modules/Sitemap/Module.php:359
 #: includes/Modules/Sitemap/Module.php:385
@@ -4693,12 +5157,24 @@ msgid "Hide terms without published posts"
 msgstr "Ukryj terminy bez opublikowanych wpisów"
 
 #: includes/Modules/Sitemap/Module.php:428
-msgid "WordPress core sitemaps are turned off while this module is active; their URLs redirect to the sitemap index. Search engines are not pinged: the sitemap URL is added to robots.txt instead."
-msgstr "Podstawowe mapy witryny WordPressa są wyłączone, gdy ten moduł jest aktywny; ich adresy URL przekierowują do indeksu map witryny. Wyszukiwarki nie są powiadamiane: zamiast tego adres mapy witryny jest dodawany do robots.txt."
+msgid ""
+"WordPress core sitemaps are turned off while this module is active; their "
+"URLs redirect to the sitemap index. Search engines are not pinged: the "
+"sitemap URL is added to robots.txt instead."
+msgstr ""
+"Podstawowe mapy witryny WordPressa są wyłączone, gdy ten moduł jest aktywny; "
+"ich adresy URL przekierowują do indeksu map witryny. Wyszukiwarki nie są "
+"powiadamiane: zamiast tego adres mapy witryny jest dodawany do robots.txt."
 
 #: includes/Modules/Sitemap/Module.php:434
-msgid "Password protected, non-published and noindex entries, entries excluded in the SEO box and entries whose canonical URL points elsewhere are always left out."
-msgstr "Wpisy chronione hasłem, nieopublikowane i z noindex, wpisy wykluczone w polu SEO oraz wpisy, których adres canonical wskazuje gdzie indziej, są zawsze pomijane."
+msgid ""
+"Password protected, non-published and noindex entries, entries excluded in "
+"the SEO box and entries whose canonical URL points elsewhere are always left "
+"out."
+msgstr ""
+"Wpisy chronione hasłem, nieopublikowane i z noindex, wpisy wykluczone w polu "
+"SEO oraz wpisy, których adres canonical wskazuje gdzie indziej, są zawsze "
+"pomijane."
 
 #: includes/Modules/Sitemap/Module.php:439
 #: includes/Modules/Titles/Module.php:314
@@ -4706,8 +5182,12 @@ msgid "Taxonomies"
 msgstr "Taksonomie"
 
 #: includes/Modules/Sitemap/Module.php:440
-msgid "Terms set to noindex (per term or for the whole taxonomy under Titles & Meta) are left out."
-msgstr "Terminy ustawione na noindex (osobno dla terminu lub dla całej taksonomii w sekcji Tytuły i meta) są pomijane."
+msgid ""
+"Terms set to noindex (per term or for the whole taxonomy under Titles & "
+"Meta) are left out."
+msgstr ""
+"Terminy ustawione na noindex (osobno dla terminu lub dla całej taksonomii w "
+"sekcji Tytuły i meta) są pomijane."
 
 #: includes/Modules/Sitemap/Module.php:445
 msgid "Authors"
@@ -4719,11 +5199,17 @@ msgstr "Mapa witryny autorów"
 
 #: includes/Modules/Sitemap/Module.php:451
 msgid "List author archives of users with published posts (author-sitemap.xml)"
-msgstr "Dodaj archiwa autorów użytkowników z opublikowanymi wpisami (author-sitemap.xml)"
+msgstr ""
+"Dodaj archiwa autorów użytkowników z opublikowanymi wpisami (author-"
+"sitemap.xml)"
 
 #: includes/Modules/Sitemap/Module.php:453
-msgid "Not generated when author archives are disabled or set to noindex under Titles & Meta."
-msgstr "Nie jest generowana, gdy archiwa autorów są wyłączone lub ustawione na noindex w sekcji Tytuły i meta."
+msgid ""
+"Not generated when author archives are disabled or set to noindex under "
+"Titles & Meta."
+msgstr ""
+"Nie jest generowana, gdy archiwa autorów są wyłączone lub ustawione na "
+"noindex w sekcji Tytuły i meta."
 
 #: includes/Modules/Sitemap/Module.php:458
 msgid "Exclude roles"
@@ -4735,8 +5221,13 @@ msgid "News sitemap"
 msgstr "Mapa witryny Google News"
 
 #: includes/Modules/Sitemap/Module.php:468
-msgid "Google News sitemap (news-sitemap.xml). As required by Google News it lists only articles published in the last 48 hours, at most 1,000."
-msgstr "Mapa witryny Google News (news-sitemap.xml). Zgodnie z wymaganiami Google News zawiera tylko artykuły opublikowane w ciągu ostatnich 48 godzin, maksymalnie 1000."
+msgid ""
+"Google News sitemap (news-sitemap.xml). As required by Google News it lists "
+"only articles published in the last 48 hours, at most 1,000."
+msgstr ""
+"Mapa witryny Google News (news-sitemap.xml). Zgodnie z wymaganiami Google "
+"News zawiera tylko artykuły opublikowane w ciągu ostatnich 48 godzin, "
+"maksymalnie 1000."
 
 #: includes/Modules/Sitemap/Module.php:474
 msgid "Generate a Google News sitemap"
@@ -4755,8 +5246,12 @@ msgid "Publication language"
 msgstr "Język publikacji"
 
 #: includes/Modules/Sitemap/Module.php:492
-msgid "ISO 639 language code, e.g. en, pl, de (zh-cn or zh-tw for Chinese). Defaults to the site language."
-msgstr "Kod języka ISO 639, np. en, pl, de (zh-cn lub zh-tw dla chińskiego). Domyślnie język witryny."
+msgid ""
+"ISO 639 language code, e.g. en, pl, de (zh-cn or zh-tw for Chinese). "
+"Defaults to the site language."
+msgstr ""
+"Kod języka ISO 639, np. en, pl, de (zh-cn lub zh-tw dla chińskiego). "
+"Domyślnie język witryny."
 
 #: includes/Modules/Sitemap/Module.php:507
 msgid "Exclude categories"
@@ -4772,8 +5267,17 @@ msgid "Video sitemap"
 msgstr "Mapa witryny wideo"
 
 #: includes/Modules/Sitemap/Module.php:518
-msgid "Video sitemap (video-sitemap.xml) built from VideoObject schema data and, optionally, from YouTube and Vimeo embeds, video blocks, [video] shortcodes and attached video files. No external requests are made: YouTube thumbnails use the standard image URL, Vimeo videos use the featured image as thumbnail."
-msgstr "Mapa witryny wideo (video-sitemap.xml) tworzona na podstawie danych schema VideoObject oraz, opcjonalnie, osadzeń YouTube i Vimeo, bloków wideo, shortcode'ów [video] i załączonych plików wideo. Nie są wykonywane żadne zewnętrzne żądania: miniatury YouTube używają standardowego adresu obrazu, a filmy Vimeo używają obrazka wyróżniającego jako miniatury."
+msgid ""
+"Video sitemap (video-sitemap.xml) built from VideoObject schema data and, "
+"optionally, from YouTube and Vimeo embeds, video blocks, [video] shortcodes "
+"and attached video files. No external requests are made: YouTube thumbnails "
+"use the standard image URL, Vimeo videos use the featured image as thumbnail."
+msgstr ""
+"Mapa witryny wideo (video-sitemap.xml) tworzona na podstawie danych schema "
+"VideoObject oraz, opcjonalnie, osadzeń YouTube i Vimeo, bloków wideo, "
+"shortcode'ów [video] i załączonych plików wideo. Nie są wykonywane żadne "
+"zewnętrzne żądania: miniatury YouTube używają standardowego adresu obrazu, a "
+"filmy Vimeo używają obrazka wyróżniającego jako miniatury."
 
 #: includes/Modules/Sitemap/Module.php:524
 msgid "Generate a video sitemap"
@@ -4785,27 +5289,41 @@ msgstr "Automatyczne wykrywanie filmów"
 
 #: includes/Modules/Sitemap/Module.php:539
 msgid "Find videos in the content (otherwise only VideoObject schema is used)"
-msgstr "Znajduj filmy w treści (w przeciwnym razie używane jest tylko schema VideoObject)"
+msgstr ""
+"Znajduj filmy w treści (w przeciwnym razie używane jest tylko schema "
+"VideoObject)"
 
 #: includes/Modules/Sitemap/Module.php:562
 msgid "No content is listed yet."
 msgstr "Nie ma jeszcze żadnych treści na liście."
 
 #: includes/Modules/Sitemap/Module.php:564
-msgid "Submit the sitemap index in Google Search Console and Bing Webmaster Tools. It is also listed in robots.txt when the site is visible to search engines."
-msgstr "Prześlij indeks map witryny w Google Search Console i Bing Webmaster Tools. Jest on też wymieniony w robots.txt, gdy witryna jest widoczna dla wyszukiwarek."
+msgid ""
+"Submit the sitemap index in Google Search Console and Bing Webmaster Tools. "
+"It is also listed in robots.txt when the site is visible to search engines."
+msgstr ""
+"Prześlij indeks map witryny w Google Search Console i Bing Webmaster Tools. "
+"Jest on też wymieniony w robots.txt, gdy witryna jest widoczna dla "
+"wyszukiwarek."
 
 #: includes/Modules/Sitemap/Module.php:566
-msgid "Search engines are discouraged from indexing this site (Settings → Reading)."
-msgstr "Wyszukiwarki są proszone o nieindeksowanie tej witryny (Ustawienia → Czytanie)."
+msgid ""
+"Search engines are discouraged from indexing this site (Settings → Reading)."
+msgstr ""
+"Wyszukiwarki są proszone o nieindeksowanie tej witryny (Ustawienia → "
+"Czytanie)."
 
 #: includes/Modules/Sitemap/Stylesheet.php:23
 msgid "XML Sitemap"
 msgstr "Mapa witryny XML"
 
 #: includes/Modules/Sitemap/Stylesheet.php:24
-msgid "This XML sitemap is meant for search engines. It lists the URLs of this site that should be indexed."
-msgstr "Ta mapa witryny XML jest przeznaczona dla wyszukiwarek. Zawiera adresy URL tej witryny, które powinny zostać zaindeksowane."
+msgid ""
+"This XML sitemap is meant for search engines. It lists the URLs of this site "
+"that should be indexed."
+msgstr ""
+"Ta mapa witryny XML jest przeznaczona dla wyszukiwarek. Zawiera adresy URL "
+"tej witryny, które powinny zostać zaindeksowane."
 
 #: includes/Modules/Sitemap/Stylesheet.php:25
 msgid "This index lists the individual sitemaps of the site."
@@ -4839,8 +5357,7 @@ msgstr "Ostatnia modyfikacja"
 msgid "All sitemaps"
 msgstr "Wszystkie mapy witryny"
 
-#: includes/Modules/Social/Module.php:49
-#: includes/Modules/Social/Module.php:123
+#: includes/Modules/Social/Module.php:49 includes/Modules/Social/Module.php:123
 msgid "Social"
 msgstr "Social media"
 
@@ -4850,7 +5367,9 @@ msgstr "Domyślny obrazek do udostępniania"
 
 #: includes/Modules/Social/Module.php:56
 msgid "Used when a page has no featured image. Recommended 1200×630 px."
-msgstr "Używany, gdy strona nie ma obrazka wyróżniającego. Zalecany rozmiar 1200×630 px."
+msgstr ""
+"Używany, gdy strona nie ma obrazka wyróżniającego. Zalecany rozmiar 1200×630 "
+"px."
 
 #: includes/Modules/Social/Module.php:61
 msgid "Content image fallback"
@@ -4869,8 +5388,12 @@ msgid "Default Facebook author URL"
 msgstr "Domyślny adres URL autora na Facebooku"
 
 #: includes/Modules/Social/Module.php:76
-msgid "Used as article:author when the post author has no Facebook profile in their user profile."
-msgstr "Używany jako article:author, gdy autor wpisu nie ma profilu na Facebooku w swoim profilu użytkownika."
+msgid ""
+"Used as article:author when the post author has no Facebook profile in their "
+"user profile."
+msgstr ""
+"Używany jako article:author, gdy autor wpisu nie ma profilu na Facebooku w "
+"swoim profilu użytkownika."
 
 #: includes/Modules/Social/Module.php:81
 msgid "Facebook app ID"
@@ -4888,13 +5411,11 @@ msgstr "Bez @."
 msgid "Default Twitter card"
 msgstr "Domyślna karta Twitter"
 
-#: includes/Modules/Social/Module.php:96
-#: includes/Modules/Social/Module.php:153
+#: includes/Modules/Social/Module.php:96 includes/Modules/Social/Module.php:153
 msgid "Summary with large image"
 msgstr "Podsumowanie z dużym obrazem"
 
-#: includes/Modules/Social/Module.php:97
-#: includes/Modules/Social/Module.php:154
+#: includes/Modules/Social/Module.php:97 includes/Modules/Social/Module.php:154
 msgid "Summary"
 msgstr "Podsumowanie"
 
@@ -4933,7 +5454,8 @@ msgstr "Obraz X (Twitter)"
 
 #: includes/Modules/Social/Module.php:134
 msgid "Leave empty to reuse the SEO title, description and featured image."
-msgstr "Zostaw puste, aby użyć ponownie tytułu SEO, opisu i obrazka wyróżniającego."
+msgstr ""
+"Zostaw puste, aby użyć ponownie tytułu SEO, opisu i obrazka wyróżniającego."
 
 #: includes/Modules/Social/Module.php:149
 msgid "Twitter card"
@@ -5030,8 +5552,12 @@ msgid "No fingerprint mode"
 msgstr "Tryb bez śladów"
 
 #: includes/Modules/Titles/Module.php:165
-msgid "Hide every trace of the plugin on the front end (REST index, asset URLs, sitemap stylesheet path)"
-msgstr "Ukryj wszelkie ślady wtyczki na froncie (indeks REST, adresy URL zasobów, ścieżka arkusza stylów mapy witryny)"
+msgid ""
+"Hide every trace of the plugin on the front end (REST index, asset URLs, "
+"sitemap stylesheet path)"
+msgstr ""
+"Ukryj wszelkie ślady wtyczki na froncie (indeks REST, adresy URL zasobów, "
+"ścieżka arkusza stylów mapy witryny)"
 
 #: includes/Modules/Titles/Module.php:171
 msgid "Hide SEO box on"
@@ -5064,8 +5590,12 @@ msgid "Homepage title"
 msgstr "Tytuł strony głównej"
 
 #: includes/Modules/Titles/Module.php:206
-msgid "Used when the front page shows latest posts, or as fallback for a static front page without its own SEO title."
-msgstr "Używany, gdy strona główna wyświetla najnowsze wpisy, lub jako zastępczy dla statycznej strony głównej bez własnego tytułu SEO."
+msgid ""
+"Used when the front page shows latest posts, or as fallback for a static "
+"front page without its own SEO title."
+msgstr ""
+"Używany, gdy strona główna wyświetla najnowsze wpisy, lub jako zastępczy dla "
+"statycznej strony głównej bez własnego tytułu SEO."
 
 #: includes/Modules/Titles/Module.php:211
 msgid "Homepage description"
@@ -5142,8 +5672,10 @@ msgid "Posts page title"
 msgstr "Tytuł strony wpisów"
 
 #: includes/Modules/Titles/Module.php:377
-msgid "When a static page shows the latest posts and has no SEO title of its own."
-msgstr "Gdy statyczna strona wyświetla najnowsze wpisy i nie ma własnego tytułu SEO."
+msgid ""
+"When a static page shows the latest posts and has no SEO title of its own."
+msgstr ""
+"Gdy statyczna strona wyświetla najnowsze wpisy i nie ma własnego tytułu SEO."
 
 #: includes/Modules/Titles/Module.php:382
 msgid "Posts page description"
@@ -5228,8 +5760,10 @@ msgid "Forbidden: the key file was not found or does not match."
 msgstr "Zabronione: plik klucza nie został znaleziony lub nie pasuje."
 
 #: includes/Modules/Tools/IndexNow.php:273
-msgid "Unprocessable: the URLs do not belong to this host or the key does not match."
-msgstr "Nieprzetworzone: adresy URL nie należą do tego hosta lub klucz nie pasuje."
+msgid ""
+"Unprocessable: the URLs do not belong to this host or the key does not match."
+msgstr ""
+"Nieprzetworzone: adresy URL nie należą do tego hosta lub klucz nie pasuje."
 
 #: includes/Modules/Tools/IndexNow.php:274
 msgid "Too many requests: try again later."
@@ -5246,8 +5780,12 @@ msgid "Submit to IndexNow"
 msgstr "Wyślij do IndexNow"
 
 #: includes/Modules/Tools/Llms.php:153
-msgid "A physical llms.txt file exists in the site root; the web server serves it instead of the generated one."
-msgstr "W katalogu głównym witryny istnieje fizyczny plik llms.txt; serwer WWW udostępnia go zamiast wygenerowanego."
+msgid ""
+"A physical llms.txt file exists in the site root; the web server serves it "
+"instead of the generated one."
+msgstr ""
+"W katalogu głównym witryny istnieje fizyczny plik llms.txt; serwer WWW "
+"udostępnia go zamiast wygenerowanego."
 
 #: includes/Modules/Tools/Llms.php:158
 msgid "Turn the file on and save to publish it at /llms.txt."
@@ -5262,17 +5800,26 @@ msgid "robots.txt content"
 msgstr "Zawartość robots.txt"
 
 #: includes/Modules/Tools/Module.php:91
-msgid "Replaces the virtual robots.txt generated by WordPress. Leave empty to keep the WordPress default. While custom content is set, lines added by other plugins are dropped; the sitemap line is added automatically by the XML Sitemaps module."
-msgstr "Zastępuje wirtualny plik robots.txt generowany przez WordPressa. Zostaw puste, aby zachować domyślny plik WordPressa. Gdy ustawiona jest własna zawartość, wiersze dodane przez inne wtyczki są pomijane; wiersz mapy witryny jest dodawany automatycznie przez moduł Mapy witryny XML."
+msgid ""
+"Replaces the virtual robots.txt generated by WordPress. Leave empty to keep "
+"the WordPress default. While custom content is set, lines added by other "
+"plugins are dropped; the sitemap line is added automatically by the XML "
+"Sitemaps module."
+msgstr ""
+"Zastępuje wirtualny plik robots.txt generowany przez WordPressa. Zostaw "
+"puste, aby zachować domyślny plik WordPressa. Gdy ustawiona jest własna "
+"zawartość, wiersze dodane przez inne wtyczki są pomijane; wiersz mapy "
+"witryny jest dodawany automatycznie przez moduł Mapy witryny XML."
 
-#: includes/Modules/Tools/Module.php:103
-#: includes/Modules/Tools/Module.php:108
+#: includes/Modules/Tools/Module.php:103 includes/Modules/Tools/Module.php:108
 msgid "llms.txt"
 msgstr "llms.txt"
 
 #: includes/Modules/Tools/Module.php:109
 msgid "Publish /llms.txt, a Markdown summary of the site for AI assistants"
-msgstr "Opublikuj /llms.txt, podsumowanie witryny w formacie Markdown dla asystentów AI"
+msgstr ""
+"Opublikuj /llms.txt, podsumowanie witryny w formacie Markdown dla asystentów "
+"AI"
 
 #: includes/Modules/Tools/Module.php:115
 msgid "Content"
@@ -5290,8 +5837,7 @@ msgstr "Dodatkowy tekst"
 msgid "Optional paragraph shown under the site description."
 msgstr "Opcjonalny akapit wyświetlany pod opisem witryny."
 
-#: includes/Modules/Tools/Module.php:148
-#: includes/Modules/Tools/Module.php:153
+#: includes/Modules/Tools/Module.php:148 includes/Modules/Tools/Module.php:153
 #: includes/Modules/Tools/Utilities.php:164
 msgid "IndexNow"
 msgstr "IndexNow"
@@ -5301,8 +5847,16 @@ msgid "Notify search engines about new and updated content"
 msgstr "Powiadamiaj wyszukiwarki o nowych i zaktualizowanych treściach"
 
 #: includes/Modules/Tools/Module.php:156
-msgid "When on, the URLs of published and updated content are sent to the IndexNow API (api.indexnow.org), which shares them with Bing, Yandex, Seznam, Naver and other participating search engines. Nothing is sent while this is off. Google does not use IndexNow."
-msgstr "Po włączeniu adresy URL opublikowanych i zaktualizowanych treści są wysyłane do IndexNow API (api.indexnow.org), które udostępnia je wyszukiwarkom Bing, Yandex, Seznam, Naver i innym uczestniczącym wyszukiwarkom. Gdy opcja jest wyłączona, nic nie jest wysyłane. Google nie korzysta z IndexNow."
+msgid ""
+"When on, the URLs of published and updated content are sent to the IndexNow "
+"API (api.indexnow.org), which shares them with Bing, Yandex, Seznam, Naver "
+"and other participating search engines. Nothing is sent while this is off. "
+"Google does not use IndexNow."
+msgstr ""
+"Po włączeniu adresy URL opublikowanych i zaktualizowanych treści są wysyłane "
+"do IndexNow API (api.indexnow.org), które udostępnia je wyszukiwarkom Bing, "
+"Yandex, Seznam, Naver i innym uczestniczącym wyszukiwarkom. Gdy opcja jest "
+"wyłączona, nic nie jest wysyłane. Google nie korzysta z IndexNow."
 
 #: includes/Modules/Tools/Module.php:161
 msgid "Submit automatically"
@@ -5321,8 +5875,14 @@ msgid "Delete all MG SEO data when the plugin is deleted"
 msgstr "Usuń wszystkie dane MG SEO po usunięciu wtyczki"
 
 #: includes/Modules/Tools/Module.php:184
-msgid "Removes settings, SEO data of posts, terms and users, redirections and the 404 log when you delete the plugin on the Plugins screen. Deactivating keeps everything."
-msgstr "Usuwa ustawienia, dane SEO wpisów, terminów i użytkowników, przekierowania oraz dziennik 404 po usunięciu wtyczki na ekranie Wtyczki. Dezaktywacja zachowuje wszystko."
+msgid ""
+"Removes settings, SEO data of posts, terms and users, redirections and the "
+"404 log when you delete the plugin on the Plugins screen. Deactivating keeps "
+"everything."
+msgstr ""
+"Usuwa ustawienia, dane SEO wpisów, terminów i użytkowników, przekierowania "
+"oraz dziennik 404 po usunięciu wtyczki na ekranie Wtyczki. Dezaktywacja "
+"zachowuje wszystko."
 
 #: includes/Modules/Tools/Module.php:189
 msgid "Export, import and reset"
@@ -5340,12 +5900,23 @@ msgstr "Narzędzia"
 #. translators: %s: file path
 #: includes/Modules/Tools/Robots.php:101
 #, php-format
-msgid "A physical robots.txt file exists (%s). The web server serves it directly, so the content below is not used until you delete or rename that file."
-msgstr "Istnieje fizyczny plik robots.txt (%s). Serwer WWW udostępnia go bezpośrednio, więc poniższa zawartość nie jest używana, dopóki nie usuniesz lub nie zmienisz nazwy tego pliku."
+msgid ""
+"A physical robots.txt file exists (%s). The web server serves it directly, "
+"so the content below is not used until you delete or rename that file."
+msgstr ""
+"Istnieje fizyczny plik robots.txt (%s). Serwer WWW udostępnia go "
+"bezpośrednio, więc poniższa zawartość nie jest używana, dopóki nie usuniesz "
+"lub nie zmienisz nazwy tego pliku."
 
 #: includes/Modules/Tools/Robots.php:104
-msgid "\"Discourage search engines from indexing this site\" is on (Settings → Reading), so WordPress serves \"Disallow: /\" and the content below is not used."
-msgstr "Opcja „Proś wyszukiwarki o nieindeksowanie tej witryny” jest włączona (Ustawienia → Czytanie), więc WordPress zwraca „Disallow: /”, a poniższa zawartość nie jest używana."
+msgid ""
+"\"Discourage search engines from indexing this site\" is on (Settings → "
+"Reading), so WordPress serves \"Disallow: /\" and the content below is not "
+"used."
+msgstr ""
+"Opcja „Proś wyszukiwarki o nieindeksowanie tej witryny” jest włączona "
+"(Ustawienia → Czytanie), więc WordPress zwraca „Disallow: /”, a poniższa "
+"zawartość nie jest używana."
 
 #: includes/Modules/Tools/Robots.php:106
 msgid "View current robots.txt"
@@ -5396,8 +5967,11 @@ msgstr "Plik musi być plikiem JSON wyeksportowanym z MG SEO."
 #. translators: 1: settings groups, 2: redirections created, 3: redirections skipped
 #: includes/Modules/Tools/Utilities.php:138
 #, php-format
-msgid "Settings imported: %1$d sections, %2$d redirections created, %3$d skipped."
-msgstr "Zaimportowano ustawienia: sekcji %1$d, utworzono przekierowań: %2$d, pominięto: %3$d."
+msgid ""
+"Settings imported: %1$d sections, %2$d redirections created, %3$d skipped."
+msgstr ""
+"Zaimportowano ustawienia: sekcji %1$d, utworzono przekierowań: %2$d, "
+"pominięto: %3$d."
 
 #: includes/Modules/Tools/Utilities.php:148
 msgid "Tick the confirmation box to reset the settings."
@@ -5408,12 +5982,20 @@ msgid "All settings were reset to their defaults."
 msgstr "Wszystkie ustawienia zostały przywrócone do wartości domyślnych."
 
 #: includes/Modules/Tools/Utilities.php:166
-msgid "IndexNow is off. Turn it on in the Tools settings to submit URLs to api.indexnow.org."
-msgstr "IndexNow jest wyłączony. Włącz go w ustawieniach narzędzi, aby wysyłać adresy URL do api.indexnow.org."
+msgid ""
+"IndexNow is off. Turn it on in the Tools settings to submit URLs to "
+"api.indexnow.org."
+msgstr ""
+"IndexNow jest wyłączony. Włącz go w ustawieniach narzędzi, aby wysyłać "
+"adresy URL do api.indexnow.org."
 
 #: includes/Modules/Tools/Utilities.php:168
-msgid "Submitting sends the URLs below to api.indexnow.org. One URL per line; only URLs of this site are accepted."
-msgstr "Wysłanie spowoduje przesłanie poniższych adresów URL do api.indexnow.org. Jeden adres URL w wierszu; akceptowane są tylko adresy URL tej witryny."
+msgid ""
+"Submitting sends the URLs below to api.indexnow.org. One URL per line; only "
+"URLs of this site are accepted."
+msgstr ""
+"Wysłanie spowoduje przesłanie poniższych adresów URL do api.indexnow.org. "
+"Jeden adres URL w wierszu; akceptowane są tylko adresy URL tej witryny."
 
 #: includes/Modules/Tools/Utilities.php:172
 #: includes/Modules/Tools/Utilities.php:179
@@ -5474,8 +6056,12 @@ msgid "Reset settings"
 msgstr "Resetuj ustawienia"
 
 #: includes/Modules/Tools/Utilities.php:220
-msgid "Restores the defaults of every module. SEO data of posts and terms, redirections and the 404 log are not touched."
-msgstr "Przywraca wartości domyślne wszystkich modułów. Dane SEO wpisów i terminów, przekierowania oraz dziennik 404 nie są zmieniane."
+msgid ""
+"Restores the defaults of every module. SEO data of posts and terms, "
+"redirections and the 404 log are not touched."
+msgstr ""
+"Przywraca wartości domyślne wszystkich modułów. Dane SEO wpisów i terminów, "
+"przekierowania oraz dziennik 404 nie są zmieniane."
 
 #: includes/Modules/Tools/Utilities.php:224
 msgid "Also reset which modules are enabled"
@@ -5495,8 +6081,14 @@ msgid "GTIN (EAN, UPC)"
 msgstr "GTIN (EAN, UPC)"
 
 #: includes/Modules/WooCommerce/Fields.php:56
-msgid "GTIN-8, GTIN-12 (UPC), GTIN-13 (EAN) or GTIN-14 for structured data. The schema property is chosen from the length. When empty, the WooCommerce GTIN field is used."
-msgstr "GTIN-8, GTIN-12 (UPC), GTIN-13 (EAN) lub GTIN-14 dla danych strukturalnych. Właściwość schema jest wybierana na podstawie długości. Gdy pole jest puste, używane jest pole GTIN z WooCommerce."
+msgid ""
+"GTIN-8, GTIN-12 (UPC), GTIN-13 (EAN) or GTIN-14 for structured data. The "
+"schema property is chosen from the length. When empty, the WooCommerce GTIN "
+"field is used."
+msgstr ""
+"GTIN-8, GTIN-12 (UPC), GTIN-13 (EAN) lub GTIN-14 dla danych strukturalnych. "
+"Właściwość schema jest wybierana na podstawie długości. Gdy pole jest puste, "
+"używane jest pole GTIN z WooCommerce."
 
 #: includes/Modules/WooCommerce/Fields.php:65
 msgid "Manufacturer part number."
@@ -5536,8 +6128,12 @@ msgid "WooCommerce structured data"
 msgstr "Dane strukturalne WooCommerce"
 
 #: includes/Modules/WooCommerce/Module.php:91
-msgid "Remove WooCommerce's own JSON-LD (product, breadcrumbs, website) to avoid duplicates"
-msgstr "Usuń własny JSON-LD WooCommerce (produkt, okruszki, witryna), aby uniknąć duplikatów"
+msgid ""
+"Remove WooCommerce's own JSON-LD (product, breadcrumbs, website) to avoid "
+"duplicates"
+msgstr ""
+"Usuń własny JSON-LD WooCommerce (produkt, okruszki, witryna), aby uniknąć "
+"duplikatów"
 
 #: includes/Modules/WooCommerce/Module.php:99
 msgid "WooCommerce Brands taxonomy"
@@ -5620,8 +6216,12 @@ msgid "Shipping & returns"
 msgstr "Wysyłka i zwroty"
 
 #: includes/Modules/WooCommerce/Module.php:176
-msgid "Basic shipping and return policy data added to every offer (recommended by Google for merchant listings)."
-msgstr "Podstawowe dane o wysyłce i polityce zwrotów dodawane do każdej oferty (zalecane przez Google dla list produktów w Merchant Center)."
+msgid ""
+"Basic shipping and return policy data added to every offer (recommended by "
+"Google for merchant listings)."
+msgstr ""
+"Podstawowe dane o wysyłce i polityce zwrotów dodawane do każdej oferty "
+"(zalecane przez Google dla list produktów w Merchant Center)."
 
 #: includes/Modules/WooCommerce/Module.php:181
 msgid "Shipping details"
@@ -5732,32 +6332,45 @@ msgid "Remove the product base (/product/name/ becomes /name/)"
 msgstr "Usuń bazę produktu (/product/nazwa/ zmieni się w /nazwa/)"
 
 #: includes/Modules/WooCommerce/Module.php:292
-msgid "Pages and posts with the same slug keep priority; old URLs are redirected with 301."
-msgstr "Strony i wpisy o tym samym slugu mają pierwszeństwo; stare adresy URL są przekierowywane kodem 301."
+msgid ""
+"Pages and posts with the same slug keep priority; old URLs are redirected "
+"with 301."
+msgstr ""
+"Strony i wpisy o tym samym slugu mają pierwszeństwo; stare adresy URL są "
+"przekierowywane kodem 301."
 
 #: includes/Modules/WooCommerce/Module.php:297
 msgid "Category base"
 msgstr "Baza kategorii"
 
 #: includes/Modules/WooCommerce/Module.php:298
-msgid "Remove the product category base (/product-category/name/ becomes /name/)"
-msgstr "Usuń bazę kategorii produktów (/product-category/nazwa/ zmieni się w /nazwa/)"
+msgid ""
+"Remove the product category base (/product-category/name/ becomes /name/)"
+msgstr ""
+"Usuń bazę kategorii produktów (/product-category/nazwa/ zmieni się w /nazwa/)"
 
 #: includes/Modules/WooCommerce/Module.php:304
 msgid "Hidden products"
 msgstr "Ukryte produkty"
 
 #: includes/Modules/WooCommerce/Module.php:305
-msgid "No index for products with catalog visibility \"Hidden\" (and leave them out of sitemaps)"
-msgstr "Noindex dla produktów z widocznością w katalogu „Ukryty” (i pomijanie ich w mapach witryny)"
+msgid ""
+"No index for products with catalog visibility \"Hidden\" (and leave them out "
+"of sitemaps)"
+msgstr ""
+"Noindex dla produktów z widocznością w katalogu „Ukryty” (i pomijanie ich w "
+"mapach witryny)"
 
 #: includes/Modules/WooCommerce/Module.php:311
 msgid "Cart, checkout, my account"
 msgstr "Koszyk, kasa, moje konto"
 
 #: includes/Modules/WooCommerce/Module.php:312
-msgid "No index for the cart, checkout and account pages (and leave them out of sitemaps)"
-msgstr "Noindex dla stron koszyka, kasy i konta (i pomijanie ich w mapach witryny)"
+msgid ""
+"No index for the cart, checkout and account pages (and leave them out of "
+"sitemaps)"
+msgstr ""
+"Noindex dla stron koszyka, kasy i konta (i pomijanie ich w mapach witryny)"
 
 #: includes/Modules/WooCommerce/Module.php:318
 msgid "Add-to-cart links"
@@ -5765,7 +6378,8 @@ msgstr "Odnośniki dodawania do koszyka"
 
 #: includes/Modules/WooCommerce/Module.php:319
 msgid "No index for URLs with ?add-to-cart= (the canonical never contains it)"
-msgstr "Noindex dla adresów URL z ?add-to-cart= (canonical nigdy go nie zawiera)"
+msgstr ""
+"Noindex dla adresów URL z ?add-to-cart= (canonical nigdy go nie zawiera)"
 
 #: includes/Modules/WooCommerce/Module.php:325
 msgid "Open Graph"
@@ -5816,8 +6430,12 @@ msgid "Missing \"name\"."
 msgstr "Brak „name”."
 
 #: includes/Modules/WooCommerce/Product.php:630
-msgid "One of \"offers\", \"review\" or \"aggregateRating\" is required (set a price or collect reviews)."
-msgstr "Wymagane jest jedno z pól „offers”, „review” lub „aggregateRating” (ustaw cenę lub zbieraj opinie)."
+msgid ""
+"One of \"offers\", \"review\" or \"aggregateRating\" is required (set a "
+"price or collect reviews)."
+msgstr ""
+"Wymagane jest jedno z pól „offers”, „review” lub „aggregateRating” (ustaw "
+"cenę lub zbieraj opinie)."
 
 #. translators: %s: property name
 #: includes/Modules/WooCommerce/Product.php:639
@@ -5835,15 +6453,22 @@ msgstr "Offer nie ma „availability”."
 
 #: includes/Modules/WooCommerce/Product.php:648
 msgid "Offer has no \"shippingDetails\" (recommended for merchant listings)."
-msgstr "Offer nie ma „shippingDetails” (zalecane dla list produktów w Merchant Center)."
+msgstr ""
+"Offer nie ma „shippingDetails” (zalecane dla list produktów w Merchant "
+"Center)."
 
 #: includes/Modules/WooCommerce/Product.php:651
-msgid "Offer has no \"hasMerchantReturnPolicy\" (recommended for merchant listings)."
-msgstr "Offer nie ma „hasMerchantReturnPolicy” (zalecane dla list produktów w Merchant Center)."
+msgid ""
+"Offer has no \"hasMerchantReturnPolicy\" (recommended for merchant listings)."
+msgstr ""
+"Offer nie ma „hasMerchantReturnPolicy” (zalecane dla list produktów w "
+"Merchant Center)."
 
 #: includes/Modules/WooCommerce/Product.php:655
 msgid "No product image (\"image\" is required for merchant listings)."
-msgstr "Brak obrazka produktu („image” jest wymagane dla list produktów w Merchant Center)."
+msgstr ""
+"Brak obrazka produktu („image” jest wymagane dla list produktów w Merchant "
+"Center)."
 
 #: includes/Modules/WooCommerce/Product.php:658
 msgid "No \"brand\"."
@@ -5862,16 +6487,24 @@ msgid "Titles & Meta"
 msgstr "Tytuły i meta"
 
 #: includes/Plugin.php:143
-msgid "Title and description templates, robots meta, canonical URLs and verification codes."
-msgstr "Szablony tytułów i opisów, metaznacznik robots, adresy canonical i kody weryfikacyjne."
+msgid ""
+"Title and description templates, robots meta, canonical URLs and "
+"verification codes."
+msgstr ""
+"Szablony tytułów i opisów, metaznacznik robots, adresy canonical i kody "
+"weryfikacyjne."
 
 #: includes/Plugin.php:144
 msgid "Social (Open Graph & Twitter)"
 msgstr "Social media (Open Graph i Twitter)"
 
 #: includes/Plugin.php:144
-msgid "Open Graph and Twitter Card tags for shares on Facebook, LinkedIn, X and messengers."
-msgstr "Znaczniki Open Graph i Twitter Card dla udostępnień na Facebooku, LinkedIn, X i komunikatorach."
+msgid ""
+"Open Graph and Twitter Card tags for shares on Facebook, LinkedIn, X and "
+"messengers."
+msgstr ""
+"Znaczniki Open Graph i Twitter Card dla udostępnień na Facebooku, LinkedIn, "
+"X i komunikatorach."
 
 #: includes/Plugin.php:145
 msgid "Content Analysis"
@@ -5882,7 +6515,9 @@ msgid "Focus keyword analysis and SEO score in the editor and post lists."
 msgstr "Analiza frazy kluczowej i wynik SEO w edytorze i na listach wpisów."
 
 #: includes/Plugin.php:146
-msgid "Breadcrumb trail (shortcode, block and PHP function) with BreadcrumbList schema."
+msgid ""
+"Breadcrumb trail (shortcode, block and PHP function) with BreadcrumbList "
+"schema."
 msgstr "Okruszki (shortcode, blok i funkcja PHP) ze schema BreadcrumbList."
 
 #: includes/Plugin.php:147
@@ -5898,48 +6533,75 @@ msgid "Schema (Structured Data)"
 msgstr "Schema (dane strukturalne)"
 
 #: includes/Plugin.php:148
-msgid "JSON-LD graph, schema generator with templates, custom JSON-LD and validation."
-msgstr "Graf JSON-LD, generator schema z szablonami, własny JSON-LD i walidacja."
+msgid ""
+"JSON-LD graph, schema generator with templates, custom JSON-LD and "
+"validation."
+msgstr ""
+"Graf JSON-LD, generator schema z szablonami, własny JSON-LD i walidacja."
 
 #: includes/Plugin.php:149
 msgid "Redirections & 404 Monitor"
 msgstr "Przekierowania i monitor 404"
 
 #: includes/Plugin.php:149
-msgid "301/302/307/410/451 redirects with regex, auto redirects on slug change and a 404 log."
-msgstr "Przekierowania 301/302/307/410/451 z wyrażeniami regularnymi, automatyczne przekierowania po zmianie slugu i dziennik 404."
+msgid ""
+"301/302/307/410/451 redirects with regex, auto redirects on slug change and "
+"a 404 log."
+msgstr ""
+"Przekierowania 301/302/307/410/451 z wyrażeniami regularnymi, automatyczne "
+"przekierowania po zmianie slugu i dziennik 404."
 
 #: includes/Plugin.php:150
 msgid "Local SEO"
 msgstr "Lokalne SEO"
 
 #: includes/Plugin.php:150
-msgid "Business data, multiple locations, opening hours, address shortcode and LocalBusiness schema."
-msgstr "Dane firmy, wiele lokalizacji, godziny otwarcia, shortcode adresu i schema LocalBusiness."
+msgid ""
+"Business data, multiple locations, opening hours, address shortcode and "
+"LocalBusiness schema."
+msgstr ""
+"Dane firmy, wiele lokalizacji, godziny otwarcia, shortcode adresu i schema "
+"LocalBusiness."
 
 #: includes/Plugin.php:151
 msgid "WooCommerce SEO"
 msgstr "WooCommerce SEO"
 
 #: includes/Plugin.php:151
-msgid "Product schema, GTIN/brand fields, product variables and WooCommerce URL options."
-msgstr "Schema Product, pola GTIN/marki, zmienne produktu i opcje adresów URL WooCommerce."
+msgid ""
+"Product schema, GTIN/brand fields, product variables and WooCommerce URL "
+"options."
+msgstr ""
+"Schema Product, pola GTIN/marki, zmienne produktu i opcje adresów URL "
+"WooCommerce."
 
 #: includes/Plugin.php:152
-msgid "Automatic alt and title attributes from templates, case changes and find & replace."
-msgstr "Automatyczne atrybuty alt i title z szablonów, zmiany wielkości liter oraz znajdź i zamień."
+msgid ""
+"Automatic alt and title attributes from templates, case changes and find & "
+"replace."
+msgstr ""
+"Automatyczne atrybuty alt i title z szablonów, zmiany wielkości liter oraz "
+"znajdź i zamień."
 
 #: includes/Plugin.php:153
 msgid "Bulk Editing"
 msgstr "Edycja zbiorcza"
 
 #: includes/Plugin.php:153
-msgid "Edit SEO titles, descriptions, keywords and robots for many posts at once, plus CSV import/export."
-msgstr "Edytuj tytuły SEO, opisy, słowa kluczowe i robots dla wielu wpisów naraz oraz importuj/eksportuj CSV."
+msgid ""
+"Edit SEO titles, descriptions, keywords and robots for many posts at once, "
+"plus CSV import/export."
+msgstr ""
+"Edytuj tytuły SEO, opisy, słowa kluczowe i robots dla wielu wpisów naraz "
+"oraz importuj/eksportuj CSV."
 
 #: includes/Plugin.php:154
-msgid "Google Search Console performance and URL inspection using your own Google Cloud project."
-msgstr "Wydajność w Google Search Console i inspekcja adresów URL z użyciem własnego projektu Google Cloud."
+msgid ""
+"Google Search Console performance and URL inspection using your own Google "
+"Cloud project."
+msgstr ""
+"Wydajność w Google Search Console i inspekcja adresów URL z użyciem własnego "
+"projektu Google Cloud."
 
 #: includes/Plugin.php:155
 msgid "Internal Links"
@@ -5954,8 +6616,12 @@ msgid "Import from Rank Math and Yoast SEO, export and import MG SEO settings."
 msgstr "Import z Rank Math i Yoast SEO, eksport i import ustawień MG SEO."
 
 #: includes/Plugin.php:157
-msgid "Choose which roles may edit SEO settings, per-post SEO data, redirections and reports."
-msgstr "Wybierz, które role mogą edytować ustawienia SEO, dane SEO poszczególnych wpisów, przekierowania i raporty."
+msgid ""
+"Choose which roles may edit SEO settings, per-post SEO data, redirections "
+"and reports."
+msgstr ""
+"Wybierz, które role mogą edytować ustawienia SEO, dane SEO poszczególnych "
+"wpisów, przekierowania i raporty."
 
 #: includes/Plugin.php:158
 msgid "robots.txt editor, llms.txt, IndexNow and housekeeping."
@@ -6099,17 +6765,21 @@ msgstr "Brak zmian do zapisania."
 
 #. translators: 1: saved rows, 2: total rows
 #: assets/bulk.js:86
-#, js-format
 msgid "Saved %1$d of %2$d"
 msgstr "Zapisano %1$d z %2$d"
 
-#: assets/editor.js:35
-msgid "SEO score"
-msgstr "Wynik SEO"
+#: assets/editor.js:107
+msgid "Set a focus keyword in the SEO box to get a score."
+msgstr "Ustaw frazę kluczową w panelu SEO, żeby zobaczyć wynik."
 
-#: assets/editor.js:47
+#: assets/editor.js:110 assets/editor.js:132
 msgid "Edit SEO settings"
 msgstr "Edytuj ustawienia SEO"
+
+#: assets/editor.js:120 assets/editor.js:127 assets/editor.js:128
+#: assets/editor.js:131
+msgid "SEO score"
+msgstr "Wynik SEO"
 
 #: assets/image.js:74
 msgid "Replace in the media library? This cannot be undone."
@@ -6117,67 +6787,75 @@ msgstr "Zamienić w mediach? Tej operacji nie można cofnąć."
 
 #. translators: %d: number of matches or values
 #: assets/image.js:92
-#, js-format
 msgid "Found %d matches…"
 msgstr "Znaleziono dopasowań: %d…"
 
 #. translators: %d: number of matches or values
 #: assets/image.js:93
-#, js-format
 msgid "Changed %d values…"
 msgstr "Zmieniono wartości: %d…"
 
 #. translators: %d: number of matches or values
 #: assets/image.js:98
-#, js-format
 msgid "Preview: %d matches."
 msgstr "Podgląd: dopasowań: %d."
 
 #. translators: %d: number of matches or values
 #: assets/image.js:99
-#, js-format
 msgid "Done: %d values changed."
 msgstr "Gotowe: zmieniono wartości: %d."
 
 #. translators: 1: images saved, 2: images still without alt text
 #: assets/image.js:153
-#, js-format
 msgid "%1$d saved, %2$d without alt text left."
 msgstr "Zapisano: %1$d, pozostało bez tekstu alternatywnego: %2$d."
 
 #. translators: 1: scope name, 2: processed count, 3: total count
 #: assets/import.js:48
-#, js-format
 msgid "%1$s: %2$d of %3$s"
 msgstr "%1$s: %2$d z %3$s"
 
-#: assets/import.js:84
+#. translators: 1: posts done, 2: total posts
+#: assets/import.js:90
+msgid "Calculating SEO scores: %1$d of %2$d"
+msgstr "Liczenie wyników SEO: %1$d z %2$d"
+
+#: assets/import.js:98
 msgid "Finished. Reloading…"
 msgstr "Zakończono. Przeładowywanie…"
 
-#: assets/import.js:87
+#: assets/import.js:101
 msgid "The import failed."
 msgstr "Import nie powiódł się."
 
-#: assets/import.js:117
+#: assets/import.js:131
 msgid "Deleted."
 msgstr "Usunięto."
 
 #: assets/local.js:19
-msgid "Address, contact details, opening hours and map from the Local SEO settings or a location."
-msgstr "Adres, dane kontaktowe, godziny otwarcia i mapa z ustawień Lokalnego SEO lub lokalizacji."
+msgid ""
+"Address, contact details, opening hours and map from the Local SEO settings "
+"or a location."
+msgstr ""
+"Adres, dane kontaktowe, godziny otwarcia i mapa z ustawień Lokalnego SEO lub "
+"lokalizacji."
 
 #: assets/local.js:40
 msgid "Parts"
 msgstr "Części"
 
 #: assets/local.js:41
-msgid "Comma separated: name, address, contact, hours, ids, social, map – or all."
-msgstr "Oddzielone przecinkami: name, address, contact, hours, ids, social, map – lub all."
+msgid ""
+"Comma separated: name, address, contact, hours, ids, social, map – or all."
+msgstr ""
+"Oddzielone przecinkami: name, address, contact, hours, ids, social, map – "
+"lub all."
 
 #: assets/local.js:47
-msgid "Location ID(s), \"all\", or empty for the main business / current location."
-msgstr "ID lokalizacji, „all” lub puste dla głównej firmy / bieżącej lokalizacji."
+msgid ""
+"Location ID(s), \"all\", or empty for the main business / current location."
+msgstr ""
+"ID lokalizacji, „all” lub puste dla głównej firmy / bieżącej lokalizacji."
 
 #: assets/local.js:52
 msgid "Map"
@@ -6189,5 +6867,17 @@ msgstr "Odnośnik"
 
 #: assets/local.js:58
 msgid "Embedded map"
-
 msgstr "Osadzona mapa"
+
+#. translators: 1: posts done, 2: total posts
+#: assets/scores.js:57
+msgid "Scored %1$d of %2$d…"
+msgstr "Policzono %1$d z %2$d…"
+
+#: assets/scores.js:62
+msgid "Done. Reloading…"
+msgstr "Gotowe. Odświeżanie…"
+
+#: assets/scores.js:79
+msgid "Calculating…"
+msgstr "Liczenie…"

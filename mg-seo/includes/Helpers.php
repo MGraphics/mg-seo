@@ -238,4 +238,25 @@ final class Helpers {
 	public static function can_edit_post_seo( int $post_id ): bool {
 		return current_user_can( 'edit_post', $post_id ) && current_user_can( 'mgseo_edit_meta' );
 	}
+
+	/**
+	 * Whether a post is indexable from its own robots meta, its password and the post type defaults.
+	 *
+	 * @param array  $own       The post's own robots directives (`_mgseo_robots`).
+	 * @param string $password  Post password.
+	 * @param string $post_type Post type.
+	 */
+	public static function robots_allow_index( array $own, string $password, string $post_type ): bool {
+		if ( in_array( 'noindex', $own, true ) ) {
+			return false;
+		}
+		if ( in_array( 'index', $own, true ) ) {
+			return true;
+		}
+		if ( '' !== $password && Options::get( 'titles', 'noindex_password', true ) ) {
+			return false;
+		}
+		$inherited = array_merge( (array) Options::get( 'titles', 'robots_global', array() ), (array) Options::get( 'titles', 'pt_' . $post_type . '_robots', array() ) );
+		return ! in_array( 'noindex', $inherited, true );
+	}
 }

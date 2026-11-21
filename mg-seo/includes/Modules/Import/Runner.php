@@ -138,20 +138,28 @@ final class Runner {
 				$after   = (int) $result['last'];
 			} while ( ! $result['done'] && ! $stalled );
 		}
-		return self::finish();
+		return self::finish( true );
 	}
 
 	/**
 	 * Mark the stored log finished and return it.
 	 *
+	 * @param bool $sync Whether the whole import ran in this request (WP-CLI, tests).
 	 * @return array<string, mixed>
 	 */
-	public static function finish(): array {
+	public static function finish( bool $sync = false ): array {
 		$log = Log::load();
 		$log->finish();
 		$log->save();
 		if ( ! $log->dry_run() ) {
 			update_option( 'mgseo_flush_rewrite', 1 );
+			/**
+			 * Fires after an import wrote data (SEO scores are recalculated on this hook).
+			 *
+			 * @param array $log  Import log.
+			 * @param bool  $sync Whether the import ran synchronously in this request.
+			 */
+			do_action( 'mgseo/import/finished', $log->to_array(), $sync );
 		}
 		return $log->to_array();
 	}
