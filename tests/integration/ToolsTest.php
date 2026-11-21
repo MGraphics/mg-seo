@@ -59,7 +59,8 @@ class ToolsTest extends TestCase {
 	public function test_robots_txt_replaced_only_when_custom_content_set(): void {
 		$default = "User-agent: *\nDisallow: /wp-admin/\n";
 		$this->assertSame( $default, Robots::filter( $default, '1' ) );
-		$this->assertStringStartsWith( $default, apply_filters( 'robots_txt', $default, '1' ) );
+		// Without custom content the output is not replaced (other plugins such as WooCommerce may still add lines).
+		$this->assertStringContainsString( "Disallow: /wp-admin/\n", apply_filters( 'robots_txt', $default, '1' ) );
 
 		$this->set_option( 'tools', 'robots_txt', "User-agent: *\nDisallow: /private/" );
 		$out = apply_filters( 'robots_txt', $default, '1' );
