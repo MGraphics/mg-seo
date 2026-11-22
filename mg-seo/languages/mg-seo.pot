@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MG SEO 0.2.0\n"
+"Project-Id-Version: MG SEO 0.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-21T22:18:39+00:00\n"
+"POT-Creation-Date: 2026-11-22T19:50:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mg-seo\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: mg-seo.php
 #: includes/Admin/Admin.php:59
 #: includes/Admin/Admin.php:60
-#: includes/Admin/Admin.php:137
+#: includes/Admin/Admin.php:142
 msgid "MG SEO"
 msgstr ""
 
@@ -46,25 +46,25 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: includes/Admin/Admin.php:118
+#: includes/Admin/Admin.php:120
 #: includes/Admin/Settings.php:172
 #: includes/Admin/TermFields.php:100
 #: includes/Modules/Schema/Module.php:719
-#: includes/Modules/Social/Module.php:142
 msgid "Choose image"
 msgstr ""
 
-#: includes/Admin/Admin.php:119
+#: includes/Admin/Admin.php:121
 msgid "Use this image"
 msgstr ""
 
-#: includes/Admin/Admin.php:120
+#: includes/Admin/Admin.php:122
 #: assets/bulk.js:42
 #: assets/image.js:133
+#: assets/seo-ui.js:712
 msgid "Saved"
 msgstr ""
 
-#: includes/Admin/Admin.php:121
+#: includes/Admin/Admin.php:123
 #: assets/bulk.js:68
 #: assets/bulk.js:89
 #: assets/image.js:106
@@ -76,16 +76,46 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/Admin/Admin.php:122
-#: includes/Modules/Analysis/Module.php:685
-#: includes/Modules/Analysis/Overview.php:172
-#: assets/editor.js:68
+#: includes/Admin/Admin.php:124
+#: includes/Modules/Analysis/Module.php:1003
+#: includes/Modules/Analysis/Report.php:196
+#: includes/Modules/Analysis/Scores.php:204
+#: assets/seo-ui.js:58
 msgid "No keyword"
 msgstr ""
 
-#: includes/Admin/Admin.php:133
+#: includes/Admin/Admin.php:125
+msgid "to improve"
+msgstr ""
+
+#: includes/Admin/Admin.php:126
+#: includes/Admin/Metabox.php:83
+#: includes/Admin/TermFields.php:52
+#: includes/Admin/UserFields.php:56
+#: includes/Modules/Analysis/Module.php:711
+#: includes/Modules/Analysis/Module.php:1080
+#: includes/Modules/Bulk/Module.php:117
+#: includes/Modules/Bulk/Module.php:168
+#: assets/editor.js:140
+#: assets/editor.js:212
+#: assets/editor.js:215
+#: assets/editor.js:217
+#: assets/elementor.js:89
+#: assets/elementor.js:108
+#: assets/elementor.js:124
+#: assets/seo-ui.js:253
+#: assets/seo-ui.js:803
+#: assets/seo-ui.js:804
+msgid "SEO"
+msgstr ""
+
+#: includes/Admin/Admin.php:127
+msgid "No image: add a featured image or choose one below."
+msgstr ""
+
+#: includes/Admin/Admin.php:138
 #: includes/Admin/Settings.php:29
-#: includes/Modules/Analysis/Overview.php:192
+#: includes/Modules/Analysis/Overview.php:187
 #: includes/Modules/Bulk/Page.php:24
 #: includes/Modules/Image/Module.php:217
 #: includes/Modules/Import/Page.php:39
@@ -95,18 +125,18 @@ msgstr ""
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: includes/Admin/Admin.php:138
+#: includes/Admin/Admin.php:143
 msgid "Turn modules on or off. Disabled modules load no code on the front end."
 msgstr ""
 
 #. translators: %s: dependency name
-#: includes/Admin/Admin.php:153
+#: includes/Admin/Admin.php:158
 #, php-format
 msgid "Requires %s."
 msgstr ""
 
-#: includes/Admin/Admin.php:156
-#: includes/Admin/Admin.php:232
+#: includes/Admin/Admin.php:161
+#: includes/Admin/Admin.php:237
 #: includes/Modules/Import/Page.php:24
 #: includes/Modules/Redirections/Admin.php:319
 #: includes/Modules/Redirections/Admin.php:516
@@ -116,11 +146,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:161
+#: includes/Admin/Admin.php:166
 msgid "Save modules"
 msgstr ""
 
-#: includes/Admin/Admin.php:184
+#: includes/Admin/Admin.php:189
 #: includes/Admin/Settings.php:239
 #: includes/Modules/Bulk/Csv.php:323
 #: includes/Modules/Redirections/Admin.php:106
@@ -132,20 +162,12 @@ msgstr ""
 msgid "You do not have permission to do this."
 msgstr ""
 
-#: includes/Admin/Admin.php:213
+#: includes/Admin/Admin.php:218
 msgid "Settings saved."
 msgstr ""
 
-#: includes/Admin/Metabox.php:83
-#: includes/Admin/TermFields.php:52
-#: includes/Admin/UserFields.php:56
-#: includes/Modules/Analysis/Module.php:493
-#: includes/Modules/Analysis/Module.php:739
-#: includes/Modules/Bulk/Module.php:117
-#: includes/Modules/Bulk/Module.php:168
-#: assets/editor.js:125
-#: assets/editor.js:130
-msgid "SEO"
+#: includes/Admin/Metabox.php:96
+msgid "Hints"
 msgstr ""
 
 #: includes/Admin/Metabox.php:96
@@ -156,57 +178,84 @@ msgid "General"
 msgstr ""
 
 #: includes/Admin/Metabox.php:103
+#: assets/seo-ui.js:659
+msgid "Title and description in Google"
+msgstr ""
+
+#: includes/Admin/Metabox.php:109
+#: assets/editor.js:168
 msgid "Advanced"
 msgstr ""
 
-#: includes/Admin/Metabox.php:170
-#: includes/Admin/TermFields.php:63
-#: includes/Modules/Bulk/ListTable.php:160
-#: includes/Modules/Bulk/ListTable.php:241
-msgid "Focus keywords"
+#: includes/Admin/Metabox.php:137
+msgid "SEO settings"
+msgstr ""
+
+#: includes/Admin/Metabox.php:169
+#: includes/Modules/SearchConsole/ReportsPage.php:277
+#: includes/Modules/SearchConsole/ReportsPage.php:332
+#: includes/Modules/SearchConsole/ReportsPage.php:368
+#: includes/Modules/SearchConsole/ReportsPage.php:501
+#: assets/seo-ui.js:369
+msgid "Keyword"
 msgstr ""
 
 #: includes/Admin/Metabox.php:171
-msgid "Main keyword, secondary keyword, …"
+#: assets/seo-ui.js:411
+msgid "The words someone types into Google to find this page. Separate more keywords with commas."
 msgstr ""
 
-#: includes/Admin/Metabox.php:172
-msgid "Separate keywords with commas. The first one is the primary keyword."
-msgstr ""
-
-#: includes/Admin/Metabox.php:178
+#: includes/Admin/Metabox.php:174
+#: assets/seo-ui.js:376
 msgid "Suggestion from the title:"
 msgstr ""
 
-#: includes/Admin/Metabox.php:184
-#: includes/Admin/TermFields.php:55
-#: includes/Modules/Bulk/ListTable.php:158
-#: includes/Modules/Bulk/ListTable.php:226
-#: includes/Modules/Bulk/Module.php:169
-msgid "SEO title"
+#: includes/Admin/Metabox.php:182
+msgid "Turn on the Content Analysis module to get the score and hints."
 msgstr ""
 
-#: includes/Admin/Metabox.php:188
-#: includes/Admin/TermFields.php:59
-#: includes/Modules/Bulk/ListTable.php:159
-#: includes/Modules/Bulk/ListTable.php:234
-msgid "Meta description"
+#: includes/Admin/Metabox.php:207
+#: assets/seo-ui.js:498
+msgid "Preview size"
 msgstr ""
 
-#: includes/Admin/Metabox.php:193
-msgid "SEO analysis"
+#: includes/Admin/Metabox.php:208
+#: includes/Modules/Schema/Module.php:167
+#: includes/Modules/Schema/Module.php:293
+#: includes/Modules/Schema/Types.php:579
+#: includes/Modules/Schema/Types.php:598
+#: includes/Modules/Schema/Types.php:609
+#: includes/Modules/Schema/Types.php:627
+#: assets/seo-ui.js:499
+msgid "Phone"
 msgstr ""
 
-#: includes/Admin/Metabox.php:194
-msgid "Enter a focus keyword to analyse the content."
+#: includes/Admin/Metabox.php:209
+#: assets/seo-ui.js:500
+msgid "Desktop"
 msgstr ""
 
-#: includes/Admin/Metabox.php:215
+#: includes/Admin/Metabox.php:218
+#: assets/seo-ui.js:484
+msgid "Title in Google"
+msgstr ""
+
+#: includes/Admin/Metabox.php:220
+#: includes/Admin/Metabox.php:225
+msgid "Insert variable"
+msgstr ""
+
 #: includes/Admin/Metabox.php:223
+#: assets/seo-ui.js:489
+msgid "Description in Google"
+msgstr ""
+
+#: includes/Admin/Metabox.php:240
+#: includes/Admin/Metabox.php:248
 #: includes/Admin/TermFields.php:73
 #: includes/Admin/UserFields.php:80
 #: includes/Helpers.php:167
-#: includes/Modules/Analysis/Module.php:546
+#: includes/Modules/Analysis/Module.php:769
 #: includes/Modules/Bulk/ListTable.php:58
 #: includes/Modules/Bulk/ListTable.php:249
 #: includes/Modules/Bulk/Module.php:133
@@ -215,15 +264,15 @@ msgstr ""
 msgid "No Index"
 msgstr ""
 
-#: includes/Admin/Metabox.php:215
-#: includes/Admin/Metabox.php:222
+#: includes/Admin/Metabox.php:240
+#: includes/Admin/Metabox.php:247
 #: includes/Admin/TermFields.php:72
 #: includes/Modules/Bulk/ListTable.php:248
 #: includes/Modules/Bulk/Module.php:204
 msgid "Index"
 msgstr ""
 
-#: includes/Admin/Metabox.php:218
+#: includes/Admin/Metabox.php:243
 #: includes/Admin/TermFields.php:68
 #: includes/Modules/Bulk/ListTable.php:161
 #: includes/Modules/Bulk/ListTable.php:251
@@ -233,71 +282,71 @@ msgid "Indexing"
 msgstr ""
 
 #. translators: %s: default indexing value
-#: includes/Admin/Metabox.php:221
+#: includes/Admin/Metabox.php:246
 #, php-format
 msgid "Default (%s)"
 msgstr ""
 
-#: includes/Admin/Metabox.php:226
+#: includes/Admin/Metabox.php:251
 #: includes/Modules/Titles/Module.php:256
 #: includes/Modules/Titles/Module.php:307
 msgid "Robots meta"
 msgstr ""
 
-#: includes/Admin/Metabox.php:237
+#: includes/Admin/Metabox.php:262
 msgid "Max snippet"
 msgstr ""
 
-#: includes/Admin/Metabox.php:238
+#: includes/Admin/Metabox.php:263
 msgid "Max video preview"
 msgstr ""
 
-#: includes/Admin/Metabox.php:239
+#: includes/Admin/Metabox.php:264
 #: includes/Modules/Titles/Module.php:118
 msgid "Max image preview"
 msgstr ""
 
-#: includes/Admin/Metabox.php:241
+#: includes/Admin/Metabox.php:266
 #: includes/Admin/TermFields.php:71
 #: includes/Modules/Bulk/ListTable.php:247
 #: includes/Modules/Bulk/Module.php:203
 #: includes/Modules/Schema/Module.php:698
-#: includes/Modules/Social/Module.php:152
+#: includes/Modules/Social/Module.php:188
 #: includes/Modules/WooCommerce/Fields.php:34
 #: assets/local.js:55
 msgid "Default"
 msgstr ""
 
-#: includes/Admin/Metabox.php:249
+#: includes/Admin/Metabox.php:274
 #: includes/Admin/TermFields.php:86
 msgid "Canonical URL"
 msgstr ""
 
-#: includes/Admin/Metabox.php:253
+#: includes/Admin/Metabox.php:278
 msgid "Breadcrumb title"
 msgstr ""
 
 #. translators: %s: taxonomy singular name
-#: includes/Admin/Metabox.php:268
+#: includes/Admin/Metabox.php:293
 #, php-format
 msgid "Primary %s"
 msgstr ""
 
-#: includes/Admin/Metabox.php:269
+#: includes/Admin/Metabox.php:294
 #: includes/Modules/Schema/Graph.php:386
 #: includes/Modules/Tools/Utilities.php:181
 msgid "Automatic"
 msgstr ""
 
-#: includes/Admin/Metabox.php:277
+#: includes/Admin/Metabox.php:302
 msgid "Pillar content (cornerstone, preferred in link suggestions)"
 msgstr ""
 
-#: includes/Admin/Metabox.php:278
+#: includes/Admin/Metabox.php:303
 msgid "Exclude from XML sitemap"
 msgstr ""
 
-#: includes/Admin/Metabox.php:279
+#: includes/Admin/Metabox.php:304
 msgid "Exclude from Google News sitemap"
 msgstr ""
 
@@ -307,6 +356,25 @@ msgstr ""
 
 #: includes/Admin/Settings.php:225
 msgid "Available variables"
+msgstr ""
+
+#: includes/Admin/TermFields.php:55
+#: includes/Modules/Bulk/ListTable.php:158
+#: includes/Modules/Bulk/ListTable.php:226
+#: includes/Modules/Bulk/Module.php:169
+msgid "SEO title"
+msgstr ""
+
+#: includes/Admin/TermFields.php:59
+#: includes/Modules/Bulk/ListTable.php:159
+#: includes/Modules/Bulk/ListTable.php:234
+msgid "Meta description"
+msgstr ""
+
+#: includes/Admin/TermFields.php:63
+#: includes/Modules/Bulk/ListTable.php:160
+#: includes/Modules/Bulk/ListTable.php:241
+msgid "Focus keywords"
 msgstr ""
 
 #: includes/Admin/TermFields.php:91
@@ -377,245 +445,594 @@ msgstr ""
 msgid "Bulk edit SEO data"
 msgstr ""
 
-#. translators: %d: characters
-#: includes/Modules/Analysis/Analyzer.php:140
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:172
 #, php-format
-msgid "SEO title has %d characters (aim for 30–60)."
-msgstr ""
-
-#. translators: %d: characters
-#: includes/Modules/Analysis/Analyzer.php:149
-#, php-format
-msgid "Meta description has %d characters (aim for 120–160)."
-msgstr ""
-
-#. translators: 1: word count, 2: recommended minimum
-#: includes/Modules/Analysis/Analyzer.php:158
-#, php-format
-msgid "Content is %1$d words long (recommended at least %2$d)."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:163
-msgid "Focus keyword appears in the SEO title."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:163
-msgid "Add the focus keyword to the SEO title."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:164
-msgid "Focus keyword appears in the meta description."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:164
-msgid "Add the focus keyword to the meta description."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:169
-msgid "Focus keyword is used in the URL."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:169
-msgid "Use the focus keyword in the URL slug."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:175
-msgid "Focus keyword appears at the beginning of the content."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:175
-msgid "Use the focus keyword in the first paragraph."
-msgstr ""
-
-#. translators: %d: occurrences
-#: includes/Modules/Analysis/Analyzer.php:183
-#, php-format
-msgid "Focus keyword found %d time in the content."
-msgid_plural "Focus keyword found %d times in the content."
+msgid "The title in Google has a good length (%d character)"
+msgid_plural "The title in Google has a good length (%d characters)"
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: %d: occurrences
-#: includes/Modules/Analysis/Analyzer.php:183
-msgid "Focus keyword does not appear in the content."
-msgstr ""
-
-#. translators: %s: density percent
-#: includes/Modules/Analysis/Analyzer.php:194
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:179
 #, php-format
-msgid "Keyword density is %s%% (aim for 0.5–2.5%%)."
+msgid "The title in Google is too long: %d character"
+msgid_plural "The title in Google is too long: %d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:182
+msgid "Google cuts it off after about 60 characters. Shorten the title or remove the site name from it."
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:206
-msgid "Focus keyword found in subheadings (H2–H4)."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:206
-msgid "Use the focus keyword in at least one subheading."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:216
-msgid "Focus keyword found in an image alt attribute."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:216
-#: includes/Modules/Analysis/Scores.php:271
-msgid "Add an image with the focus keyword in its alt text."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:221
-msgid "Focus keyword is near the beginning of the title."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:221
-msgid "Move the focus keyword closer to the beginning of the title."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:224
-msgid "Focus keyword is not used by other content yet."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:224
-msgid "Another post already targets this focus keyword."
-msgstr ""
-
-#. translators: %s: keyword
-#: includes/Modules/Analysis/Analyzer.php:233
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:192
 #, php-format
-msgid "Secondary keyword \"%s\" is used."
+msgid "The title in Google is short: %d character"
+msgid_plural "The title in Google is short: %d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:192
+msgid "Write a title for Google"
 msgstr ""
 
-#. translators: %s: keyword
-#: includes/Modules/Analysis/Analyzer.php:233
+#: includes/Modules/Analysis/Analyzer.php:195
+msgid "There is room to say what the page is about (up to about 60 characters)."
+msgstr ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:205
 #, php-format
-msgid "Secondary keyword \"%s\" is not used yet."
+msgid "The description in Google has a good length (%d character)"
+msgid_plural "The description in Google has a good length (%d characters)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:212
+#, php-format
+msgid "The description in Google is too long: %d character"
+msgid_plural "The description in Google is too long: %d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:215
+msgid "Google cuts it off after about 160 characters. Put the most important part at the beginning."
 msgstr ""
 
-#. translators: %d: characters
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:225
+#, php-format
+msgid "The description in Google is too short: %d character"
+msgid_plural "The description in Google is too short: %d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:225
+msgid "Write a description for Google"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:228
+msgid "This is the text under the title in search results. Write 1 or 2 sentences (120–160 characters) that make people want to click."
+msgstr ""
+
+#. translators: %d: number of words
+#: includes/Modules/Analysis/Analyzer.php:239
+#, php-format
+msgid "The text has a good length (%d word)"
+msgid_plural "The text has a good length (%d words)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of words
+#: includes/Modules/Analysis/Analyzer.php:243
+#, php-format
+msgid "The text is short: %d word"
+msgid_plural "The text is short: %d words"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: recommended number of words
 #: includes/Modules/Analysis/Analyzer.php:245
 #, php-format
-msgid "URL is %d characters long (keep it under 75)."
+msgid "Cover the topic in more depth, ideally in %d word or more."
+msgid_plural "Cover the topic in more depth, ideally in %d words or more."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of words
+#: includes/Modules/Analysis/Analyzer.php:248
+#, php-format
+msgid "The text is very short: %d word"
+msgid_plural "The text is very short: %d words"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: recommended number of words
+#: includes/Modules/Analysis/Analyzer.php:250
+#, php-format
+msgid "Texts this short rarely rank high in Google. Cover the topic in more depth, ideally in %d word or more."
+msgid_plural "Texts this short rarely rank high in Google. Cover the topic in more depth, ideally in %d words or more."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:261
+msgid "The keyword is in the title"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:261
+#: includes/Modules/Analysis/Scores.php:298
+msgid "Add the keyword to the title"
 msgstr ""
 
 #: includes/Modules/Analysis/Analyzer.php:264
-msgid "Content links to other pages of this site."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:264
-msgid "Add internal links to related content."
+msgid "The title is the first place where Google and readers look for what the page is about."
 msgstr ""
 
 #: includes/Modules/Analysis/Analyzer.php:265
-msgid "Content links to external sources."
+msgid "title"
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:265
-msgid "Consider linking to a relevant external source."
+#: includes/Modules/Analysis/Analyzer.php:275
+msgid "The keyword is in the description in Google"
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:268
-msgid "Title contains a number."
-msgstr ""
-
-#: includes/Modules/Analysis/Analyzer.php:268
-msgid "Titles with numbers often get more clicks."
+#: includes/Modules/Analysis/Analyzer.php:275
+#: includes/Modules/Analysis/Scores.php:299
+msgid "Add the keyword to the description in Google"
 msgstr ""
 
 #: includes/Modules/Analysis/Analyzer.php:278
-msgid "Paragraphs are a readable length."
+msgid "Google highlights the searched words in the description, so the result stands out."
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:278
-msgid "Some paragraphs are longer than 150 words; split them."
+#: includes/Modules/Analysis/Analyzer.php:279
+msgid "description in Google"
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:281
-msgid "Content contains images or video."
+#. translators: %s: example address ending, e.g. /physiotherapy-krakow
+#: includes/Modules/Analysis/Analyzer.php:292
+#, php-format
+msgid "The address is shown in search results. Change its ending, e.g. to %s."
 msgstr ""
 
-#: includes/Modules/Analysis/Analyzer.php:281
-msgid "Add images or video to the content."
+#: includes/Modules/Analysis/Analyzer.php:294
+msgid "The old address will be redirected automatically."
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:77
-#: includes/Modules/Analysis/Overview.php:214
+#: includes/Modules/Analysis/Analyzer.php:301
+msgid "The keyword is in the page address"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:301
+#: includes/Modules/Analysis/Scores.php:300
+msgid "Add the keyword to the page address"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:305
+msgid "page address"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:318
+msgid "The keyword is at the beginning of the text"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:318
+#: includes/Modules/Analysis/Scores.php:301
+msgid "Use the keyword at the beginning of the text"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:321
+msgid "Ideally in the first paragraph: readers know right away they are in the right place."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:322
+msgid "first paragraph"
+msgstr ""
+
+#. translators: %s: keyword form found in the text
+#: includes/Modules/Analysis/Analyzer.php:331
+#, php-format
+msgid "Inflected forms and short words in between count too, e.g. “%s”."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:333
+#: includes/Modules/Analysis/Report.php:68
+msgid "Google will not connect the page with what people search for. Use the keyword in the title and in the first paragraph, then in one subheading."
+msgstr ""
+
+#. translators: 1: keyword, 2: number of occurrences
+#: includes/Modules/Analysis/Analyzer.php:340
+#, php-format
+msgid "The keyword appears in the text %2$d time"
+msgid_plural "The keyword appears in the text %2$d times"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: keyword, 2: number of occurrences
+#: includes/Modules/Analysis/Analyzer.php:340
+#, php-format
+msgid "The keyword “%1$s” is not on this page"
+msgstr ""
+
+#. translators: %d: number of occurrences
+#: includes/Modules/Analysis/Analyzer.php:355
+#, php-format
+msgid "The keyword is used %d time, just right"
+msgid_plural "The keyword is used %d times, just right"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of occurrences
+#: includes/Modules/Analysis/Analyzer.php:359
+#, php-format
+msgid "The keyword is repeated too often: %d time"
+msgid_plural "The keyword is repeated too often: %d times"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:360
+msgid "This sounds unnatural. Replace some of the repetitions with other words."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:362
+msgid "The keyword appears in the text only once"
+msgstr ""
+
+#. translators: %d: number of occurrences
+#: includes/Modules/Analysis/Analyzer.php:364
+#, php-format
+msgid "The keyword appears in the text too rarely: %d time"
+msgid_plural "The keyword appears in the text too rarely: %d times"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: minimum, 2: maximum number of uses
+#: includes/Modules/Analysis/Analyzer.php:368
+#, php-format
+msgid "For a text of this length, use it %1$d to %2$d times, naturally."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:394
+msgid "The keyword is in a subheading"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:394
+#: includes/Modules/Analysis/Scores.php:304
+msgid "Use the keyword in one subheading"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:397
+msgid "Subheadings help Google understand what each part of the text is about."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:398
+msgid "subheadings"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:412
+msgid "The keyword is in an image description"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:414
+#: includes/Modules/Analysis/Scores.php:305
+msgid "Describe an image with words from the keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:414
+msgid "Add an image and describe it with words from the keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:423
+msgid "Image settings have an “Alternative text” field. Describe briefly what the image shows."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:424
+msgid "image description"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:435
+msgid "The keyword is at the beginning of the title"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:435
+#: includes/Modules/Analysis/Scores.php:306
+msgid "Move the keyword closer to the beginning of the title"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:438
+msgid "The beginning of the title is the most visible part, especially on phones."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:449
+msgid "Two pages with the same keyword compete with each other. Open the other page or choose a different keyword."
+msgstr ""
+
+#. translators: 1: title of the other page, 2: explanation
+#: includes/Modules/Analysis/Analyzer.php:452
+#, php-format
+msgid "“%1$s”. %2$s"
+msgstr ""
+
+#. translators: 1: title of the other page, 2: explanation
+#: includes/Modules/Analysis/Analyzer.php:452
+msgid "Two pages with the same keyword compete with each other."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:464
+msgid "No other page uses this keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:464
+#: includes/Modules/Analysis/Scores.php:307
+msgid "Another page already uses this keyword"
+msgstr ""
+
+#. translators: %s: keyword
+#: includes/Modules/Analysis/Analyzer.php:479
+#, php-format
+msgid "The additional keyword “%s” is used in the text"
+msgstr ""
+
+#. translators: %s: keyword
+#: includes/Modules/Analysis/Analyzer.php:479
+#, php-format
+msgid "The additional keyword “%s” is not used in the text"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:481
+msgid "Use it at least once if it fits the topic."
+msgstr ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:492
+msgid "The page address is short"
+msgstr ""
+
+#. translators: %d: number of characters
+#: includes/Modules/Analysis/Analyzer.php:492
+#, php-format
+msgid "The page address is long: %d character"
+msgid_plural "The page address is long: %d characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:495
+msgid "A short address is easier to read and copy. Shorten its ending."
+msgstr ""
+
+#. translators: %d: number of links
+#: includes/Modules/Analysis/Analyzer.php:520
+#, php-format
+msgid "The text links to other pages of the site (%d link)"
+msgid_plural "The text links to other pages of the site (%d links)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of links
+#: includes/Modules/Analysis/Analyzer.php:520
+msgid "No links to other pages of the site"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:523
+msgid "Links lead readers and Google to the rest of the site. Add 1 or 2."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:533
+msgid "The text links to an external source"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:533
+#: includes/Modules/Analysis/Scores.php:310
+msgid "You can link to a trustworthy source"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:535
+msgid "A link to research, an authority or a manufacturer shows where your information comes from."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:543
+msgid "The title contains a number"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:543
+#: includes/Modules/Analysis/Scores.php:311
+msgid "A number in the title often gets more clicks"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:545
+msgid "For example “5 exercises …” or “in 2026”. This is a tip, not an error."
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:561
+msgid "Paragraphs are short and easy to read"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:561
+#: includes/Modules/Analysis/Scores.php:312
+msgid "Split long paragraphs"
+msgstr ""
+
+#. translators: %d: number of paragraphs
+#: includes/Modules/Analysis/Analyzer.php:564
+#, php-format
+msgid "%d paragraph has more than 150 words. Shorter ones are easier to read on a phone."
+msgid_plural "%d paragraphs have more than 150 words. Shorter ones are easier to read on a phone."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Analysis/Analyzer.php:573
+msgid "The text has an image or a video"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:573
+#: includes/Modules/Analysis/Scores.php:313
+msgid "Add an image or a video"
+msgstr ""
+
+#: includes/Modules/Analysis/Analyzer.php:575
+msgid "Images break up the text and can appear in Google Images."
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:83
+#: includes/Modules/Analysis/Overview.php:209
 msgid "SEO Overview"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:78
+#: includes/Modules/Analysis/Module.php:84
 #: includes/Modules/Links/ReportPage.php:27
 #: includes/Modules/SearchConsole/ReportsPage.php:24
 msgid "Overview"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:475
+#: includes/Modules/Analysis/Module.php:100
+msgid "Hints per content type"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:101
+msgid "Blog posts get every hint. Pages such as Contact or Pricing skip the advice meant for articles: the minimum length, a number in the title, a link to an external source and an image or video."
+msgstr ""
+
+#. translators: %s: post type name
+#: includes/Modules/Analysis/Module.php:109
+#, php-format
+msgid "%s: hints"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:111
+msgid "Article: all hints"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:112
+msgid "Page: without blog hints"
+msgstr ""
+
+#. translators: %s: post type name
+#: includes/Modules/Analysis/Module.php:120
+#, php-format
+msgid "%s: minimum words"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:121
+msgid "0 = no minimum length."
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:130
+msgid "Content types"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:346
+#: includes/Modules/Bulk/Module.php:256
+#: includes/Modules/Links/Module.php:451
+#: includes/Modules/Schema/Module.php:612
+msgid "Post not found."
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:693
 msgid "This post cannot be scored."
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:530
+#: includes/Modules/Analysis/Module.php:751
 msgid "Calculate score"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:601
+#: includes/Modules/Analysis/Module.php:829
+msgid "Filter by SEO score"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:844
+msgid "All SEO scores"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:845
+msgid "SEO: to improve (below 80)"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:846
+#: includes/Modules/Bulk/ListTable.php:59
+msgid "SEO: poor (0–49)"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:847
+#: includes/Modules/Bulk/ListTable.php:60
+msgid "SEO: needs work (50–79)"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:848
+#: includes/Modules/Bulk/ListTable.php:61
+msgid "SEO: good (80–100)"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:849
+#: includes/Modules/Bulk/ListTable.php:62
+msgid "SEO: no keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:916
 msgid "Recalculate SEO score"
 msgstr ""
 
 #. translators: %d: number of posts
-#: includes/Modules/Analysis/Module.php:647
+#: includes/Modules/Analysis/Module.php:962
 #, php-format
 msgid "SEO score recalculated for %d post."
 msgid_plural "SEO score recalculated for %d posts."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Modules/Analysis/Module.php:706
-msgid "SEO score:"
+#: includes/Modules/Analysis/Module.php:1029
+msgid "Show"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:708
-msgid "Details"
+#. translators: %s: state, e.g. "No keyword"
+#: includes/Modules/Analysis/Module.php:1041
+#, php-format
+msgid "SEO: %s"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:741
-msgid "SEO score of this page"
+#. translators: 1: score, 2: band word
+#: includes/Modules/Analysis/Module.php:1044
+#, php-format
+msgid "SEO: %1$s, %2$s"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:749
-#: includes/Modules/Analysis/Overview.php:360
-#: includes/Modules/Analysis/Overview.php:362
-#: assets/editor.js:110
-msgid "Set a focus keyword"
+#: includes/Modules/Analysis/Module.php:1099
+#: includes/Modules/Analysis/Scores.php:293
+msgid "Enter a keyword so the page can be scored"
 msgstr ""
 
-#: includes/Modules/Analysis/Module.php:771
-#: assets/editor.js:112
+#: includes/Modules/Analysis/Module.php:1132
+msgid "Open SEO hints"
+msgstr ""
+
+#: includes/Modules/Analysis/Module.php:1143
+#: assets/editor.js:171
 msgid "SEO overview of all pages"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:169
-msgid "Not calculated yet"
-msgstr ""
-
-#: includes/Modules/Analysis/Overview.php:215
+#: includes/Modules/Analysis/Overview.php:210
 msgid "Every indexable page with its SEO score, worst first. Start at the top: each row lists the changes that raise the score the most. Scores are calculated on this server from the focus keyword and the content."
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:224
+#: includes/Modules/Analysis/Overview.php:219
 msgid "All pages"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:244
+#: includes/Modules/Analysis/Overview.php:240
 #: includes/Modules/Bulk/Page.php:78
 #: includes/Modules/Bulk/Page.php:114
 #: includes/Modules/Schema/Module.php:706
 msgid "Post type"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:245
+#: includes/Modules/Analysis/Overview.php:241
 msgid "All post types"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:250
+#: includes/Modules/Analysis/Overview.php:246
 #: includes/Modules/Bulk/Page.php:82
 #: includes/Modules/Bulk/Page.php:87
 #: includes/Modules/Redirections/ListTable.php:164
@@ -623,71 +1040,87 @@ msgid "Filter"
 msgstr ""
 
 #. translators: %d: number of pages
-#: includes/Modules/Analysis/Overview.php:258
+#: includes/Modules/Analysis/Overview.php:254
 #, php-format
 msgid "%d page has not been scored yet. It will be scored in the background, or click \"Recalculate all\"."
 msgid_plural "%d pages have not been scored yet. They will be scored in the background, or click \"Recalculate all\"."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Modules/Analysis/Overview.php:263
+#: includes/Modules/Analysis/Overview.php:259
 #: includes/Modules/Bulk/ListTable.php:162
 msgid "Score"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:264
+#: includes/Modules/Analysis/Overview.php:260
 #: includes/Modules/SearchConsole/ReportsPage.php:277
 msgid "Page"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:265
+#: includes/Modules/Analysis/Overview.php:261
 msgid "What to improve first"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:266
+#: includes/Modules/Analysis/Overview.php:262
 msgid "Focus keyword"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:269
+#: includes/Modules/Analysis/Overview.php:265
 msgid "No pages found."
 msgstr ""
 
 #. translators: %s: date and time
-#: includes/Modules/Analysis/Overview.php:295
+#: includes/Modules/Analysis/Overview.php:291
 #, php-format
 msgid "All scores last recalculated: %s."
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:297
+#: includes/Modules/Analysis/Overview.php:293
 msgid "Scores update when a page is saved and once a day in the background (they also depend on other pages, e.g. duplicate focus keywords)."
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:312
+#: includes/Modules/Analysis/Overview.php:308
 #: includes/Modules/Bulk/ListTable.php:215
 #: includes/Modules/Links/ReportPage.php:114
 msgid "(no title)"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:324
+#: includes/Modules/Analysis/Overview.php:320
 msgid "Edit SEO"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:326
+#: includes/Modules/Analysis/Overview.php:322
 #: includes/Modules/Links/ReportPage.php:117
 #: includes/Modules/Redirections/LogTable.php:128
 msgid "View"
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:329
+#: includes/Modules/Analysis/Overview.php:325
 msgid "Not calculated yet."
 msgstr ""
 
-#: includes/Modules/Analysis/Overview.php:333
-#: assets/editor.js:96
+#: includes/Modules/Analysis/Overview.php:329
 msgid "Nothing important left to fix."
 msgstr ""
 
+#: includes/Modules/Analysis/Overview.php:333
+msgid "To improve:"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:333
+msgid "Worth considering:"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:356
+msgid "enter a keyword in the editor"
+msgstr ""
+
+#: includes/Modules/Analysis/Overview.php:356
+msgid "Set a focus keyword"
+msgstr ""
+
 #. translators: %s: suggested focus keyword
+#: includes/Modules/Analysis/Overview.php:360
 #: includes/Modules/Analysis/Overview.php:368
 #, php-format
 msgid "Suggestion: “%s”"
@@ -697,103 +1130,165 @@ msgstr ""
 msgid "Recalculate all"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:198
-msgid "Poor (0–49)"
+#. translators: %s: keyword
+#: includes/Modules/Analysis/Report.php:67
+#, php-format
+msgid "The keyword “%s” is not in the text"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:199
-msgid "Needs work (50–79)"
+#. translators: %s: keyword
+#: includes/Modules/Analysis/Report.php:67
+#, php-format
+msgid "The keyword “%s” is not on this page"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:200
-msgid "Good (80–100)"
+#: includes/Modules/Analysis/Report.php:139
+msgid "To improve"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:139
+msgid "To improve without a keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:140
+msgid "Worth considering"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:141
+msgid "All good"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:158
+msgid "Open the other page"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:164
+msgid "Edit the title in Google"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:165
+msgid "Write the description"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:166
+msgid "Change the keyword"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:167
+msgid "Change the address"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:179
+msgid "Show matching pages"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:192
+#: assets/seo-ui.js:54
+msgid "Good"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:193
+#: assets/seo-ui.js:55
+msgid "Needs work"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:194
+#: assets/seo-ui.js:56
+msgid "Poor"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:195
+#: assets/seo-ui.js:57
+msgid "Not calculated yet"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:208
+#: assets/seo-ui.js:63
+msgid "Enter a keyword to calculate the score"
+msgstr ""
+
+#: includes/Modules/Analysis/Report.php:211
+#: assets/seo-ui.js:69
+msgid "Nothing important left to fix"
+msgstr ""
+
+#. translators: %d: number of things to improve
+#: includes/Modules/Analysis/Report.php:214
+#: assets/seo-ui.js:72
+#, php-format,js-format
+msgid "%d thing to improve"
+msgid_plural "%d things to improve"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of things to improve
+#: includes/Modules/Analysis/Report.php:224
+#, php-format
+msgid "%d to improve"
+msgid_plural "%d to improve"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: state, e.g. "No keyword"
+#: includes/Modules/Analysis/Report.php:237
+#: assets/seo-ui.js:87
+#, php-format,js-format
+msgid "SEO score: %s"
+msgstr ""
+
+#. translators: 1: score, 2: band word
+#: includes/Modules/Analysis/Report.php:240
+#: assets/seo-ui.js:90
+#, php-format,js-format
+msgid "SEO score: %1$d out of 100, %2$s"
 msgstr ""
 
 #: includes/Modules/Analysis/Scores.php:201
-msgid "No focus keyword"
+msgid "Poor (0–49)"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:260
-msgid "Set a focus keyword so the page can be scored."
+#: includes/Modules/Analysis/Scores.php:202
+msgid "Needs work (50–79)"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:261
-msgid "Make the SEO title 30–60 characters long."
+#: includes/Modules/Analysis/Scores.php:203
+msgid "Good (80–100)"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:262
-msgid "Write a meta description of 120–160 characters."
+#: includes/Modules/Analysis/Scores.php:294
+#: includes/Modules/Analysis/Scores.php:302
+msgid "The keyword is not on this page"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:263
-msgid "Add more content (at least 600 words is recommended)."
+#: includes/Modules/Analysis/Scores.php:295
+msgid "Fix the length of the title in Google (30–60 characters)"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:264
-msgid "Put the focus keyword in the SEO title."
+#: includes/Modules/Analysis/Scores.php:296
+msgid "Fix the length of the description in Google (120–160 characters)"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:265
-msgid "Use the focus keyword in the meta description."
+#: includes/Modules/Analysis/Scores.php:297
+msgid "The text is short: cover the topic in more depth"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:266
-msgid "Use the focus keyword in the URL."
+#: includes/Modules/Analysis/Scores.php:303
+msgid "Use the keyword more naturally in the text"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:267
-msgid "Mention the focus keyword in the first paragraph."
+#: includes/Modules/Analysis/Scores.php:308
+msgid "Shorten the page address"
 msgstr ""
 
-#: includes/Modules/Analysis/Scores.php:268
-msgid "Use the focus keyword in the content."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:269
-msgid "Use the focus keyword more naturally (0.5–2.5% of the words)."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:270
-msgid "Use the focus keyword in a subheading (H2–H4)."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:272
-msgid "Move the focus keyword closer to the start of the title."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:273
-msgid "Another page targets the same focus keyword: pick a different one."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:274
-msgid "Shorten the URL to under 75 characters."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:275
-msgid "Link to other pages of this site."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:276
-msgid "Link to a trustworthy external source."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:277
-msgid "Consider a number in the title."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:278
-msgid "Split paragraphs longer than 150 words."
-msgstr ""
-
-#: includes/Modules/Analysis/Scores.php:279
-msgid "Add an image or a video."
+#: includes/Modules/Analysis/Scores.php:309
+msgid "Add a link to another page of the site"
 msgstr ""
 
 #: includes/Modules/Breadcrumbs/Module.php:49
 #: includes/Modules/Breadcrumbs/Module.php:401
 #: includes/Modules/Breadcrumbs/Module.php:478
 #: includes/Plugin.php:146
-#: assets/editor.js:183
+#: assets/editor.js:28
 msgid "Breadcrumbs"
 msgstr ""
 
@@ -970,22 +1465,6 @@ msgstr ""
 msgid "Missing focus keyword"
 msgstr ""
 
-#: includes/Modules/Bulk/ListTable.php:59
-msgid "Score below 50"
-msgstr ""
-
-#: includes/Modules/Bulk/ListTable.php:60
-msgid "Score 50–79"
-msgstr ""
-
-#: includes/Modules/Bulk/ListTable.php:61
-msgid "Score 80+"
-msgstr ""
-
-#: includes/Modules/Bulk/ListTable.php:62
-msgid "No score"
-msgstr ""
-
 #: includes/Modules/Bulk/ListTable.php:157
 #: includes/Modules/Bulk/Page.php:141
 msgid "Post"
@@ -993,10 +1472,6 @@ msgstr ""
 
 #: includes/Modules/Bulk/ListTable.php:163
 msgid "Actions"
-msgstr ""
-
-#: includes/Modules/Bulk/ListTable.php:259
-msgid "N/A"
 msgstr ""
 
 #: includes/Modules/Bulk/ListTable.php:264
@@ -1044,12 +1519,6 @@ msgstr ""
 
 #: includes/Modules/Bulk/Module.php:201
 msgid "— No change —"
-msgstr ""
-
-#: includes/Modules/Bulk/Module.php:256
-#: includes/Modules/Links/Module.php:451
-#: includes/Modules/Schema/Module.php:612
-msgid "Post not found."
 msgstr ""
 
 #: includes/Modules/Bulk/Module.php:259
@@ -1326,6 +1795,7 @@ msgstr ""
 #: includes/Modules/Schema/Types.php:402
 #: includes/Modules/Schema/Types.php:624
 #: includes/Modules/Schema/Types.php:884
+#: includes/Modules/Social/Module.php:177
 msgid "Image"
 msgstr ""
 
@@ -1663,10 +2133,12 @@ msgstr ""
 
 #: includes/Modules/Links/Module.php:364
 #: includes/Modules/Links/ReportPage.php:225
+#: assets/seo-ui.js:349
 msgid "Copy link"
 msgstr ""
 
 #: includes/Modules/Links/Module.php:365
+#: assets/seo-ui.js:353
 msgid "Copied"
 msgstr ""
 
@@ -2951,7 +3423,7 @@ msgstr[1] ""
 #. translators: %d: number of minutes
 #. translators: %d: minutes
 #: includes/Modules/Schema/Blocks.php:243
-#: includes/Modules/Social/Module.php:420
+#: includes/Modules/Social/Module.php:461
 #, php-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3088,15 +3560,6 @@ msgstr ""
 msgid "Empty: the home URL."
 msgstr ""
 
-#: includes/Modules/Schema/Module.php:167
-#: includes/Modules/Schema/Module.php:293
-#: includes/Modules/Schema/Types.php:579
-#: includes/Modules/Schema/Types.php:598
-#: includes/Modules/Schema/Types.php:609
-#: includes/Modules/Schema/Types.php:627
-msgid "Phone"
-msgstr ""
-
 #: includes/Modules/Schema/Module.php:173
 #: includes/Modules/Schema/Types.php:600
 msgid "Founding date"
@@ -3186,6 +3649,7 @@ msgstr ""
 #: includes/Modules/Schema/Module.php:313
 #: includes/Modules/Schema/Module.php:687
 #: includes/Modules/SearchConsole/ReportsPage.php:390
+#: includes/Modules/Social/Module.php:181
 msgid "Remove"
 msgstr ""
 
@@ -4608,13 +5072,6 @@ msgstr ""
 msgid "Position"
 msgstr ""
 
-#: includes/Modules/SearchConsole/ReportsPage.php:277
-#: includes/Modules/SearchConsole/ReportsPage.php:332
-#: includes/Modules/SearchConsole/ReportsPage.php:368
-#: includes/Modules/SearchConsole/ReportsPage.php:501
-msgid "Keyword"
-msgstr ""
-
 #: includes/Modules/SearchConsole/ReportsPage.php:286
 #: includes/Modules/SearchConsole/ReportsPage.php:305
 msgid "Track"
@@ -5061,7 +5518,6 @@ msgid "All sitemaps"
 msgstr ""
 
 #: includes/Modules/Social/Module.php:49
-#: includes/Modules/Social/Module.php:123
 msgid "Social"
 msgstr ""
 
@@ -5110,12 +5566,12 @@ msgid "Default Twitter card"
 msgstr ""
 
 #: includes/Modules/Social/Module.php:96
-#: includes/Modules/Social/Module.php:153
+#: includes/Modules/Social/Module.php:189
 msgid "Summary with large image"
 msgstr ""
 
 #: includes/Modules/Social/Module.php:97
-#: includes/Modules/Social/Module.php:154
+#: includes/Modules/Social/Module.php:190
 msgid "Summary"
 msgstr ""
 
@@ -5128,43 +5584,52 @@ msgstr ""
 msgid "Add author and reading time labels to posts"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:127
-msgid "Facebook / Open Graph title"
+#: includes/Modules/Social/Module.php:123
+#: assets/editor.js:167
+msgid "Social media"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:128
-msgid "Facebook / Open Graph description"
+#: includes/Modules/Social/Module.php:143
+msgid "Facebook and LinkedIn"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:129
-msgid "Open Graph image"
+#: includes/Modules/Social/Module.php:144
+msgid "X"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:130
-msgid "X (Twitter) title"
+#: includes/Modules/Social/Module.php:147
+msgid "Network"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:131
-msgid "X (Twitter) description"
+#: includes/Modules/Social/Module.php:159
+msgid "This is how the link looks when shared. When the fields are empty, the title, description and image of the page are used."
 msgstr ""
 
-#: includes/Modules/Social/Module.php:132
-msgid "X (Twitter) image"
+#: includes/Modules/Social/Module.php:161
+msgid "Title when shared"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:134
-msgid "Leave empty to reuse the SEO title, description and featured image."
+#: includes/Modules/Social/Module.php:162
+msgid "Description when shared"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:149
-msgid "Twitter card"
+#: includes/Modules/Social/Module.php:180
+msgid "Choose a different image"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:414
+#: includes/Modules/Social/Module.php:182
+msgid "Best size: 1200 × 630 pixels."
+msgstr ""
+
+#: includes/Modules/Social/Module.php:185
+msgid "Card type"
+msgstr ""
+
+#: includes/Modules/Social/Module.php:455
 msgid "Written by"
 msgstr ""
 
-#: includes/Modules/Social/Module.php:418
+#: includes/Modules/Social/Module.php:459
 msgid "Time to read"
 msgstr ""
 
@@ -6314,6 +6779,14 @@ msgstr ""
 msgid "Page %1$d of %2$d"
 msgstr ""
 
+#: assets/builders.js:29
+msgid "Changes in this panel are saved right away."
+msgstr ""
+
+#: assets/builders.js:29
+msgid "Changes in this panel are saved right away. The score is calculated from the page as shown here; it is updated after you save the layout."
+msgstr ""
+
 #: assets/bulk.js:77
 msgid "No changes to save."
 msgstr ""
@@ -6324,20 +6797,25 @@ msgstr ""
 msgid "Saved %1$d of %2$d"
 msgstr ""
 
-#: assets/editor.js:107
-msgid "Set a focus keyword in the SEO box to get a score."
+#: assets/editor.js:156
+msgid "Open in the SEO box"
 msgstr ""
 
-#: assets/editor.js:110
-#: assets/editor.js:132
-msgid "Edit SEO settings"
+#: assets/editor.js:167
+msgid "How the link looks when shared on Facebook, LinkedIn or X."
 msgstr ""
 
-#: assets/editor.js:120
-#: assets/editor.js:127
-#: assets/editor.js:128
-#: assets/editor.js:131
-msgid "SEO score"
+#: assets/editor.js:168
+msgid "Indexing, canonical address, breadcrumbs."
+msgstr ""
+
+#: assets/editor.js:206
+#: assets/editor.js:220
+msgid "Show hints"
+msgstr ""
+
+#: assets/elementor.js:70
+msgid "Changes in this tab are saved right away."
 msgstr ""
 
 #: assets/image.js:74
@@ -6438,4 +6916,70 @@ msgstr ""
 
 #: assets/scores.js:79
 msgid "Calculating…"
+msgstr ""
+
+#: assets/seo-ui.js:268
+msgid "Start with the first one."
+msgstr ""
+
+#. translators: %d: number of places
+#: assets/seo-ui.js:312
+#, js-format
+msgid "Show %d place"
+msgid_plural "Show %d places"
+msgstr[0] ""
+msgstr[1] ""
+
+#: assets/seo-ui.js:339
+msgid "Looking for matching pages…"
+msgstr ""
+
+#: assets/seo-ui.js:345
+msgid "No matching pages found yet."
+msgstr ""
+
+#: assets/seo-ui.js:360
+msgid "Could not load suggestions."
+msgstr ""
+
+#: assets/seo-ui.js:410
+msgid "Enter the words someone would type into Google to find this page. Then we will check the text for them and calculate the score."
+msgstr ""
+
+#. translators: 1: number of characters, 2: characters over the limit
+#: assets/seo-ui.js:426
+#, js-format
+msgid "%1$d character, %2$d too many"
+msgid_plural "%1$d characters, %2$d too many"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of characters, 2: recommended maximum
+#: assets/seo-ui.js:429
+#, js-format
+msgid "%1$d of about %2$d characters"
+msgstr ""
+
+#: assets/seo-ui.js:577
+msgid "Created automatically from the page title and the site name. Start typing to set your own."
+msgstr ""
+
+#: assets/seo-ui.js:579
+msgid "Google will now show the beginning of the text. Write 1 or 2 sentences that make people want to click."
+msgstr ""
+
+#: assets/seo-ui.js:708
+msgid "Checking the page…"
+msgstr ""
+
+#: assets/seo-ui.js:712
+msgid "Saving…"
+msgstr ""
+
+#: assets/seo-ui.js:712
+msgid "Could not save. Check your connection and try again."
+msgstr ""
+
+#: assets/seo-ui.js:801
+msgid "Close"
 msgstr ""

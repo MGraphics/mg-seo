@@ -120,43 +120,84 @@ final class Module extends Base {
 	public function metabox_tab( array $tabs, \WP_Post $post ): array {
 		$tabs[] = array(
 			'id'       => 'social',
-			'title'    => __( 'Social', 'mg-seo' ),
+			'title'    => __( 'Social media', 'mg-seo' ),
 			'priority' => 30,
 			'render'   => static function ( \WP_Post $post ): void {
-				$fields = array(
-					'og_title'            => array( __( 'Facebook / Open Graph title', 'mg-seo' ), 'text' ),
-					'og_description'      => array( __( 'Facebook / Open Graph description', 'mg-seo' ), 'textarea' ),
-					'og_image'            => array( __( 'Open Graph image', 'mg-seo' ), 'image' ),
-					'twitter_title'       => array( __( 'X (Twitter) title', 'mg-seo' ), 'text' ),
-					'twitter_description' => array( __( 'X (Twitter) description', 'mg-seo' ), 'textarea' ),
-					'twitter_image'       => array( __( 'X (Twitter) image', 'mg-seo' ), 'image' ),
+				$custom_og = (string) Meta::post( $post->ID, 'og_image' );
+				// Image used when the field is empty: featured image, first content image or the default.
+				$auto_img = '';
+				if ( '' === $custom_og ) {
+					$image    = self::post_image( $post );
+					$auto_img = $image ? (string) $image['url'] : (string) Options::get( 'social', 'default_image', '' );
+				}
+				$fallback = array(
+					'title'       => Titles::post_title( $post ),
+					'description' => Titles::post_description( $post ),
+					'image'       => $auto_img,
+					'site'        => html_entity_decode( get_bloginfo( 'name' ), ENT_QUOTES, 'UTF-8' ),
+					'sep'         => Variables::separator(),
+					'postTitle'   => html_entity_decode( get_the_title( $post ), ENT_QUOTES, 'UTF-8' ),
 				);
-				echo '<p class="description">' . esc_html__( 'Leave empty to reuse the SEO title, description and featured image.', 'mg-seo' ) . '</p>';
-				foreach ( $fields as $key => $def ) {
-					$value = (string) Meta::post( $post->ID, $key );
-					$dom   = 'mgseo-' . str_replace( '_', '-', $key );
-					echo '<p class="mgseo-row"><label for="' . esc_attr( $dom ) . '"><strong>' . esc_html( $def[0] ) . '</strong></label>';
-					if ( 'textarea' === $def[1] ) {
-						echo '<textarea id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" rows="2" class="widefat mgseo-has-variables">' . esc_textarea( $value ) . '</textarea>';
-					} elseif ( 'image' === $def[1] ) {
-						echo '<span class="mgseo-image-field"><input type="url" id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '" class="regular-text" /> <button type="button" class="button mgseo-media" data-target="' . esc_attr( $dom ) . '">' . esc_html__( 'Choose image', 'mg-seo' ) . '</button></span>';
-					} else {
-						echo '<input type="text" id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '" class="widefat mgseo-has-variables" />';
+				$host     = (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+				$networks = array(
+					'og'      => __( 'Facebook and LinkedIn', 'mg-seo' ),
+					'twitter' => __( 'X', 'mg-seo' ),
+				);
+				echo '<div class="mgseo-social" data-fallback="' . esc_attr( (string) wp_json_encode( $fallback ) ) . '">';
+				echo '<div class="mgseo-social-switch" role="group" aria-label="' . esc_attr__( 'Network', 'mg-seo' ) . '">';
+				$first = true;
+				foreach ( $networks as $net => $label ) {
+					echo '<button type="button" class="mgseo-device-btn" data-network="' . esc_attr( $net ) . '" aria-pressed="' . ( $first ? 'true' : 'false' ) . '">' . esc_html( $label ) . '</button>';
+					$first = false;
+				}
+				echo '</div>';
+				$first = true;
+				foreach ( $networks as $net => $label ) {
+					echo '<div class="mgseo-social-net" data-network="' . esc_attr( $net ) . '"' . ( $first ? '' : ' hidden' ) . '>';
+					echo '<div class="mgseo-social-card" data-network="' . esc_attr( $net ) . '" aria-hidden="true"><div class="mgseo-social-img"></div><div class="mgseo-social-text"><span class="mgseo-social-host">' . esc_html( $host ) . '</span><span class="mgseo-social-title"></span><span class="mgseo-social-desc"></span></div></div>';
+					echo '<div class="mgseo-social-fields">';
+					echo '<p class="mgseo-help">' . esc_html__( 'This is how the link looks when shared. When the fields are empty, the title, description and image of the page are used.', 'mg-seo' ) . '</p>';
+					$fields = array(
+						$net . '_title'       => __( 'Title when shared', 'mg-seo' ),
+						$net . '_description' => __( 'Description when shared', 'mg-seo' ),
+					);
+					foreach ( $fields as $key => $field_label ) {
+						$dom   = 'mgseo-' . str_replace( '_', '-', $key );
+						$value = (string) Meta::post( $post->ID, $key );
+						echo '<div class="mgseo-field"><label class="mgseo-label" for="' . esc_attr( $dom ) . '">' . esc_html( $field_label ) . '</label>';
+						if ( str_ends_with( $key, '_description' ) ) {
+							echo '<textarea id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" rows="2" class="widefat mgseo-input">' . esc_textarea( $value ) . '</textarea>';
+						} else {
+							echo '<input type="text" id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '" class="widefat mgseo-input" />';
+						}
+						echo '</div>';
 					}
-					echo '</p>';
+					$key = $net . '_image';
+					$dom = 'mgseo-' . $net . '-image';
+					echo '<div class="mgseo-field"><span class="mgseo-label" id="' . esc_attr( $dom ) . '-label">' . esc_html__( 'Image', 'mg-seo' ) . '</span>';
+					echo '<div class="mgseo-image-pick" data-target="' . esc_attr( $dom ) . '"><span class="mgseo-image-thumb"></span>';
+					echo '<input type="hidden" id="' . esc_attr( $dom ) . '" name="mgseo[' . esc_attr( $key ) . ']" value="' . esc_attr( (string) Meta::post( $post->ID, $key ) ) . '" />';
+					echo '<button type="button" class="button mgseo-media" data-target="' . esc_attr( $dom ) . '" aria-describedby="' . esc_attr( $dom ) . '-label">' . esc_html__( 'Choose a different image', 'mg-seo' ) . '</button> ';
+					echo '<button type="button" class="button-link mgseo-image-remove">' . esc_html__( 'Remove', 'mg-seo' ) . '</button></div>';
+					echo '<p class="mgseo-help">' . esc_html__( 'Best size: 1200 × 630 pixels.', 'mg-seo' ) . '</p></div>';
+					if ( 'twitter' === $net ) {
+						$card = (string) Meta::post( $post->ID, 'twitter_card' );
+						echo '<div class="mgseo-field"><label class="mgseo-label" for="mgseo-twitter-card">' . esc_html__( 'Card type', 'mg-seo' ) . '</label><select id="mgseo-twitter-card" name="mgseo[twitter_card]">';
+						foreach (
+							array(
+								''                    => __( 'Default', 'mg-seo' ),
+								'summary_large_image' => __( 'Summary with large image', 'mg-seo' ),
+								'summary'             => __( 'Summary', 'mg-seo' ),
+							) as $value => $option
+						) {
+							echo '<option value="' . esc_attr( $value ) . '" ' . selected( $card, $value, false ) . '>' . esc_html( $option ) . '</option>';
+						}
+						echo '</select></div>';
+					}
+					echo '</div></div>';
+					$first = false;
 				}
-				$card = (string) Meta::post( $post->ID, 'twitter_card' );
-				echo '<p class="mgseo-row"><label><strong>' . esc_html__( 'Twitter card', 'mg-seo' ) . '</strong> <select name="mgseo[twitter_card]">';
-				foreach (
-					array(
-						''                    => __( 'Default', 'mg-seo' ),
-						'summary_large_image' => __( 'Summary with large image', 'mg-seo' ),
-						'summary'             => __( 'Summary', 'mg-seo' ),
-					) as $value => $label
-				) {
-					echo '<option value="' . esc_attr( $value ) . '" ' . selected( $card, $value, false ) . '>' . esc_html( $label ) . '</option>';
-				}
-				echo '</select></label></p>';
+				echo '</div>';
 			},
 			'save'     => static function ( int $post_id, array $data ): void {
 				if ( ! array_key_exists( 'og_title', $data ) ) {

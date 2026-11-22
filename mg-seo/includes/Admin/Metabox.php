@@ -93,10 +93,16 @@ final class Metabox {
 		$tabs = array(
 			array(
 				'id'       => 'general',
-				'title'    => __( 'General', 'mg-seo' ),
+				'title'    => \MGSEO\Plugin::instance()->module( 'analysis' ) ? __( 'Hints', 'mg-seo' ) : __( 'General', 'mg-seo' ),
 				'render'   => array( self::class, 'render_general' ),
 				'save'     => array( self::class, 'save_general' ),
 				'priority' => 10,
+			),
+			array(
+				'id'       => 'snippet',
+				'title'    => __( 'Title and description in Google', 'mg-seo' ),
+				'render'   => array( self::class, 'render_snippet' ),
+				'priority' => 15,
 			),
 			array(
 				'id'         => 'advanced',
@@ -128,19 +134,20 @@ final class Metabox {
 		wp_nonce_field( 'mgseo_metabox', 'mgseo_metabox_nonce' );
 		$tabs = self::tabs( $post );
 		echo '<div class="mgseo-box" data-post-id="' . esc_attr( (string) $post->ID ) . '" data-post-type="' . esc_attr( $post->post_type ) . '">';
-		echo '<div class="mgseo-box-tabs" role="tablist">';
+		echo '<div class="mgseo-box-tabs" role="tablist" aria-label="' . esc_attr__( 'SEO settings', 'mg-seo' ) . '">';
 		foreach ( $tabs as $i => $tab ) {
 			printf(
-				'<button type="button" role="tab" class="mgseo-box-tab%s" data-tab="%s" aria-selected="%s">%s</button>',
-				0 === $i ? ' is-active' : '',
+				'<button type="button" role="tab" id="mgseo-tab-%1$s" aria-controls="mgseo-panel-%1$s" class="mgseo-box-tab%2$s" data-tab="%1$s" aria-selected="%3$s" tabindex="%4$s">%5$s</button>',
 				esc_attr( $tab['id'] ),
+				0 === $i ? ' is-active' : '',
 				0 === $i ? 'true' : 'false',
+				0 === $i ? '0' : '-1',
 				esc_html( $tab['title'] )
 			);
 		}
 		echo '</div>';
 		foreach ( $tabs as $i => $tab ) {
-			printf( '<div class="mgseo-box-panel%s" data-panel="%s" role="tabpanel">', 0 === $i ? ' is-active' : '', esc_attr( $tab['id'] ) );
+			printf( '<div class="mgseo-box-panel%1$s" data-panel="%2$s" role="tabpanel" id="mgseo-panel-%2$s" aria-labelledby="mgseo-tab-%2$s" tabindex="0"%3$s>', 0 === $i ? ' is-active' : '', esc_attr( $tab['id'] ), 0 === $i ? '' : ' hidden' );
 			call_user_func( $tab['render'], $post );
 			echo '</div>';
 		}
@@ -148,59 +155,77 @@ final class Metabox {
 	}
 
 	/**
-	 * General tab: snippet preview, keyword, title, description, analysis.
+	 * Hints tab: score, keyword and the grouped hints (rendered by assets/seo-ui.js).
 	 *
 	 * @param \WP_Post $post Post.
 	 */
 	public static function render_general( \WP_Post $post ): void {
-		$title_tpl = (string) Options::get( 'titles', 'pt_' . $post->post_type . '_title', '%title% %sep% %sitename%' );
-		$desc_tpl  = (string) Options::get( 'titles', 'pt_' . $post->post_type . '_description', '%excerpt%' );
-		$title     = (string) Meta::post( $post->ID, 'title' );
-		$desc      = (string) Meta::post( $post->ID, 'description' );
-		$keyword   = (string) Meta::post( $post->ID, 'focus_keyword' );
-		$preview_t = \MGSEO\Variables::replace( '' !== $title ? $title : $title_tpl, $post );
-		$preview_d = \MGSEO\Variables::replace( '' !== $desc ? $desc : $desc_tpl, $post );
+		$keyword    = (string) Meta::post( $post->ID, 'focus_keyword' );
+		$suggestion = '' === trim( $keyword ) && class_exists( \MGSEO\Modules\Analysis\Scores::class ) ? \MGSEO\Modules\Analysis\Scores::suggest_keyword( $post ) : '';
+		$analysis   = (bool) \MGSEO\Plugin::instance()->module( 'analysis' );
+		echo '<div class="mgseo-hints-host">';
 		?>
-		<div class="mgseo-serp" aria-live="polite">
-			<div class="mgseo-serp-url"><?php echo esc_html( (string) get_permalink( $post ) ); ?></div>
-			<div class="mgseo-serp-title"><?php echo esc_html( $preview_t ); ?></div>
-			<div class="mgseo-serp-desc"><?php echo esc_html( $preview_d ); ?></div>
-		</div>
-		<p class="mgseo-row">
-			<label for="mgseo-focus-keyword"><strong><?php esc_html_e( 'Focus keywords', 'mg-seo' ); ?></strong></label>
-			<input type="text" id="mgseo-focus-keyword" name="mgseo[focus_keyword]" value="<?php echo esc_attr( $keyword ); ?>" class="widefat" placeholder="<?php esc_attr_e( 'Main keyword, secondary keyword, …', 'mg-seo' ); ?>" />
-			<span class="description"><?php esc_html_e( 'Separate keywords with commas. The first one is the primary keyword.', 'mg-seo' ); ?></span>
-			<?php
-			$suggestion = '' === trim( $keyword ) && class_exists( \MGSEO\Modules\Analysis\Scores::class ) ? \MGSEO\Modules\Analysis\Scores::suggest_keyword( $post ) : '';
-			if ( '' !== $suggestion ) :
-				?>
-				<span class="mgseo-keyword-suggestion">
+		<div class="mgseo-field mgseo-kw">
+			<label for="mgseo-focus-keyword" class="mgseo-label"><?php esc_html_e( 'Keyword', 'mg-seo' ); ?></label>
+			<input type="text" id="mgseo-focus-keyword" name="mgseo[focus_keyword]" value="<?php echo esc_attr( $keyword ); ?>" class="widefat mgseo-input" autocomplete="off" />
+			<p class="mgseo-help" data-help="keyword"><?php esc_html_e( 'The words someone types into Google to find this page. Separate more keywords with commas.', 'mg-seo' ); ?></p>
+			<?php if ( '' !== $suggestion ) : ?>
+				<p class="mgseo-help mgseo-kw-suggestion">
 					<?php esc_html_e( 'Suggestion from the title:', 'mg-seo' ); ?>
 					<button type="button" class="button-link mgseo-use-suggestion" data-keyword="<?php echo esc_attr( $suggestion ); ?>"><?php echo esc_html( $suggestion ); ?></button>
-				</span>
+				</p>
 			<?php endif; ?>
-		</p>
-		<p class="mgseo-row">
-			<label for="mgseo-title"><strong><?php esc_html_e( 'SEO title', 'mg-seo' ); ?></strong> <span class="mgseo-counter" data-for="mgseo-title" data-max="60"></span></label>
-			<input type="text" id="mgseo-title" name="mgseo[title]" value="<?php echo esc_attr( $title ); ?>" class="widefat mgseo-has-variables" placeholder="<?php echo esc_attr( $title_tpl ); ?>" data-template="<?php echo esc_attr( $title_tpl ); ?>" data-preview="<?php echo esc_attr( $preview_t ); ?>" />
-		</p>
-		<p class="mgseo-row">
-			<label for="mgseo-description"><strong><?php esc_html_e( 'Meta description', 'mg-seo' ); ?></strong> <span class="mgseo-counter" data-for="mgseo-description" data-max="160"></span></label>
-			<textarea id="mgseo-description" name="mgseo[description]" rows="3" class="widefat mgseo-has-variables" placeholder="<?php echo esc_attr( $desc_tpl ); ?>" data-template="<?php echo esc_attr( $desc_tpl ); ?>" data-preview="<?php echo esc_attr( $preview_d ); ?>"><?php echo esc_textarea( $desc ); ?></textarea>
-		</p>
-		<?php if ( \MGSEO\Plugin::instance()->module( 'analysis' ) ) : ?>
-			<div class="mgseo-analysis" data-score="<?php echo esc_attr( (string) Meta::post( $post->ID, 'score', '' ) ); ?>">
-				<h4><?php esc_html_e( 'SEO analysis', 'mg-seo' ); ?> <span class="mgseo-score-badge"></span></h4>
-				<ul class="mgseo-analysis-list"><li><?php esc_html_e( 'Enter a focus keyword to analyse the content.', 'mg-seo' ); ?></li></ul>
-			</div>
-		<?php endif; ?>
+		</div>
 		<?php
+		echo '</div>';
+		if ( ! $analysis ) {
+			echo '<p class="description">' . esc_html__( 'Turn on the Content Analysis module to get the score and hints.', 'mg-seo' ) . '</p>';
+		}
 		/**
 		 * Fires at the end of the General tab.
 		 *
 		 * @param \WP_Post $post Post.
 		 */
 		do_action( 'mgseo/metabox_general', $post );
+	}
+
+	/**
+	 * Title and description tab: Google preview (phone and desktop), fields showing the automatic text.
+	 *
+	 * @param \WP_Post $post Post.
+	 */
+	public static function render_snippet( \WP_Post $post ): void {
+		$title_tpl = (string) Options::get( 'titles', 'pt_' . $post->post_type . '_title', '%title% %page% %sep% %sitename%' );
+		$desc_tpl  = (string) Options::get( 'titles', 'pt_' . $post->post_type . '_description', '%excerpt%' );
+		$title     = (string) Meta::post( $post->ID, 'title' );
+		$desc      = (string) Meta::post( $post->ID, 'description' );
+		$auto_t    = \MGSEO\Variables::replace( $title_tpl, $post );
+		$auto_d    = \MGSEO\Variables::replace( $desc_tpl, $post );
+		?>
+		<div class="mgseo-snippet">
+			<div class="mgseo-serp-wrap">
+				<div class="mgseo-device" role="group" aria-label="<?php esc_attr_e( 'Preview size', 'mg-seo' ); ?>">
+					<button type="button" class="mgseo-device-btn" data-device="mobile" aria-pressed="true"><?php esc_html_e( 'Phone', 'mg-seo' ); ?></button>
+					<button type="button" class="mgseo-device-btn" data-device="desktop" aria-pressed="false"><?php esc_html_e( 'Desktop', 'mg-seo' ); ?></button>
+				</div>
+				<div class="mgseo-serp is-mobile">
+					<div class="mgseo-serp-site"><span class="mgseo-serp-icon" aria-hidden="true"></span><span><span class="mgseo-serp-name"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></span><span class="mgseo-serp-url"><?php echo esc_html( (string) get_permalink( $post ) ); ?></span></span></div>
+					<div class="mgseo-serp-title"><?php echo esc_html( '' !== $title ? \MGSEO\Variables::replace( $title, $post ) : $auto_t ); ?></div>
+					<div class="mgseo-serp-desc"><?php echo esc_html( '' !== $desc ? \MGSEO\Variables::replace( $desc, $post ) : $auto_d ); ?></div>
+				</div>
+			</div>
+			<div class="mgseo-field">
+				<label for="mgseo-title" class="mgseo-label"><?php esc_html_e( 'Title in Google', 'mg-seo' ); ?> <span class="mgseo-counter" data-for="title"></span></label>
+				<input type="text" id="mgseo-title" name="mgseo[title]" data-field="title" value="<?php echo esc_attr( $title ); ?>" class="widefat mgseo-input" placeholder="<?php echo esc_attr( $auto_t ); ?>" />
+				<p class="mgseo-help"><span data-help="title"></span> <button type="button" class="button-link mgseo-insert-var" data-for="mgseo-title"><?php esc_html_e( 'Insert variable', 'mg-seo' ); ?></button></p>
+			</div>
+			<div class="mgseo-field">
+				<label for="mgseo-description" class="mgseo-label"><?php esc_html_e( 'Description in Google', 'mg-seo' ); ?> <span class="mgseo-counter" data-for="description"></span></label>
+				<textarea id="mgseo-description" name="mgseo[description]" data-field="description" rows="3" class="widefat mgseo-input" placeholder="<?php echo esc_attr( $auto_d ); ?>"><?php echo esc_textarea( $desc ); ?></textarea>
+				<p class="mgseo-help"><span data-help="description"></span> <button type="button" class="button-link mgseo-insert-var" data-for="mgseo-description"><?php esc_html_e( 'Insert variable', 'mg-seo' ); ?></button></p>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -395,10 +420,12 @@ final class Metabox {
 		if ( ! current_user_can( 'mgseo_edit_meta' ) ) {
 			return;
 		}
+		\MGSEO\Modules\Analysis\Editors::register();
+		wp_enqueue_style( 'mgseo-ui' );
 		wp_enqueue_script(
 			'mgseo-editor',
 			MGSEO_URL . 'assets/editor.js',
-			array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-data', 'wp-components', 'wp-i18n', 'wp-editor', 'wp-blocks', 'wp-block-editor', 'wp-server-side-render' ),
+			array( 'mgseo-ui', 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-data', 'wp-components', 'wp-i18n', 'wp-editor', 'wp-blocks', 'wp-block-editor', 'wp-server-side-render' ),
 			MGSEO_VERSION,
 			true
 		);

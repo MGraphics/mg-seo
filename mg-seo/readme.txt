@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,25 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.3.0 =
+* New: the score and hints are visible while editing. Block editor: a pinned "SEO 21" button opens an SEO sidebar next to the content (score, keyword, hints, title and description in Google). Classic editor: one line in the Publish box and the score in the SEO box header, visible even when the box is collapsed.
+* New: Elementor: an "SEO · 68" tab next to Widgets and Globals with the same panel, and the score in the Elementor top bar. The live score is calculated from the page rendered in the preview; fields are saved right away.
+* New: Beaver Builder, Divi, Bricks and the WPBakery front-end editor: a floating "SEO 68" button with the same panel (these editors hide the admin bar). Tested with Elementor and Beaver Builder Lite; Divi, Bricks and WPBakery have no free version and follow their documented functions.
+* New: scores are calculated from the rendered content (blocks, shortcodes and page builders: Elementor, Beaver Builder, Bricks, Divi, WPBakery), live and stored, so the editor, lists and the overview show the same number. Text in shortcode attributes of builders that are not loaded is still counted.
+* New: hints in three groups ("To improve", open and ordered by weight; "Worth considering"; "All good", closed). One cause gives one hint: a keyword missing from the page is one hint with the places where it is missing. Every hint says what to do and why, in plain words ("title in Google" instead of "SEO title", "page address" instead of "slug"), with buttons (edit the title, open the other page using the keyword, show matching pages to link to).
+* New: the keyword is recognised in inflected forms and with short words in between ("masaż leczniczy w Krakowie" for "masaż leczniczy Kraków"). Filter `mgseo/analysis/inflection` turns it off.
+* New: without a keyword the editors show "No keyword" and one sentence about what to enter instead of a red 40/100; checks that do not need a keyword still run.
+* New: hints and the minimum length per content type (MG SEO → Content Analysis). Pages such as Contact or Pricing no longer get blog advice (600 words, a number in the title, an external link, an image).
+* New: one way to show a score everywhere (mark, number, word and the number of things to improve): editors, post lists, bulk editor, overview, admin bar. The admin bar menu shows the score, the three most important things and "Open SEO hints".
+* New: Google preview with the site name and icon, phone and desktop views, the keyword in bold; title and description fields show the automatic text instead of template variables, counters say "89 characters, 29 too many"; variables are under "Insert variable".
+* New: social media preview card (Facebook and LinkedIn, X) next to the fields, image chosen with a thumbnail instead of a URL field.
+* New: post lists: one narrow SEO column (mark, number, word; things to improve and the keyword on one line), an "SEO score" filter next to the date and category filters; the link counts column is hidden by default (Screen Options).
+* Accessibility: status is never shown by colour alone (shapes, words and screen reader text), contrast of the marks is at least 4.5:1, the SEO box tabs follow the ARIA tab pattern (arrow keys, labelled panels), score changes are announced, the Google preview no longer reads every typed character; accent colour follows the admin colour scheme.
+* Fix: "Edit SEO settings" in the block editor did nothing when the meta box pane was collapsed; it is now "Show hints" and opens the SEO sidebar.
+* Fix: Polish plural forms in analysis messages ("22 słowa", "53 znaki", "25 słów").
+* Fix: the coloured left bar on active module cards in the dashboard is gone (the dashboard gets a separate redesign).
+* Developers: REST `POST mg-seo/v1/post/<id>/seo` saves keyword, title and description; `mg-seo/v1/analyze` accepts rendered `html` and returns `groups`, `fix_count`, `summary`, `spoken`; filters `mgseo/analysis/builder`, `mgseo/analysis/builder_content`, `mgseo/analysis/the_content`, `mgseo/analysis/type_rules`, `mgseo/analysis/client_config`, `mgseo/analysis/admin_bar_hints_url`.
 
 = 0.2.0 =
 * New: SEO scores are always available. They are calculated after every import (Rank Math, Yoast, CSV), on the fly in post lists, with "Recalculate all" on the list screens and the overview, a bulk action, `wp mgseo scores recalc`, and a daily background pass in small batches (scores depend on other pages, e.g. duplicate focus keywords). Imported Rank Math/Yoast scores are replaced by MG SEO's own analysis.

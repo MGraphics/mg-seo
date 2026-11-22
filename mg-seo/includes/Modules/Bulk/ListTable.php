@@ -56,10 +56,10 @@ final class ListTable extends \WP_List_Table {
 			'missing_description' => __( 'Missing description', 'mg-seo' ),
 			'missing_keyword'     => __( 'Missing focus keyword', 'mg-seo' ),
 			'noindex'             => __( 'No Index', 'mg-seo' ),
-			'score_bad'           => __( 'Score below 50', 'mg-seo' ),
-			'score_ok'            => __( 'Score 50–79', 'mg-seo' ),
-			'score_good'          => __( 'Score 80+', 'mg-seo' ),
-			'score_none'          => __( 'No score', 'mg-seo' ),
+			'score_bad'           => __( 'SEO: poor (0–49)', 'mg-seo' ),
+			'score_ok'            => __( 'SEO: needs work (50–79)', 'mg-seo' ),
+			'score_good'          => __( 'SEO: good (80–100)', 'mg-seo' ),
+			'score_none'          => __( 'SEO: no keyword', 'mg-seo' ),
 		);
 	}
 
@@ -255,11 +255,11 @@ final class ListTable extends \WP_List_Table {
 				return $html . '</select>';
 			case 'score':
 				$score = Meta::post( $id, 'score', '' );
-				if ( '' === $score ) {
-					return '<span class="mgseo-score is-none">' . esc_html__( 'N/A', 'mg-seo' ) . '</span>';
+				if ( '' === $score || '' === trim( (string) Meta::post( $id, 'focus_keyword' ) ) ) {
+					return \MGSEO\Modules\Analysis\Report::rating_html( null, '' === trim( (string) Meta::post( $id, 'focus_keyword' ) ) ? 'none' : 'pending' );
 				}
-				$class = (int) $score >= 80 ? 'is-good' : ( (int) $score >= 50 ? 'is-ok' : 'is-bad' );
-				return '<span class="mgseo-score ' . esc_attr( $class ) . '">' . esc_html( (string) (int) $score ) . '</span>';
+				$data = \MGSEO\Modules\Analysis\Scores::data( $id );
+				return \MGSEO\Modules\Analysis\Report::rating_html( (int) $score, \MGSEO\Modules\Analysis\Scores::band( (int) $score ), array( 'fix_count' => $data ? (int) $data['fix_count'] : -1 ) );
 			case 'actions':
 				return '<button type="button" class="button mgseo-bulk-save-row">' . esc_html__( 'Save', 'mg-seo' ) . '</button><span class="mgseo-bulk-status" aria-live="polite"></span>';
 		}

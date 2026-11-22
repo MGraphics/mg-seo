@@ -102,9 +102,11 @@ final class Admin {
 		if ( ! $is_ours && ! $editor && ! ( $screen && 'edit' === $screen->base ) ) {
 			return;
 		}
-		wp_enqueue_style( 'mgseo-admin', MGSEO_URL . 'assets/admin.css', array(), MGSEO_VERSION );
+		\MGSEO\Modules\Analysis\Editors::register();
+		wp_enqueue_style( 'mgseo-ui' );
+		wp_enqueue_style( 'mgseo-admin', MGSEO_URL . 'assets/admin.css', array( 'mgseo-ui' ), MGSEO_VERSION );
 		wp_enqueue_media();
-		wp_enqueue_script( 'mgseo-admin', MGSEO_URL . 'assets/admin.js', array( 'jquery', 'wp-api-fetch' ), MGSEO_VERSION, true );
+		wp_enqueue_script( 'mgseo-admin', MGSEO_URL . 'assets/admin.js', array( 'jquery', 'wp-api-fetch', 'mgseo-ui' ), MGSEO_VERSION, true );
 		wp_localize_script(
 			'mgseo-admin',
 			'mgseoAdmin',
@@ -120,6 +122,9 @@ final class Admin {
 					'saved'       => __( 'Saved', 'mg-seo' ),
 					'error'       => __( 'Error', 'mg-seo' ),
 					'noKeyword'   => __( 'No keyword', 'mg-seo' ),
+					'toImprove'   => __( 'to improve', 'mg-seo' ),
+					'seo'         => __( 'SEO', 'mg-seo' ),
+					'noImage'     => __( 'No image: add a featured image or choose one below.', 'mg-seo' ),
 				),
 			)
 		);

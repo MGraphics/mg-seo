@@ -15,7 +15,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Every post of a managed post type gets two meta values:
  * - `_mgseo_score` (int 0-100): only when a focus keyword is set (sortable list column, overview);
- * - `_mgseo_score_data` (array): v (format version), t (time), k (has keyword), s (raw score), i (top issues).
+ * - `_mgseo_score_data` (array): v (format version), t (time), k (has keyword), s (raw score), i (top issues),
+ *   n (number of things to improve, as shown in the editors).
  *
  * Scores depend on other posts (duplicate focus keywords), so they are recomputed after imports,
  * on demand (button, bulk action, WP-CLI, REST) and by a daily WP-Cron pass in small batches.
@@ -25,7 +26,7 @@ final class Scores {
 	/**
 	 * Bump when the stored data format or the analysis changes, to recompute stale data lazily.
 	 */
-	public const VERSION = 1;
+	public const VERSION = 2;
 
 	public const DATA_KEY     = 'score_data';
 	public const PASS_OPTION  = 'mgseo_scores_pass';
@@ -78,7 +79,8 @@ final class Scores {
 			't' => time(),
 			'k' => $has_kw,
 			's' => (int) $result['score'],
-			'i' => self::top_issues( $result['checks'], $has_kw ),
+			'i' => isset( $result['report'] ) ? self::top_from_report( $result['report']['items'], $has_kw ) : self::top_issues( $result['checks'], $has_kw ),
+			'n' => isset( $result['fix_count'] ) ? (int) $result['fix_count'] : -1,
 		);
 		update_post_meta( $post->ID, Meta::PREFIX . self::DATA_KEY, $data );
 		if ( $has_kw ) {
@@ -93,7 +95,7 @@ final class Scores {
 	 * Stored data of a post, normalised.
 	 *
 	 * @param int $post_id Post id.
-	 * @return array{score: int|null, keyword: bool, issues: array<int, array{id: string, status: string}>, time: int, band: string, version: int}|null Null when never computed.
+	 * @return array{score: int|null, keyword: bool, issues: array<int, array{id: string, status: string}>, time: int, band: string, version: int, fix_count: int}|null Null when never computed.
 	 */
 	public static function data( int $post_id ): ?array {
 		$raw = get_post_meta( $post_id, Meta::PREFIX . self::DATA_KEY, true );
@@ -103,12 +105,13 @@ final class Scores {
 		$keyword = ! empty( $raw['k'] );
 		$score   = $keyword ? (int) ( $raw['s'] ?? 0 ) : null;
 		return array(
-			'score'   => $score,
-			'keyword' => $keyword,
-			'issues'  => array_values( array_filter( (array) ( $raw['i'] ?? array() ), 'is_array' ) ),
-			'time'    => (int) ( $raw['t'] ?? 0 ),
-			'band'    => self::band( $score, $keyword ),
-			'version' => (int) $raw['v'],
+			'score'     => $score,
+			'keyword'   => $keyword,
+			'issues'    => array_values( array_filter( (array) ( $raw['i'] ?? array() ), 'is_array' ) ),
+			'time'      => (int) ( $raw['t'] ?? 0 ),
+			'band'      => self::band( $score, $keyword ),
+			'version'   => (int) $raw['v'],
+			'fix_count' => (int) ( $raw['n'] ?? -1 ),
 		);
 	}
 
@@ -198,7 +201,7 @@ final class Scores {
 			'poor'          => __( 'Poor (0–49)', 'mg-seo' ),
 			'ok'            => __( 'Needs work (50–79)', 'mg-seo' ),
 			'good'          => __( 'Good (80–100)', 'mg-seo' ),
-			self::BAND_NONE => __( 'No focus keyword', 'mg-seo' ),
+			self::BAND_NONE => __( 'No keyword', 'mg-seo' ),
 		);
 	}
 
@@ -251,32 +254,63 @@ final class Scores {
 	}
 
 	/**
+	 * The most important hints from a report (Report::build() items: fix group by weight, then warnings).
+	 *
+	 * @param array $items   Report items.
+	 * @param bool  $keyword Whether a focus keyword is set.
+	 * @return array<int, array{id: string, status: string}>
+	 */
+	public static function top_from_report( array $items, bool $keyword ): array {
+		$issues = array();
+		if ( ! $keyword ) {
+			$issues[] = array(
+				'id'     => self::NO_KEYWORD,
+				'status' => 'fail',
+			);
+		}
+		foreach ( $items as $item ) {
+			if ( count( $issues ) >= self::MAX_ISSUES ) {
+				break;
+			}
+			if ( 'ok' === ( $item['status'] ?? '' ) || ( 0 === (int) ( $item['weight'] ?? 0 ) && Report::KEYWORD_MISSING !== $item['id'] ) ) {
+				continue;
+			}
+			$issues[] = array(
+				'id'     => (string) $item['id'],
+				'status' => (string) $item['status'],
+			);
+		}
+		return $issues;
+	}
+
+	/**
 	 * Plain-language advice for a check id (what to do, not what was measured).
 	 *
 	 * @param string $id Check id.
 	 */
 	public static function issue_label( string $id ): string {
 		$labels = array(
-			self::NO_KEYWORD         => __( 'Set a focus keyword so the page can be scored.', 'mg-seo' ),
-			'title_length'           => __( 'Make the SEO title 30–60 characters long.', 'mg-seo' ),
-			'description_length'     => __( 'Write a meta description of 120–160 characters.', 'mg-seo' ),
-			'content_length'         => __( 'Add more content (at least 600 words is recommended).', 'mg-seo' ),
-			'keyword_in_title'       => __( 'Put the focus keyword in the SEO title.', 'mg-seo' ),
-			'keyword_in_description' => __( 'Use the focus keyword in the meta description.', 'mg-seo' ),
-			'keyword_in_url'         => __( 'Use the focus keyword in the URL.', 'mg-seo' ),
-			'keyword_in_intro'       => __( 'Mention the focus keyword in the first paragraph.', 'mg-seo' ),
-			'keyword_in_content'     => __( 'Use the focus keyword in the content.', 'mg-seo' ),
-			'keyword_density'        => __( 'Use the focus keyword more naturally (0.5–2.5% of the words).', 'mg-seo' ),
-			'keyword_in_subheadings' => __( 'Use the focus keyword in a subheading (H2–H4).', 'mg-seo' ),
-			'keyword_in_alt'         => __( 'Add an image with the focus keyword in its alt text.', 'mg-seo' ),
-			'keyword_title_start'    => __( 'Move the focus keyword closer to the start of the title.', 'mg-seo' ),
-			'keyword_unique'         => __( 'Another page targets the same focus keyword: pick a different one.', 'mg-seo' ),
-			'url_length'             => __( 'Shorten the URL to under 75 characters.', 'mg-seo' ),
-			'internal_links'         => __( 'Link to other pages of this site.', 'mg-seo' ),
-			'external_links'         => __( 'Link to a trustworthy external source.', 'mg-seo' ),
-			'title_number'           => __( 'Consider a number in the title.', 'mg-seo' ),
-			'short_paragraphs'       => __( 'Split paragraphs longer than 150 words.', 'mg-seo' ),
-			'has_media'              => __( 'Add an image or a video.', 'mg-seo' ),
+			self::NO_KEYWORD         => __( 'Enter a keyword so the page can be scored', 'mg-seo' ),
+			Report::KEYWORD_MISSING  => __( 'The keyword is not on this page', 'mg-seo' ),
+			'title_length'           => __( 'Fix the length of the title in Google (30–60 characters)', 'mg-seo' ),
+			'description_length'     => __( 'Fix the length of the description in Google (120–160 characters)', 'mg-seo' ),
+			'content_length'         => __( 'The text is short: cover the topic in more depth', 'mg-seo' ),
+			'keyword_in_title'       => __( 'Add the keyword to the title', 'mg-seo' ),
+			'keyword_in_description' => __( 'Add the keyword to the description in Google', 'mg-seo' ),
+			'keyword_in_url'         => __( 'Add the keyword to the page address', 'mg-seo' ),
+			'keyword_in_intro'       => __( 'Use the keyword at the beginning of the text', 'mg-seo' ),
+			'keyword_in_content'     => __( 'The keyword is not on this page', 'mg-seo' ),
+			'keyword_density'        => __( 'Use the keyword more naturally in the text', 'mg-seo' ),
+			'keyword_in_subheadings' => __( 'Use the keyword in one subheading', 'mg-seo' ),
+			'keyword_in_alt'         => __( 'Describe an image with words from the keyword', 'mg-seo' ),
+			'keyword_title_start'    => __( 'Move the keyword closer to the beginning of the title', 'mg-seo' ),
+			'keyword_unique'         => __( 'Another page already uses this keyword', 'mg-seo' ),
+			'url_length'             => __( 'Shorten the page address', 'mg-seo' ),
+			'internal_links'         => __( 'Add a link to another page of the site', 'mg-seo' ),
+			'external_links'         => __( 'You can link to a trustworthy source', 'mg-seo' ),
+			'title_number'           => __( 'A number in the title often gets more clicks', 'mg-seo' ),
+			'short_paragraphs'       => __( 'Split long paragraphs', 'mg-seo' ),
+			'has_media'              => __( 'Add an image or a video', 'mg-seo' ),
 		);
 		/**
 		 * Filter the plain-language advice for analysis checks.

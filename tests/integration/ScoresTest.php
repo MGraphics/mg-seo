@@ -131,7 +131,8 @@ class ScoresTest extends TestCase {
 		Scores::reset_budget( 1 );
 
 		$html = $this->column( $first );
-		$this->assertMatchesRegularExpression( '#\d+/100#', $html );
+		$this->assertMatchesRegularExpression( '#mgseo-rating-num">\d+</b>#', $html );
+		$this->assertMatchesRegularExpression( '#SEO score: \d+ out of 100#', $html );
 		$this->assertTrue( metadata_exists( 'post', $first, Meta::PREFIX . 'score' ) );
 
 		// Budget used up: the cell offers to calculate the score in place.
@@ -142,7 +143,7 @@ class ScoresTest extends TestCase {
 		$request  = new \WP_REST_Request( 'POST', '/mg-seo/v1/scores/post/' . $second );
 		$response = rest_get_server()->dispatch( $request );
 		$this->assertSame( 200, $response->get_status() );
-		$this->assertMatchesRegularExpression( '#\d+/100#', $response->get_data()['html'] );
+		$this->assertMatchesRegularExpression( '#mgseo-rating-num">\d+</b>#', $response->get_data()['html'] );
 		$this->assertStringNotContainsString( 'mgseo-score-now', $response->get_data()['html'] );
 		$this->assertTrue( metadata_exists( 'post', $second, Meta::PREFIX . 'score' ) );
 	}
@@ -168,7 +169,8 @@ class ScoresTest extends TestCase {
 		wp_set_current_user( $this->admin );
 		$post = $this->unscored_post( '', array( 'post_title' => 'Strony WWW – Firma Kowalski' ) );
 		$html = $this->column( $post );
-		$this->assertStringContainsString( 'Set a focus keyword', $html );
+		$this->assertStringContainsString( 'enter a keyword in the editor', $html );
+		$this->assertStringContainsString( 'mgseo-mark is-none', $html );
 		$this->assertStringContainsString( 'mgseo_focus=keyword', $html );
 		$this->assertStringContainsString( 'strony www', $html );
 		$this->assertStringNotContainsString( 'N/A', $html );
@@ -407,8 +409,11 @@ class ScoresTest extends TestCase {
 		$this->module()->admin_bar( $bar );
 		$node = $bar->get_node( 'seo-score' );
 		$this->assertNotNull( $node );
-		$this->assertMatchesRegularExpression( '#\d+/100#', $node->title );
-		$this->assertNotNull( $bar->get_node( 'seo-score-issue-0' ) );
+		$this->assertMatchesRegularExpression( '#seo-score-value">\d+<#', $node->title );
+		$this->assertStringContainsString( 'out of 100', $node->title );
+		$this->assertNotNull( $bar->get_node( 'seo-score-head' ) );
+		$this->assertNotNull( $bar->get_node( 'seo-score-issue-1' ) );
+		$this->assertNotNull( $bar->get_node( 'seo-score-hints' ) );
 
 		$none = $this->unscored_post( '' );
 		$this->go_to( get_permalink( $none ) );
@@ -420,7 +425,8 @@ class ScoresTest extends TestCase {
 		ob_start();
 		$this->module()->publish_box( get_post( $post ) );
 		$html = (string) ob_get_clean();
-		$this->assertStringContainsString( 'mgseo-live-score', $html );
+		$this->assertStringContainsString( 'mgseo-live-line', $html );
+		$this->assertStringContainsString( 'mgseo-show-hints', $html );
 		$this->assertMatchesRegularExpression( '#\d+/100#', $html );
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );

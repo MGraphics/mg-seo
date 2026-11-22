@@ -1,0 +1,173 @@
+/* MG SEO shared editor UI (SEO box, block editor sidebar, Elementor, page builders, lists). WordPress admin look. */
+.mgseo-panel, .mgseo-float, .mgseo-snippet, .mgseo-social, .mgseo-rating, .mgseo-pin {
+	--mgseo-accent: var(--wp-admin-theme-color, #3858e9);
+	--mgseo-ink: #1e1e1e;
+	--mgseo-mut: #50575e;
+	--mgseo-line: #e0e0e0;
+	--mgseo-bad: #b32d2e;
+	--mgseo-warn: #8a6100;
+	--mgseo-warn-mark: #b26200;
+	--mgseo-ok: #007017;
+}
+
+/* Shape marks: circle with "!" = to improve, triangle = worth considering, check = all good, ring = no keyword. */
+.mgseo-mark { display: inline-block; flex: none; width: 14px; height: 14px; position: relative; vertical-align: -2px; box-sizing: border-box; }
+.mgseo-mark.is-poor, .mgseo-mark.is-fail { background: #b32d2e; border-radius: 50%; }
+.mgseo-mark.is-poor::after, .mgseo-mark.is-fail::after { content: "!"; position: absolute; left: 0; right: 0; top: 0; text-align: center; color: #fff; font: 700 10px/14px -apple-system, BlinkMacSystemFont, Arial, sans-serif; }
+.mgseo-mark.is-ok, .mgseo-mark.is-warn { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 13px solid #b26200; vertical-align: -1px; }
+.mgseo-mark.is-good, .mgseo-mark.is-pass { width: 14px; }
+.mgseo-mark.is-good::after, .mgseo-mark.is-pass::after { content: ""; position: absolute; left: 4px; top: 0; width: 5px; height: 10px; border: solid #007017; border-width: 0 2px 2px 0; transform: rotate(40deg); }
+.mgseo-mark.is-none, .mgseo-mark.is-pending, .mgseo-mark.is-all { border: 2px solid #8c8f94; border-radius: 50%; }
+
+/* One way to show a score: mark, number, word. */
+.mgseo-rating { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--mgseo-ink); }
+.mgseo-rating-num { font-weight: 600; }
+.mgseo-rating-num small { font-weight: 400; color: #646970; }
+.mgseo-rating.is-poor .mgseo-rating-word { color: var(--mgseo-bad); }
+.mgseo-rating.is-ok .mgseo-rating-word { color: var(--mgseo-warn); }
+.mgseo-rating.is-good .mgseo-rating-word { color: var(--mgseo-ok); }
+.mgseo-rating.is-none .mgseo-rating-word, .mgseo-rating.is-pending .mgseo-rating-word { color: var(--mgseo-mut); }
+
+/* "SEO 21" pin (block editor header, Elementor top bar, floating button). */
+.mgseo-pin { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; line-height: 1; white-space: nowrap; color: inherit; }
+.interface-pinned-items button:has(.mgseo-pin), .editor-header__settings button:has(.mgseo-pin) { width: auto !important; min-width: 0; padding: 0 10px !important; }
+.interface-pinned-items button:has(.mgseo-pin) svg { display: none; }
+
+/* Panel. */
+.mgseo-panel { color: var(--mgseo-ink); font-size: 13px; }
+.mgseo-panel.is-loading .mgseo-panel-score { opacity: .7; }
+.mgseo-scoreline { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.mgseo-big { font-size: 26px; font-weight: 650; line-height: 1; letter-spacing: -.01em; }
+.mgseo-big small { font-size: 13px; font-weight: 400; color: #646970; }
+.mgseo-word { font-weight: 600; font-size: 13px; }
+.mgseo-word.is-poor { color: var(--mgseo-bad); } .mgseo-word.is-ok { color: var(--mgseo-warn); } .mgseo-word.is-good { color: var(--mgseo-ok); } .mgseo-word.is-none, .mgseo-word.is-pending { color: var(--mgseo-mut); }
+.mgseo-sub { font-size: 12px; color: var(--mgseo-mut); margin-top: 4px; }
+.mgseo-panel-score { margin: 0 0 14px; }
+.mgseo-field { margin: 0 0 14px; }
+.mgseo-label { display: block; font-weight: 600; margin: 0 0 6px; }
+.mgseo-field .mgseo-input, .mgseo-panel input.mgseo-input, .mgseo-panel textarea.mgseo-input { width: 100%; box-sizing: border-box; min-height: 36px; padding: 6px 10px; border: 1px solid #949494; border-radius: 2px; font-size: 13px; background: #fff; color: var(--mgseo-ink); }
+.mgseo-input:focus { border-color: var(--mgseo-accent); box-shadow: 0 0 0 1px var(--mgseo-accent); outline: 2px solid transparent; }
+.mgseo-input.is-auto::placeholder { color: #50575e; opacity: 1; }
+.mgseo-input.is-auto { background: #f6f7f7; }
+.mgseo-help { color: #646970; font-size: 12px; line-height: 1.45; margin: 4px 0 0; }
+.mgseo-field.is-highlighted .mgseo-input { box-shadow: 0 0 0 2px var(--mgseo-accent); }
+.mgseo-counter { float: right; font-weight: 400; color: var(--mgseo-mut); font-size: 12px; }
+.mgseo-counter.is-over { color: var(--mgseo-bad); font-weight: 600; }
+.mgseo-status { color: var(--mgseo-mut); font-size: 12px; min-height: 1em; margin: 8px 0 0; }
+
+/* Grouped hints. */
+.mgseo-hints { margin: 0; }
+.mgseo-group { border-top: 1px solid var(--mgseo-line); }
+.mgseo-group:last-child { border-bottom: 1px solid var(--mgseo-line); }
+.mgseo-group > summary { cursor: pointer; padding: 10px 0; font-weight: 600; list-style: none; display: flex; gap: 6px; align-items: center; }
+.mgseo-group > summary::-webkit-details-marker { display: none; }
+.mgseo-group > summary::after { content: ""; width: 7px; height: 7px; border: solid var(--mgseo-ink); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); margin: 0 4px 3px auto; }
+.mgseo-group[open] > summary::after { transform: rotate(-135deg); margin-bottom: -3px; }
+.mgseo-count { font-weight: 400; color: #646970; }
+.mgseo-group ul { list-style: none; margin: 0; padding: 0 0 6px; }
+.mgseo-hint { display: flex; gap: 9px; padding: 6px 0 8px; margin: 0; align-items: flex-start; }
+.mgseo-hint .mgseo-mark { margin-top: 1px; }
+.mgseo-hint > div { min-width: 0; flex: 1; }
+.mgseo-hint b { display: block; font-weight: 600; line-height: 1.4; }
+.mgseo-hint.is-simple b { font-weight: 400; }
+.mgseo-hint p { font-size: 12.5px; color: var(--mgseo-mut); line-height: 1.45; margin: 2px 0 0; }
+.mgseo-acts { margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; }
+.mgseo-acts .button-link, .mgseo-acts a { color: var(--mgseo-accent); text-decoration: underline; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; }
+.mgseo-places { margin: 6px 0 0; padding-top: 6px; border-top: 1px dashed #dcdcde; font-size: 12.5px; color: var(--mgseo-mut); }
+.mgseo-places span { display: inline-block; margin-right: 10px; white-space: nowrap; }
+.mgseo-places span::before { content: "· "; }
+.mgseo-suggest ul { margin: 6px 0 0; padding: 0; list-style: none; }
+.mgseo-suggest li { margin: 0 0 4px; }
+
+/* Collapsible sections (block editor sidebar, Elementor, floating panel). */
+.mgseo-fold { border-bottom: 1px solid var(--mgseo-line); }
+.mgseo-fold > summary { cursor: pointer; padding: 12px 0; font-weight: 600; list-style: none; display: flex; }
+.mgseo-fold > summary::-webkit-details-marker { display: none; }
+.mgseo-fold > summary::after { content: ""; width: 7px; height: 7px; border: solid var(--mgseo-ink); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); margin: 2px 4px 0 auto; }
+.mgseo-fold[open] > summary::after { transform: rotate(-135deg); margin-top: 6px; }
+.mgseo-fold-body, .mgseo-fold > .mgseo-snippet { padding: 0 0 12px; }
+.mgseo-overview-link { margin: 12px 0 0; }
+
+/* Google preview. */
+.mgseo-serp-wrap { margin: 0 0 16px; }
+.mgseo-device, .mgseo-social-switch { display: inline-flex; margin: 0 0 8px; border: 1px solid #949494; border-radius: 2px; overflow: hidden; }
+.mgseo-device-btn { border: 0; background: #fff; padding: 5px 10px; font-size: 12px; cursor: pointer; color: var(--mgseo-ink); }
+.mgseo-device-btn + .mgseo-device-btn { border-left: 1px solid #949494; }
+.mgseo-device-btn[aria-pressed="true"] { background: var(--mgseo-ink); color: #fff; }
+.mgseo-serp { border: 1px solid #dcdcde; border-radius: 8px; padding: 12px 16px; background: #fff; font-family: arial, sans-serif; max-width: 600px; box-sizing: border-box; }
+.mgseo-serp.is-mobile { max-width: 380px; }
+.mgseo-serp-site { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; min-width: 0; }
+.mgseo-serp-icon { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; border: 1px solid #dadce0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #474747; overflow: hidden; }
+.mgseo-serp-icon img { width: 18px; height: 18px; }
+.mgseo-serp-site > span:last-child { display: flex; flex-direction: column; min-width: 0; }
+.mgseo-serp-name { color: #202124; font-size: 14px; line-height: 1.3; }
+.mgseo-serp-url { color: #4d5156; font-size: 12px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mgseo-serp-title { color: #1a0dab; font-size: 20px; line-height: 1.3; margin: 2px 0 4px; }
+.mgseo-serp.is-mobile .mgseo-serp-title { font-size: 18px; }
+.mgseo-serp-desc { color: #474747; font-size: 14px; line-height: 1.55; }
+.mgseo-serp-desc b { color: #202124; }
+.mgseo-vars { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
+.mgseo-var { border: 1px solid #c3c4c7; background: #f6f7f7; border-radius: 2px; padding: 2px 6px; font: 12px/1.5 Menlo, Consolas, monospace; cursor: pointer; }
+
+/* Social preview. */
+.mgseo-social-net { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.mgseo-social-card { border: 1px solid #dadde1; background: #fff; overflow: hidden; }
+.mgseo-social-img { aspect-ratio: 1200 / 630; background: #f0f0f1; display: flex; align-items: center; justify-content: center; color: var(--mgseo-mut); font-size: 12px; text-align: center; padding: 0; }
+.mgseo-social-img.is-empty { padding: 12px; box-sizing: border-box; }
+.mgseo-social-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mgseo-social-text { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; background: #f2f3f5; border-top: 1px solid #dadde1; }
+.mgseo-social-host { font-size: 12px; color: #606770; text-transform: uppercase; }
+.mgseo-social-title { font-size: 16px; font-weight: 600; color: #1d2129; line-height: 1.3; }
+.mgseo-social-desc { font-size: 14px; color: #606770; line-height: 1.35; }
+.mgseo-image-pick { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mgseo-image-thumb img { width: 96px; height: 50px; object-fit: cover; border: 1px solid #dcdcde; display: block; }
+@media (max-width: 900px) { .mgseo-social-net { grid-template-columns: minmax(0, 1fr); } }
+
+/* Floating button and panel (page builders without the admin bar). */
+.mgseo-float { position: fixed; left: 16px; bottom: 16px; z-index: 999999; font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.mgseo-float-btn { display: inline-flex; align-items: center; height: 36px; padding: 0 12px; border: 1px solid #1e1e1e; background: #1e1e1e; color: #fff; border-radius: 2px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+.mgseo-float-btn .mgseo-mark.is-good::after { border-color: #68de7c; }
+.mgseo-float-btn .mgseo-mark.is-ok { border-bottom-color: #f0b849; }
+.mgseo-float-btn .mgseo-mark.is-poor { background: #f86368; }
+.mgseo-float-btn .mgseo-mark.is-poor::after { color: #1e1e1e; }
+.mgseo-float-btn .mgseo-mark.is-none { border-color: #c3c4c7; }
+.mgseo-float-panel { position: absolute; left: 0; bottom: 46px; width: 340px; max-width: calc(100vw - 32px); max-height: calc(100vh - 90px); overflow: auto; background: #fff; color: #1e1e1e; border: 1px solid #c3c4c7; box-shadow: 0 4px 20px rgba(0,0,0,.18); }
+.mgseo-float-panel[hidden] { display: none; }
+.mgseo-float-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; background: #fff; z-index: 1; }
+.mgseo-float-close { border: 0; background: none; font-size: 20px; line-height: 1; cursor: pointer; color: #1e1e1e; padding: 2px 6px; }
+.mgseo-float-body { padding: 14px; }
+.mgseo-float .screen-reader-text, .mgseo-el-panel .screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.mgseo-float button.button-link { color: var(--mgseo-accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+
+/* Elementor panel tab: follows Elementor's light or dark UI theme through its colour variables. */
+.mgseo-el-panel { padding: 16px 20px; }
+.mgseo-el-panel .mgseo-panel { --mgseo-ink: var(--e-a-color-txt, #1e1e1e); --mgseo-mut: var(--e-a-color-txt-muted, #50575e); --mgseo-line: var(--e-a-border-color, #e0e0e0); color: var(--mgseo-ink); }
+.mgseo-el-panel .mgseo-big small, .mgseo-el-panel .mgseo-count, .mgseo-el-panel .mgseo-help { color: var(--mgseo-mut); }
+.mgseo-el-panel .mgseo-input { border-color: var(--e-a-border-color-bold, #949494) !important; }
+.mgseo-el-panel .mgseo-input.is-auto { background: var(--e-a-bg-hover, #f6f7f7) !important; }
+.mgseo-el-panel .mgseo-input.is-auto::placeholder { color: var(--mgseo-mut); }
+.mgseo-el-panel .mgseo-serp { color: #202124; }
+.mgseo-el-panel .mgseo-input { background: var(--e-a-bg-default, #fff) !important; color: var(--e-a-color-txt, #1e1e1e) !important; }
+.mgseo-el-panel button.button-link { color: var(--e-a-color-info, #2563eb); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.mgseo-el-pin { font-size: 12px; }
+
+/* Block editor sidebar. */
+.mgseo-sidebar-panel { padding: 16px; }
+.mgseo-doc-panel .mgseo-help { margin: 0 0 8px; }
+.mgseo-prepublish-body .mgseo-top { margin: 6px 0 10px 18px; }
+
+/* Dark Elementor theme (class set by assets/elementor.js when the panel text is light). */
+.mgseo-dark .mgseo-word.is-poor, .mgseo-dark .mgseo-rating.is-poor .mgseo-rating-word { color: #f86368; }
+.mgseo-dark .mgseo-word.is-ok, .mgseo-dark .mgseo-rating.is-ok .mgseo-rating-word { color: #f0b849; }
+.mgseo-dark .mgseo-word.is-good, .mgseo-dark .mgseo-rating.is-good .mgseo-rating-word { color: #68de7c; }
+.mgseo-dark .mgseo-mark.is-good::after, .mgseo-dark .mgseo-mark.is-pass::after { border-color: #68de7c; }
+.mgseo-dark .mgseo-mark.is-ok, .mgseo-dark .mgseo-mark.is-warn { border-bottom-color: #f0b849; }
+.mgseo-dark .mgseo-mark.is-poor, .mgseo-dark .mgseo-mark.is-fail { background: #f86368; }
+.mgseo-dark .mgseo-mark.is-poor::after, .mgseo-dark .mgseo-mark.is-fail::after { color: #1f2124; }
+.mgseo-dark .mgseo-group > summary::after, .mgseo-dark .mgseo-fold > summary::after { border-color: var(--mgseo-ink); }
+.mgseo-dark button.button-link, .mgseo-dark .mgseo-acts a { color: #8fb3ff; }
+
+/* Elements toggled with the hidden attribute. */
+.mgseo-vars[hidden], .mgseo-places[hidden], .mgseo-kw-suggestion[hidden], .mgseo-social-net[hidden] { display: none !important; }
+.mgseo-scoreline.is-empty { align-items: center; }
+.mgseo-scoreline.is-empty .mgseo-word { font-size: 15px; }

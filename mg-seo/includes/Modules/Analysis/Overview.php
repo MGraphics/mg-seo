@@ -161,17 +161,12 @@ final class Overview {
 	/**
 	 * Score badge HTML.
 	 *
-	 * @param int|null $score Score.
-	 * @param string   $band  Band.
+	 * @param int|null $score     Score.
+	 * @param string   $band      Band.
+	 * @param int      $fix_count Number of things to improve (-1 = unknown).
 	 */
-	public static function badge( ?int $score, string $band ): string {
-		if ( Scores::BAND_PENDING === $band ) {
-			return '<span class="mgseo-score is-none" title="' . esc_attr__( 'Not calculated yet', 'mg-seo' ) . '">–</span>';
-		}
-		if ( Scores::BAND_NONE === $band || null === $score ) {
-			return '<span class="mgseo-score is-none">' . esc_html__( 'No keyword', 'mg-seo' ) . '</span>';
-		}
-		return '<span class="mgseo-score ' . esc_attr( Scores::band_class( $band ) ) . '">' . esc_html( (string) $score ) . '/100</span>';
+	public static function badge( ?int $score, string $band, int $fix_count = -1 ): string {
+		return Report::rating_html( $score, $band, array( 'fix_count' => $fix_count ) );
 	}
 
 	/**
@@ -217,7 +212,7 @@ final class Overview {
 		echo '<ul class="mgseo-bands">';
 		$all_class = '' === $band ? ' is-current' : '';
 		printf(
-			'<li class="mgseo-band is-all%1$s"><a href="%2$s"><strong>%3$d</strong><span>%4$s</span></a></li>',
+			'<li class="mgseo-band is-all%1$s"><a href="%2$s"><strong>%3$d</strong><span><span class="mgseo-mark is-all" aria-hidden="true"></span>%4$s</span></a></li>',
 			esc_attr( $all_class ),
 			esc_url( add_query_arg( $filter, $base ) ),
 			(int) $data['total'],
@@ -225,12 +220,13 @@ final class Overview {
 		);
 		foreach ( $labels as $key => $label ) {
 			printf(
-				'<li class="mgseo-band %1$s%2$s"><a href="%3$s"><strong>%4$d</strong><span>%5$s</span></a></li>',
+				'<li class="mgseo-band %1$s%2$s"><a href="%3$s"><strong>%4$d</strong><span><span class="mgseo-mark is-%6$s" aria-hidden="true"></span>%5$s</span></a></li>',
 				esc_attr( Scores::band_class( $key ) ),
 				esc_attr( $band === $key ? ' is-current' : '' ),
 				esc_url( add_query_arg( $filter + array( 'band' => $key ), $base ) ),
 				(int) $data['counts'][ $key ],
-				esc_html( $label )
+				esc_html( $label ),
+				esc_attr( $key )
 			);
 		}
 		echo '</ul>';
@@ -311,7 +307,7 @@ final class Overview {
 		$edit     = $can_edit ? get_edit_post_link( $id, 'raw' ) : '';
 		$title    = '' !== trim( $row['title'] ) ? $row['title'] : __( '(no title)', 'mg-seo' );
 		echo '<tr class="mgseo-band-' . esc_attr( $row['band'] ) . '">';
-		echo '<td class="column-score">' . self::badge( $row['score'], $row['band'] ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in badge().
+		echo '<td class="column-score">' . self::badge( $row['score'], $row['band'], (int) ( $row['data']['fix_count'] ?? -1 ) ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in badge().
 		echo '<td><strong>';
 		if ( $edit ) {
 			echo '<a href="' . esc_url( $edit . '#mgseo-box' ) . '">' . esc_html( $title ) . '</a>';
@@ -334,7 +330,7 @@ final class Overview {
 			} else {
 				echo '<ul class="mgseo-issues">';
 				foreach ( $issues as $issue ) {
-					echo '<li class="is-' . esc_attr( $issue['status'] ) . '">' . esc_html( $issue['label'] ) . '</li>';
+					echo '<li class="is-' . esc_attr( $issue['status'] ) . '"><span class="mgseo-mark is-' . esc_attr( $issue['status'] ) . '" aria-hidden="true"></span> <span class="screen-reader-text">' . esc_html( 'fail' === $issue['status'] ? __( 'To improve:', 'mg-seo' ) : __( 'Worth considering:', 'mg-seo' ) ) . ' </span>' . esc_html( $issue['label'] ) . '</li>';
 				}
 				echo '</ul>';
 			}
@@ -349,21 +345,25 @@ final class Overview {
 	}
 
 	/**
-	 * "Set a focus keyword" link with a suggestion.
+	 * "Enter a keyword" link with a suggestion.
 	 *
 	 * @param int  $post_id  Post id.
 	 * @param bool $can_edit Whether the user may edit the post.
+	 * @param bool $short    One short line (post list column).
 	 */
-	public static function keyword_hint( int $post_id, bool $can_edit ): void {
-		$link = $can_edit ? self::keyword_link( $post_id ) : '';
-		if ( $link ) {
-			echo '<a class="mgseo-set-keyword" href="' . esc_url( $link ) . '">' . esc_html__( 'Set a focus keyword', 'mg-seo' ) . '</a>';
-		} else {
-			echo '<span class="mgseo-set-keyword">' . esc_html__( 'Set a focus keyword', 'mg-seo' ) . '</span>';
-		}
+	public static function keyword_hint( int $post_id, bool $can_edit, bool $short = false ): void {
+		$link       = $can_edit ? self::keyword_link( $post_id ) : '';
+		$label      = $short ? __( 'enter a keyword in the editor', 'mg-seo' ) : __( 'Set a focus keyword', 'mg-seo' );
 		$post       = get_post( $post_id );
 		$suggestion = $post ? Scores::suggest_keyword( $post ) : '';
-		if ( '' !== $suggestion ) {
+		/* translators: %s: suggested focus keyword */
+		$title = '' !== $suggestion ? sprintf( __( 'Suggestion: “%s”', 'mg-seo' ), $suggestion ) : '';
+		if ( $link ) {
+			echo '<a class="mgseo-set-keyword" href="' . esc_url( $link ) . '" title="' . esc_attr( $title ) . '">' . esc_html( $label ) . '</a>';
+		} else {
+			echo '<span class="mgseo-set-keyword" title="' . esc_attr( $title ) . '">' . esc_html( $label ) . '</span>';
+		}
+		if ( '' !== $suggestion && ! $short ) {
 			/* translators: %s: suggested focus keyword */
 			echo '<br /><small class="mgseo-suggestion">' . esc_html( sprintf( __( 'Suggestion: “%s”', 'mg-seo' ), $suggestion ) ) . '</small>';
 		}

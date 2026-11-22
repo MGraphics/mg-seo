@@ -11,7 +11,7 @@ Titles and meta, a schema generator, XML sitemaps (with image, news and video), 
 | Area | What you get |
 |---|---|
 | Titles & meta | Templates with variables per post type, taxonomy and archive; per-post title/description; robots (noindex, nofollow, max-snippet, max-image-preview …); canonical URLs; verification codes; RSS before/after text |
-| Editor | SEO box in the block and classic editors with a Google snippet preview, live focus keyword analysis (multiple keywords), a live x/100 badge in the editor header, Publish box and admin bar, and an SEO score column |
+| Editor | Score and grouped hints while editing: SEO sidebar with a pinned score button in the block editor, Publish box line and SEO box in the classic editor, an SEO tab and top-bar score in Elementor, a floating panel in Beaver Builder, Divi, Bricks and WPBakery, and the admin bar; analysis of the rendered content (blocks, shortcodes, page builders) with Polish inflection; Google and social media previews; one narrow SEO column with a score filter in post lists |
 | SEO overview | Every indexable page sorted by score (worst first) with the 2–3 most important fixes, counts per band; scores recalculated after imports, on demand (`wp mgseo scores recalc`) and daily |
 | Social | Open Graph and Twitter Cards with per-post overrides and default images |
 | Schema | Site graph (WebSite, Organization/Person, WebPage, BreadcrumbList), generator for Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service and more, custom JSON-LD, templates with conditions, local validation |
