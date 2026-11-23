@@ -15,7 +15,7 @@ Titles and meta, a schema generator, XML sitemaps (with image, news and video), 
 | SEO overview | Every indexable page sorted by score (worst first) with the 2–3 most important fixes, counts per band; scores recalculated after imports, on demand (`wp mgseo scores recalc`) and daily |
 | Social | Open Graph and Twitter Cards with per-post overrides and default images |
 | Schema | Site graph (WebSite, Organization/Person, WebPage, BreadcrumbList), generator for Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service and more, custom JSON-LD, templates with conditions, local validation |
-| Sitemaps | XML sitemap index, post type/taxonomy/author sitemaps with images, Google News and video sitemaps, neutral XSL |
+| Sitemaps | XML sitemap index at `/sitemap.xml`, post type/taxonomy/author sitemaps (`/sitemap-article.xml`, `/sitemap-page.xml`, `/sitemap-{name}.xml`) with images, Google News and video sitemaps, neutral XSL, 301s from old addresses |
 | Redirections | 301/302/307/410/451, regex, automatic slug-change redirects, CSV import/export, 404 monitor |
 | Local SEO | Business data, opening hours, multiple locations, address shortcode/block, KML |
 | WooCommerce | Product schema (GTIN/MPN/brand, offers, ratings), product Open Graph, URL base options |

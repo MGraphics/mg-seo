@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Complete SEO toolkit: titles and meta, schema generator, XML sitemaps, redirecti
 * **SEO overview** – every indexable page sorted by score (worst first) with the 2–3 changes that matter most, counts per band, a live score badge in the editor header, the Publish box and the admin bar.
 * **Open Graph & Twitter Cards** with per-post overrides.
 * **Schema generator** – Article, FAQ, HowTo, Product, Event, Person, Organization, LocalBusiness, Service, Recipe, Course, JobPosting, Video and custom JSON-LD; schema templates with display conditions; local validation against Google rich result rules.
-* **XML sitemaps** with images, plus Google News and video sitemaps.
+* **XML sitemaps** with images, plus Google News and video sitemaps, at /sitemap.xml and /sitemap-{name}.xml.
 * **Redirections** (301, 302, 307, 410, 451, regex) with automatic redirects on slug changes, CSV import/export and a **404 monitor**.
 * **Breadcrumbs** with BreadcrumbList schema (shortcode, block, PHP function).
 * **Local SEO** – business data, opening hours, multiple locations, address shortcode, KML.
@@ -77,6 +77,14 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.3.2 =
+* New: shorter sitemap addresses. The index is /sitemap.xml; it lists /sitemap-article.xml (posts), /sitemap-page.xml, /sitemap-category.xml, /sitemap-tag.xml, /sitemap-author.xml, /sitemap-news.xml, /sitemap-video.xml and /sitemap-{name}.xml for every other post type and taxonomy (product_cat → /sitemap-product-cat.xml). Long sitemaps continue in /sitemap-article-2.xml, /sitemap-article-3.xml … robots.txt, the sitemap stylesheet and the links in MG SEO → XML Sitemaps use the new addresses.
+* New: names are unique and never change: a name that is already taken, reserved (index, author, news, video, image, images, locations, style) or ends in a number gets "-posts" (post types) or "-terms" (taxonomies), e.g. a taxonomy named "page" is /sitemap-page-terms.xml and a post type "news" is /sitemap-news-posts.xml; post types are named before taxonomies.
+* New: old addresses redirect (301) to the matching new sitemap: sitemap_index.xml, post-sitemap.xml, post-sitemap2.xml, page-sitemap.xml, category-sitemap.xml, author-sitemap.xml … (earlier versions, Rank Math, Yoast) and the WordPress addresses wp-sitemap.xml, wp-sitemap-posts-post-1.xml … Sitemaps already submitted in Search Console keep working. Setting "Old addresses" (on by default) turns this off; old addresses are then a normal 404 page. When another plugin already answers wp-sitemap addresses with a 404 (e.g. MG Stealth), that 404 stays.
+* Fix: robots.txt no longer keeps a "Sitemap:" line with this site's old sitemap_index.xml or wp-sitemap.xml address (e.g. left in custom robots.txt content after an import); the line with /sitemap.xml is added as before.
+* Updating: rewrite rules and cached sitemaps are rebuilt automatically after the update, no need to save permalinks.
+* Developers: `Builder::slugs()` returns the names; the `mgseo/sitemap/entry` filter gets the sitemap name as a fourth argument; filter `mgseo/sitemap/external` lists /sitemap-{name}.xml names served by other code (default: locations).
 
 = 0.3.1 =
 * New: the MG SEO dashboard has new module cards: an icon for every module, the name and description, and an on/off switch at the bottom. When a module is on, the card links to its settings (or to its screen, e.g. "Open" for the bulk editor, import and role manager). Modules that are always on or need another plugin say so on the card.

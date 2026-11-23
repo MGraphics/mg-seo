@@ -16,12 +16,45 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Decides which sitemaps exist, which objects they list and builds their XML.
  *
- * Sitemap names: '<post_type>', '<taxonomy>', 'author', 'news', 'video'.
+ * Sitemap names (the {name} in /sitemap-{name}.xml) are URL slugs, see slugs(): 'article' (posts), 'page',
+ * 'category', 'tag', 'author', 'news', 'video' and one slug per other post type and taxonomy.
  * Items are lists of array( object id, GMT datetime of last modification ); id 0 in a post type list is the homepage.
  */
 final class Builder {
 
 	public const NEWS_MAX = 1000;
+
+	/**
+	 * URL scheme version, part of the XML cache key (2: /sitemap.xml and /sitemap-{name}.xml since 0.3.2).
+	 */
+	public const SCHEME = 2;
+
+	/**
+	 * Fixed slugs of core post types and taxonomies.
+	 */
+	public const ALIASES = array(
+		'post_type' => array(
+			'post' => 'article',
+			'page' => 'page',
+		),
+		'taxonomy'  => array(
+			'category' => 'category',
+			'post_tag' => 'tag',
+		),
+	);
+
+	/**
+	 * Slugs no post type or taxonomy may take: the index, the special sitemaps (also while they are off, so
+	 * names never shift when a sitemap is switched on) and /sitemap-locations.xml of the Local SEO module.
+	 */
+	public const RESERVED = array( 'index', 'author', 'news', 'video', 'image', 'images', 'locations', 'style' );
+
+	/**
+	 * Per-request memo of slug maps.
+	 *
+	 * @var array<string, array{post_type: array<string, string>, taxonomy: array<string, string>}>
+	 */
+	private array $slugs = array();
 
 	/**
 	 * Per-request memo of item lists.
@@ -94,12 +127,15 @@ final class Builder {
 	 * @return array<string, array{0: string, 1: string}>
 	 */
 	public function sitemaps(): array {
-		$maps = array();
-		foreach ( $this->post_types() as $type ) {
-			$maps[ $type ] = array( 'post_type', $type );
+		$maps       = array();
+		$types      = $this->post_types();
+		$taxonomies = $this->taxonomies();
+		$slugs      = $this->slugs( $types, $taxonomies );
+		foreach ( $types as $type ) {
+			$maps[ $slugs['post_type'][ $type ] ] = array( 'post_type', $type );
 		}
-		foreach ( $this->taxonomies() as $taxonomy ) {
-			$maps[ $taxonomy ] = array( 'taxonomy', $taxonomy );
+		foreach ( $taxonomies as $taxonomy ) {
+			$maps[ $slugs['taxonomy'][ $taxonomy ] ] = array( 'taxonomy', $taxonomy );
 		}
 		if ( $this->authors_enabled() ) {
 			$maps['author'] = array( 'author', '' );
@@ -114,16 +150,171 @@ final class Builder {
 	}
 
 	/**
-	 * Public URL of a sitemap page.
+	 * Slug of a post type or taxonomy sitemap (the {name} in /sitemap-{name}.xml).
+	 *
+	 * @param string $kind 'post_type' or 'taxonomy'.
+	 * @param string $name Post type or taxonomy name.
+	 */
+	public function slug( string $kind, string $name ): string {
+		$map = $this->slugs();
+		if ( ! isset( $map[ $kind ][ $name ] ) ) {
+			$map = $this->slugs( $this->post_types(), $this->taxonomies() );
+		}
+		return $map[ $kind ][ $name ] ?? self::normalize( $name );
+	}
+
+	/**
+	 * Slugs of all public post types and taxonomies (plus those added with the sitemap filters).
+	 *
+	 * Rule, applied in a fixed order so every object always gets the same name, whatever is switched on: post,
+	 * page, the other public post types in registration order, category, post_tag, the other public taxonomies,
+	 * then post types and taxonomies that only the `mgseo/sitemap/post_types` / `mgseo/sitemap/taxonomies`
+	 * filters add.
+	 * 1. post is 'article', page 'page', category 'category', post_tag 'tag'; any other name is lower-cased with
+	 *    '_' turned into '-' and characters other than a-z, 0-9 and '-' removed (product_cat → product-cat).
+	 * 2. A name that is reserved (see RESERVED), already taken, empty or ends in '-<number>' (that would read as a
+	 *    page number) gets the suffix '-posts' (post types) or '-terms' (taxonomies): a taxonomy named "page" is
+	 *    'page-terms', a post type named "news" is 'news-posts', a post type "top-10" is 'top-10-posts'.
+	 * 3. Should that be taken too, '-b', '-c' … are appended until the name is free.
+	 *
+	 * Post types are named before taxonomies, so on a clash the post type keeps the plain name.
+	 * Reads no settings (it is also used to build the settings screen).
+	 *
+	 * @param string[] $extra_types      Post types beyond the public ones (from the sitemap filter).
+	 * @param string[] $extra_taxonomies Taxonomies beyond the public ones (from the sitemap filter).
+	 * @return array{post_type: array<string, string>, taxonomy: array<string, string>}
+	 */
+	public function slugs( array $extra_types = array(), array $extra_taxonomies = array() ): array {
+		$types      = array_values( array_unique( array_merge( array_keys( self::ALIASES['post_type'] ), array_keys( Context::post_types() ) ) ) );
+		$taxonomies = array_values( array_unique( array_merge( array_keys( self::ALIASES['taxonomy'] ), array_keys( Context::taxonomies() ) ) ) );
+		$groups     = array(
+			array( 'post_type', $types ),
+			array( 'taxonomy', $taxonomies ),
+			array( 'post_type', array_values( array_diff( array_map( 'strval', $extra_types ), $types ) ) ),
+			array( 'taxonomy', array_values( array_diff( array_map( 'strval', $extra_taxonomies ), $taxonomies ) ) ),
+		);
+		$memo_key   = (string) wp_json_encode( $groups );
+		if ( isset( $this->slugs[ $memo_key ] ) ) {
+			return $this->slugs[ $memo_key ];
+		}
+		$taken = array_fill_keys( self::RESERVED, true );
+		$map   = array(
+			'post_type' => array(),
+			'taxonomy'  => array(),
+		);
+		foreach ( $groups as [ $kind, $names ] ) {
+			foreach ( $names as $name ) {
+				$slug = self::ALIASES[ $kind ][ $name ] ?? self::normalize( $name );
+				if ( '' === $slug || isset( $taken[ $slug ] ) || preg_match( '/-[0-9]+$/', $slug ) ) {
+					$slug = ltrim( $slug . ( 'post_type' === $kind ? '-posts' : '-terms' ), '-' );
+					$base = $slug;
+					for ( $letter = 'b'; isset( $taken[ $slug ] ); $letter++ ) {
+						$slug = $base . '-' . $letter;
+					}
+				}
+				$taken[ $slug ]        = true;
+				$map[ $kind ][ $name ] = $slug;
+			}
+		}
+		$this->slugs[ $memo_key ] = $map;
+		return $map;
+	}
+
+	/**
+	 * URL-safe form of an object name: lower case, '_' → '-', only a-z, 0-9 and single hyphens.
+	 *
+	 * @param string $name Name.
+	 */
+	public static function normalize( string $name ): string {
+		$slug = (string) preg_replace( '/[^a-z0-9-]+/', '', str_replace( '_', '-', strtolower( $name ) ) );
+		return trim( (string) preg_replace( '/-{2,}/', '-', $slug ), '-' );
+	}
+
+	/**
+	 * Public URL of a sitemap page: /sitemap.xml (index), /sitemap-{name}.xml, /sitemap-{name}-{page}.xml.
 	 *
 	 * @param string $name Sitemap name ('index' for the index).
 	 * @param int    $page Page number.
 	 */
 	public static function url( string $name, int $page = 1 ): string {
 		if ( 'index' === $name ) {
-			return home_url( '/sitemap_index.xml' );
+			return home_url( '/sitemap.xml' );
 		}
-		return home_url( '/' . $name . '-sitemap' . ( $page > 1 ? $page : '' ) . '.xml' );
+		return home_url( '/sitemap-' . $name . ( $page > 1 ? '-' . $page : '' ) . '.xml' );
+	}
+
+	/**
+	 * Whether a sitemap page exists (a news sitemap always has page 1 while it is on).
+	 *
+	 * @param string $name Sitemap name.
+	 * @param int    $page Page number.
+	 */
+	public function exists( string $name, int $page = 1 ): bool {
+		if ( 'index' === $name ) {
+			return true;
+		}
+		if ( $page < 1 || ! isset( $this->sitemaps()[ $name ] ) ) {
+			return false;
+		}
+		if ( 'news' === $name ) {
+			return 1 === $page;
+		}
+		return $page <= count( $this->chunks( $name, $this->items( $name ) ) );
+	}
+
+	/**
+	 * New sitemap for an address of the old scheme (MG SEO before 0.3.2, Rank Math, Yoast): sitemap_index.xml and
+	 * {name}-sitemap{N}.xml, where {name} was the post type or taxonomy name, author, news or video.
+	 *
+	 * @param string $old  Old name ('index' for sitemap_index.xml).
+	 * @param int    $page Old page number.
+	 * @return array{0: string, 1: int}|null Sitemap name and page, null when nothing matches.
+	 */
+	public function legacy_target( string $old, int $page = 1 ): ?array {
+		if ( 'index' === $old ) {
+			return array( 'index', 1 );
+		}
+		$names = array();
+		foreach ( $this->sitemaps() as $name => [ $kind, $sub ] ) {
+			// Later entries win, as they did in the old scheme (a post type "news" lost to the News sitemap).
+			$names[ in_array( $kind, array( 'post_type', 'taxonomy' ), true ) ? $sub : $kind ] = $name;
+		}
+		return isset( $names[ $old ] ) ? $this->page_target( $names[ $old ], $page ) : null;
+	}
+
+	/**
+	 * New sitemap for a WordPress core sitemap address (wp-sitemap.xml, wp-sitemap-posts-post-1.xml …).
+	 *
+	 * @param string $path Request path, e.g. 'wp-sitemap-taxonomies-category-1.xml'.
+	 * @return array{0: string, 1: int}|null
+	 */
+	public function core_target( string $path ): ?array {
+		if ( 'wp-sitemap.xml' === $path ) {
+			return array( 'index', 1 );
+		}
+		if ( preg_match( '/^wp-sitemap-(posts|taxonomies)-([a-z0-9_-]+)-([0-9]+)\.xml$/', $path, $m ) ) {
+			$kind = 'posts' === $m[1] ? 'post_type' : 'taxonomy';
+			$list = 'post_type' === $kind ? $this->post_types() : $this->taxonomies();
+			return in_array( $m[2], $list, true ) ? $this->page_target( $this->slug( $kind, $m[2] ), (int) $m[3] ) : null;
+		}
+		if ( preg_match( '/^wp-sitemap-users-([0-9]+)\.xml$/', $path, $m ) ) {
+			return $this->page_target( 'author', (int) $m[1] );
+		}
+		return null;
+	}
+
+	/**
+	 * The same page of a sitemap when it exists, otherwise its first page (page sizes differ between plugins).
+	 *
+	 * @param string $name Sitemap name.
+	 * @param int    $page Page.
+	 * @return array{0: string, 1: int}|null
+	 */
+	private function page_target( string $name, int $page ): ?array {
+		if ( $this->exists( $name, max( 1, $page ) ) ) {
+			return array( $name, max( 1, $page ) );
+		}
+		return $this->exists( $name, 1 ) ? array( $name, 1 ) : null;
 	}
 
 	/**
@@ -192,7 +383,7 @@ final class Builder {
 	 */
 	public function xml( string $name, int $page = 1 ): ?string {
 		$page      = max( 1, $page );
-		$cache_key = 'xml|' . $name . '|' . $page . '|' . $this->stylesheet_url();
+		$cache_key = 'xml|' . self::SCHEME . '|' . $name . '|' . $page . '|' . $this->stylesheet_url();
 		$cached    = Cache::get( $cache_key );
 		if ( is_string( $cached ) ) {
 			return $cached;
@@ -627,8 +818,10 @@ final class Builder {
 		if ( ! isset( $maps[ $name ] ) ) {
 			return array();
 		}
-		[ $kind ] = $maps[ $name ];
-		$entries  = array();
+		[ $kind, $sub ] = $maps[ $name ];
+		// Filter argument as before 0.3.2: the post type or taxonomy name, or author/news/video.
+		$filter_name = in_array( $kind, array( 'post_type', 'taxonomy' ), true ) ? $sub : $kind;
+		$entries     = array();
 
 		foreach ( array_chunk( $items, 200 ) as $chunk ) {
 			$objects = array();
@@ -676,10 +869,11 @@ final class Builder {
 				 * Filter a sitemap entry. Return false to leave it out.
 				 *
 				 * @param array|false $entry  Entry: loc, lastmod, images, news, videos.
-				 * @param string      $name   Sitemap name (post type, taxonomy, author, news, video).
+				 * @param string      $type   Post type or taxonomy name, or author, news, video.
 				 * @param object|null $object WP_Post, WP_Term, WP_User or null (homepage).
+				 * @param string      $name   Sitemap name, the {name} in /sitemap-{name}.xml (since 0.3.2).
 				 */
-				$entry = apply_filters( 'mgseo/sitemap/entry', $entry, $name, $object );
+				$entry = apply_filters( 'mgseo/sitemap/entry', $entry, $filter_name, $object, $name );
 				if ( is_array( $entry ) && ! empty( $entry['loc'] ) ) {
 					$entries[] = $entry;
 				}

@@ -17,13 +17,21 @@ defined( 'ABSPATH' ) || exit;
 /**
  * XML sitemaps (index, post types, taxonomies, authors, Google News, video) with an XSL view.
  *
- * Public URLs: /sitemap_index.xml, /<name>-sitemap.xml, /<name>-sitemap<N>.xml, /sitemap.xsl.
- * /sitemap.xml and the core /wp-sitemap*.xml URLs redirect (301) to the index.
+ * Public URLs: /sitemap.xml (index), /sitemap-{name}.xml, /sitemap-{name}-{N}.xml (page N ≥ 2), /sitemap.xsl.
+ * {name} is 'article' (posts), 'page', 'category', 'tag', 'author', 'news', 'video' or the slug of another post type
+ * or taxonomy (rule in Builder::slugs()). Old addresses (sitemap_index.xml, {name}-sitemap{N}.xml of MG SEO before
+ * 0.3.2, Rank Math and Yoast, and the core wp-sitemap*.xml) redirect (301) to the new ones while the
+ * "legacy_redirects" setting is on, otherwise they are a plain 404.
  */
 final class Module extends Base {
 
 	public const QUERY_VAR      = 'xml_sitemap';
 	public const QUERY_VAR_PAGE = 'xml_sitemap_page';
+
+	/**
+	 * Sitemap names served by other modules: /sitemap-locations.xml (Local SEO).
+	 */
+	public const EXTERNAL = array( 'locations' );
 
 	/**
 	 * Builder instance.
@@ -84,14 +92,34 @@ final class Module extends Base {
 
 	/**
 	 * Register rewrite rules.
+	 *
+	 * Requests are resolved from the path in parse_request() (match_path()), so the rules mainly keep WordPress from
+	 * treating these addresses as pages; old rules left from an earlier version keep working until the next flush.
 	 */
 	public function rewrite_rules(): void {
-		$var  = self::QUERY_VAR;
-		$page = self::QUERY_VAR_PAGE;
-		add_rewrite_rule( '^sitemap_index\.xml$', 'index.php?' . $var . '=index', 'top' );
-		add_rewrite_rule( '^sitemap\.xml$', 'index.php?' . $var . '=legacy', 'top' );
+		$var      = self::QUERY_VAR;
+		$page     = self::QUERY_VAR_PAGE;
+		$external = implode( '|', array_map( static fn( $name ) => preg_quote( (string) $name, '/' ), self::external() ) );
+		add_rewrite_rule( '^sitemap\.xml$', 'index.php?' . $var . '=index', 'top' );
 		add_rewrite_rule( '^sitemap\.xsl$', 'index.php?' . $var . '=xsl', 'top' );
+		add_rewrite_rule( '^sitemap-' . ( '' !== $external ? '(?!(?:' . $external . ')\.xml$)' : '' ) . '([a-z0-9-]+?)(?:-([0-9]+))?\.xml$', 'index.php?' . $var . '=$matches[1]&' . $page . '=$matches[2]', 'top' );
+		// Old addresses, with the same targets as before 0.3.2 so a downgrade still works without a flush.
+		add_rewrite_rule( '^sitemap_index\.xml$', 'index.php?' . $var . '=index', 'top' );
 		add_rewrite_rule( '^([a-z0-9_-]+?)-sitemap([0-9]+)?\.xml$', 'index.php?' . $var . '=$matches[1]&' . $page . '=$matches[2]', 'top' );
+	}
+
+	/**
+	 * Sitemap names served by other modules (never handled here).
+	 *
+	 * @return string[]
+	 */
+	public static function external(): array {
+		/**
+		 * Filter the /sitemap-{name}.xml names that other code serves (default: locations, Local SEO).
+		 *
+		 * @param string[] $names Names.
+		 */
+		return array_values( array_filter( array_map( 'strval', (array) apply_filters( 'mgseo/sitemap/external', self::EXTERNAL ) ) ) );
 	}
 
 	/**
@@ -107,26 +135,36 @@ final class Module extends Base {
 	}
 
 	/**
-	 * Resolve a request path to array( name, page ) or null.
+	 * Resolve a request path to array( name, page ) or null when the path is not a sitemap address of this module.
+	 *
+	 * Names: 'index', 'xsl', a sitemap name, 'legacy:<old name>' (old scheme, 'legacy:index' for sitemap_index.xml)
+	 * or 'core:<path>' (WordPress core sitemaps). Page 0 marks an invalid page number (e.g. sitemap-page-1.xml:
+	 * page 1 has no number).
 	 *
 	 * @param string $path Request path relative to home, without slashes.
 	 * @return array{0: string, 1: int}|null
 	 */
 	public static function match_path( string $path ): ?array {
-		if ( 'sitemap_index.xml' === $path ) {
-			return array( 'index', 1 );
-		}
 		if ( 'sitemap.xml' === $path ) {
-			return array( 'legacy', 1 );
+			return array( 'index', 1 );
 		}
 		if ( 'sitemap.xsl' === $path ) {
 			return array( 'xsl', 1 );
 		}
-		if ( preg_match( '/^wp-sitemap(?:[a-z0-9_-]*)\.(?:xml|xsl)$/', $path ) ) {
-			return array( 'core', 1 );
+		if ( preg_match( '/^sitemap-([a-z0-9-]+?)(?:-([0-9]+))?\.xml$/', $path, $m ) ) {
+			if ( in_array( $m[1], self::external(), true ) && ! isset( $m[2] ) ) {
+				return null;
+			}
+			return array( $m[1], isset( $m[2] ) ? ( (int) $m[2] >= 2 && ! str_starts_with( $m[2], '0' ) ? (int) $m[2] : 0 ) : 1 );
+		}
+		if ( 'sitemap_index.xml' === $path ) {
+			return array( 'legacy:index', 1 );
+		}
+		if ( preg_match( '/^wp-sitemap(?:-[a-z0-9_-]+)?\.xml$/', $path ) ) {
+			return array( 'core:' . $path, 1 );
 		}
 		if ( preg_match( '/^([a-z0-9_-]+?)-sitemap([0-9]+)?\.xml$/', $path, $m ) ) {
-			return array( $m[1], isset( $m[2] ) ? (int) $m[2] : 1 );
+			return array( 'legacy:' . $m[1], isset( $m[2] ) ? max( 1, (int) $m[2] ) : 1 );
 		}
 		return null;
 	}
@@ -137,22 +175,23 @@ final class Module extends Base {
 	 * @param \WP $wp WordPress request.
 	 */
 	public function parse_request( \WP $wp ): void {
-		$name = isset( $wp->query_vars[ self::QUERY_VAR ] ) ? sanitize_key( (string) $wp->query_vars[ self::QUERY_VAR ] ) : '';
-		$page = isset( $wp->query_vars[ self::QUERY_VAR_PAGE ] ) ? (int) $wp->query_vars[ self::QUERY_VAR_PAGE ] : 1;
-		if ( 'wp' === $name || ( '' === $name && ( ! empty( $wp->query_vars['sitemap'] ) || ! empty( $wp->query_vars['sitemap-stylesheet'] ) ) ) ) {
-			// Core sitemap URLs (wp-sitemap.xml matches our generic rule as "wp").
-			$name = 'core';
+		$matched = self::match_path( Helpers::request_path() );
+		if ( ! $matched && ! empty( $wp->query_vars[ self::QUERY_VAR ] ) ) {
+			// Plain permalinks: index.php?xml_sitemap=article&xml_sitemap_page=2.
+			$name    = sanitize_key( (string) $wp->query_vars[ self::QUERY_VAR ] );
+			$page    = isset( $wp->query_vars[ self::QUERY_VAR_PAGE ] ) && '' !== $wp->query_vars[ self::QUERY_VAR_PAGE ] ? (int) $wp->query_vars[ self::QUERY_VAR_PAGE ] : 1;
+			$matched = array( $name, $page );
 		}
-		if ( '' === $name ) {
-			// Fallback when rewrite rules were not flushed yet.
-			$matched = self::match_path( Helpers::request_path() );
-			if ( ! $matched ) {
-				return;
-			}
-			[ $name, $page ] = $matched;
+		if ( ! $matched ) {
+			return;
+		}
+		[ $name, $page ] = $matched;
+		if ( str_starts_with( $name, 'core:' ) && isset( $wp->query_vars['error'] ) && '404' === (string) $wp->query_vars['error'] ) {
+			// Another plugin already turned the core address into a 404 (e.g. MG Stealth hides wp-* paths).
+			return;
 		}
 
-		$response = $this->response( $name, max( 1, $page ) );
+		$response = $this->response( $name, $page );
 		if ( null === $response ) {
 			$wp->query_vars = array( 'error' => '404' );
 			return;
@@ -169,21 +208,37 @@ final class Module extends Base {
 	}
 
 	/**
+	 * Whether old sitemap addresses redirect to the new ones.
+	 */
+	public static function legacy_redirects(): bool {
+		return (bool) Options::get( 'sitemap', 'legacy_redirects', true );
+	}
+
+	/**
 	 * Build the response for a sitemap request.
 	 *
-	 * @param string $name Name: index, legacy, core, xsl or a sitemap name.
-	 * @param int    $page Page.
+	 * @param string $name Name from match_path(): index, xsl, a sitemap name, legacy:<old> or core:<path>.
+	 * @param int    $page Page (0 = invalid).
 	 * @return array{redirect?: string, body?: string}|null Null for 404.
 	 */
 	public function response( string $name, int $page = 1 ): ?array {
-		if ( 'legacy' === $name || 'core' === $name ) {
-			return array( 'redirect' => Builder::url( 'index' ) );
+		if ( str_starts_with( $name, 'legacy:' ) || str_starts_with( $name, 'core:' ) ) {
+			if ( ! self::legacy_redirects() ) {
+				return null;
+			}
+			$target = str_starts_with( $name, 'legacy:' )
+				? $this->builder()->legacy_target( substr( $name, 7 ), $page )
+				: $this->builder()->core_target( substr( $name, 5 ) );
+			return $target ? array( 'redirect' => Builder::url( $target[0], $target[1] ) ) : null;
 		}
 		if ( 'xsl' === $name ) {
 			if ( ! Options::get( 'sitemap', 'stylesheet', true ) ) {
 				return null;
 			}
 			return array( 'body' => Stylesheet::xsl() );
+		}
+		if ( $page < 1 ) {
+			return null;
 		}
 		$xml = $this->builder()->xml( $name, $page );
 		if ( null === $xml ) {
@@ -218,6 +273,9 @@ final class Module extends Base {
 			return $output;
 		}
 		$url = Builder::url( 'index' );
+		// Drop lines with this site's old index addresses (e.g. left in a custom robots.txt after an import).
+		$home   = preg_quote( untrailingslashit( (string) preg_replace( '~^https?://~i', '', home_url() ) ), '/' );
+		$output = (string) preg_replace( '/^[ \t]*sitemap:[ \t]*https?:\/\/' . $home . '\/(?:sitemap_index|wp-sitemap)\.xml[ \t]*(?:\r?\n|$)/mi', '', $output );
 		if ( preg_match( '/^\s*sitemap:\s*' . preg_quote( $url, '/' ) . '\s*$/mi', $output ) ) {
 			return $output;
 		}
@@ -344,6 +402,14 @@ final class Module extends Base {
 				'toggle_label' => __( 'Show sitemaps as a readable table in browsers (served from /sitemap.xsl)', 'mg-seo' ),
 				'default'      => true,
 			),
+			array(
+				'id'           => 'legacy_redirects',
+				'type'         => 'toggle',
+				'label'        => __( 'Old addresses', 'mg-seo' ),
+				'toggle_label' => __( 'Redirect old sitemap addresses to the new ones (301)', 'mg-seo' ),
+				'default'      => true,
+				'desc'         => __( 'sitemap_index.xml, post-sitemap.xml, page-sitemap.xml and the other names used by earlier versions, Rank Math and Yoast, and the WordPress addresses wp-sitemap.xml …, so sitemaps submitted earlier in Search Console keep working. When off, these addresses return a normal 404 page.', 'mg-seo' ),
+			),
 		);
 
 		$pt_fields = array();
@@ -358,7 +424,7 @@ final class Module extends Base {
 				'type'         => 'toggle',
 				'label'        => __( 'Include in sitemap', 'mg-seo' ),
 				/* translators: %s: sitemap file name */
-				'toggle_label' => sprintf( __( 'List entries in %s', 'mg-seo' ), $name . '-sitemap.xml' ),
+				'toggle_label' => sprintf( __( 'List entries in %s', 'mg-seo' ), 'sitemap-' . $this->builder()->slug( 'post_type', $name ) . '.xml' ),
 				'default'      => true,
 			);
 			$pt_fields[] = array(
@@ -384,7 +450,7 @@ final class Module extends Base {
 				'type'         => 'toggle',
 				'label'        => __( 'Include in sitemap', 'mg-seo' ),
 				/* translators: %s: sitemap file name */
-				'toggle_label' => sprintf( __( 'List terms in %s', 'mg-seo' ), $name . '-sitemap.xml' ),
+				'toggle_label' => sprintf( __( 'List terms in %s', 'mg-seo' ), 'sitemap-' . $this->builder()->slug( 'taxonomy', $name ) . '.xml' ),
 				'default'      => 'category' === $name,
 			);
 			$tax_fields[] = array(
@@ -425,7 +491,7 @@ final class Module extends Base {
 			array(
 				'id'          => 'general',
 				'title'       => __( 'General', 'mg-seo' ),
-				'description' => __( 'WordPress core sitemaps are turned off while this module is active; their URLs redirect to the sitemap index. Search engines are not pinged: the sitemap URL is added to robots.txt instead.', 'mg-seo' ),
+				'description' => __( 'The sitemap index is /sitemap.xml; it lists /sitemap-article.xml (posts), /sitemap-page.xml, /sitemap-category.xml, /sitemap-author.xml and /sitemap-{name}.xml for other content types, numbered /sitemap-{name}-2.xml … when split. WordPress core sitemaps are turned off while this module is active. Search engines are not pinged: the sitemap URL is added to robots.txt instead.', 'mg-seo' ),
 				'fields'      => $general,
 			),
 			array(
@@ -448,7 +514,7 @@ final class Module extends Base {
 						'id'           => 'authors',
 						'type'         => 'toggle',
 						'label'        => __( 'Author sitemap', 'mg-seo' ),
-						'toggle_label' => __( 'List author archives of users with published posts (author-sitemap.xml)', 'mg-seo' ),
+						'toggle_label' => __( 'List author archives of users with published posts (sitemap-author.xml)', 'mg-seo' ),
 						'default'      => true,
 						'desc'         => __( 'Not generated when author archives are disabled or set to noindex under Titles & Meta.', 'mg-seo' ),
 					),
@@ -465,7 +531,7 @@ final class Module extends Base {
 			array(
 				'id'          => 'news',
 				'title'       => __( 'News sitemap', 'mg-seo' ),
-				'description' => __( 'Google News sitemap (news-sitemap.xml). As required by Google News it lists only articles published in the last 48 hours, at most 1,000.', 'mg-seo' ),
+				'description' => __( 'Google News sitemap (sitemap-news.xml). As required by Google News it lists only articles published in the last 48 hours, at most 1,000.', 'mg-seo' ),
 				'fields'      => array(
 					array(
 						'id'           => 'news',
@@ -515,7 +581,7 @@ final class Module extends Base {
 			array(
 				'id'          => 'video',
 				'title'       => __( 'Video sitemap', 'mg-seo' ),
-				'description' => __( 'Video sitemap (video-sitemap.xml) built from VideoObject schema data and, optionally, from YouTube and Vimeo embeds, video blocks, [video] shortcodes and attached video files. No external requests are made: YouTube thumbnails use the standard image URL, Vimeo videos use the featured image as thumbnail.', 'mg-seo' ),
+				'description' => __( 'Video sitemap (sitemap-video.xml) built from VideoObject schema data and, optionally, from YouTube and Vimeo embeds, video blocks, [video] shortcodes and attached video files. No external requests are made: YouTube thumbnails use the standard image URL, Vimeo videos use the featured image as thumbnail.', 'mg-seo' ),
 				'fields'      => array(
 					array(
 						'id'           => 'video',

@@ -75,23 +75,235 @@ class SitemapTest extends TestCase {
 		$this->assertFalse( (bool) apply_filters( 'wp_sitemaps_enabled', true ) );
 		global $wp_rewrite;
 		$rules = $wp_rewrite->wp_rewrite_rules();
-		$this->assertArrayHasKey( '^sitemap_index\.xml$', $rules );
+		$this->assertArrayHasKey( '^sitemap\.xml$', $rules );
 		$this->assertArrayHasKey( '^sitemap\.xsl$', $rules );
+		$this->assertArrayHasKey( '^sitemap-(?!(?:locations)\.xml$)([a-z0-9-]+?)(?:-([0-9]+))?\.xml$', $rules );
+		$this->assertArrayHasKey( '^sitemap_index\.xml$', $rules );
 		$this->assertArrayHasKey( '^([a-z0-9_-]+?)-sitemap([0-9]+)?\.xml$', $rules );
 	}
 
-	public function test_paths_and_redirects(): void {
-		$this->assertSame( array( 'index', 1 ), Sitemap::match_path( 'sitemap_index.xml' ) );
-		$this->assertSame( array( 'post', 1 ), Sitemap::match_path( 'post-sitemap.xml' ) );
-		$this->assertSame( array( 'my-type', 3 ), Sitemap::match_path( 'my-type-sitemap3.xml' ) );
-		$this->assertSame( array( 'core', 1 ), Sitemap::match_path( 'wp-sitemap.xml' ) );
+	public function test_rewrite_rules_route_new_names_and_leave_locations_alone(): void {
+		global $wp_rewrite;
+		$route = static function ( string $path ) use ( $wp_rewrite ): ?string {
+			foreach ( $wp_rewrite->wp_rewrite_rules() as $match => $query ) {
+				if ( preg_match( '#^' . $match . '#', $path ) ) {
+					return $query;
+				}
+			}
+			return null;
+		};
+		$this->assertSame( 'index.php?xml_sitemap=index', $route( 'sitemap.xml' ) );
+		$this->assertSame( 'index.php?xml_sitemap=$matches[1]&xml_sitemap_page=$matches[2]', $route( 'sitemap-article-2.xml' ) );
+		$this->assertSame( 'index.php?xml_sitemap=$matches[1]&xml_sitemap_page=$matches[2]', $route( 'post-sitemap2.xml' ), 'As before 0.3.2 (downgrade)' );
+		$this->assertSame( 'index.php?xml_sitemap=index', $route( 'sitemap_index.xml' ) );
+		$this->assertStringNotContainsString( 'xml_sitemap', (string) $route( 'sitemap-locations.xml' ), 'Served by the Local SEO module' );
+	}
+
+	public function test_match_path(): void {
+		$this->assertSame( array( 'index', 1 ), Sitemap::match_path( 'sitemap.xml' ) );
+		$this->assertSame( array( 'xsl', 1 ), Sitemap::match_path( 'sitemap.xsl' ) );
+		$this->assertSame( array( 'article', 1 ), Sitemap::match_path( 'sitemap-article.xml' ) );
+		$this->assertSame( array( 'article', 2 ), Sitemap::match_path( 'sitemap-article-2.xml' ) );
+		$this->assertSame( array( 'product-cat', 12 ), Sitemap::match_path( 'sitemap-product-cat-12.xml' ) );
+		$this->assertSame( array( 'top-10-posts', 1 ), Sitemap::match_path( 'sitemap-top-10-posts.xml' ) );
+		$this->assertSame( array( 'article', 0 ), Sitemap::match_path( 'sitemap-article-1.xml' ), 'Page 1 has no number' );
+		$this->assertSame( array( 'article', 0 ), Sitemap::match_path( 'sitemap-article-02.xml' ) );
+		$this->assertNull( Sitemap::match_path( 'sitemap-locations.xml' ), 'Local SEO sitemap' );
+		$this->assertNull( Sitemap::match_path( 'sitemap-Article.xml' ) );
+		$this->assertNull( Sitemap::match_path( 'sitemap-.xml' ) );
+
+		$this->assertSame( array( 'legacy:index', 1 ), Sitemap::match_path( 'sitemap_index.xml' ) );
+		$this->assertSame( array( 'legacy:post', 1 ), Sitemap::match_path( 'post-sitemap.xml' ) );
+		$this->assertSame( array( 'legacy:post_tag', 1 ), Sitemap::match_path( 'post_tag-sitemap.xml' ) );
+		$this->assertSame( array( 'legacy:my-type', 3 ), Sitemap::match_path( 'my-type-sitemap3.xml' ) );
+		$this->assertSame( array( 'core:wp-sitemap.xml', 1 ), Sitemap::match_path( 'wp-sitemap.xml' ) );
+		$this->assertSame( array( 'core:wp-sitemap-posts-post-1.xml', 1 ), Sitemap::match_path( 'wp-sitemap-posts-post-1.xml' ) );
 		$this->assertNull( Sitemap::match_path( 'about-us' ) );
+		$this->assertNull( Sitemap::match_path( 'wp-sitemap.xsl' ) );
 
 		$module = Plugin::instance()->module( 'sitemap' );
-		$this->assertSame( array( 'redirect' => home_url( '/sitemap_index.xml' ) ), $module->response( 'legacy' ) );
-		$this->assertSame( array( 'redirect' => home_url( '/sitemap_index.xml' ) ), $module->response( 'core' ) );
+		$this->assertFalse( $module->no_canonical_redirect( 'http://example.org/sitemap.xml/', 'http://example.org/sitemap.xml' ) );
+		$this->assertFalse( $module->no_canonical_redirect( 'http://example.org/sitemap-article-2.xml/', 'http://example.org/sitemap-article-2.xml' ) );
+		$this->assertSame( 'http://example.org/a/', $module->no_canonical_redirect( 'http://example.org/a/', 'http://example.org/a' ) );
+	}
+
+	public function test_responses_for_new_names(): void {
+		self::factory()->post->create();
+		$module = new Sitemap();
+		$this->assertArrayHasKey( 'body', $module->response( 'index' ) );
+		$this->assertArrayHasKey( 'body', $module->response( 'article' ) );
+		$this->assertArrayHasKey( 'body', $module->response( 'xsl' ) );
+		$this->assertNull( $module->response( 'article', 0 ), 'sitemap-article-1.xml' );
+		$this->assertNull( $module->response( 'article', 2 ) );
+		$this->assertNull( $module->response( 'post' ), 'Old internal name' );
 		$this->assertNull( $module->response( 'nonexistent' ) );
-		$this->assertFalse( $module->no_canonical_redirect( 'http://example.org/sitemap_index.xml/', 'http://example.org/sitemap_index.xml' ) );
+	}
+
+	public function test_slug_rule_and_collisions(): void {
+		register_post_type( 'book', array( 'public' => true ) );
+		register_post_type( 'news', array( 'public' => true ) );
+		register_post_type( 'top-10', array( 'public' => true ) );
+		register_post_type( 'author', array( 'public' => true ) );
+		register_post_type( 'product_cat', array( 'public' => true ) );
+		register_taxonomy( 'page', 'post', array( 'public' => true ) );
+		register_taxonomy( 'product_cat', 'post', array( 'public' => true ) );
+		register_taxonomy( 'genre__x', 'post', array( 'public' => true ) );
+		register_taxonomy( 'locations', 'post', array( 'public' => true ) );
+		register_taxonomy( 'article', 'post', array( 'public' => true ) );
+		try {
+			$builder = new Builder();
+			$slugs   = $builder->slugs();
+			$this->assertSame( 'article', $slugs['post_type']['post'] );
+			$this->assertSame( 'page', $slugs['post_type']['page'] );
+			$this->assertSame( 'book', $slugs['post_type']['book'] );
+			$this->assertSame( 'news-posts', $slugs['post_type']['news'], 'Reserved for the News sitemap' );
+			$this->assertSame( 'top-10-posts', $slugs['post_type']['top-10'], 'Would read as page 10 of "top"' );
+			$this->assertSame( 'author-posts', $slugs['post_type']['author'] );
+			$this->assertSame( 'product-cat', $slugs['post_type']['product_cat'] );
+			$this->assertSame( 'category', $slugs['taxonomy']['category'] );
+			$this->assertSame( 'tag', $slugs['taxonomy']['post_tag'] );
+			$this->assertSame( 'page-terms', $slugs['taxonomy']['page'], 'Post types keep the plain name' );
+			$this->assertSame( 'product-cat-terms', $slugs['taxonomy']['product_cat'] );
+			$this->assertSame( 'genre-x', $slugs['taxonomy']['genre__x'] );
+			$this->assertSame( 'locations-terms', $slugs['taxonomy']['locations'], 'Reserved for Local SEO' );
+			$this->assertSame( 'article-terms', $slugs['taxonomy']['article'] );
+
+			// All names are unique and none ends in a page number.
+			$all = array_merge( array_values( $slugs['post_type'] ), array_values( $slugs['taxonomy'] ) );
+			$this->assertSame( count( $all ), count( array_unique( $all ) ) );
+			foreach ( $all as $slug ) {
+				$this->assertMatchesRegularExpression( '/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug );
+				$this->assertDoesNotMatchRegularExpression( '/-[0-9]+$/', $slug );
+				$this->assertSame( array( $slug, 1 ), Sitemap::match_path( 'sitemap-' . $slug . '.xml' ) );
+				$this->assertSame( array( $slug, 3 ), Sitemap::match_path( 'sitemap-' . $slug . '-3.xml' ) );
+			}
+
+			// Deterministic: the same objects always get the same names, whatever is switched on.
+			$this->set_option( 'sitemap', 'pt_book_include', false );
+			$this->set_option( 'sitemap', 'tax_page_include', true );
+			$this->set_option( 'sitemap', 'news', true );
+			$again = ( new Builder() )->slugs();
+			$this->assertSame( $slugs, $again );
+			$maps = ( new Builder() )->sitemaps();
+			$this->assertSame( array( 'taxonomy', 'page' ), $maps['page-terms'] );
+			$this->assertSame( array( 'post_type', 'page' ), $maps['page'] );
+			$this->assertSame( array( 'news', '' ), $maps['news'] );
+			$this->assertSame( array( 'post_type', 'news' ), $maps['news-posts'] );
+			$this->assertArrayNotHasKey( 'book', $maps );
+
+			// The third clash gets a letter.
+			add_filter( 'mgseo/sitemap/taxonomies', static fn( $list ) => array_merge( $list, array( 'news_posts' ) ) );
+			register_taxonomy( 'news_posts', 'post', array( 'public' => false ) );
+			$this->assertSame( 'news-posts-terms', ( new Builder() )->slug( 'taxonomy', 'news_posts' ) );
+			register_taxonomy( 'news-posts-terms', 'post', array( 'public' => true ) );
+			$third = ( new Builder() )->slugs( array(), array( 'news_posts' ) );
+			$this->assertSame( 'news-posts-terms', $third['taxonomy']['news-posts-terms'], 'Registered earlier, keeps its name' );
+			$this->assertSame( 'news-posts-terms-b', $third['taxonomy']['news_posts'] );
+		} finally {
+			foreach ( array( 'news', 'top-10', 'author', 'product_cat' ) as $type ) {
+				unregister_post_type( $type );
+			}
+			foreach ( array( 'page', 'product_cat', 'genre__x', 'locations', 'article', 'news_posts', 'news-posts-terms' ) as $tax ) {
+				unregister_taxonomy( $tax );
+			}
+		}
+	}
+
+	public function test_legacy_redirects(): void {
+		register_post_type( 'book', array( 'public' => true ) );
+		for ( $i = 1; $i <= 3; $i++ ) {
+			self::factory()->post->create( array( 'post_type' => 'book' ) );
+		}
+		$user = self::factory()->user->create( array( 'role' => 'author' ) );
+		self::factory()->post->create( array( 'post_author' => $user ) );
+		$tag = self::factory()->tag->create();
+		self::factory()->post->create( array( 'tags_input' => array( $tag ) ) );
+		$this->set_option( 'sitemap', 'tax_post_tag_include', true );
+		$this->set_option( 'titles', 'tax_post_tag_robots', array() );
+		$this->set_option( 'sitemap', 'links_per_sitemap', 2 );
+		$module = new Sitemap();
+		$expect = array(
+			'sitemap_index.xml'                    => '/sitemap.xml',
+			'post-sitemap.xml'                     => '/sitemap-article.xml',
+			'post-sitemap2.xml'                    => '/sitemap-article-2.xml',
+			'post-sitemap9.xml'                    => '/sitemap-article.xml',
+			'page-sitemap.xml'                     => null,
+			'category-sitemap.xml'                 => '/sitemap-category.xml',
+			'post_tag-sitemap.xml'                 => '/sitemap-tag.xml',
+			'author-sitemap.xml'                   => '/sitemap-author.xml',
+			'book-sitemap1.xml'                    => '/sitemap-book.xml',
+			'book-sitemap2.xml'                    => '/sitemap-book-2.xml',
+			'news-sitemap.xml'                     => null,
+			'unknown-sitemap.xml'                  => null,
+			'wp-sitemap.xml'                       => '/sitemap.xml',
+			'wp-sitemap-posts-post-1.xml'          => '/sitemap-article.xml',
+			'wp-sitemap-posts-book-2.xml'          => '/sitemap-book-2.xml',
+			'wp-sitemap-taxonomies-category-1.xml' => '/sitemap-category.xml',
+			'wp-sitemap-taxonomies-post_tag-1.xml' => '/sitemap-tag.xml',
+			'wp-sitemap-users-1.xml'               => '/sitemap-author.xml',
+			'wp-sitemap-posts-nope-1.xml'          => null,
+		);
+		foreach ( $expect as $path => $target ) {
+			$matched = Sitemap::match_path( $path );
+			$this->assertNotNull( $matched, $path );
+			$response = $module->response( ...$matched );
+			if ( null === $target ) {
+				$this->assertNull( $response, $path . ' (no matching sitemap)' );
+			} else {
+				$this->assertSame( array( 'redirect' => home_url( $target ) ), $response, $path );
+			}
+		}
+
+		// Off: every old address is a plain 404, nothing points to the new names.
+		$this->set_option( 'sitemap', 'legacy_redirects', false );
+		$module = new Sitemap();
+		foreach ( array_keys( $expect ) as $path ) {
+			$this->assertNull( $module->response( ...Sitemap::match_path( $path ) ), $path );
+		}
+		$this->assertArrayHasKey( 'body', $module->response( 'index' ) );
+	}
+
+	public function test_parse_request_redirects_and_respects_earlier_404(): void {
+		$module = Plugin::instance()->module( 'sitemap' );
+		$wp     = new \WP();
+		$uri    = $_SERVER['REQUEST_URI'] ?? null;
+
+		$_SERVER['REQUEST_URI'] = '/wp-sitemap.xml';
+		$wp->query_vars         = array( 'error' => '404' );
+		$module->parse_request( $wp );
+		$this->assertSame( array( 'error' => '404' ), $wp->query_vars, 'Left to the 404 set by another plugin' );
+
+		$_SERVER['REQUEST_URI'] = '/sitemap-nothing.xml';
+		$wp->query_vars         = array();
+		$module->parse_request( $wp );
+		$this->assertSame( array( 'error' => '404' ), $wp->query_vars );
+
+		$_SERVER['REQUEST_URI'] = '/sitemap-locations.xml';
+		$wp->query_vars         = array( 'kml_locations' => 'sitemap' );
+		$module->parse_request( $wp );
+		$this->assertSame( array( 'kml_locations' => 'sitemap' ), $wp->query_vars, 'Not handled here' );
+
+		$_SERVER['REQUEST_URI'] = '/about/';
+		$wp->query_vars         = array( 'pagename' => 'about' );
+		$module->parse_request( $wp );
+		$this->assertSame( array( 'pagename' => 'about' ), $wp->query_vars );
+		if ( null === $uri ) {
+			unset( $_SERVER['REQUEST_URI'] );
+		} else {
+			$_SERVER['REQUEST_URI'] = $uri;
+		}
+	}
+
+	public function test_upgrade_flushes_rewrites_and_cache(): void {
+		remove_filter( 'mgseo/sitemap/cache_enabled', '__return_false' );
+		Cache::set( 'test', 1 );
+		update_option( 'mgseo_version', '0.3.1' );
+		delete_option( 'mgseo_flush_rewrite' );
+		$version = Cache::version();
+		\MGSEO\Installer::maybe_upgrade();
+		$this->assertSame( MGSEO_VERSION, get_option( 'mgseo_version' ) );
+		$this->assertNotEmpty( get_option( 'mgseo_flush_rewrite' ) );
+		$this->assertNotSame( $version, Cache::version() );
 	}
 
 	public function test_index_lists_sitemaps(): void {
@@ -103,19 +315,19 @@ class SitemapTest extends TestCase {
 		$locs = $this->locs( $xml );
 		$this->assertSame( 'sitemapindex', $dom->documentElement->localName );
 		$this->assertSame( Renderer::NS_SITEMAP, $dom->documentElement->namespaceURI );
-		$this->assertContains( home_url( '/post-sitemap.xml' ), $locs );
-		$this->assertContains( home_url( '/page-sitemap.xml' ), $locs );
-		$this->assertContains( home_url( '/category-sitemap.xml' ), $locs );
-		$this->assertContains( home_url( '/author-sitemap.xml' ), $locs );
-		$this->assertNotContains( home_url( '/news-sitemap.xml' ), $locs );
-		$this->assertNotContains( home_url( '/post_tag-sitemap.xml' ), $locs );
+		$this->assertContains( home_url( '/sitemap-article.xml' ), $locs );
+		$this->assertContains( home_url( '/sitemap-page.xml' ), $locs );
+		$this->assertContains( home_url( '/sitemap-category.xml' ), $locs );
+		$this->assertContains( home_url( '/sitemap-author.xml' ), $locs );
+		$this->assertNotContains( home_url( '/sitemap-news.xml' ), $locs );
+		$this->assertNotContains( home_url( '/sitemap-tag.xml' ), $locs );
 		$this->assertMatchesRegularExpression( '/<lastmod>\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\+00:00<\/lastmod>/', $xml );
 		$this->assertStringContainsString( '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>', $xml );
 
 		$this->set_option( 'sitemap', 'pt_page_include', false );
 		$this->set_option( 'sitemap', 'stylesheet', false );
 		$xml = ( new Builder() )->xml( 'index' );
-		$this->assertNotContains( home_url( '/page-sitemap.xml' ), $this->locs( $xml ) );
+		$this->assertNotContains( home_url( '/sitemap-page.xml' ), $this->locs( $xml ) );
 		$this->assertStringNotContainsString( 'xml-stylesheet', $xml );
 		$this->assertNull( Plugin::instance()->module( 'sitemap' )->response( 'xsl' ) );
 	}
@@ -145,7 +357,7 @@ class SitemapTest extends TestCase {
 		$this->set_option( 'sitemap', 'exclude_posts', (string) $by_id );
 		add_filter( 'mgseo/sitemap/exclude_post', static fn( $exclude, $id ) => $id === $by_filter ? true : $exclude, 10, 2 );
 
-		$xml  = ( new Builder() )->xml( 'post' );
+		$xml  = ( new Builder() )->xml( 'article' );
 		$locs = $this->locs( $xml );
 		$this->assertSame( home_url( '/' ), $locs[0], 'Homepage comes first when the front page shows posts' );
 		$this->assertContains( get_permalink( $post ), $locs );
@@ -175,9 +387,9 @@ class SitemapTest extends TestCase {
 		$this->assertStringContainsString( 'https://cdn.example.com/a.png?x=1&amp;y=2', $xml );
 
 		$this->set_option( 'sitemap', 'include_featured', false );
-		$this->assertStringNotContainsString( 'featured.jpg', ( new Builder() )->xml( 'post' ) );
+		$this->assertStringNotContainsString( 'featured.jpg', ( new Builder() )->xml( 'article' ) );
 		$this->set_option( 'sitemap', 'include_images', false );
-		$xml = ( new Builder() )->xml( 'post' );
+		$xml = ( new Builder() )->xml( 'article' );
 		$this->assertStringNotContainsString( '<image:image>', $xml );
 		$this->assertStringNotContainsString( 'xmlns:image', $xml );
 	}
@@ -200,7 +412,7 @@ class SitemapTest extends TestCase {
 		$locs = $this->locs( ( new Builder() )->xml( 'page' ) );
 		$this->assertSame( home_url( '/' ), $locs[0] );
 		$this->assertContains( get_permalink( $other ), $locs );
-		$this->assertNotContains( home_url( '/' ), $this->locs( ( new Builder() )->xml( 'post' ) ?? '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>' ) );
+		$this->assertNotContains( home_url( '/' ), $this->locs( ( new Builder() )->xml( 'article' ) ?? '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>' ) );
 	}
 
 	public function test_pagination_split(): void {
@@ -218,10 +430,10 @@ class SitemapTest extends TestCase {
 		$this->set_option( 'sitemap', 'links_per_sitemap', 2 );
 		$builder = new Builder();
 		$index   = $this->locs( $builder->xml( 'index' ) );
-		$this->assertContains( home_url( '/book-sitemap.xml' ), $index );
-		$this->assertContains( home_url( '/book-sitemap2.xml' ), $index );
-		$this->assertContains( home_url( '/book-sitemap3.xml' ), $index );
-		$this->assertNotContains( home_url( '/book-sitemap4.xml' ), $index );
+		$this->assertContains( home_url( '/sitemap-book.xml' ), $index );
+		$this->assertContains( home_url( '/sitemap-book-2.xml' ), $index );
+		$this->assertContains( home_url( '/sitemap-book-3.xml' ), $index );
+		$this->assertNotContains( home_url( '/sitemap-book-4.xml' ), $index );
 
 		$this->assertSame( array( get_permalink( $ids[0] ), get_permalink( $ids[1] ) ), $this->locs( $builder->xml( 'book', 1 ) ) );
 		$this->assertSame( array( get_permalink( $ids[2] ), get_permalink( $ids[3] ) ), $this->locs( $builder->xml( 'book', 2 ) ) );
@@ -254,7 +466,7 @@ class SitemapTest extends TestCase {
 		$this->assertContains( get_term_link( $empty ), $this->locs( ( new Builder() )->xml( 'category' ) ) );
 
 		// Tags are off by default; enabled tags still follow the taxonomy noindex default.
-		$this->assertArrayNotHasKey( 'post_tag', ( new Builder() )->sitemaps() );
+		$this->assertArrayNotHasKey( 'tag', ( new Builder() )->sitemaps() );
 	}
 
 	public function test_author_sitemap(): void {
@@ -289,7 +501,7 @@ class SitemapTest extends TestCase {
 		$this->set_option( 'sitemap', 'news_exclude_terms', array( (string) $skip_cat ) );
 
 		$builder = new Builder();
-		$this->assertContains( home_url( '/news-sitemap.xml' ), $this->locs( $builder->xml( 'index' ) ) );
+		$this->assertContains( home_url( '/sitemap-news.xml' ), $this->locs( $builder->xml( 'index' ) ) );
 		$xml  = $builder->xml( 'news' );
 		$dom  = $this->dom( $xml );
 		$locs = $this->locs( $xml );
@@ -326,7 +538,7 @@ class SitemapTest extends TestCase {
 		$plain = self::factory()->post->create( array( 'post_title' => 'No video' ) );
 
 		$builder = new Builder();
-		$this->assertContains( home_url( '/video-sitemap.xml' ), $this->locs( $builder->xml( 'index' ) ) );
+		$this->assertContains( home_url( '/sitemap-video.xml' ), $this->locs( $builder->xml( 'index' ) ) );
 		$xml  = $builder->xml( 'video' );
 		$dom  = $this->dom( $xml );
 		$locs = $this->locs( $xml );
@@ -414,7 +626,7 @@ class SitemapTest extends TestCase {
 		);
 		add_filter( 'mgseo/sitemap/post_types', static fn( $types ) => array_diff( $types, array( 'page' ) ) );
 		$builder = new Builder();
-		$locs    = $this->locs( $builder->xml( 'post' ) );
+		$locs    = $this->locs( $builder->xml( 'article' ) );
 		$this->assertContains( get_permalink( $keep ), $locs );
 		$this->assertNotContains( get_permalink( $drop ), $locs );
 		$this->assertSame( home_url( '/?home=1' ), $locs[0] );
@@ -422,10 +634,15 @@ class SitemapTest extends TestCase {
 	}
 
 	public function test_robots_txt_line(): void {
-		$line   = 'Sitemap: ' . home_url( '/sitemap_index.xml' );
+		$line   = 'Sitemap: ' . home_url( '/sitemap.xml' );
 		$output = apply_filters( 'robots_txt', "User-agent: *\nDisallow: /wp-admin/\n", true );
 		$this->assertSame( 1, substr_count( $output, $line ) );
 		$this->assertSame( 1, substr_count( apply_filters( 'robots_txt', $output, true ), $line ), 'Not duplicated' );
+		$old    = "User-agent: *\nDisallow:\n\nSitemap: " . home_url( '/sitemap_index.xml' ) . "\nSitemap: https://other.example/sitemap_index.xml\n";
+		$output = apply_filters( 'robots_txt', $old, true );
+		$this->assertStringNotContainsString( home_url( '/sitemap_index.xml' ), $output, 'Old address of this site dropped' );
+		$this->assertStringContainsString( 'Sitemap: https://other.example/sitemap_index.xml', $output );
+		$this->assertSame( 1, substr_count( $output, $line ) );
 		$this->assertStringNotContainsString( 'Sitemap:', apply_filters( 'robots_txt', "User-agent: *\nDisallow: /\n", false ) );
 		$this->assertStringNotContainsString( 'wp-sitemap', $output );
 	}
@@ -433,19 +650,19 @@ class SitemapTest extends TestCase {
 	public function test_cache_invalidation(): void {
 		remove_filter( 'mgseo/sitemap/cache_enabled', '__return_false' );
 		$first = self::factory()->post->create( array( 'post_title' => 'First' ) );
-		$xml   = ( new Builder() )->xml( 'post' );
+		$xml   = ( new Builder() )->xml( 'article' );
 		$this->assertContains( get_permalink( $first ), $this->locs( $xml ) );
-		$this->assertSame( $xml, ( new Builder() )->xml( 'post' ), 'Served from cache' );
+		$this->assertSame( $xml, ( new Builder() )->xml( 'article' ), 'Served from cache' );
 
 		$second = self::factory()->post->create( array( 'post_title' => 'Second' ) );
-		$this->assertContains( get_permalink( $second ), $this->locs( ( new Builder() )->xml( 'post' ) ), 'Invalidated on publish' );
+		$this->assertContains( get_permalink( $second ), $this->locs( ( new Builder() )->xml( 'article' ) ), 'Invalidated on publish' );
 
 		Meta::set_post( $second, 'robots', array( 'noindex' ) );
-		$this->assertNotContains( get_permalink( $second ), $this->locs( ( new Builder() )->xml( 'post' ) ), 'Invalidated on meta change' );
+		$this->assertNotContains( get_permalink( $second ), $this->locs( ( new Builder() )->xml( 'article' ) ), 'Invalidated on meta change' );
 
 		$first_url = get_permalink( $first );
 		wp_delete_post( $first, true );
-		$this->assertNotContains( $first_url, $this->locs( ( new Builder() )->xml( 'post' ) ), 'Invalidated on delete' );
+		$this->assertNotContains( $first_url, $this->locs( ( new Builder() )->xml( 'article' ) ), 'Invalidated on delete' );
 
 		$version = Cache::version();
 		( new Builder() )->xml( 'index' );
@@ -480,7 +697,7 @@ class SitemapTest extends TestCase {
 		$this->dom( $xsl );
 		$this->assertStringContainsString( '<title>XML Sitemap</title>', $xsl );
 		self::factory()->post->create();
-		foreach ( array( $xsl, ( new Builder() )->xml( 'index' ), ( new Builder() )->xml( 'post' ) ) as $doc ) {
+		foreach ( array( $xsl, ( new Builder() )->xml( 'index' ), ( new Builder() )->xml( 'article' ) ) as $doc ) {
 			$this->assertDoesNotMatchRegularExpression( '/mg-?seo|rank-?math|yoast|<!--/i', $doc );
 		}
 	}

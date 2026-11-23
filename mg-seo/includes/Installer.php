@@ -61,6 +61,7 @@ final class Installer {
 			}
 		}
 		update_option( 'mgseo_db_version', self::DB_VERSION );
+		update_option( 'mgseo_version', MGSEO_VERSION );
 		update_option( 'mgseo_flush_rewrite', 1 );
 	}
 
@@ -80,6 +81,13 @@ final class Installer {
 	public static function maybe_upgrade(): void {
 		if ( get_option( 'mgseo_db_version' ) !== self::DB_VERSION ) {
 			self::activate();
+		}
+		if ( get_option( 'mgseo_version' ) !== MGSEO_VERSION ) {
+			// New plugin version (also an update without reactivation): rebuild rewrite rules (e.g. new sitemap
+			// addresses in 0.3.2) and drop cached sitemaps that may hold old URLs.
+			update_option( 'mgseo_version', MGSEO_VERSION );
+			update_option( 'mgseo_flush_rewrite', 1 );
+			Modules\Sitemap\Cache::bump();
 		}
 		if ( get_option( 'mgseo_flush_rewrite' ) ) {
 			add_action(

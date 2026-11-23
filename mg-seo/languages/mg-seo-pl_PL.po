@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MG SEO 0.3.1\n"
+"Project-Id-Version: MG SEO 0.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
-"POT-Creation-Date: 2026-11-23T07:51:00+00:00\n"
+"POT-Creation-Date: 2026-11-23T08:36:46+00:00\n"
 "PO-Revision-Date: 2026-11-21 23:20+0100\n"
 "Last-Translator: MGraphics\n"
 "Language-Team: Polski\n"
@@ -178,7 +178,7 @@ msgid "Hints"
 msgstr "Podpowiedzi"
 
 #: includes/Admin/Metabox.php:96 includes/Modules/Links/Module.php:75
-#: includes/Modules/Sitemap/Module.php:427
+#: includes/Modules/Sitemap/Module.php:493
 #: includes/Modules/Titles/Module.php:74
 msgid "General"
 msgstr "Ogólne"
@@ -3832,9 +3832,9 @@ msgid "Add a SearchAction to the WebSite node"
 msgstr "Dodaj SearchAction do węzła WebSite"
 
 #: includes/Modules/Schema/Module.php:247
-#: includes/Modules/Sitemap/Module.php:433
 #: includes/Modules/Sitemap/Module.php:499
-#: includes/Modules/Sitemap/Module.php:530
+#: includes/Modules/Sitemap/Module.php:565
+#: includes/Modules/Sitemap/Module.php:596
 #: includes/Modules/Titles/Module.php:279
 msgid "Post types"
 msgstr "Rodzaje treści"
@@ -5602,111 +5602,137 @@ msgstr "sprawdzono %s"
 msgid "Open in Search Console"
 msgstr "Otwórz w Search Console"
 
-#: includes/Modules/Sitemap/Module.php:291
+#: includes/Modules/Sitemap/Module.php:349
 msgid "Comma separated IDs."
 msgstr "Identyfikatory oddzielone przecinkami."
 
-#: includes/Modules/Sitemap/Module.php:297
+#: includes/Modules/Sitemap/Module.php:355
 msgid "Your sitemaps"
 msgstr "Twoje mapy witryny"
 
-#: includes/Modules/Sitemap/Module.php:303
+#: includes/Modules/Sitemap/Module.php:361
 msgid "Links per sitemap"
 msgstr "Liczba odnośników na mapę witryny"
 
-#: includes/Modules/Sitemap/Module.php:307
+#: includes/Modules/Sitemap/Module.php:365
 msgid "Larger lists are split into numbered sitemaps (maximum 50,000)."
 msgstr ""
 "Dłuższe listy są dzielone na ponumerowane mapy witryny (maksymalnie 50 000)."
 
-#: includes/Modules/Sitemap/Module.php:312
+#: includes/Modules/Sitemap/Module.php:370
 #: includes/Modules/Sitemap/Stylesheet.php:30
 msgid "Images"
 msgstr "Obrazy"
 
-#: includes/Modules/Sitemap/Module.php:313
+#: includes/Modules/Sitemap/Module.php:371
 msgid "List images found in the content of each post"
 msgstr "Dodaj obrazy znalezione w treści każdego wpisu"
 
-#: includes/Modules/Sitemap/Module.php:319
+#: includes/Modules/Sitemap/Module.php:377
 msgid "Featured image"
 msgstr "Obrazek wyróżniający"
 
-#: includes/Modules/Sitemap/Module.php:320
+#: includes/Modules/Sitemap/Module.php:378
 msgid "Also list the featured image"
 msgstr "Dodaj także obrazek wyróżniający"
 
-#: includes/Modules/Sitemap/Module.php:327
+#: includes/Modules/Sitemap/Module.php:385
 msgid "Exclude posts"
 msgstr "Wyklucz wpisy"
 
-#: includes/Modules/Sitemap/Module.php:329
+#: includes/Modules/Sitemap/Module.php:387
 msgid "Posts, pages or other entries that never appear in sitemaps."
 msgstr ""
 "Wpisy, strony lub inne treści, które nigdy nie pojawiają się w mapach "
 "witryny."
 
-#: includes/Modules/Sitemap/Module.php:335
+#: includes/Modules/Sitemap/Module.php:393
 msgid "Exclude terms"
 msgstr "Wyklucz terminy"
 
-#: includes/Modules/Sitemap/Module.php:337
+#: includes/Modules/Sitemap/Module.php:395
 msgid "Categories, tags or other terms that never appear in sitemaps."
 msgstr ""
 "Kategorie, tagi lub inne terminy, które nigdy nie pojawiają się w mapach "
 "witryny."
 
-#: includes/Modules/Sitemap/Module.php:343
+#: includes/Modules/Sitemap/Module.php:401
 msgid "Stylesheet"
 msgstr "Arkusz stylów"
 
-#: includes/Modules/Sitemap/Module.php:344
+#: includes/Modules/Sitemap/Module.php:402
 msgid ""
 "Show sitemaps as a readable table in browsers (served from /sitemap.xsl)"
 msgstr ""
 "Pokaż mapy witryny w przeglądarkach jako czytelną tabelę (serwowaną z /"
 "sitemap.xsl)"
 
-#: includes/Modules/Sitemap/Module.php:359
-#: includes/Modules/Sitemap/Module.php:385
+#: includes/Modules/Sitemap/Module.php:408
+msgid "Old addresses"
+msgstr "Stare adresy"
+
+#: includes/Modules/Sitemap/Module.php:409
+msgid "Redirect old sitemap addresses to the new ones (301)"
+msgstr "Przekierowuj stare adresy map witryny na nowe (301)"
+
+#: includes/Modules/Sitemap/Module.php:411
+msgid ""
+"sitemap_index.xml, post-sitemap.xml, page-sitemap.xml and the other names "
+"used by earlier versions, Rank Math and Yoast, and the WordPress addresses "
+"wp-sitemap.xml …, so sitemaps submitted earlier in Search Console keep "
+"working. When off, these addresses return a normal 404 page."
+msgstr ""
+"sitemap_index.xml, post-sitemap.xml, page-sitemap.xml i inne nazwy używane "
+"przez wcześniejsze wersje, Rank Math i Yoast oraz adresy WordPressa wp-"
+"sitemap.xml …, dzięki czemu mapy zgłoszone wcześniej w Search Console nadal "
+"działają. Po wyłączeniu te adresy zwracają zwykłą stronę 404."
+
+#: includes/Modules/Sitemap/Module.php:425
+#: includes/Modules/Sitemap/Module.php:451
 msgid "Include in sitemap"
 msgstr "Uwzględnij w mapie witryny"
 
 #. translators: %s: sitemap file name
-#: includes/Modules/Sitemap/Module.php:361
+#: includes/Modules/Sitemap/Module.php:427
 #, php-format
 msgid "List entries in %s"
 msgstr "Pokaż wpisy w: %s"
 
-#: includes/Modules/Sitemap/Module.php:367
+#: includes/Modules/Sitemap/Module.php:433
 msgid "Exclude IDs"
 msgstr "Wyklucz identyfikatory"
 
 #. translators: %s: sitemap file name
-#: includes/Modules/Sitemap/Module.php:387
+#: includes/Modules/Sitemap/Module.php:453
 #, php-format
 msgid "List terms in %s"
 msgstr "Pokaż terminy w: %s"
 
-#: includes/Modules/Sitemap/Module.php:393
+#: includes/Modules/Sitemap/Module.php:459
 msgid "Empty terms"
 msgstr "Puste terminy"
 
-#: includes/Modules/Sitemap/Module.php:394
+#: includes/Modules/Sitemap/Module.php:460
 msgid "Hide terms without published posts"
 msgstr "Ukryj terminy bez opublikowanych wpisów"
 
-#: includes/Modules/Sitemap/Module.php:428
+#: includes/Modules/Sitemap/Module.php:494
 msgid ""
-"WordPress core sitemaps are turned off while this module is active; their "
-"URLs redirect to the sitemap index. Search engines are not pinged: the "
-"sitemap URL is added to robots.txt instead."
+"The sitemap index is /sitemap.xml; it lists /sitemap-article.xml (posts), /"
+"sitemap-page.xml, /sitemap-category.xml, /sitemap-author.xml and /sitemap-"
+"{name}.xml for other content types, numbered /sitemap-{name}-2.xml … when "
+"split. WordPress core sitemaps are turned off while this module is active. "
+"Search engines are not pinged: the sitemap URL is added to robots.txt "
+"instead."
 msgstr ""
-"Podstawowe mapy witryny WordPressa są wyłączone, gdy ten moduł jest aktywny; "
-"ich adresy URL przekierowują do indeksu map witryny. Wyszukiwarki nie są "
-"powiadamiane: zamiast tego adres mapy witryny jest dodawany do robots.txt."
+"Indeks map witryny to /sitemap.xml; zawiera /sitemap-article.xml (wpisy), /"
+"sitemap-page.xml, /sitemap-category.xml, /sitemap-author.xml oraz /sitemap-"
+"{nazwa}.xml dla innych typów treści, a po podziale kolejne /sitemap-"
+"{nazwa}-2.xml … Podstawowe mapy witryny WordPressa są wyłączone, gdy ten "
+"moduł jest aktywny. Wyszukiwarki nie są powiadamiane: zamiast tego adres "
+"mapy witryny jest dodawany do robots.txt."
 
-#: includes/Modules/Sitemap/Module.php:434
+#: includes/Modules/Sitemap/Module.php:500
 msgid ""
 "Password protected, non-published and noindex entries, entries excluded in "
 "the SEO box and entries whose canonical URL points elsewhere are always left "
@@ -5716,12 +5742,12 @@ msgstr ""
 "SEO oraz wpisy, których adres canonical wskazuje gdzie indziej, są zawsze "
 "pomijane."
 
-#: includes/Modules/Sitemap/Module.php:439
+#: includes/Modules/Sitemap/Module.php:505
 #: includes/Modules/Titles/Module.php:314
 msgid "Taxonomies"
 msgstr "Taksonomie"
 
-#: includes/Modules/Sitemap/Module.php:440
+#: includes/Modules/Sitemap/Module.php:506
 msgid ""
 "Terms set to noindex (per term or for the whole taxonomy under Titles & "
 "Meta) are left out."
@@ -5729,21 +5755,21 @@ msgstr ""
 "Terminy ustawione na noindex (osobno dla terminu lub dla całej taksonomii w "
 "sekcji Tytuły i meta) są pomijane."
 
-#: includes/Modules/Sitemap/Module.php:445
+#: includes/Modules/Sitemap/Module.php:511
 msgid "Authors"
 msgstr "Autorzy"
 
-#: includes/Modules/Sitemap/Module.php:450
+#: includes/Modules/Sitemap/Module.php:516
 msgid "Author sitemap"
 msgstr "Mapa witryny autorów"
 
-#: includes/Modules/Sitemap/Module.php:451
-msgid "List author archives of users with published posts (author-sitemap.xml)"
+#: includes/Modules/Sitemap/Module.php:517
+msgid "List author archives of users with published posts (sitemap-author.xml)"
 msgstr ""
-"Dodaj archiwa autorów użytkowników z opublikowanymi wpisami (author-"
-"sitemap.xml)"
+"Dodaj archiwa autorów użytkowników z opublikowanymi wpisami (sitemap-"
+"author.xml)"
 
-#: includes/Modules/Sitemap/Module.php:453
+#: includes/Modules/Sitemap/Module.php:519
 msgid ""
 "Not generated when author archives are disabled or set to noindex under "
 "Titles & Meta."
@@ -5751,41 +5777,41 @@ msgstr ""
 "Nie jest generowana, gdy archiwa autorów są wyłączone lub ustawione na "
 "noindex w sekcji Tytuły i meta."
 
-#: includes/Modules/Sitemap/Module.php:458
+#: includes/Modules/Sitemap/Module.php:524
 msgid "Exclude roles"
 msgstr "Wyklucz role"
 
-#: includes/Modules/Sitemap/Module.php:467
-#: includes/Modules/Sitemap/Module.php:473
+#: includes/Modules/Sitemap/Module.php:533
+#: includes/Modules/Sitemap/Module.php:539
 msgid "News sitemap"
 msgstr "Mapa witryny Google News"
 
-#: includes/Modules/Sitemap/Module.php:468
+#: includes/Modules/Sitemap/Module.php:534
 msgid ""
-"Google News sitemap (news-sitemap.xml). As required by Google News it lists "
+"Google News sitemap (sitemap-news.xml). As required by Google News it lists "
 "only articles published in the last 48 hours, at most 1,000."
 msgstr ""
-"Mapa witryny Google News (news-sitemap.xml). Zgodnie z wymaganiami Google "
+"Mapa witryny Google News (sitemap-news.xml). Zgodnie z wymaganiami Google "
 "News zawiera tylko artykuły opublikowane w ciągu ostatnich 48 godzin, "
 "maksymalnie 1000."
 
-#: includes/Modules/Sitemap/Module.php:474
+#: includes/Modules/Sitemap/Module.php:540
 msgid "Generate a Google News sitemap"
 msgstr "Generuj mapę witryny Google News"
 
-#: includes/Modules/Sitemap/Module.php:480
+#: includes/Modules/Sitemap/Module.php:546
 msgid "Publication name"
 msgstr "Nazwa publikacji"
 
-#: includes/Modules/Sitemap/Module.php:483
+#: includes/Modules/Sitemap/Module.php:549
 msgid "Must match the name in Google News. Defaults to the site title."
 msgstr "Musi odpowiadać nazwie w Google News. Domyślnie tytuł witryny."
 
-#: includes/Modules/Sitemap/Module.php:489
+#: includes/Modules/Sitemap/Module.php:555
 msgid "Publication language"
 msgstr "Język publikacji"
 
-#: includes/Modules/Sitemap/Module.php:492
+#: includes/Modules/Sitemap/Module.php:558
 msgid ""
 "ISO 639 language code, e.g. en, pl, de (zh-cn or zh-tw for Chinese). "
 "Defaults to the site language."
@@ -5793,51 +5819,51 @@ msgstr ""
 "Kod języka ISO 639, np. en, pl, de (zh-cn lub zh-tw dla chińskiego). "
 "Domyślnie język witryny."
 
-#: includes/Modules/Sitemap/Module.php:507
+#: includes/Modules/Sitemap/Module.php:573
 msgid "Exclude categories"
 msgstr "Wyklucz kategorie"
 
-#: includes/Modules/Sitemap/Module.php:510
+#: includes/Modules/Sitemap/Module.php:576
 msgid "Single posts can also be excluded in the SEO box."
 msgstr "Pojedyncze wpisy można też wykluczyć w polu SEO."
 
-#: includes/Modules/Sitemap/Module.php:517
-#: includes/Modules/Sitemap/Module.php:523
+#: includes/Modules/Sitemap/Module.php:583
+#: includes/Modules/Sitemap/Module.php:589
 msgid "Video sitemap"
 msgstr "Mapa witryny wideo"
 
-#: includes/Modules/Sitemap/Module.php:518
+#: includes/Modules/Sitemap/Module.php:584
 msgid ""
-"Video sitemap (video-sitemap.xml) built from VideoObject schema data and, "
+"Video sitemap (sitemap-video.xml) built from VideoObject schema data and, "
 "optionally, from YouTube and Vimeo embeds, video blocks, [video] shortcodes "
 "and attached video files. No external requests are made: YouTube thumbnails "
 "use the standard image URL, Vimeo videos use the featured image as thumbnail."
 msgstr ""
-"Mapa witryny wideo (video-sitemap.xml) tworzona na podstawie danych schema "
+"Mapa witryny wideo (sitemap-video.xml) tworzona na podstawie danych schema "
 "VideoObject oraz, opcjonalnie, osadzeń YouTube i Vimeo, bloków wideo, "
 "shortcode'ów [video] i załączonych plików wideo. Nie są wykonywane żadne "
 "zewnętrzne żądania: miniatury YouTube używają standardowego adresu obrazu, a "
 "filmy Vimeo używają obrazka wyróżniającego jako miniatury."
 
-#: includes/Modules/Sitemap/Module.php:524
+#: includes/Modules/Sitemap/Module.php:590
 msgid "Generate a video sitemap"
 msgstr "Generuj mapę witryny wideo"
 
-#: includes/Modules/Sitemap/Module.php:538
+#: includes/Modules/Sitemap/Module.php:604
 msgid "Auto-detect videos"
 msgstr "Automatyczne wykrywanie filmów"
 
-#: includes/Modules/Sitemap/Module.php:539
+#: includes/Modules/Sitemap/Module.php:605
 msgid "Find videos in the content (otherwise only VideoObject schema is used)"
 msgstr ""
 "Znajduj filmy w treści (w przeciwnym razie używane jest tylko schema "
 "VideoObject)"
 
-#: includes/Modules/Sitemap/Module.php:562
+#: includes/Modules/Sitemap/Module.php:628
 msgid "No content is listed yet."
 msgstr "Nie ma jeszcze żadnych treści na liście."
 
-#: includes/Modules/Sitemap/Module.php:564
+#: includes/Modules/Sitemap/Module.php:630
 msgid ""
 "Submit the sitemap index in Google Search Console and Bing Webmaster Tools. "
 "It is also listed in robots.txt when the site is visible to search engines."
@@ -5846,7 +5872,7 @@ msgstr ""
 "Jest on też wymieniony w robots.txt, gdy witryna jest widoczna dla "
 "wyszukiwarek."
 
-#: includes/Modules/Sitemap/Module.php:566
+#: includes/Modules/Sitemap/Module.php:632
 msgid ""
 "Search engines are discouraged from indexing this site (Settings → Reading)."
 msgstr ""
