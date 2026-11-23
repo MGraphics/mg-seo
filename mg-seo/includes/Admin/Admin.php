@@ -67,6 +67,17 @@ final class Admin {
 	private array $leads = array();
 
 	/**
+	 * Page callbacks built in this menu() run, per slug.
+	 *
+	 * The top-level page and its first submenu entry share one page hook; WordPress adds the callback to that hook
+	 * once per registration and only skips the second one when it is the same callable. Reusing the callback keeps
+	 * the Dashboard from rendering twice.
+	 *
+	 * @var array<string, callable>
+	 */
+	private array $screens = array();
+
+	/**
 	 * Register the admin menu.
 	 *
 	 * Every screen keeps its own page and slug; the submenu lists one entry per group (Dashboard, General Settings,
@@ -108,6 +119,7 @@ final class Admin {
 			}
 		}
 		Navigation::set_pages( $pages );
+		$this->screens = array();
 
 		$dashboard = $this->screen( $pages[ self::MENU_SLUG ] );
 		add_menu_page( __( 'MG SEO', 'mg-seo' ), __( 'MG SEO', 'mg-seo' ), 'mgseo_manage_settings', self::MENU_SLUG, $dashboard, $icon, 80 );
@@ -150,9 +162,12 @@ final class Admin {
 			return $callback; // Settings pages render the shell themselves (tiles with their tabs).
 		}
 		$slug = (string) $page['slug'];
-		return static function () use ( $slug, $callback ): void {
-			Navigation::render( $slug, $callback );
-		};
+		if ( ! isset( $this->screens[ $slug ] ) ) {
+			$this->screens[ $slug ] = static function () use ( $slug, $callback ): void {
+				Navigation::render( $slug, $callback );
+			};
+		}
+		return $this->screens[ $slug ];
 	}
 
 	/**

@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.3.3 =
+* Fix: MG SEO → Dashboard was shown twice on one page (two headers, two sets of tabs, two module grids and two "Save modules" buttons). It now shows once, as intended in 0.3.2. Other screens were not affected.
 
 = 0.3.2 =
 * New: a shorter MG SEO menu. Instead of about 20 entries it has six groups: Dashboard (modules, SEO overview, Search Console performance, link report), General Settings (content analysis, breadcrumbs, internal links, image SEO, local SEO, WooCommerce, Search Console, robots.txt/llms.txt/IndexNow), Titles & Meta (title templates, social media, schema), Sitemaps, Redirections (redirects, 404 monitor, settings) and Tools (bulk editor, image tools, import & export, role manager, utilities). Modules that are off do not appear.

@@ -178,6 +178,19 @@ class NavigationTest extends TestCase {
 		$this->assertSame( substr_count( $html, 'class="mgseo-tile' . '"' ) + substr_count( $html, 'class="mgseo-tile is-current"' ), substr_count( $html, '<svg' ) );
 	}
 
+	public function test_dashboard_renders_once(): void {
+		$hook = 'toplevel_page_' . Admin::MENU_SLUG; // Shared by the top-level page and its first submenu entry.
+		remove_all_actions( $hook );
+		$this->build_menu();
+		ob_start();
+		do_action( $hook );
+		$html = (string) ob_get_clean();
+		$this->assertSame( 1, substr_count( $html, '<h1' ) );
+		$this->assertSame( 1, substr_count( $html, 'class="mgseo-topnav"' ) );
+		$this->assertSame( 1, substr_count( $html, 'class="mgseo-modules-intro"' ) );
+		$this->assertSame( 1, substr_count( $html, 'class="mgseo-modules-form"' ) );
+	}
+
 	public function test_reports_only_user_gets_the_first_screen_they_may_open(): void {
 		$role = add_role( 'mgseo_reader', 'Reader', array( 'read' => true, 'mgseo_view_reports' => true ) );
 		$this->assertNotNull( $role );
