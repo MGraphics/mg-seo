@@ -48,15 +48,9 @@ final class Settings {
 		$single          = count( $tabs ) < 2;
 		$label           = $single ? Navigation::label( $slug ) : (string) ( $tab['title'] ?? '' );
 		list( , $group ) = Navigation::context( $slug );
-		$primary         = (string) ( $group['primary'] ?? '' );
 		$first           = (string) ( $ids[0] ?? '' );
 		echo '<div class="mgseo-section-head">';
 		$top = $shell && 'top' === ( $group['layout'] ?? 'rail' );
-		if ( ! $single && ! $top ) {
-			if ( $primary !== $slug ) {
-				echo '<p class="mgseo-section-kicker">' . esc_html( Navigation::label( $slug ) ) . '</p>';
-			}
-		}
 		echo '<h2 class="mgseo-section-title">' . esc_html( $label ) . '</h2>';
 		$desc = ! empty( $tab['description'] ) ? (string) $tab['description'] : ( $single || $first === $current ? esc_html( Plugin::labels()[ $module->id() ][1] ?? '' ) : '' );
 		if ( '' !== $desc ) {

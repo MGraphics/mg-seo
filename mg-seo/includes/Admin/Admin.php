@@ -306,7 +306,7 @@ final class Admin {
 		echo '<p class="mgseo-module-desc" id="mgseo-module-' . esc_attr( $key ) . '-desc">' . esc_html( Plugin::labels()[ $id ][1] ?? '' ) . '</p>';
 		echo '<div class="mgseo-module-foot">';
 		if ( $link ) {
-			echo '<a class="mgseo-module-link" href="' . esc_url( $link['url'] ) . '">' . esc_html( $link['label'] ) . '<span class="screen-reader-text">: ' . esc_html( $title ) . '</span>' . ModuleIcons::arrow() . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static icon filtered with wp_kses.
+			echo '<a class="mgseo-module-link" href="' . esc_url( $link['url'] ) . '">' . esc_html( $link['label'] ) . '<span class="screen-reader-text">: ' . esc_html( $title ) . '</span></a>';
 		}
 		echo '<label class="mgseo-switch">';
 		echo '<span class="mgseo-switch-state" aria-hidden="true">' . esc_html( $checked ? __( 'On', 'mg-seo' ) : __( 'Off', 'mg-seo' ) ) . '</span>';

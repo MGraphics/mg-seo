@@ -156,6 +156,26 @@ class NavigationTest extends TestCase {
 		$this->assertStringContainsString( 'page=mg-seo-redirections', $html );
 	}
 
+	public function test_shell_has_no_decorative_icons_or_eyebrow_labels(): void {
+		$this->build_menu();
+		$_GET['tab'] = 'llms';
+		ob_start();
+		Settings::render_page( Plugin::instance()->module( 'tools' ) );
+		Navigation::render(
+			'mg-seo-404-monitor',
+			static function (): void {
+				echo '<div class="wrap"><h1>404 Monitor</h1></div>';
+			}
+		);
+		$html = (string) ob_get_clean();
+		unset( $_GET['tab'] );
+		$this->assertStringContainsString( 'class="mgseo-rail"', $html );
+		$this->assertStringContainsString( 'class="mgseo-topnav"', $html );
+		foreach ( array( 'mgseo-shell-icon', 'mgseo-nav-icon', 'mgseo-section-kicker', '<svg' ) as $needle ) {
+			$this->assertStringNotContainsString( $needle, $html );
+		}
+	}
+
 	public function test_reports_only_user_gets_the_first_screen_they_may_open(): void {
 		$role = add_role( 'mgseo_reader', 'Reader', array( 'read' => true, 'mgseo_view_reports' => true ) );
 		$this->assertNotNull( $role );

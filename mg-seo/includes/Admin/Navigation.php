@@ -4,7 +4,7 @@
  *
  * Every existing screen keeps its own admin page and slug (?page=mg-seo-…), so links, bookmarks, save handlers,
  * capabilities and per-screen assets work as before. The submenu shows one entry per group; inside a group a
- * shell renders the group header and the navigation between its screens: a vertical rail with icons for
+ * shell renders the group header and the navigation between its screens: a vertical list of sections for
  * settings groups, tabs across the top for screens with wide tables.
  *
  * @package MGSEO
@@ -40,8 +40,8 @@ final class Navigation {
 	/**
 	 * Group definitions in menu order.
 	 *
-	 * Each group: title, description, layout (rail|top), icon, pages (slugs in order), primary (optional slug of a
-	 * settings page whose tabs are listed at the top level of the rail, with their own icons).
+	 * Each group: title, description, layout (rail|top), pages (slugs in order), primary (optional slug of a
+	 * settings page whose tabs are listed at the top level of the rail).
 	 *
 	 * @return array<string, array<string, mixed>>
 	 */
@@ -51,21 +51,18 @@ final class Navigation {
 				'title'       => __( 'Dashboard', 'mg-seo' ),
 				'description' => __( 'Turn modules on or off, check the SEO score of every page and open the reports.', 'mg-seo' ),
 				'layout'      => 'top',
-				'icon'        => 'modules',
 				'pages'       => array( Admin::MENU_SLUG, 'mg-seo-overview', 'mg-seo-gsc-reports', 'mg-seo-links-report' ),
 			),
 			'general'      => array(
 				'title'       => __( 'General Settings', 'mg-seo' ),
 				'description' => __( 'Site-wide options: content analysis, breadcrumbs, links, images, local SEO, Search Console and robots.txt.', 'mg-seo' ),
 				'layout'      => 'rail',
-				'icon'        => 'sliders',
 				'pages'       => array( 'mg-seo-analysis', 'mg-seo-breadcrumbs', 'mg-seo-links', 'mg-seo-image', 'mg-seo-local', 'mg-seo-woocommerce', 'mg-seo-gsc', 'mg-seo-tools' ),
 			),
 			'titles'       => array(
 				'title'       => __( 'Titles & Meta', 'mg-seo' ),
 				'description' => __( 'How pages look in search results and when shared: title and description templates, robots meta, social cards and structured data.', 'mg-seo' ),
 				'layout'      => 'rail',
-				'icon'        => 'titles',
 				'pages'       => array( 'mg-seo-titles', 'mg-seo-social', 'mg-seo-schema' ),
 				'primary'     => 'mg-seo-titles',
 			),
@@ -73,7 +70,6 @@ final class Navigation {
 				'title'       => __( 'Sitemaps', 'mg-seo' ),
 				'description' => __( 'Which pages, terms and authors search engines find in the XML sitemaps, plus the news and video sitemaps.', 'mg-seo' ),
 				'layout'      => 'rail',
-				'icon'        => 'sitemap',
 				'pages'       => array( 'mg-seo-sitemap' ),
 				'primary'     => 'mg-seo-sitemap',
 			),
@@ -81,14 +77,12 @@ final class Navigation {
 				'title'       => __( 'Redirections', 'mg-seo' ),
 				'description' => __( 'Redirects, the log of missing pages (404) and how both behave.', 'mg-seo' ),
 				'layout'      => 'top',
-				'icon'        => 'redirections',
 				'pages'       => array( 'mg-seo-redirects', 'mg-seo-404-monitor', 'mg-seo-redirections' ),
 			),
 			'tools'        => array(
 				'title'       => __( 'Tools', 'mg-seo' ),
 				'description' => __( 'Bulk editing, image tools, imports from other plugins, roles and housekeeping.', 'mg-seo' ),
 				'layout'      => 'top',
-				'icon'        => 'tools',
 				'pages'       => array( 'mg-seo-bulk', 'mg-seo-image-tools', 'mg-seo-import', 'mg-seo-roles', 'mg-seo-utilities' ),
 			),
 		);
@@ -98,7 +92,7 @@ final class Navigation {
 		 *
 		 * Pages that are not listed in any group keep their own submenu entry.
 		 *
-		 * @param array $groups Group id => array( title, description, layout (rail|top), icon, pages, primary ).
+		 * @param array $groups Group id => array( title, description, layout (rail|top), pages, primary ).
 		 */
 		return (array) apply_filters( 'mgseo/admin_groups', $groups );
 	}
@@ -178,7 +172,7 @@ final class Navigation {
 	/**
 	 * Navigation entries of a group for the current user.
 	 *
-	 * Each entry: slug, label, icon, url, tabs (list of id, label, url, icon) for settings pages with more than one tab.
+	 * Each entry: slug, label, url, tabs (list of id, label, url) for settings pages with more than one tab.
 	 *
 	 * @param string $group Group id.
 	 * @return array<int, array<string, mixed>>
@@ -193,7 +187,6 @@ final class Navigation {
 			$entry  = array(
 				'slug'  => $slug,
 				'label' => self::label( $slug ),
-				'icon'  => self::icon( $slug ),
 				'url'   => self::url( $slug ),
 				'tabs'  => array(),
 			);
@@ -206,7 +199,6 @@ final class Navigation {
 							'id'    => (string) $tab['id'],
 							'label' => (string) $tab['title'],
 							'url'   => self::url( $slug, (string) $tab['id'] ),
-							'icon'  => (string) ( $tab['icon'] ?? self::tab_icon( (string) $page['module'], (string) $tab['id'] ) ),
 						);
 					}
 				}
@@ -240,57 +232,7 @@ final class Navigation {
 		return (string) ( $page['menu_title'] ?? $page['title'] ?? $slug );
 	}
 
-	/**
-	 * Icon key of a page.
-	 *
-	 * @param string $slug Page slug.
-	 */
-	private static function icon( string $slug ): string {
-		$icons = array(
-			Admin::MENU_SLUG      => 'modules',
-			'mg-seo-overview'     => 'analysis',
-			'mg-seo-gsc-reports'  => 'gsc',
-			'mg-seo-links-report' => 'links',
-			'mg-seo-redirects'    => 'redirections',
-			'mg-seo-404-monitor'  => 'missing',
-			'mg-seo-redirections' => 'sliders',
-			'mg-seo-image-tools'  => 'image',
-			'mg-seo-utilities'    => 'tools',
-		);
-		if ( isset( $icons[ $slug ] ) ) {
-			return $icons[ $slug ];
-		}
-		$page = self::$pages[ $slug ] ?? array();
-		if ( ! empty( $page['module'] ) ) {
-			return (string) $page['module'];
-		}
-		$module = (string) preg_replace( '/^mg-seo-/', '', $slug );
-		return $module;
-	}
 
-	/**
-	 * Icon key of a settings tab listed at the top level of a rail.
-	 *
-	 * @param string $module Module id.
-	 * @param string $tab    Tab id.
-	 */
-	private static function tab_icon( string $module, string $tab ): string {
-		$icons = array(
-			'titles/general'      => 'sliders',
-			'titles/home'         => 'home',
-			'titles/post_types'   => 'document',
-			'titles/taxonomies'   => 'tag',
-			'titles/archives'     => 'folder',
-			'titles/verification' => 'shield',
-			'sitemap/general'     => 'sliders',
-			'sitemap/post_types'  => 'document',
-			'sitemap/taxonomies'  => 'tag',
-			'sitemap/authors'     => 'person',
-			'sitemap/news'        => 'news',
-			'sitemap/video'       => 'video',
-		);
-		return $icons[ $module . '/' . $tab ] ?? $module;
-	}
 
 	/**
 	 * Group id and definition for a page; pages outside every group get a group of their own.
@@ -310,7 +252,6 @@ final class Navigation {
 				'title'       => (string) ( $page['title'] ?? '' ),
 				'description' => ! empty( $page['module'] ) ? (string) ( Plugin::labels()[ $page['module'] ][1] ?? '' ) : '',
 				'layout'      => 'rail',
-				'icon'        => self::icon( $slug ),
 				'pages'       => array( $slug ),
 				'primary'     => $slug,
 			),
@@ -368,7 +309,6 @@ final class Navigation {
 
 		echo '<div class="wrap mgseo-wrap mgseo-shell is-' . esc_attr( $layout ) . '" data-group="' . esc_attr( $group_id ) . '">';
 		echo '<header class="mgseo-shell-head">';
-		echo '<span class="mgseo-shell-icon">' . ModuleIcons::svg( (string) ( $group['icon'] ?? '' ) ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered with wp_kses in ModuleIcons.
 		echo '<div class="mgseo-shell-titles"><h1>' . esc_html( (string) $group['title'] ) . '</h1>';
 		if ( ! empty( $group['description'] ) ) {
 			echo '<p class="mgseo-shell-desc">' . esc_html( (string) $group['description'] ) . '</p>';
@@ -385,7 +325,6 @@ final class Navigation {
 				foreach ( $entries as $entry ) {
 					$current = $entry['slug'] === $slug;
 					echo '<li><a class="mgseo-topnav-link' . ( $current ? ' is-current' : '' ) . '" href="' . esc_url( $entry['url'] ) . '"' . ( $current ? ' aria-current="page"' : '' ) . '>';
-					echo '<span class="mgseo-nav-icon">' . ModuleIcons::svg( $entry['icon'] ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered with wp_kses in ModuleIcons.
 					echo '<span class="mgseo-nav-label">' . esc_html( $entry['label'] ) . '</span></a></li>';
 				}
 				echo '</ul></nav>';
@@ -420,7 +359,6 @@ final class Navigation {
 		$entry  = array(
 			'slug'  => $slug,
 			'label' => self::label( $slug ),
-			'icon'  => self::icon( $slug ),
 			'url'   => self::url( $slug ),
 			'tabs'  => array(),
 		);
@@ -430,7 +368,6 @@ final class Navigation {
 					'id'    => (string) $tab['id'],
 					'label' => (string) $tab['title'],
 					'url'   => self::url( $slug, (string) $tab['id'] ),
-					'icon'  => (string) ( $tab['icon'] ?? (string) $page['module'] ),
 				);
 			}
 		}
@@ -440,7 +377,7 @@ final class Navigation {
 	/**
 	 * Vertical rail (wide screens) and a section picker (narrow screens).
 	 *
-	 * Tabs of the group's primary page are listed at the top level with their own icons; other pages with several
+	 * Tabs of the group's primary page are listed at the top level; other pages with several
 	 * tabs show them nested under the page, expanded while one of them is open.
 	 *
 	 * @param array  $entries   Entries.
@@ -458,7 +395,6 @@ final class Navigation {
 				foreach ( $entry['tabs'] as $t ) {
 					$items[] = array(
 						'label'    => $t['label'],
-						'icon'     => $t['icon'],
 						'url'      => $t['url'],
 						'current'  => $is_page && $t['id'] === $tab,
 						'children' => array(),
@@ -477,7 +413,6 @@ final class Navigation {
 			}
 			$items[] = array(
 				'label'    => $entry['label'],
-				'icon'     => $entry['icon'],
 				'url'      => $entry['tabs'] ? $entry['tabs'][0]['url'] : $entry['url'],
 				'current'  => $is_page && ! $entry['tabs'],
 				'active'   => $is_page,
@@ -501,7 +436,6 @@ final class Navigation {
 			}
 			echo '<li class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			echo '<a class="mgseo-rail-link' . ( $item['current'] ? ' is-current' : '' ) . '" href="' . esc_url( $item['url'] ) . '"' . ( $item['current'] ? ' aria-current="page"' : '' ) . '>';
-			echo '<span class="mgseo-nav-icon">' . ModuleIcons::svg( $item['icon'] ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered with wp_kses in ModuleIcons.
 			echo '<span class="mgseo-nav-label">' . esc_html( $item['label'] ) . '</span></a>';
 			if ( $item['children'] && ! empty( $item['active'] ) ) {
 				echo '<ul class="mgseo-rail-sub">';
