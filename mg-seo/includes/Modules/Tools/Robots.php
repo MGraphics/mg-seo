@@ -74,15 +74,15 @@ final class Robots {
 	}
 
 	/**
-	 * Suggested default content.
+	 * Suggested default content: neutral rules only. No CMS paths (wp-admin, admin-ajax.php, wp-includes,
+	 * ?s=), so robots.txt does not reveal WordPress (consistent with MG Stealth, which removes wp-admin lines).
+	 * Search results and 404 pages are already noindex; blocking them here would hide that noindex from crawlers.
+	 * The Sitemap module adds the "Sitemap:" line.
 	 */
 	public static function suggestion(): string {
 		$lines = array(
 			'User-agent: *',
-			'Disallow: /wp-admin/',
-			'Allow: /wp-admin/admin-ajax.php',
-			'Disallow: /?s=',
-			'Disallow: /search/',
+			'Disallow:',
 		);
 		/**
 		 * Filter the suggested robots.txt content.

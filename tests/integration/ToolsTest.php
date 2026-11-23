@@ -85,6 +85,17 @@ class ToolsTest extends TestCase {
 		$this->assertStringNotContainsString( 'Sitemap:', Robots::suggestion() );
 	}
 
+	public function test_robots_suggestion_does_not_reveal_wordpress(): void {
+		$suggestion = Robots::suggestion();
+		$this->assertSame( "User-agent: *\nDisallow:", $suggestion );
+		foreach ( array( 'wp-admin', 'wp-includes', 'wp-content', 'admin-ajax', 'wp-json', 'xmlrpc', '?s=' ) as $needle ) {
+			$this->assertStringNotContainsString( $needle, $suggestion );
+		}
+		ob_start();
+		Robots::render_status();
+		$this->assertStringNotContainsString( 'wp-admin', (string) ob_get_clean() );
+	}
+
 	public function test_llms_txt_content(): void {
 		update_option( 'blogname', 'Studio Graphics' );
 		update_option( 'blogdescription', 'Design & web' );
