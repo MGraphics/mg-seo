@@ -29,6 +29,13 @@
 		selectTab( $tabs.eq( ( next + $tabs.length ) % $tabs.length ), true );
 	} );
 
+	/* Narrow screens: the section picker replaces the rail and opens the chosen section. */
+	$( document ).on( 'change', '.mgseo-section-picker', function () {
+		if ( this.value && this.value !== window.location.href ) {
+			window.location.href = this.value;
+		}
+	} );
+
 	/* Media picker for image fields. */
 	$( document ).on( 'click', '.mgseo-media', function ( e ) {
 		e.preventDefault();

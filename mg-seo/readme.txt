@@ -56,7 +56,7 @@ Complete SEO toolkit: titles and meta, schema generator, XML sitemaps, redirecti
 1. Upload the `mg-seo` folder to `/wp-content/plugins/` or install the ZIP via Plugins → Add New → Upload.
 2. Activate the plugin.
 3. Go to **MG SEO → Dashboard** to choose modules, then **MG SEO → Titles & Meta**.
-4. Switching from Rank Math or Yoast? Open **MG SEO → Import & Export** and run the importer (it also works after the old plugin was deleted).
+4. Switching from Rank Math or Yoast? Open **MG SEO → Tools → Import & Export** and run the importer (it also works after the old plugin was deleted).
 
 == Frequently Asked Questions ==
 
@@ -79,6 +79,11 @@ Tak, interfejs jest dostępny po polsku i po angielsku.
 == Changelog ==
 
 = 0.3.2 =
+* New: a shorter MG SEO menu. Instead of about 20 entries it has six groups: Dashboard (modules, SEO overview, Search Console performance, link report), General Settings (content analysis, breadcrumbs, internal links, image SEO, local SEO, WooCommerce, Search Console, robots.txt/llms.txt/IndexNow), Titles & Meta (title templates, social media, schema), Sitemaps, Redirections (redirects, 404 monitor, settings) and Tools (bulk editor, image tools, import & export, role manager, utilities). Modules that are off do not appear.
+* New: settings screens have a header with a short description and a rail on the left with an icon per section; the fields are shown as label | control with the help text underneath, and "Save Changes" stays in view at the bottom. Sections with several parts (e.g. Local SEO) open underneath their name. Screens with tables (redirections, bulk editor, reports) have tabs with icons across the top.
+* Narrow screens: the rail becomes a "Section" list and the top tabs scroll sideways.
+* Every screen keeps its address (`admin.php?page=mg-seo-…&tab=…`), so bookmarks and links keep working; settings, save buttons and permissions did not change.
+* Developers: filter `mgseo/admin_groups` changes the menu groups; screens outside every group keep their own menu entry.
 * New: shorter sitemap addresses. The index is /sitemap.xml; it lists /sitemap-article.xml (posts), /sitemap-page.xml, /sitemap-category.xml, /sitemap-tag.xml, /sitemap-author.xml, /sitemap-news.xml, /sitemap-video.xml and /sitemap-{name}.xml for every other post type and taxonomy (product_cat → /sitemap-product-cat.xml). Long sitemaps continue in /sitemap-article-2.xml, /sitemap-article-3.xml … robots.txt, the sitemap stylesheet and the links in MG SEO → XML Sitemaps use the new addresses.
 * New: names are unique and never change: a name that is already taken, reserved (index, author, news, video, image, images, locations, style) or ends in a number gets "-posts" (post types) or "-terms" (taxonomies), e.g. a taxonomy named "page" is /sitemap-page-terms.xml and a post type "news" is /sitemap-news-posts.xml; post types are named before taxonomies.
 * New: old addresses redirect (301) to the matching new sitemap: sitemap_index.xml, post-sitemap.xml, post-sitemap2.xml, page-sitemap.xml, category-sitemap.xml, author-sitemap.xml … (earlier versions, Rank Math, Yoast) and the WordPress addresses wp-sitemap.xml, wp-sitemap-posts-post-1.xml … Sitemaps already submitted in Search Console keep working. Setting "Old addresses" (on by default) turns this off; old addresses are then a normal 404 page. When another plugin already answers wp-sitemap addresses with a 404 (e.g. MG Stealth), that 404 stays.

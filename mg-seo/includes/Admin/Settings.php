@@ -20,7 +20,9 @@ defined( 'ABSPATH' ) || exit;
 final class Settings {
 
 	/**
-	 * Render a module settings page.
+	 * Render a module settings page inside its group shell.
+	 *
+	 * One tab is shown per request (?tab=…); its form posts that tab to handle_save() as before.
 	 *
 	 * @param Module $module Module.
 	 */
@@ -30,50 +32,72 @@ final class Settings {
 		}
 		$tabs   = $module->settings();
 		$values = Options::group( $module->id() );
+		$slug   = 'mg-seo-' . $module->id();
+		$ids    = array_map( static fn( $tab ) => (string) $tab['id'], $tabs );
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- tab selection only.
-		$current = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : ( $tabs[0]['id'] ?? '' );
-
-		echo '<div class="wrap mgseo-wrap">';
-		echo '<h1>' . esc_html( Plugin::title( $module->id() ) ) . '</h1>';
-		if ( count( $tabs ) > 1 ) {
-			echo '<nav class="nav-tab-wrapper mgseo-tabs">';
-			foreach ( $tabs as $tab ) {
-				$url = add_query_arg(
-					array(
-						'page' => 'mg-seo-' . $module->id(),
-						'tab'  => $tab['id'],
-					),
-					admin_url( 'admin.php' )
-				);
-				printf( '<a href="%s" class="nav-tab%s">%s</a>', esc_url( $url ), $tab['id'] === $current ? ' nav-tab-active' : '', esc_html( $tab['title'] ) );
-			}
-			echo '</nav>';
+		$current = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
+		if ( ! in_array( $current, $ids, true ) ) {
+			$current = $ids[0] ?? '';
 		}
-		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="mgseo-settings-form">';
-		wp_nonce_field( 'mgseo_save_' . $module->id() );
-		echo '<input type="hidden" name="action" value="mgseo_save_settings" />';
-		echo '<input type="hidden" name="module" value="' . esc_attr( $module->id() ) . '" />';
-		echo '<input type="hidden" name="tab" value="' . esc_attr( $current ) . '" />';
+		$tab = $tabs[ (int) array_search( $current, $ids, true ) ] ?? array();
 
-		foreach ( $tabs as $tab ) {
-			if ( $tab['id'] !== $current ) {
-				continue;
+		$shell = Navigation::open( $slug, $current );
+		if ( ! $shell ) {
+			echo '<div class="wrap mgseo-wrap"><h1>' . esc_html( Plugin::title( $module->id() ) ) . '</h1>';
+		}
+		$single          = count( $tabs ) < 2;
+		$label           = $single ? Navigation::label( $slug ) : (string) ( $tab['title'] ?? '' );
+		list( , $group ) = Navigation::context( $slug );
+		$primary         = (string) ( $group['primary'] ?? '' );
+		$first           = (string) ( $ids[0] ?? '' );
+		echo '<div class="mgseo-section-head">';
+		$top = $shell && 'top' === ( $group['layout'] ?? 'rail' );
+		if ( ! $single && ! $top ) {
+			if ( $primary !== $slug ) {
+				echo '<p class="mgseo-section-kicker">' . esc_html( Navigation::label( $slug ) ) . '</p>';
 			}
-			if ( ! empty( $tab['description'] ) ) {
-				echo '<p class="mgseo-tab-desc">' . wp_kses_post( $tab['description'] ) . '</p>';
+		}
+		echo '<h2 class="mgseo-section-title">' . esc_html( $label ) . '</h2>';
+		$desc = ! empty( $tab['description'] ) ? (string) $tab['description'] : ( $single || $first === $current ? esc_html( Plugin::labels()[ $module->id() ][1] ?? '' ) : '' );
+		if ( '' !== $desc ) {
+			echo '<p class="mgseo-tab-desc">' . wp_kses_post( $desc ) . '</p>';
+		}
+		echo '</div>';
+
+		// Screens with top tabs (e.g. Redirections) list this page's own tabs under the heading.
+		if ( ! $single && ( ! $shell || $top ) ) {
+			echo '<nav class="mgseo-subnav" aria-label="' . esc_attr( Plugin::title( $module->id() ) ) . '"><ul>';
+			foreach ( $tabs as $t ) {
+				$is = (string) $t['id'] === $current;
+				echo '<li><a href="' . esc_url( Navigation::url( $slug, (string) $t['id'] ) ) . '"' . ( $is ? ' class="is-current" aria-current="page"' : '' ) . '>' . esc_html( (string) $t['title'] ) . '</a></li>';
 			}
-			echo '<table class="form-table" role="presentation"><tbody>';
+			echo '</ul></nav>';
+		}
+
+		if ( $tab ) {
+			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="mgseo-settings-form">';
+			wp_nonce_field( 'mgseo_save_' . $module->id() );
+			echo '<input type="hidden" name="action" value="mgseo_save_settings" />';
+			echo '<input type="hidden" name="module" value="' . esc_attr( $module->id() ) . '" />';
+			echo '<input type="hidden" name="tab" value="' . esc_attr( $current ) . '" />';
+			echo '<table class="form-table mgseo-form-table" role="presentation"><tbody>';
 			foreach ( $tab['fields'] ?? array() as $field ) {
 				self::render_field( $field, $values[ $field['id'] ?? '' ] ?? ( $field['default'] ?? '' ) );
 			}
 			echo '</tbody></table>';
+			self::render_variables_help( $tabs, $current );
 			if ( empty( $tab['no_submit'] ) ) {
-				submit_button();
+				echo '<div class="mgseo-form-actions">';
+				submit_button( null, 'primary', 'submit', false );
+				echo '</div>';
 			}
+			echo '</form>';
 		}
-		echo '</form>';
-		self::render_variables_help( $tabs, $current );
-		echo '</div>';
+		if ( $shell ) {
+			Navigation::close();
+		} else {
+			echo '</div>';
+		}
 	}
 
 	/**

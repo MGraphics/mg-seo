@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MG SEO 0.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
-"POT-Creation-Date: 2026-11-23T08:36:46+00:00\n"
+"POT-Creation-Date: 2026-11-23T08:46:05+00:00\n"
 "PO-Revision-Date: 2026-11-21 23:20+0100\n"
 "Last-Translator: MGraphics\n"
 "Language-Team: Polski\n"
@@ -18,8 +18,7 @@ msgstr ""
 "X-Domain: mg-seo\n"
 
 #. Plugin Name of the plugin
-#: mg-seo.php includes/Admin/Admin.php:59 includes/Admin/Admin.php:60
-#: includes/Admin/Admin.php:149
+#: mg-seo.php includes/Admin/Admin.php:113
 msgid "MG SEO"
 msgstr "MG SEO"
 
@@ -47,41 +46,42 @@ msgstr "MGraphics"
 msgid "https://mgraphics.com.pl"
 msgstr "https://mgraphics.com.pl"
 
-#: includes/Admin/Admin.php:67
+#: includes/Admin/Admin.php:83 includes/Admin/Admin.php:84
+#: includes/Admin/Navigation.php:51
 msgid "Dashboard"
 msgstr "Kokpit"
 
-#: includes/Admin/Admin.php:120 includes/Admin/Settings.php:172
+#: includes/Admin/Admin.php:221 includes/Admin/Settings.php:196
 #: includes/Admin/TermFields.php:100 includes/Modules/Schema/Module.php:719
 msgid "Choose image"
 msgstr "Wybierz obraz"
 
-#: includes/Admin/Admin.php:121
+#: includes/Admin/Admin.php:222
 msgid "Use this image"
 msgstr "Użyj tego obrazu"
 
-#: includes/Admin/Admin.php:122 assets/bulk.js:42 assets/image.js:133
+#: includes/Admin/Admin.php:223 assets/bulk.js:42 assets/image.js:133
 #: assets/seo-ui.js:712
 msgid "Saved"
 msgstr "Zapisano"
 
-#: includes/Admin/Admin.php:123 assets/bulk.js:68 assets/bulk.js:89
+#: includes/Admin/Admin.php:224 assets/bulk.js:68 assets/bulk.js:89
 #: assets/image.js:106 assets/image.js:136 assets/image.js:161
 #: assets/import.js:134 assets/scores.js:67 assets/scores.js:87
 msgid "Error"
 msgstr "Błąd"
 
-#: includes/Admin/Admin.php:124 includes/Modules/Analysis/Module.php:1003
+#: includes/Admin/Admin.php:225 includes/Modules/Analysis/Module.php:1003
 #: includes/Modules/Analysis/Report.php:196
 #: includes/Modules/Analysis/Scores.php:204 assets/seo-ui.js:58
 msgid "No keyword"
 msgstr "Brak frazy"
 
-#: includes/Admin/Admin.php:125
+#: includes/Admin/Admin.php:226
 msgid "to improve"
 msgstr "do poprawy"
 
-#: includes/Admin/Admin.php:126 includes/Admin/Metabox.php:83
+#: includes/Admin/Admin.php:227 includes/Admin/Metabox.php:83
 #: includes/Admin/TermFields.php:52 includes/Admin/UserFields.php:56
 #: includes/Modules/Analysis/Module.php:711
 #: includes/Modules/Analysis/Module.php:1080
@@ -93,23 +93,23 @@ msgstr "do poprawy"
 msgid "SEO"
 msgstr "SEO"
 
-#: includes/Admin/Admin.php:127
+#: includes/Admin/Admin.php:228
 msgid "No image: add a featured image or choose one below."
 msgstr "Brak obrazka: dodaj obrazek wyróżniający albo wybierz go poniżej."
 
-#: includes/Admin/Admin.php:128 includes/Admin/Admin.php:211
+#: includes/Admin/Admin.php:229 includes/Admin/Admin.php:312
 msgid "On"
 msgstr "Włączony"
 
-#: includes/Admin/Admin.php:129 includes/Admin/Admin.php:211
+#: includes/Admin/Admin.php:230 includes/Admin/Admin.php:312
 msgid "Off"
 msgstr "Wyłączony"
 
-#: includes/Admin/Admin.php:130
+#: includes/Admin/Admin.php:231
 msgid "Unsaved changes"
 msgstr "Niezapisane zmiany"
 
-#: includes/Admin/Admin.php:143 includes/Admin/Settings.php:29
+#: includes/Admin/Admin.php:244 includes/Admin/Settings.php:31
 #: includes/Modules/Analysis/Overview.php:187 includes/Modules/Bulk/Page.php:24
 #: includes/Modules/Image/Module.php:217 includes/Modules/Import/Page.php:39
 #: includes/Modules/Links/ReportPage.php:24
@@ -118,34 +118,38 @@ msgstr "Niezapisane zmiany"
 msgid "You do not have permission to access this page."
 msgstr "Nie masz uprawnień do wyświetlenia tej strony."
 
-#: includes/Admin/Admin.php:151
+#: includes/Admin/Admin.php:250 includes/Admin/Navigation.php:226
+msgid "Modules"
+msgstr "Moduły"
+
+#: includes/Admin/Admin.php:252
 msgid "Turn modules on or off. Disabled modules load no code on the front end."
 msgstr ""
 "Włączaj i wyłączaj moduły. Wyłączone moduły nie ładują żadnego kodu na "
 "stronie publicznej."
 
 #. translators: 1: number of modules turned on, 2: number of all modules
-#: includes/Admin/Admin.php:153
+#: includes/Admin/Admin.php:254
 #, php-format
 msgid "On: %1$d of %2$d"
 msgstr "Włączone: %1$d z %2$d"
 
-#: includes/Admin/Admin.php:165
+#: includes/Admin/Admin.php:266
 msgid "Save modules"
 msgstr "Zapisz moduły"
 
-#: includes/Admin/Admin.php:198
+#: includes/Admin/Admin.php:299
 msgid "Always on"
 msgstr "Zawsze włączony"
 
 #. translators: %s: name of the plugin the module needs, e.g. WooCommerce
-#: includes/Admin/Admin.php:201
+#: includes/Admin/Admin.php:302
 #, php-format
 msgid "Needs %s"
 msgstr "Wymaga: %s"
 
-#: includes/Admin/Admin.php:233 includes/Admin/Admin.php:326
-#: includes/Modules/Import/Page.php:24
+#: includes/Admin/Admin.php:334 includes/Admin/Admin.php:427
+#: includes/Admin/Navigation.php:230 includes/Modules/Import/Page.php:24
 #: includes/Modules/Redirections/Admin.php:319
 #: includes/Modules/Redirections/Admin.php:516
 #: includes/Modules/Schema/Module.php:752
@@ -153,12 +157,12 @@ msgstr "Wymaga: %s"
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: includes/Admin/Admin.php:240
+#: includes/Admin/Admin.php:341
 msgctxt "link to a module screen"
 msgid "Open"
 msgstr "Otwórz"
 
-#: includes/Admin/Admin.php:278 includes/Admin/Settings.php:239
+#: includes/Admin/Admin.php:379 includes/Admin/Settings.php:263
 #: includes/Modules/Bulk/Csv.php:323
 #: includes/Modules/Redirections/Admin.php:106
 #: includes/Modules/Roles/Module.php:127
@@ -169,7 +173,7 @@ msgstr "Otwórz"
 msgid "You do not have permission to do this."
 msgstr "Nie masz uprawnień do wykonania tej czynności."
 
-#: includes/Admin/Admin.php:307
+#: includes/Admin/Admin.php:408
 msgid "Settings saved."
 msgstr "Ustawienia zostały zapisane."
 
@@ -330,11 +334,109 @@ msgstr "Wyklucz z mapy witryny XML"
 msgid "Exclude from Google News sitemap"
 msgstr "Wyklucz z mapy witryny Google News"
 
-#: includes/Admin/Settings.php:130
+#: includes/Admin/Navigation.php:52
+msgid ""
+"Turn modules on or off, check the SEO score of every page and open the "
+"reports."
+msgstr ""
+"Włączaj i wyłączaj moduły, sprawdzaj wynik SEO każdej strony i otwieraj "
+"raporty."
+
+#: includes/Admin/Navigation.php:58
+msgid "General Settings"
+msgstr "Ustawienia ogólne"
+
+#: includes/Admin/Navigation.php:59
+msgid ""
+"Site-wide options: content analysis, breadcrumbs, links, images, local SEO, "
+"Search Console and robots.txt."
+msgstr ""
+"Ustawienia dla całej witryny: analiza treści, okruszki, linki, obrazy, "
+"lokalne SEO, Search Console i robots.txt."
+
+#: includes/Admin/Navigation.php:65 includes/Plugin.php:143
+msgid "Titles & Meta"
+msgstr "Tytuły i meta"
+
+#: includes/Admin/Navigation.php:66
+msgid ""
+"How pages look in search results and when shared: title and description "
+"templates, robots meta, social cards and structured data."
+msgstr ""
+"Jak strony wyglądają w wynikach wyszukiwania i po udostępnieniu: szablony "
+"tytułów i opisów, robots meta, karty social media i dane strukturalne."
+
+#: includes/Admin/Navigation.php:73
+msgid "Sitemaps"
+msgstr "Mapy witryny"
+
+#: includes/Admin/Navigation.php:74
+msgid ""
+"Which pages, terms and authors search engines find in the XML sitemaps, plus "
+"the news and video sitemaps."
+msgstr ""
+"Które strony, kategorie i autorów wyszukiwarki znajdą w mapach witryny XML, "
+"a także mapy wiadomości i wideo."
+
+#: includes/Admin/Navigation.php:81 includes/Modules/Import/Page.php:28
+#: includes/Modules/Redirections/Admin.php:315
+#: includes/Modules/Redirections/Module.php:85
+#: includes/Modules/Redirections/Module.php:273
+#: includes/Modules/Redirections/Module.php:274
+msgid "Redirections"
+msgstr "Przekierowania"
+
+#: includes/Admin/Navigation.php:82
+msgid "Redirects, the log of missing pages (404) and how both behave."
+msgstr "Przekierowania, dziennik nieistniejących stron (404) i ich ustawienia."
+
+#: includes/Admin/Navigation.php:88 includes/Modules/Schema/Blocks.php:281
+#: includes/Modules/Schema/Module.php:742 includes/Modules/Schema/Types.php:478
+#: includes/Plugin.php:158
+msgid "Tools"
+msgstr "Narzędzia"
+
+#: includes/Admin/Navigation.php:89
+msgid ""
+"Bulk editing, image tools, imports from other plugins, roles and "
+"housekeeping."
+msgstr ""
+"Masowa edycja, narzędzia obrazów, import z innych wtyczek, role i porządki."
+
+#: includes/Admin/Navigation.php:227 includes/Modules/Social/Module.php:123
+#: assets/editor.js:167
+msgid "Social media"
+msgstr "Social media"
+
+#: includes/Admin/Navigation.php:228 includes/Modules/Import/Page.php:29
+#: includes/Modules/Schema/Module.php:424
+msgid "Schema"
+msgstr "Schema"
+
+#: includes/Admin/Navigation.php:229 includes/Modules/Tools/Module.php:204
+#: includes/Modules/Tools/Utilities.php:161
+msgid "SEO Utilities"
+msgstr "Narzędzia SEO"
+
+#: includes/Admin/Navigation.php:231
+msgid "Crawlers & indexing"
+msgstr "Roboty i indeksowanie"
+
+#. translators: %s: name of a group of MG SEO screens, e.g. "Titles & Meta"
+#: includes/Admin/Navigation.php:380
+#, php-format
+msgid "%s: sections"
+msgstr "%s: sekcje"
+
+#: includes/Admin/Navigation.php:520 includes/Modules/Schema/Types.php:417
+msgid "Section"
+msgstr "Sekcja"
+
+#: includes/Admin/Settings.php:154
 msgid "Enabled"
 msgstr "Włączone"
 
-#: includes/Admin/Settings.php:225
+#: includes/Admin/Settings.php:249
 msgid "Available variables"
 msgstr "Dostępne zmienne"
 
@@ -1971,18 +2073,6 @@ msgstr "Meta terminów"
 #: includes/Modules/Import/Page.php:27
 msgid "User meta"
 msgstr "Meta użytkowników"
-
-#: includes/Modules/Import/Page.php:28
-#: includes/Modules/Redirections/Admin.php:315
-#: includes/Modules/Redirections/Module.php:85
-#: includes/Modules/Redirections/Module.php:273
-#: includes/Modules/Redirections/Module.php:274
-msgid "Redirections"
-msgstr "Przekierowania"
-
-#: includes/Modules/Import/Page.php:29 includes/Modules/Schema/Module.php:424
-msgid "Schema"
-msgstr "Schema"
 
 #: includes/Modules/Import/Page.php:30
 #: includes/Modules/Redirections/Admin.php:454
@@ -3660,12 +3750,6 @@ msgstr "Całkowity czas:"
 msgid "Supplies"
 msgstr "Materiały"
 
-#: includes/Modules/Schema/Blocks.php:281
-#: includes/Modules/Schema/Module.php:742 includes/Modules/Schema/Types.php:478
-#: includes/Plugin.php:158
-msgid "Tools"
-msgstr "Narzędzia"
-
 #. translators: %s: JSON parser error message
 #: includes/Modules/Schema/Entities.php:173
 #, php-format
@@ -4354,10 +4438,6 @@ msgstr "Autor (puste: autor wpisu)"
 #: includes/Modules/Schema/Types.php:416
 msgid "Empty: post tags."
 msgstr "Puste: tagi wpisu."
-
-#: includes/Modules/Schema/Types.php:417
-msgid "Section"
-msgstr "Sekcja"
 
 #: includes/Modules/Schema/Types.php:417
 msgid "Empty: primary category."
@@ -5994,10 +6074,6 @@ msgstr "Etykiety Slack/X"
 msgid "Add author and reading time labels to posts"
 msgstr "Dodaj do wpisów etykiety autora i czasu czytania"
 
-#: includes/Modules/Social/Module.php:123 assets/editor.js:167
-msgid "Social media"
-msgstr "Social media"
-
 #: includes/Modules/Social/Module.php:143
 msgid "Facebook and LinkedIn"
 msgstr "Facebook i LinkedIn"
@@ -6464,11 +6540,6 @@ msgstr ""
 #: includes/Modules/Tools/Module.php:189
 msgid "Export, import and reset"
 msgstr "Eksport, import i reset"
-
-#: includes/Modules/Tools/Module.php:204
-#: includes/Modules/Tools/Utilities.php:161
-msgid "SEO Utilities"
-msgstr "Narzędzia SEO"
 
 #: includes/Modules/Tools/Module.php:205
 msgid "Utilities"
@@ -7058,10 +7129,6 @@ msgstr "Brak GTIN lub MPN."
 #: includes/Modules/WooCommerce/Product.php:668
 msgid "No \"description\"."
 msgstr "Brak „description”."
-
-#: includes/Plugin.php:143
-msgid "Titles & Meta"
-msgstr "Tytuły i meta"
 
 #: includes/Plugin.php:143
 msgid ""

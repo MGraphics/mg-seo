@@ -40,6 +40,8 @@ final class Admin {
 	 */
 	public function boot(): void {
 		add_action( 'admin_menu', array( $this, 'menu' ) );
+		add_action( 'admin_head', array( $this, 'hide_grouped' ) );
+		add_filter( 'submenu_file', array( $this, 'current_entry' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
 		add_action( 'admin_post_mgseo_save_settings', array( Settings::class, 'handle_save' ) );
 		add_action( 'admin_post_mgseo_modules', array( $this, 'handle_modules' ) );
@@ -51,25 +53,43 @@ final class Admin {
 	}
 
 	/**
+	 * Submenu slugs registered for access but not listed (screens reached through their group).
+	 *
+	 * @var string[]
+	 */
+	private array $hidden = array();
+
+	/**
+	 * Group lead (the listed submenu entry) per page slug.
+	 *
+	 * @var array<string, string>
+	 */
+	private array $leads = array();
+
+	/**
 	 * Register the admin menu.
+	 *
+	 * Every screen keeps its own page and slug; the submenu lists one entry per group (Dashboard, General Settings,
+	 * Titles & Meta, Sitemaps, Redirections, Tools), which opens the first screen of the group the user may open.
+	 * The other screens are registered under the same parent (so access checks, page hooks and URLs stay the
+	 * same) and taken out of the visible list in hide_grouped().
 	 */
 	public function menu(): void {
 		$icon = 'data:image/svg+xml;base64,' . base64_encode( '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="black" d="M2 16V4h2.6L10 10.4 15.4 4H18v12h-2.4V7.8L10 14.3 4.4 7.8V16z"/></svg>' ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- inline menu icon.
-		add_menu_page(
-			__( 'MG SEO', 'mg-seo' ),
-			__( 'MG SEO', 'mg-seo' ),
-			'mgseo_manage_settings',
-			self::MENU_SLUG,
-			array( $this, 'dashboard' ),
-			$icon,
-			80
-		);
-		add_submenu_page( self::MENU_SLUG, __( 'Dashboard', 'mg-seo' ), __( 'Dashboard', 'mg-seo' ), 'mgseo_manage_settings', self::MENU_SLUG, array( $this, 'dashboard' ) );
 
-		$pages = array();
+		$pages = array(
+			self::MENU_SLUG => array(
+				'slug'       => self::MENU_SLUG,
+				'title'      => __( 'Dashboard', 'mg-seo' ),
+				'menu_title' => __( 'Dashboard', 'mg-seo' ),
+				'capability' => 'mgseo_manage_settings',
+				'callback'   => array( $this, 'dashboard' ),
+				'position'   => 0,
+			),
+		);
 		foreach ( Plugin::instance()->modules() as $id => $module ) {
 			if ( $module->settings() ) {
-				$pages[] = array(
+				$pages[ 'mg-seo-' . $id ] = array(
 					'slug'       => 'mg-seo-' . $id,
 					'title'      => Plugin::title( $id ),
 					'menu_title' => $module->settings_menu_title(),
@@ -78,16 +98,97 @@ final class Admin {
 						Settings::render_page( $module );
 					},
 					'position'   => 50,
+					'module'     => $id,
 				);
 			}
 			foreach ( $module->admin_pages() as $page ) {
-				$pages[] = $page + array( 'position' => 20 );
+				if ( ! empty( $page['slug'] ) ) {
+					$pages[ $page['slug'] ] = $page + array( 'position' => 20 );
+				}
 			}
 		}
-		usort( $pages, static fn( $a, $b ) => ( $a['position'] ?? 50 ) <=> ( $b['position'] ?? 50 ) );
-		foreach ( $pages as $page ) {
-			add_submenu_page( self::MENU_SLUG, $page['title'], $page['menu_title'] ?? $page['title'], $page['capability'] ?? 'mgseo_manage_settings', $page['slug'], $page['callback'] );
+		Navigation::set_pages( $pages );
+
+		$dashboard = $this->screen( $pages[ self::MENU_SLUG ] );
+		add_menu_page( __( 'MG SEO', 'mg-seo' ), __( 'MG SEO', 'mg-seo' ), 'mgseo_manage_settings', self::MENU_SLUG, $dashboard, $icon, 80 );
+
+		$this->hidden = array();
+		$this->leads  = array();
+		$done         = array();
+		foreach ( array_keys( Navigation::groups() ) as $group ) {
+			$lead    = Navigation::lead( (string) $group );
+			$members = Navigation::members( (string) $group );
+			$title   = (string) ( Navigation::groups()[ $group ]['title'] ?? '' );
+			foreach ( $members as $slug ) {
+				$page                 = $pages[ $slug ];
+				$done[ $slug ]        = true;
+				$this->leads[ $slug ] = (string) $lead;
+				add_submenu_page( self::MENU_SLUG, $page['title'], $slug === $lead ? $title : ( $page['menu_title'] ?? $page['title'] ), $page['capability'] ?? 'mgseo_manage_settings', $slug, $this->screen( $page ) );
+				if ( $slug !== $lead ) {
+					$this->hidden[] = $slug;
+				}
+			}
 		}
+
+		// Screens outside every group (e.g. added through filters) keep their own entry.
+		$rest = array_diff_key( $pages, $done );
+		uasort( $rest, static fn( $a, $b ) => ( $a['position'] ?? 50 ) <=> ( $b['position'] ?? 50 ) );
+		foreach ( $rest as $slug => $page ) {
+			add_submenu_page( self::MENU_SLUG, $page['title'], $page['menu_title'] ?? $page['title'], $page['capability'] ?? 'mgseo_manage_settings', $slug, $this->screen( $page ) );
+		}
+	}
+
+	/**
+	 * Page callback that shows a screen inside its group shell.
+	 *
+	 * @param array $page Page definition.
+	 * @return callable
+	 */
+	private function screen( array $page ): callable {
+		$callback = $page['callback'];
+		if ( ! empty( $page['module'] ) ) {
+			return $callback; // Settings pages render the shell themselves (rail with their tabs).
+		}
+		$slug = (string) $page['slug'];
+		return static function () use ( $slug, $callback ): void {
+			Navigation::render( $slug, $callback );
+		};
+	}
+
+	/**
+	 * Take grouped screens out of the visible submenu.
+	 *
+	 * Runs on admin_head: after WordPress has checked access to the current page (which needs the entries) and
+	 * before the menu is printed.
+	 */
+	public function hide_grouped(): void {
+		foreach ( $this->hidden as $slug ) {
+			remove_submenu_page( self::MENU_SLUG, $slug );
+		}
+	}
+
+	/**
+	 * Highlight the group entry while one of its screens is open.
+	 *
+	 * @param string|null $submenu_file Current submenu file.
+	 * @return string|null
+	 */
+	public function current_entry( $submenu_file ) {
+		global $plugin_page;
+		if ( is_string( $plugin_page ) && ! empty( $this->leads[ $plugin_page ] ) ) {
+			return $this->leads[ $plugin_page ];
+		}
+		return $submenu_file;
+	}
+
+	/**
+	 * Slugs hidden from the submenu (for tests).
+	 *
+	 * @internal
+	 * @return string[]
+	 */
+	public function hidden_pages(): array {
+		return $this->hidden;
 	}
 
 	/**
@@ -146,7 +247,7 @@ final class Admin {
 		$registry = Plugin::registry();
 		$on       = count( array_filter( array_keys( $registry ), array( $plugin, 'is_module_active' ) ) );
 		echo '<div class="wrap mgseo-wrap mgseo-dashboard">';
-		echo '<h1>' . esc_html__( 'MG SEO', 'mg-seo' ) . '</h1>';
+		echo '<h1>' . esc_html__( 'Modules', 'mg-seo' ) . '</h1>';
 		echo '<div class="mgseo-modules-intro">';
 		echo '<p>' . esc_html__( 'Turn modules on or off. Disabled modules load no code on the front end.', 'mg-seo' ) . '</p>';
 		/* translators: 1: number of modules turned on, 2: number of all modules */
