@@ -4,8 +4,8 @@
  *
  * Every existing screen keeps its own admin page and slug (?page=mg-seo-…), so links, bookmarks, save handlers,
  * capabilities and per-screen assets work as before. The submenu shows one entry per group; inside a group a
- * shell renders the group header and the navigation between its screens: a vertical list of sections for
- * settings groups, tabs across the top for screens with wide tables.
+ * shell renders the group header and the navigation between its screens: tiles with icons for settings
+ * groups, tabs across the top for screens with wide tables.
  *
  * @package MGSEO
  */
@@ -40,8 +40,8 @@ final class Navigation {
 	/**
 	 * Group definitions in menu order.
 	 *
-	 * Each group: title, description, layout (rail|top), pages (slugs in order), primary (optional slug of a
-	 * settings page whose tabs are listed at the top level of the rail).
+	 * Each group: title, description, layout (rail: section tiles | top: tabs), pages (slugs in order), primary (optional slug of a
+	 * settings page whose tabs get their own tiles, with their own icons).
 	 *
 	 * @return array<string, array<string, mixed>>
 	 */
@@ -172,7 +172,7 @@ final class Navigation {
 	/**
 	 * Navigation entries of a group for the current user.
 	 *
-	 * Each entry: slug, label, url, tabs (list of id, label, url) for settings pages with more than one tab.
+	 * Each entry: slug, label, icon, url, tabs (list of id, label, url, icon) for settings pages with more than one tab.
 	 *
 	 * @param string $group Group id.
 	 * @return array<int, array<string, mixed>>
@@ -187,6 +187,7 @@ final class Navigation {
 			$entry  = array(
 				'slug'  => $slug,
 				'label' => self::label( $slug ),
+				'icon'  => self::icon( $slug ),
 				'url'   => self::url( $slug ),
 				'tabs'  => array(),
 			);
@@ -199,6 +200,7 @@ final class Navigation {
 							'id'    => (string) $tab['id'],
 							'label' => (string) $tab['title'],
 							'url'   => self::url( $slug, (string) $tab['id'] ),
+							'icon'  => (string) ( $tab['icon'] ?? self::tab_icon( (string) $page['module'], (string) $tab['id'] ) ),
 						);
 					}
 				}
@@ -232,7 +234,57 @@ final class Navigation {
 		return (string) ( $page['menu_title'] ?? $page['title'] ?? $slug );
 	}
 
+	/**
+	 * Icon key of a page.
+	 *
+	 * @param string $slug Page slug.
+	 */
+	private static function icon( string $slug ): string {
+		$icons = array(
+			Admin::MENU_SLUG      => 'modules',
+			'mg-seo-overview'     => 'analysis',
+			'mg-seo-gsc-reports'  => 'gsc',
+			'mg-seo-links-report' => 'links',
+			'mg-seo-redirects'    => 'redirections',
+			'mg-seo-404-monitor'  => 'missing',
+			'mg-seo-redirections' => 'sliders',
+			'mg-seo-image-tools'  => 'image',
+			'mg-seo-utilities'    => 'tools',
+		);
+		if ( isset( $icons[ $slug ] ) ) {
+			return $icons[ $slug ];
+		}
+		$page = self::$pages[ $slug ] ?? array();
+		if ( ! empty( $page['module'] ) ) {
+			return (string) $page['module'];
+		}
+		$module = (string) preg_replace( '/^mg-seo-/', '', $slug );
+		return $module;
+	}
 
+	/**
+	 * Icon key of a settings tab that has its own tile.
+	 *
+	 * @param string $module Module id.
+	 * @param string $tab    Tab id.
+	 */
+	private static function tab_icon( string $module, string $tab ): string {
+		$icons = array(
+			'titles/general'      => 'sliders',
+			'titles/home'         => 'home',
+			'titles/post_types'   => 'document',
+			'titles/taxonomies'   => 'tag',
+			'titles/archives'     => 'folder',
+			'titles/verification' => 'shield',
+			'sitemap/general'     => 'sliders',
+			'sitemap/post_types'  => 'document',
+			'sitemap/taxonomies'  => 'tag',
+			'sitemap/authors'     => 'person',
+			'sitemap/news'        => 'news',
+			'sitemap/video'       => 'video',
+		);
+		return $icons[ $module . '/' . $tab ] ?? $module;
+	}
 
 	/**
 	 * Group id and definition for a page; pages outside every group get a group of their own.
@@ -333,8 +385,15 @@ final class Navigation {
 			return true;
 		}
 
+		$children = self::tiles( $entries, $slug, $tab, $primary, $nav_label );
 		echo '<div class="mgseo-shell-body">';
-		self::rail( $entries, $slug, $tab, $primary, $nav_label );
+		if ( $children ) {
+			echo '<nav class="mgseo-subtabs" aria-label="' . esc_attr( $children['label'] ) . '"><ul>';
+			foreach ( $children['items'] as $child ) {
+				echo '<li><a class="mgseo-subtab' . ( $child['current'] ? ' is-current' : '' ) . '" href="' . esc_url( $child['url'] ) . '"' . ( $child['current'] ? ' aria-current="page"' : '' ) . '>' . esc_html( $child['label'] ) . '</a></li>';
+			}
+			echo '</ul></nav>';
+		}
 		echo '<div class="mgseo-shell-main">';
 		return true;
 	}
@@ -359,6 +418,7 @@ final class Navigation {
 		$entry  = array(
 			'slug'  => $slug,
 			'label' => self::label( $slug ),
+			'icon'  => self::icon( $slug ),
 			'url'   => self::url( $slug ),
 			'tabs'  => array(),
 		);
@@ -368,6 +428,7 @@ final class Navigation {
 					'id'    => (string) $tab['id'],
 					'label' => (string) $tab['title'],
 					'url'   => self::url( $slug, (string) $tab['id'] ),
+					'icon'  => (string) ( $tab['icon'] ?? (string) $page['module'] ),
 				);
 			}
 		}
@@ -375,32 +436,33 @@ final class Navigation {
 	}
 
 	/**
-	 * Vertical rail (wide screens) and a section picker (narrow screens).
+	 * Section tiles: one tile (icon and name) per section of the group, wrapping into rows.
 	 *
-	 * Tabs of the group's primary page are listed at the top level; other pages with several
-	 * tabs show them nested under the page, expanded while one of them is open.
+	 * Tabs of the group's primary page get a tile each; another page with several tabs gets one tile that opens
+	 * its first tab, and its tabs are listed as sub-sections under the tiles while it is open.
 	 *
 	 * @param array  $entries   Entries.
 	 * @param string $slug      Current page.
 	 * @param string $tab       Current tab.
 	 * @param string $primary   Primary page slug.
 	 * @param string $nav_label Accessible name of the navigation.
+	 * @return array{label: string, items: array<int, array<string, mixed>>}|null Sub-sections of the open tile.
 	 */
-	private static function rail( array $entries, string $slug, string $tab, string $primary, string $nav_label ): void {
+	private static function tiles( array $entries, string $slug, string $tab, string $primary, string $nav_label ): ?array {
 		$items = array();
-		$split = false;
 		foreach ( $entries as $entry ) {
 			$is_page = $entry['slug'] === $slug;
 			if ( $entry['slug'] === $primary && $entry['tabs'] ) {
 				foreach ( $entry['tabs'] as $t ) {
 					$items[] = array(
 						'label'    => $t['label'],
+						'icon'     => $t['icon'],
 						'url'      => $t['url'],
 						'current'  => $is_page && $t['id'] === $tab,
+						'active'   => $is_page && $t['id'] === $tab,
 						'children' => array(),
 					);
 				}
-				$split = true;
 				continue;
 			}
 			$children = array();
@@ -413,58 +475,34 @@ final class Navigation {
 			}
 			$items[] = array(
 				'label'    => $entry['label'],
+				'icon'     => $entry['icon'],
 				'url'      => $entry['tabs'] ? $entry['tabs'][0]['url'] : $entry['url'],
 				'current'  => $is_page && ! $entry['tabs'],
 				'active'   => $is_page,
 				'children' => $children,
-				'split'    => $split,
 			);
-			$split   = false;
 		}
 
-		echo '<nav class="mgseo-rail" aria-label="' . esc_attr( $nav_label ) . '"><ul class="mgseo-rail-list">';
+		$open = null;
+		echo '<nav class="mgseo-tiles" aria-label="' . esc_attr( $nav_label ) . '"><ul>';
 		foreach ( $items as $item ) {
-			$classes = array( 'mgseo-rail-item' );
-			if ( $item['children'] ) {
-				$classes[] = 'has-children';
+			$aria = '';
+			if ( $item['current'] ) {
+				$aria = ' aria-current="page"';
+			} elseif ( $item['active'] ) {
+				$aria = ' aria-current="true"';
 			}
-			if ( ! empty( $item['active'] ) || $item['current'] ) {
-				$classes[] = 'is-active';
+			echo '<li><a class="mgseo-tile' . ( $item['active'] ? ' is-current' : '' ) . '" href="' . esc_url( $item['url'] ) . '"' . $aria . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static attribute.
+			echo '<span class="mgseo-tile-icon">' . ModuleIcons::svg( $item['icon'] ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered with wp_kses in ModuleIcons.
+			echo '<span class="mgseo-tile-label">' . esc_html( $item['label'] ) . '</span></a></li>';
+			if ( $item['active'] && $item['children'] ) {
+				$open = array(
+					'label' => $item['label'],
+					'items' => $item['children'],
+				);
 			}
-			if ( ! empty( $item['split'] ) ) {
-				$classes[] = 'is-split';
-			}
-			echo '<li class="' . esc_attr( implode( ' ', $classes ) ) . '">';
-			echo '<a class="mgseo-rail-link' . ( $item['current'] ? ' is-current' : '' ) . '" href="' . esc_url( $item['url'] ) . '"' . ( $item['current'] ? ' aria-current="page"' : '' ) . '>';
-			echo '<span class="mgseo-nav-label">' . esc_html( $item['label'] ) . '</span></a>';
-			if ( $item['children'] && ! empty( $item['active'] ) ) {
-				echo '<ul class="mgseo-rail-sub">';
-				foreach ( $item['children'] as $child ) {
-					echo '<li><a class="mgseo-rail-sublink' . ( $child['current'] ? ' is-current' : '' ) . '" href="' . esc_url( $child['url'] ) . '"' . ( $child['current'] ? ' aria-current="page"' : '' ) . '>' . esc_html( $child['label'] ) . '</a></li>';
-				}
-				echo '</ul>';
-			}
-			echo '</li>';
 		}
 		echo '</ul></nav>';
-
-		// Narrow screens: the same sections as a list box that opens the chosen one.
-		$select_id = 'mgseo-section-picker';
-		echo '<div class="mgseo-rail-picker">';
-		echo '<label for="' . esc_attr( $select_id ) . '">' . esc_html__( 'Section', 'mg-seo' ) . '</label>';
-		echo '<select id="' . esc_attr( $select_id ) . '" class="mgseo-section-picker">';
-		foreach ( $items as $item ) {
-			if ( $item['children'] ) {
-				echo '<optgroup label="' . esc_attr( $item['label'] ) . '">';
-				foreach ( $item['children'] as $child ) {
-					echo '<option value="' . esc_url( $child['url'] ) . '"' . selected( $child['current'], true, false ) . '>' . esc_html( $child['label'] ) . '</option>';
-				}
-				echo '</optgroup>';
-				continue;
-			}
-			echo '<option value="' . esc_url( $item['url'] ) . '"' . selected( $item['current'], true, false ) . '>' . esc_html( $item['label'] ) . '</option>';
-		}
-		echo '</select>';
-		echo '</div>';
+		return $open;
 	}
 }

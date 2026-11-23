@@ -1,6 +1,6 @@
 <?php
 /**
- * Line icons for the module cards on the dashboard.
+ * Line icons for the module cards on the dashboard and the admin navigation.
  *
  * Drawn for MG SEO on a 24 px grid: 1.75 px stroke, round caps and joins, no fills, so they take the text colour.
  *
@@ -59,6 +59,38 @@ final class ModuleIcons {
 	}
 
 	/**
+	 * Icons of admin sections that are not modules (section tiles of the settings screens), same grid and stroke.
+	 *
+	 * @return array<string, string>
+	 */
+	private static function sections(): array {
+		return array(
+			// Four tiles: the modules.
+			'modules'  => '<rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/>',
+			// Two sliders: general options.
+			'sliders'  => '<path d="M4 7.5h8.5M17.5 7.5H20M4 16.5h2.5M11.5 16.5H20"/><circle cx="15" cy="7.5" r="2.5"/><circle cx="9" cy="16.5" r="2.5"/>',
+			// A house: the homepage.
+			'home'     => '<path d="m3.5 11 8.5-7 8.5 7"/><path d="M6 9.5v10h12v-10"/><path d="M10 19.5v-5h4v5"/>',
+			// A page with lines: posts and pages.
+			'document' => '<path d="M13.5 3.5h-6a1.5 1.5 0 0 0-1.5 1.5v14a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5V7.5z"/><path d="M13.5 3.5v4h4M9.5 12h5M9.5 15.5h5"/>',
+			// A tag: categories and tags.
+			'tag'      => '<path d="M3.5 12V5a1.5 1.5 0 0 1 1.5-1.5h7l8.1 8.1a1.5 1.5 0 0 1 0 2.1l-6.4 6.4a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.4"/>',
+			// A folder: archives and other pages.
+			'folder'   => '<path d="M3.5 7A1.5 1.5 0 0 1 5 5.5h4.2l2 2.5H19a1.5 1.5 0 0 1 1.5 1.5V18a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18z"/>',
+			// A shield with a tick: verified with search engines.
+			'shield'   => '<path d="M12 3.5 5 6.2v5.3c0 4.1 2.9 7.6 7 9 4.1-1.4 7-4.9 7-9V6.2z"/><path d="m9 12 2.2 2.2 3.8-4"/>',
+			// A person: authors.
+			'person'   => '<circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>',
+			// A newspaper.
+			'news'     => '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M7.5 9h9M7.5 12.5h9M7.5 16h5"/>',
+			// A play button: video.
+			'video'    => '<rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m10.5 9.5 4 2.5-4 2.5z"/>',
+			// A warning sign: missing pages (404).
+			'missing'  => '<path d="M10.7 4.3 3 17.8a1.5 1.5 0 0 0 1.3 2.2h15.4a1.5 1.5 0 0 0 1.3-2.2L13.3 4.3a1.5 1.5 0 0 0-2.6 0z"/><path d="M12 9.5v4.5M12 17h.01"/>',
+		);
+	}
+
+	/**
 	 * Fallback for modules added through the `mgseo/modules` filter.
 	 */
 	private const FALLBACK = '<rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/>';
@@ -69,7 +101,7 @@ final class ModuleIcons {
 	 * @param string $id Module id.
 	 */
 	public static function svg( string $id ): string {
-		$shape = self::shapes()[ $id ] ?? self::FALLBACK;
+		$shape = self::shapes()[ $id ] ?? self::sections()[ $id ] ?? self::FALLBACK;
 		/**
 		 * Filter the inner SVG markup (24×24 grid, stroked with currentColor) of a module's dashboard icon.
 		 *
@@ -78,6 +110,13 @@ final class ModuleIcons {
 		 */
 		$shape = (string) apply_filters( 'mgseo/module_icon', $shape, $id );
 		return self::wrap( $shape );
+	}
+
+	/**
+	 * Small arrow used after "Settings" links.
+	 */
+	public static function arrow(): string {
+		return self::wrap( '<path d="M5 12h13.5M13 6.5l5.5 5.5-5.5 5.5"/>' );
 	}
 
 	/**

@@ -91,7 +91,7 @@ class NavigationTest extends TestCase {
 		$this->assertNotContains( 'mg-seo-local', Navigation::members( 'general' ) );
 	}
 
-	public function test_settings_screen_has_rail_and_posts_the_current_tab(): void {
+	public function test_settings_screen_has_tiles_and_posts_the_current_tab(): void {
 		$this->build_menu();
 		$_GET['tab'] = 'home';
 		ob_start();
@@ -100,10 +100,10 @@ class NavigationTest extends TestCase {
 		unset( $_GET['tab'] );
 
 		$this->assertStringContainsString( '<h1>Titles &amp; Meta</h1>', $html );
-		$this->assertStringContainsString( 'class="mgseo-rail"', $html );
-		$this->assertMatchesRegularExpression( '#<a class="mgseo-rail-link is-current" href="[^"]*page=mg-seo-titles&\#038;tab=home" aria-current="page">#', $html );
+		$this->assertStringContainsString( 'class="mgseo-tiles"', $html );
+		$this->assertMatchesRegularExpression( '#<a class="mgseo-tile is-current" href="[^"]*page=mg-seo-titles&\#038;tab=home" aria-current="page"><span class="mgseo-tile-icon"><svg #', $html );
 		$this->assertSame( 1, substr_count( $html, 'aria-current="page"' ) );
-		// Other screens of the group are reachable from the rail.
+		// Other screens of the group are reachable from the tiles.
 		$this->assertStringContainsString( 'page=mg-seo-social', $html );
 		$this->assertStringContainsString( 'page=mg-seo-schema', $html );
 		// The same form as before: module, tab, nonce, save action.
@@ -111,8 +111,6 @@ class NavigationTest extends TestCase {
 		$this->assertStringContainsString( 'name="module" value="titles"', $html );
 		$this->assertStringContainsString( 'name="tab" value="home"', $html );
 		$this->assertStringContainsString( 'name="_wpnonce"', $html );
-		// Narrow screens: a section picker with the same entries.
-		$this->assertStringContainsString( 'class="mgseo-section-picker"', $html );
 		$this->assertSame( 1, preg_match_all( '#<div class="wrap #', $html ) );
 	}
 
@@ -132,9 +130,11 @@ class NavigationTest extends TestCase {
 		Navigation::open( 'mg-seo-tools', 'llms' );
 		Navigation::close();
 		$html = (string) ob_get_clean();
-		$this->assertStringContainsString( 'mgseo-rail-sub', $html );
-		$this->assertMatchesRegularExpression( '#<a class="mgseo-rail-sublink is-current" href="[^"]*page=mg-seo-tools&\#038;tab=llms" aria-current="page">llms.txt</a>#', $html );
-		$this->assertStringContainsString( 'Crawlers &amp; indexing', $html );
+		// The page's tile is marked as open and its tabs are listed as sub-sections under the tiles.
+		$this->assertMatchesRegularExpression( '#<a class="mgseo-tile is-current" href="[^"]*page=mg-seo-tools&\#038;tab=robots" aria-current="true">.*Crawlers &amp; indexing</span>#U', $html );
+		$this->assertStringContainsString( 'class="mgseo-subtabs" aria-label="Crawlers &amp; indexing"', $html );
+		$this->assertMatchesRegularExpression( '#<a class="mgseo-subtab is-current" href="[^"]*page=mg-seo-tools&\#038;tab=llms" aria-current="page">llms.txt</a>#', $html );
+		$this->assertSame( 1, substr_count( $html, 'aria-current="page"' ) );
 	}
 
 	public function test_screens_with_tables_get_top_tabs_and_one_h1(): void {
@@ -156,7 +156,7 @@ class NavigationTest extends TestCase {
 		$this->assertStringContainsString( 'page=mg-seo-redirections', $html );
 	}
 
-	public function test_shell_has_no_decorative_icons_or_eyebrow_labels(): void {
+	public function test_header_and_top_tabs_have_no_decorative_icons_or_eyebrow_labels(): void {
 		$this->build_menu();
 		$_GET['tab'] = 'llms';
 		ob_start();
@@ -169,11 +169,13 @@ class NavigationTest extends TestCase {
 		);
 		$html = (string) ob_get_clean();
 		unset( $_GET['tab'] );
-		$this->assertStringContainsString( 'class="mgseo-rail"', $html );
+		$this->assertStringContainsString( 'class="mgseo-tiles"', $html );
 		$this->assertStringContainsString( 'class="mgseo-topnav"', $html );
-		foreach ( array( 'mgseo-shell-icon', 'mgseo-nav-icon', 'mgseo-section-kicker', '<svg' ) as $needle ) {
+		foreach ( array( 'mgseo-shell-icon', 'mgseo-nav-icon', 'mgseo-section-kicker' ) as $needle ) {
 			$this->assertStringNotContainsString( $needle, $html );
 		}
+		// Icons only on the section tiles: one per tile, none in the header or the top tabs.
+		$this->assertSame( substr_count( $html, 'class="mgseo-tile' . '"' ) + substr_count( $html, 'class="mgseo-tile is-current"' ), substr_count( $html, '<svg' ) );
 	}
 
 	public function test_reports_only_user_gets_the_first_screen_they_may_open(): void {

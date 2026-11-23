@@ -35,7 +35,7 @@ Titles and meta, a schema generator, XML sitemaps (with image, news and video), 
 1. Download `mg-seo-<version>.zip` from the [latest GitHub release](https://github.com/MGraphics/mg-seo/releases/latest)
    (the attached asset, not the "Source code" archive).
 2. In WordPress go to **Plugins → Add New → Upload Plugin**, upload the ZIP and activate it.
-3. Open **MG SEO → Dashboard** to pick modules, then **MG SEO → Titles & Meta**. The menu has six groups (Dashboard, General Settings, Titles & Meta, Sitemaps, Redirections, Tools); each group shows its screens in a rail or as tabs.
+3. Open **MG SEO → Dashboard** to pick modules, then **MG SEO → Titles & Meta**. The menu has six groups (Dashboard, General Settings, Titles & Meta, Sitemaps, Redirections, Tools); each group shows its screens as tiles or as tabs.
 
 Updates appear in **Dashboard → Updates** like any other plugin. They come from the
 [GitHub Releases](https://github.com/MGraphics/mg-seo/releases) of this public repository through the bundled

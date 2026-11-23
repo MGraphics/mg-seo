@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MG SEO 0.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mg-seo\n"
-"POT-Creation-Date: 2026-11-23T08:53:10+00:00\n"
+"POT-Creation-Date: 2026-11-23T09:00:39+00:00\n"
 "PO-Revision-Date: 2026-11-21 23:20+0100\n"
 "Last-Translator: MGraphics\n"
 "Language-Team: Polski\n"
@@ -118,7 +118,7 @@ msgstr "Niezapisane zmiany"
 msgid "You do not have permission to access this page."
 msgstr "Nie masz uprawnień do wyświetlenia tej strony."
 
-#: includes/Admin/Admin.php:250 includes/Admin/Navigation.php:218
+#: includes/Admin/Admin.php:250 includes/Admin/Navigation.php:220
 msgid "Modules"
 msgstr "Moduły"
 
@@ -149,7 +149,7 @@ msgid "Needs %s"
 msgstr "Wymaga: %s"
 
 #: includes/Admin/Admin.php:334 includes/Admin/Admin.php:427
-#: includes/Admin/Navigation.php:222 includes/Modules/Import/Page.php:24
+#: includes/Admin/Navigation.php:224 includes/Modules/Import/Page.php:24
 #: includes/Modules/Redirections/Admin.php:319
 #: includes/Modules/Redirections/Admin.php:516
 #: includes/Modules/Schema/Module.php:752
@@ -403,34 +403,30 @@ msgid ""
 msgstr ""
 "Masowa edycja, narzędzia obrazów, import z innych wtyczek, role i porządki."
 
-#: includes/Admin/Navigation.php:219 includes/Modules/Social/Module.php:123
+#: includes/Admin/Navigation.php:221 includes/Modules/Social/Module.php:123
 #: assets/editor.js:167
 msgid "Social media"
 msgstr "Social media"
 
-#: includes/Admin/Navigation.php:220 includes/Modules/Import/Page.php:29
+#: includes/Admin/Navigation.php:222 includes/Modules/Import/Page.php:29
 #: includes/Modules/Schema/Module.php:424
 msgid "Schema"
 msgstr "Schema"
 
-#: includes/Admin/Navigation.php:221 includes/Modules/Tools/Module.php:204
+#: includes/Admin/Navigation.php:223 includes/Modules/Tools/Module.php:204
 #: includes/Modules/Tools/Utilities.php:161
 msgid "SEO Utilities"
 msgstr "Narzędzia SEO"
 
-#: includes/Admin/Navigation.php:223
+#: includes/Admin/Navigation.php:225
 msgid "Crawlers & indexing"
 msgstr "Roboty i indeksowanie"
 
 #. translators: %s: name of a group of MG SEO screens, e.g. "Titles & Meta"
-#: includes/Admin/Navigation.php:320
+#: includes/Admin/Navigation.php:372
 #, php-format
 msgid "%s: sections"
 msgstr "%s: sekcje"
-
-#: includes/Admin/Navigation.php:454 includes/Modules/Schema/Types.php:417
-msgid "Section"
-msgstr "Sekcja"
 
 #: includes/Admin/Settings.php:148
 msgid "Enabled"
@@ -4438,6 +4434,10 @@ msgstr "Autor (puste: autor wpisu)"
 #: includes/Modules/Schema/Types.php:416
 msgid "Empty: post tags."
 msgstr "Puste: tagi wpisu."
+
+#: includes/Modules/Schema/Types.php:417
+msgid "Section"
+msgstr "Sekcja"
 
 #: includes/Modules/Schema/Types.php:417
 msgid "Empty: primary category."
