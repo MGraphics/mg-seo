@@ -4,7 +4,7 @@ Tags: seo, schema, sitemap, redirections, local seo
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,12 @@ No. MG SEO prints only standard tags (title, meta, link, JSON-LD) without commen
 Tak, interfejs jest dostępny po polsku i po angielsku.
 
 == Changelog ==
+
+= 0.3.1 =
+* New: the MG SEO dashboard has new module cards: an icon for every module, the name and description, and an on/off switch at the bottom. When a module is on, the card links to its settings (or to its screen, e.g. "Open" for the bulk editor, import and role manager). Modules that are always on or need another plugin say so on the card.
+* New: "On: 12 of 16" above the cards and an "Unsaved changes" note next to "Save modules", which stays in view while scrolling.
+* Accessibility: the switches are real checkboxes with the switch role (Space toggles, the state, name and description are announced), with a visible focus ring; they work at phone widths and in Windows high contrast mode. Saving works as before (one "Save modules" button, same option).
+* Developers: filter `mgseo/module_icon` changes the icon of a module card (inner SVG markup on a 24×24 grid).
 
 = 0.3.0 =
 * New: the score and hints are visible while editing. Block editor: a pinned "SEO 21" button opens an SEO sidebar next to the content (score, keyword, hints, title and description in Google). Classic editor: one line in the Publish box and the score in the SEO box header, visible even when the box is collapsed.

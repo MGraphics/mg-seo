@@ -1,8 +1,4 @@
 /* MG SEO admin styles. */
-.mgseo-wrap .mgseo-modules { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
-.mgseo-module-card { background: #fff; border: 1px solid #dcdcde; border-radius: 6px; padding: 12px 16px; }
-.mgseo-module-card.is-active { border-color: #8c8f94; }
-.mgseo-module-card p { margin: 6px 0 0; color: #50575e; }
 .mgseo-heading { margin: 1.2em 0 0; font-size: 1.1em; }
 .mgseo-variables { margin-top: 16px; max-width: 900px; }
 .mgseo-variables summary { cursor: pointer; font-weight: 600; }
@@ -69,3 +65,77 @@
 .mgseo-schema-entity textarea.code { font-family: Menlo, Consolas, monospace; font-size: 12px; }
 .mgseo-validation .is-error { color: #b32d2e; }
 .mgseo-validation .is-warning { color: #8a6d00; }
+
+/* Dashboard: module cards. */
+.mgseo-dashboard {
+	--mgseo-accent: var(--wp-admin-theme-color, #3858e9);
+	--mgseo-accent-dark: var(--wp-admin-theme-color-darker-10, #2145e6);
+	--mgseo-ink: #1e1e1e;
+	--mgseo-mut: #50575e;
+	--mgseo-line: #e2e4e7;
+	max-width: 1320px;
+}
+.mgseo-modules-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin: 8px 0 20px; }
+.mgseo-modules-intro p { margin: 0; color: var(--mgseo-mut); font-size: 14px; }
+.mgseo-modules-intro .mgseo-modules-count { color: var(--mgseo-ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.mgseo-wrap .mgseo-modules { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 16px; margin: 0 0 8px; }
+.mgseo-module { position: relative; display: flex; flex-direction: column; min-width: 0; background: #fff; border: 1px solid var(--mgseo-line); border-radius: 12px; box-shadow: 0 1px 2px rgba(30, 30, 30, .04); transition: border-color .15s ease, box-shadow .15s ease; }
+.mgseo-module:hover { border-color: #c9ccd1; box-shadow: 0 6px 18px -6px rgba(30, 30, 30, .12); }
+.mgseo-module:focus-within { border-color: #c9ccd1; }
+.mgseo-module-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 20px 0; }
+.mgseo-module-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 11px; background: #f0f0f1; color: #646970; transition: background-color .15s ease, color .15s ease; }
+.mgseo-module-icon svg { display: block; width: 24px; height: 24px; }
+.mgseo-module.is-on .mgseo-module-icon { background: #eef1fd; background: color-mix(in srgb, var(--mgseo-accent) 10%, #fff); color: var(--mgseo-accent); }
+.mgseo-module-tag { display: inline-block; padding: 3px 9px; border-radius: 999px; background: #f0f0f1; color: var(--mgseo-mut); font-size: 12px; font-weight: 500; line-height: 1.5; white-space: nowrap; }
+.mgseo-module-tag.is-warning { background: #fcf0c3; color: #614a00; }
+.mgseo-wrap .mgseo-module-title { margin: 14px 20px 0; padding: 0; color: var(--mgseo-ink); font-size: 15px; font-weight: 600; line-height: 1.35; }
+.mgseo-wrap .mgseo-module-desc { margin: 6px 20px 18px; color: var(--mgseo-mut); font-size: 13px; line-height: 1.55; }
+.mgseo-module-foot { display: flex; align-items: center; gap: 12px; min-height: 36px; margin-top: auto; padding: 10px 16px 10px 20px; border-top: 1px solid #f0f0f1; }
+.mgseo-module-link { display: inline-flex; align-items: center; gap: 6px; margin-left: -8px; padding: 6px 8px; border-radius: 6px; color: var(--mgseo-accent); font-weight: 600; text-decoration: none; }
+.mgseo-module-link svg { width: 16px; height: 16px; transition: transform .15s ease; }
+.mgseo-module-link:hover, .mgseo-module-link:active { background: #eef1fd; background: color-mix(in srgb, var(--mgseo-accent) 8%, #fff); color: var(--mgseo-accent-dark); }
+.mgseo-module-link:hover svg { transform: translateX(2px); }
+.mgseo-module-link:focus { box-shadow: none; outline: 0; }
+.mgseo-module-link:focus-visible { outline: 2px solid var(--mgseo-accent); outline-offset: 1px; }
+
+/* Switch: a real checkbox (role="switch") laid over the track, so clicks, Space and screen readers work natively. */
+.mgseo-switch { position: relative; display: inline-flex; align-items: center; gap: 10px; margin-left: auto; cursor: pointer; }
+.mgseo-switch-state { color: var(--mgseo-mut); font-size: 13px; }
+.mgseo-module.is-on .mgseo-switch-state { color: var(--mgseo-ink); font-weight: 500; }
+.mgseo-wrap input.mgseo-switch-input[type="checkbox"] { position: absolute; right: 0; top: 50%; z-index: 1; width: 40px; height: 24px; min-width: 0; margin: -12px 0 0; padding: 0; border: 0; border-radius: 999px; opacity: 0; cursor: pointer; -webkit-appearance: none; appearance: none; box-shadow: none; }
+.mgseo-wrap input.mgseo-switch-input[type="checkbox"]::before { content: none; display: none; }
+.mgseo-switch-track { position: relative; flex: none; width: 40px; height: 24px; border-radius: 999px; background: #8c8f94; transition: background-color .18s ease, box-shadow .18s ease; }
+.mgseo-switch-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .18s ease; }
+.mgseo-switch-input:checked + .mgseo-switch-track { background: var(--mgseo-accent); }
+.mgseo-switch-input:checked + .mgseo-switch-track .mgseo-switch-thumb { transform: translateX(16px); }
+.mgseo-switch:hover .mgseo-switch-input:not(:disabled) + .mgseo-switch-track { box-shadow: 0 0 0 4px rgba(140, 143, 148, .18); }
+.mgseo-switch-input:focus-visible + .mgseo-switch-track { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--mgseo-accent); }
+.mgseo-switch:has(.mgseo-switch-input:disabled) { cursor: default; }
+.mgseo-switch-input:disabled { cursor: default; }
+.mgseo-switch-input:disabled + .mgseo-switch-track { opacity: .45; }
+.mgseo-module.is-unavailable .mgseo-module-title, .mgseo-module.is-unavailable .mgseo-module-desc { color: #646970; }
+
+/* Save bar: stays in view while scrolling through the cards. */
+.mgseo-modules-bar { position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: flex-end; gap: 14px; margin: 8px 0 0; padding: 14px 0; background: linear-gradient(to bottom, rgba(240, 240, 241, 0), #f0f0f1 30%); }
+.mgseo-modules-bar-note { color: var(--mgseo-mut); font-size: 13px; }
+.mgseo-modules-form.is-dirty .mgseo-modules-bar-note { color: var(--mgseo-ink); font-weight: 500; }
+.mgseo-modules-form.is-dirty .mgseo-modules-bar-note::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #b26200; vertical-align: 1px; }
+
+@media (max-width: 782px) {
+	.mgseo-modules-intro { margin-bottom: 16px; }
+	.mgseo-wrap .mgseo-modules { gap: 12px; }
+	.mgseo-module-head { padding: 16px 16px 0; }
+	.mgseo-wrap .mgseo-module-title { margin: 12px 16px 0; }
+	.mgseo-wrap .mgseo-module-desc { margin: 4px 16px 14px; }
+	.mgseo-module-foot { padding: 8px 12px 8px 16px; }
+	.mgseo-modules-bar .button { min-height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.mgseo-module, .mgseo-module-icon, .mgseo-module-link svg, .mgseo-switch-track, .mgseo-switch-thumb { transition: none; }
+}
+@media (forced-colors: active) {
+	.mgseo-switch-track { border: 1px solid CanvasText; background: Canvas; }
+	.mgseo-switch-thumb { background: CanvasText; }
+	.mgseo-switch-input:checked + .mgseo-switch-track { background: Highlight; }
+	.mgseo-switch-input:checked + .mgseo-switch-track .mgseo-switch-thumb { background: HighlightText; }
+}

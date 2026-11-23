@@ -109,6 +109,19 @@
 		render();
 	} );
 
+	/* Dashboard: module switches. The form still posts modules[<id>] with "Save modules"; this only shows pending changes. */
+	$( document ).on( 'change', '.mgseo-switch-input', function () {
+		var i18n = cfg.i18n || {};
+		var $form = $( this ).closest( 'form' );
+		var dirty = false;
+		$( this ).closest( '.mgseo-module' ).toggleClass( 'is-on', this.checked ).toggleClass( 'is-off', ! this.checked )
+			.find( '.mgseo-switch-state' ).text( this.checked ? i18n.on : i18n.off );
+		$form.find( '.mgseo-switch-input' ).each( function () {
+			dirty = dirty || this.checked !== this.defaultChecked;
+		} );
+		$form.toggleClass( 'is-dirty', dirty ).find( '.mgseo-modules-bar-note' ).text( dirty ? i18n.unsaved : '' );
+	} );
+
 	/* ---------- SEO box: shared store, live analysis, Publish box line ---------- */
 
 	var $box = $( '.mgseo-box' );

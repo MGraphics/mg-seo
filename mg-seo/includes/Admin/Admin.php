@@ -125,46 +125,135 @@ final class Admin {
 					'toImprove'   => __( 'to improve', 'mg-seo' ),
 					'seo'         => __( 'SEO', 'mg-seo' ),
 					'noImage'     => __( 'No image: add a featured image or choose one below.', 'mg-seo' ),
+					'on'          => __( 'On', 'mg-seo' ),
+					'off'         => __( 'Off', 'mg-seo' ),
+					'unsaved'     => __( 'Unsaved changes', 'mg-seo' ),
 				),
 			)
 		);
 	}
 
 	/**
-	 * Dashboard page: module toggles.
+	 * Dashboard page: module cards with on/off switches.
+	 *
+	 * The switches are checkboxes named modules[<id>] posted to handle_modules() with the "Save modules" button.
 	 */
 	public function dashboard(): void {
 		if ( ! current_user_can( 'mgseo_manage_settings' ) ) {
 			wp_die( esc_html__( 'You do not have permission to access this page.', 'mg-seo' ) );
 		}
-		$plugin = Plugin::instance();
-		echo '<div class="wrap mgseo-wrap">';
+		$plugin   = Plugin::instance();
+		$registry = Plugin::registry();
+		$on       = count( array_filter( array_keys( $registry ), array( $plugin, 'is_module_active' ) ) );
+		echo '<div class="wrap mgseo-wrap mgseo-dashboard">';
 		echo '<h1>' . esc_html__( 'MG SEO', 'mg-seo' ) . '</h1>';
+		echo '<div class="mgseo-modules-intro">';
 		echo '<p>' . esc_html__( 'Turn modules on or off. Disabled modules load no code on the front end.', 'mg-seo' ) . '</p>';
-		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
+		/* translators: 1: number of modules turned on, 2: number of all modules */
+		echo '<p class="mgseo-modules-count">' . esc_html( sprintf( __( 'On: %1$d of %2$d', 'mg-seo' ), $on, count( $registry ) ) ) . '</p>';
+		echo '</div>';
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="mgseo-modules-form">';
 		wp_nonce_field( 'mgseo_modules' );
 		echo '<input type="hidden" name="action" value="mgseo_modules" />';
 		echo '<div class="mgseo-modules">';
-		foreach ( Plugin::registry() as $id => $def ) {
-			$active   = $plugin->is_module_active( $id );
-			$required = ! empty( $def['required'] );
-			$missing  = ! empty( $def['requires'] ) && ! Plugin::dependency_met( $def['requires'] );
-			echo '<div class="mgseo-module-card' . ( $active ? ' is-active' : '' ) . '">';
-			echo '<label><input type="checkbox" name="modules[' . esc_attr( $id ) . ']" value="1" ' . checked( $active || ( ! $missing && $this->stored_state( $id, $def ) ), true, false ) . disabled( $required || $missing, true, false ) . ' /> ';
-			echo '<strong>' . esc_html( Plugin::title( $id ) ) . '</strong></label>';
-			echo '<p>' . esc_html( Plugin::labels()[ $id ][1] ?? '' ) . '</p>';
-			if ( $missing ) {
-				/* translators: %s: dependency name */
-				echo '<p class="description">' . esc_html( sprintf( __( 'Requires %s.', 'mg-seo' ), $def['requires'] ) ) . '</p>';
-			}
-			if ( $active && isset( $plugin->modules()[ $id ] ) && $plugin->modules()[ $id ]->settings() ) {
-				echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=mg-seo-' . $id ) ) . '">' . esc_html__( 'Settings', 'mg-seo' ) . '</a></p>';
-			}
-			echo '</div>';
+		foreach ( $registry as $id => $def ) {
+			$this->module_card( $id, $def );
 		}
 		echo '</div>';
-		submit_button( __( 'Save modules', 'mg-seo' ) );
+		echo '<div class="mgseo-modules-bar">';
+		echo '<span class="mgseo-modules-bar-note" aria-live="polite"></span>';
+		submit_button( __( 'Save modules', 'mg-seo' ), 'primary', 'submit', false );
+		echo '</div>';
 		echo '</form></div>';
+	}
+
+	/**
+	 * One module card: icon, name, description, a link to its screen when on, and the switch.
+	 *
+	 * @param string $id  Module id.
+	 * @param array  $def Registry definition.
+	 */
+	private function module_card( string $id, array $def ): void {
+		$plugin   = Plugin::instance();
+		$active   = $plugin->is_module_active( $id );
+		$required = ! empty( $def['required'] );
+		$missing  = ! empty( $def['requires'] ) && ! Plugin::dependency_met( $def['requires'] );
+		$checked  = $active || ( ! $missing && $this->stored_state( $id, $def ) );
+		$title    = Plugin::title( $id );
+		$key      = sanitize_html_class( $id );
+		$link     = $active ? $this->module_link( $id ) : null;
+
+		$classes = array( 'mgseo-module', $checked ? 'is-on' : 'is-off' );
+		if ( $required ) {
+			$classes[] = 'is-locked';
+		}
+		if ( $missing ) {
+			$classes[] = 'is-unavailable';
+		}
+
+		echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-module="' . esc_attr( $id ) . '">';
+		echo '<div class="mgseo-module-head">';
+		echo '<span class="mgseo-module-icon">' . ModuleIcons::svg( $id ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered with wp_kses in ModuleIcons.
+		if ( $required ) {
+			echo '<span class="mgseo-module-tag">' . esc_html__( 'Always on', 'mg-seo' ) . '</span>';
+		} elseif ( $missing ) {
+			/* translators: %s: name of the plugin the module needs, e.g. WooCommerce */
+			echo '<span class="mgseo-module-tag is-warning">' . esc_html( sprintf( __( 'Needs %s', 'mg-seo' ), self::dependency_name( (string) $def['requires'] ) ) ) . '</span>';
+		}
+		echo '</div>';
+		echo '<h2 class="mgseo-module-title" id="mgseo-module-' . esc_attr( $key ) . '-title">' . esc_html( $title ) . '</h2>';
+		echo '<p class="mgseo-module-desc" id="mgseo-module-' . esc_attr( $key ) . '-desc">' . esc_html( Plugin::labels()[ $id ][1] ?? '' ) . '</p>';
+		echo '<div class="mgseo-module-foot">';
+		if ( $link ) {
+			echo '<a class="mgseo-module-link" href="' . esc_url( $link['url'] ) . '">' . esc_html( $link['label'] ) . '<span class="screen-reader-text">: ' . esc_html( $title ) . '</span>' . ModuleIcons::arrow() . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static icon filtered with wp_kses.
+		}
+		echo '<label class="mgseo-switch">';
+		echo '<span class="mgseo-switch-state" aria-hidden="true">' . esc_html( $checked ? __( 'On', 'mg-seo' ) : __( 'Off', 'mg-seo' ) ) . '</span>';
+		echo '<input type="checkbox" role="switch" class="mgseo-switch-input" name="modules[' . esc_attr( $id ) . ']" value="1" aria-labelledby="mgseo-module-' . esc_attr( $key ) . '-title" aria-describedby="mgseo-module-' . esc_attr( $key ) . '-desc" ' . checked( $checked, true, false ) . disabled( $required || $missing, true, false ) . ' />';
+		echo '<span class="mgseo-switch-track" aria-hidden="true"><span class="mgseo-switch-thumb"></span></span>';
+		echo '</label>';
+		echo '</div>';
+		echo '</div>';
+	}
+
+	/**
+	 * Where the card of an active module leads: its settings page, otherwise its first screen.
+	 *
+	 * @param string $id Module id.
+	 * @return array{url: string, label: string}|null
+	 */
+	private function module_link( string $id ): ?array {
+		$module = Plugin::instance()->module( $id );
+		if ( ! $module ) {
+			return null;
+		}
+		if ( $module->settings() && current_user_can( $module->capability() ) ) {
+			return array(
+				'url'   => admin_url( 'admin.php?page=mg-seo-' . $id ),
+				'label' => __( 'Settings', 'mg-seo' ),
+			);
+		}
+		foreach ( $module->admin_pages() as $page ) {
+			if ( ! empty( $page['slug'] ) && current_user_can( $page['capability'] ?? 'mgseo_manage_settings' ) ) {
+				return array(
+					'url'   => admin_url( 'admin.php?page=' . $page['slug'] ),
+					'label' => _x( 'Open', 'link to a module screen', 'mg-seo' ),
+				);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Display name of a module dependency.
+	 *
+	 * @param string $requires Dependency key.
+	 */
+	private static function dependency_name( string $requires ): string {
+		return match ( $requires ) {
+			'woocommerce' => 'WooCommerce',
+			default       => $requires,
+		};
 	}
 
 	/**
